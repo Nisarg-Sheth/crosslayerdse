@@ -1,0 +1,10 @@
+# Solution for model problem
+# Objective value = 4.75e-05
+CLIENT_PE0_0 0
+CLIENT_PE2_0 0
+CLIENT_PE3_0 0
+CLIENT_PE4_0 0
+CLIENT_PE6_0 0
+CLIENT_PE7_0 0
+CLIENT_PE13_0 1
+CLIENT_PE14_0 0
