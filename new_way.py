@@ -163,29 +163,55 @@ def generate_ILP1(output_file, graph):
     con_val= "constraint"
     with open(output_file, 'w') as f:
         f.write("Maximize\n")
-        f.write(f"problem: src___0\n")
+        f.write(f"problem: src_iscluster\n")
         f.write("Subject To"+"\n")
         i=1
+        #This represents the equation $summation_(t_i<J)(t_i) = 1
         for task in graph.tasks:
             num_of_con+=1
             con = f"{con_val}_{str(num_of_con)} : "
             line=" "
             for j in range(i):
-                line += f" + 1 {task}___{str(j)}"
+                line += f" + 1 {task}_{str(j)}"
             line += " = 1"
             f.write(con+line+"\n")
             i+=1
+
+        #The following equations are for ensuring the number of constraints can be controlled by the heuristic.
+        i=1
+        for task in graph.tasks:
+            num_of_con+=1
+            con = f"{con_val}_{str(num_of_con)} : "
+            line=f"- 1 {task}_iscluster"
+            j=0
+            for t in graph.tasks:
+                if (j+1)>=i:
+                    line +=f"+ 1 {task}_{str(j)}"
+                j+=1
+            line += " >= 1"
+            f.write(con+line+"\n")
+            i+=1
+
+
 
         #Declare the variables as binary
         f.write("\n")
         f.write("Binary"+"\n\n")
         num_var=0
         i=1
+
+        #the clustering variables
         for task in graph.tasks:
             for j in range(i):
-                f.write(task+"___"+str(j)+"\n")
+                f.write(task+"_"+str(j)+"\n")
                 num_var+=1
             i+=1
+
+        # is clustered variables
+        for task in graph.tasks:
+            f.write(f"{task}_iscluster\n")
+
+
     print(f"ILP clustering written for graph")
 
 def process_ILP1(input_file,output_file, graph):
@@ -197,7 +223,7 @@ def process_ILP1(input_file,output_file, graph):
             if not line.startswith('#'):
                 vals=line.split()
                 if int(vals[1])==1:
-                    a=vals[0].split("___")
+                    a=vals[0].rsplit("_",1)
                     if int(a[1]) in scenario.constraint_graphs[graph].task_cluster:
                         scenario.constraint_graphs[graph].task_cluster[int(a[1])].tasks.append(a[0])
                         scenario.constraint_graphs[graph].task_to_cluster[a[0]]=int(a[1])
@@ -363,6 +389,8 @@ def process_ILP3(input_file,output_file, graph,num_levels):
                 if int(vals[1])==1:
                     more_vals=vals[0].rsplit("_",1)
                     scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=dvfs_levels[more_vals[1]]
+
+
 
 def generate_ILP(output_file, graph):
     global scenario
