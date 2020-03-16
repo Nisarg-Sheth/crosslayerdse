@@ -17,6 +17,7 @@ class Complete_Scenario:
 class Constraint_graph:
     def __init__(self):
         self.task_cluster = {}
+        self.num_of_clusters = 0
         self.messages = {}
         self.task_to_cluster = {}
         self.dvfs_level = {}

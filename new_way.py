@@ -172,7 +172,7 @@ def generate_ILP1(output_file, graph):
             con = f"{con_val}_{str(num_of_con)} : "
             line=" "
             for j in range(i):
-                line += f" + 1 {task}_{str(j)}"
+                line += f" + 1 {task}_{str(j)} "
             line += " = 1"
             f.write(con+line+"\n")
             i+=1
@@ -182,13 +182,13 @@ def generate_ILP1(output_file, graph):
         for task in graph.tasks:
             num_of_con+=1
             con = f"{con_val}_{str(num_of_con)} : "
-            line=f"- 1 {task}_iscluster"
+            line=f"- 1 {task}_iscluster "
             j=0
             for t in graph.tasks:
                 if (j+1)>=i:
-                    line +=f"+ 1 {task}_{str(j)}"
+                    line +=f"+ 1 {t}_{str(i-1)} "
                 j+=1
-            line += " >= 1"
+            line += " >= 0"
             f.write(con+line+"\n")
             i+=1
 
@@ -224,7 +224,9 @@ def process_ILP1(input_file,output_file, graph):
                 vals=line.split()
                 if int(vals[1])==1:
                     a=vals[0].rsplit("_",1)
-                    if int(a[1]) in scenario.constraint_graphs[graph].task_cluster:
+                    if a[1]=="iscluster":
+                        scenario.constraint_graphs[graph].num_of_clusters+=1
+                    elif int(a[1]) in scenario.constraint_graphs[graph].task_cluster:
                         scenario.constraint_graphs[graph].task_cluster[int(a[1])].tasks.append(a[0])
                         scenario.constraint_graphs[graph].task_to_cluster[a[0]]=int(a[1])
                     else:
@@ -583,6 +585,7 @@ def main():
         gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name1)], capture_output=True)
         if "solution found" not in str(gurobi_run.stdout):
             print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+            print(str(gurobi_run.stdout))
             break;
         #this processing can be used to reduce the Design space. It also readies for the next ILP
         process_ILP1(result_file_path,output_file_path,graph)
