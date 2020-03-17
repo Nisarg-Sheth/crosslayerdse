@@ -283,6 +283,7 @@ def process_ILP1(input_file,output_file, graph):
     for a in scenario.constraint_graphs[graph].task_cluster:
         if scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped==None or not scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped:
             #the current cluster is no longer feasible
+
             is_feasible=False
             con_val= "added_constraint"
             scenario.num_of_added_con+=1
@@ -717,14 +718,15 @@ def main():
                 print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
                 print(str(gurobi_run.stdout))
                 i=100
-                break;
+                break
             #this processing can be used to reduce the Design space. It also readies for the next ILP
             cluster_done=process_ILP1(result_file_path,os.path.join(args.dir,out_name1),graph)
             if cluster_done:
                 break
-            i+=1;
-        if i==100:
+            i+=1
+        if i>=100:
             print("CLUSTERING FAILED")
+            phase+=1
             continue
         #resource mapping ILP methodology.
         # generate_ILP2(os.path.join(args.dir,out_name2),graph)
