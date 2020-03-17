@@ -14,7 +14,7 @@ TASK src TYPE 45 host 0
 TASK can1 TYPE 0 host 1
 TASK fp TYPE 1 host 1
 TASK can2 TYPE 0 host 1
-TASK pulse TYPE 12 host 1
+TASK pulse TYPE 38 host 1
 TASK sink TYPE 45 host 2
 
 ARC a0_0 FROM src TO can1 TYPE 0

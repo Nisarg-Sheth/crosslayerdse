@@ -289,7 +289,7 @@ def process_ILP1(input_file,output_file, graph):
             con = f"{con_val}_{str(scenario.num_of_added_con)} : "
             line =""
             i=0
-            for task in scenario.constraint_graphs[graph].task_cluster[a]:
+            for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
                 line += f" + 1 {task}_{str(a)} "
                 i+=1
             line+=f" <= {i}"
