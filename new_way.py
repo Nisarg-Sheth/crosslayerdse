@@ -2,10 +2,12 @@ import os
 import sys
 import re
 import argparse
+import random
 import subprocess
 from graphviz import Digraph
 from deap import *
 from old_source import *
+
 scenario = None
 
 def get_blocks(input_file):
@@ -275,9 +277,8 @@ def process_ILP1(input_file,output_file, graph):
     #unimplemented
     for a in scenario.constraint_graphs[graph].task_cluster:
         if scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped==None or not scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped:
-            with open(output_file, '+a') as f:
-                for task in scenario.constraint_graphs[graph].task_cluster[a]:
-                    add_constraint=1
+            for task in scenario.constraint_graphs[graph].task_cluster[a]:
+                add_constraint=1
 
 
 #ILP for assigning the Resource type to cluster and the dvfs mode to each task.
@@ -392,7 +393,69 @@ def process_ILP3(input_file,output_file, graph,num_levels):
                     more_vals=vals[0].rsplit("_",1)
                     scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=dvfs_levels[more_vals[1]]
 
+#ILP for assigning the Resource type to cluster and the dvfs mode to each task.
+def generate_ILP_withdvfs(output_file, graph,num_levels):
+    global scenario
+    num_of_con=0;
+    con_val= "constraint"
+    with open(output_file, 'w') as f:
+        #defining the minimization problem
+        f.write("Minimize\n")
+        line="problem: "
+        for cluster in scenario.constraint_graphs[graph].task_cluster:
+            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+                energy=0
+                for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+                    energy+=(scenario.graphs[graph].tasks[task].wcet[pe]*scenario.graphs[graph].tasks[task].power[pe])
+                line+=f"+ {energy} {pe}_{cluster} "
+        f.write(line+"\n")
+        f.write("Subject To\n")
+        i=1
+        for cluster in scenario.constraint_graphs[graph].task_cluster:
+            num_of_con+=1
+            con = f"{con_val}_{str(num_of_con)} : "
+            line=""
+            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+                line+=f"+ 1 {pe}_{cluster} "
+            line+=f" = 1 "
+            f.write(con+line+"\n")
 
+            #Declare the variables as binary
+        f.write("\n")
+        f.write("Binary\n\n")
+        num_var=0
+        i=1
+        for cluster in scenario.constraint_graphs[graph].task_cluster:
+            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+                line=f"{pe}_{cluster}\n"
+                f.write(line)
+    print(f"ILP resource mapping written for graph")
+
+def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
+    global scenario
+    with open(input_file) as file:
+        for line in file:
+            if not line.startswith('#'):
+                vals=line.split()
+                if int(vals[1])==1:
+                    more_vals=vals[0].rsplit("_",1)
+                    scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
+
+#function to add constraints and variables to the ILP formulation
+# takes three input the file name, a list of constraints and a list of variables.
+
+def edit_ILP(input_file,constraints,vars):
+    global scenario
+    with open(input_file, 'r+') as f:
+        contents=f.readlines()
+        print(contents[3])
+        for constraint in constraints:
+            contents.insert(3,f"{constraint}\n")
+        f.seek(0)
+        f.writelines(contents)
+    with open(input_file, 'a') as f:
+        for var in vars:
+            f.write(f"{var}\n")
 
 def generate_ILP(output_file, graph):
     global scenario
@@ -589,30 +652,40 @@ def main():
             break;
         #this processing can be used to reduce the Design space. It also readies for the next ILP
         process_ILP1(result_file_path,output_file_path,graph)
-
         #resource mapping ILP methodology.
-        generate_ILP2(os.path.join(args.dir,out_name2),graph)
+        # generate_ILP2(os.path.join(args.dir,out_name2),graph)
+        # #running gurobi on the output
+        # gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
+        # if "solution found" not in str(gurobi_run.stdout):
+        #     print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+        #     break;
+        # #this processing can be used to reduce the Design space.
+        # process_ILP2(result_file_path,output_file_path,graph)
+        #
+        # #dvfs_level ILP methodology.
+        # if args.dvfs_num_levels!=None:
+        #     generate_ILP3(os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
+        #     #running gurobi on the output
+        #     gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name3)], capture_output=True)
+        #     if "solution found" not in str(gurobi_run.stdout):
+        #         print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+        #         break;
+        #     phase+=1
+        #     #this processing can be used to reduce the Design space.
+        #     process_ILP3(result_file_path,output_file_path,graph,args.dvfs_num_levels)
+        #
+        generate_ILP_withdvfs(os.path.join(args.dir,out_name1),graph,args.dvfs_num_levels)
         #running gurobi on the output
         gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
         if "solution found" not in str(gurobi_run.stdout):
             print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+            print(str(gurobi_run.stdout))
             break;
+        #this processing can be used to reduce the Design space. It also readies for the next ILP
+        process_ILP_withdvfs(result_file_path,output_file_path,graph,args.dvfs_num_levels)
+
+
         phase+=1
-        #this processing can be used to reduce the Design space.
-        process_ILP2(result_file_path,output_file_path,graph)
-
-        #dvfs_level ILP methodology.
-        if args.dvfs_num_levels!=None:
-            generate_ILP3(os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
-            #running gurobi on the output
-            gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name3)], capture_output=True)
-            if "solution found" not in str(gurobi_run.stdout):
-                print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
-                break;
-            phase+=1
-            #this processing can be used to reduce the Design space.
-            process_ILP3(result_file_path,output_file_path,graph,args.dvfs_num_levels)
-
 
 if __name__ == '__main__':
     main()

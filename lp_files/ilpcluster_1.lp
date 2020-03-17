@@ -1,6 +1,8 @@
 Maximize
 problem: src_iscluster
 Subject To
+this
+yo
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 iir_0  + 1 iir_1  = 1
 constraint_3 :   + 1 idct_0  + 1 idct_1  + 1 idct_2  = 1
@@ -26,3 +28,5 @@ src_iscluster
 iir_iscluster
 idct_iscluster
 sink_iscluster
+works
+maybe

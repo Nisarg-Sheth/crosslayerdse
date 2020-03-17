@@ -1,6 +1,8 @@
 Maximize
 problem: src_iscluster
 Subject To
+this
+yo
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 fft_0  + 1 fft_1  = 1
 constraint_3 :   + 1 matrix_0  + 1 matrix_1  + 1 matrix_2  = 1
@@ -76,3 +78,5 @@ angle_iscluster
 road_iscluster
 table_iscluster
 sink_iscluster
+works
+maybe
