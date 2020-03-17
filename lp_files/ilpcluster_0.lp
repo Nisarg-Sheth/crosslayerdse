@@ -1,8 +1,6 @@
 Maximize
-problem: src_iscluster
+problem: + 1 src_0 + 1 can1_0 + 1 fp_0 + 1 can2_2 + 1 pulse_3 + 1 sink_5 
 Subject To
-this
-yo
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 can1_0  + 1 can1_1  = 1
 constraint_3 :   + 1 fp_0  + 1 fp_1  + 1 fp_2  = 1
@@ -45,5 +43,3 @@ fp_iscluster
 can2_iscluster
 pulse_iscluster
 sink_iscluster
-works
-maybe

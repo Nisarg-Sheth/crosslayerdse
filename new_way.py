@@ -54,7 +54,7 @@ def process_block(block,tg,core):
         core_name = None
         i = 0
         core_name= block[0].strip('@').strip('{').replace(" ","")
-        print(core_name)
+        #print(core_name)
         scenario.tables[core_name]=Table(core_name,block[1].strip('#'),block[2].strip('#'),block[4].strip('#'))
         for i in range(5, len(block)):
             if not block[i].startswith('#'):
@@ -436,7 +436,7 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
                 line+=f"+ 1 {pe}_{cluster} "
             line+=f" = 1 "
             f.write(con+line+"\n")
-        if num_levels != None or num_levels < 3:
+        if num_levels == None or num_levels < 3:
             print("No dvfs assumed")
         else:
             for cluster in scenario.constraint_graphs[graph].task_cluster:
@@ -448,7 +448,6 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
                         line+=f" + 1 {task}_{d}"
                     line+=f" = 1 "
                     f.write(con+line+"\n")
-            for
             #Declare the variables as binary
         f.write("\n")
         f.write("Binary\n\n")
@@ -458,7 +457,7 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
             for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
                 line=f"{pe}_{cluster}\n"
                 f.write(line)
-        if num_levels != None or num_levels < 3:
+        if num_levels == None or num_levels < 3:
             print("No dvfs assumed")
         else:
             for cluster in scenario.constraint_graphs[graph].task_cluster:
@@ -471,16 +470,19 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
 def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
     global scenario
     dvfs_levels = []
-    #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
-    freq=500
-    volt=1.1
-    #ARM processors including A7,A15 all generally have DVFS levels between 200Mhz to 1600 Mhz
-    f_up=1600.0/500;
-    f_down=200.0/500;
-    #The size of each frequency step.
-    step_size=(f_up-f_down)/(num_levels-1)
-    for i in range(num_levels):
-        dvfs_levels.append(f_down+(i*step_size))
+    if num_levels == None or num_levels < 3:
+        dvfs_levels = [1]
+    else:
+        #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
+        freq=500
+        volt=1.1
+        #ARM processors including A7,A15 all generally have DVFS levels between 200Mhz to 1600 Mhz
+        f_up=1600.0/500;
+        f_down=200.0/500;
+        #The size of each frequency step.
+        step_size=(f_up-f_down)/(num_levels-1)
+        for i in range(num_levels):
+            dvfs_levels.append(f_down+(i*step_size))
     #this creates a list of size dvfs_num_levels
     #the contents of this list will range from [1600/500 to 200/500]
     #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
@@ -493,7 +495,7 @@ def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
                     if int(more_vals[1]) in scenario.constraint_graphs[graph].task_cluster:
                         scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
                     else:
-                        scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=dvfs_levels[more_vals[1]]
+                        scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=dvfs_levels[int(more_vals[1])]
 #function to add constraints and variables to the ILP formulation
 # takes three input the file name, a list of constraints and a list of variables.
 
@@ -502,7 +504,6 @@ def edit_ILP(input_file,constraints,vars):
     if constraints!=None:
         with open(input_file, 'r+') as f:
             contents=f.readlines()
-            print(contents[3])
             for constraint in constraints:
                 contents.insert(3,f"{constraint}\n")
             f.seek(0)
@@ -706,7 +707,7 @@ def main():
             print(str(gurobi_run.stdout))
             break;
         #this processing can be used to reduce the Design space. It also readies for the next ILP
-        process_ILP1(result_file_path,output_file_path,graph)
+        process_ILP1(result_file_path,os.path.join(args.dir,out_name1),graph)
         #resource mapping ILP methodology.
         # generate_ILP2(os.path.join(args.dir,out_name2),graph)
         # #running gurobi on the output
@@ -715,7 +716,7 @@ def main():
         #     print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
         #     break;
         # #this processing can be used to reduce the Design space.
-        # process_ILP2(result_file_path,output_file_path,graph)
+        # process_ILP2(result_file_path,os.path.join(args.dir,out_name2),graph)
         #
         # #dvfs_level ILP methodology.
         # if args.dvfs_num_levels!=None:
@@ -727,9 +728,9 @@ def main():
         #         break;
         #     phase+=1
         #     #this processing can be used to reduce the Design space.
-        #     process_ILP3(result_file_path,output_file_path,graph,args.dvfs_num_levels)
+        #     process_ILP3(result_file_path,os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
         #
-        generate_ILP_withdvfs(os.path.join(args.dir,out_name1),graph,args.dvfs_num_levels)
+        generate_ILP_withdvfs(os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
         #running gurobi on the output
         gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
         if "solution found" not in str(gurobi_run.stdout):
@@ -737,7 +738,7 @@ def main():
             print(str(gurobi_run.stdout))
             break;
         #this processing can be used to reduce the Design space. It also readies for the next ILP
-        process_ILP_withdvfs(result_file_path,output_file_path,graph,args.dvfs_num_levels)
+        process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
 
 
         phase+=1

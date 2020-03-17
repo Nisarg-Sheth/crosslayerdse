@@ -1,8 +1,6 @@
 Maximize
-problem: src_iscluster
+problem: + 1 src_0 + 1 ptr_0 + 1 cache_2 + 1 tooth_2 + 1 sink_1 
 Subject To
-this
-yo
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 ptr_0  + 1 ptr_1  = 1
 constraint_3 :   + 1 cache_0  + 1 cache_1  + 1 cache_2  = 1
@@ -36,5 +34,3 @@ ptr_iscluster
 cache_iscluster
 tooth_iscluster
 sink_iscluster
-works
-maybe
