@@ -1,0 +1,236 @@
+@HYPERPERIOD 0.01
+
+@COMMUN_QUANT 0 {
+0 4E3
+1 8E3
+2 15E3
+3 1E3
+}
+
+@TASK_GRAPH 0 {
+PERIOD 0.01
+
+TASK src TYPE 45 host 0
+TASK can1 TYPE 0 host 1
+TASK fp TYPE 1 host 1
+TASK can2 TYPE 0 host 1
+TASK pulse TYPE 12 host 1
+TASK sink TYPE 45 host 2
+
+ARC a0_0 FROM src TO can1 TYPE 0
+ARC a0_1 FROM can1 to fp TYPE 0
+ARC a0_1 FROM fp TO can2 TYPE 0
+ARC a0_2 FROM can2 TO pulse TYPE 0
+ARC a0_3 FROM pulse TO sink TYPE 1
+
+HARD_DEADLINE d0_0 ON sink AT 0.03
+}
+
+@TASK_GRAPH 1 {
+PERIOD 0.01
+
+TASK src TYPE 45 host 2
+TASK iir TYPE 7 host 1
+TASK idct TYPE 8 host 1
+TASK sink TYPE 45 host 0
+
+ARC a1_0 FROM src TO iir TYPE 0
+ARC a1_1 FROM iir TO idct TYPE 0
+ARC a1_2 FROM idct TO sink TYPE 0
+
+HARD_DEADLINE d1_0 ON sink AT 0.06
+SOFT_DEADLINE d1_1 ON sink AT 0.02
+}
+
+@TASK_GRAPH 2 {
+PERIOD 0.01
+
+TASK src TYPE 45 host 0
+TASK fft TYPE 5 host 1
+TASK matrix TYPE 10 host 1
+TASK ifft TYPE 9 host 1
+TASK fir TYPE 6 host 1
+TASK angle TYPE 0 host 1
+TASK road TYPE 13 host 1
+TASK table TYPE 14 host 1
+TASK sink TYPE 45 host 2
+
+ARC a2_0 FROM src TO fir TYPE 0
+ARC a2_1 FROM fir TO angle TYPE 0
+
+ARC a2_2 FROM src TO fft TYPE 2
+ARC a2_3 FROM fft TO matrix TYPE 2
+ARC a2_4 FROM matrix TO ifft TYPE 2
+ARC a2_5 FROM ifft TO angle TYPE 2
+
+ARC a2_6 FROM angle TO road TYPE 0
+ARC a2_7 FROM road TO table TYPE 0
+ARC a2_8 FROM table TO sink TYPE 3
+
+HARD_DEADLINE d2_0 ON sink AT 0.06
+SOFT_DEADLINE d2_1 ON sink AT 0.02
+}
+
+@TASK_GRAPH 3 {
+PERIOD 0.005
+
+TASK src TYPE 45 host 2
+TASK ptr TYPE 11 host 1
+TASK cache TYPE 3 host 1
+TASK tooth TYPE 15 host 1
+TASK sink TYPE 45 host 0
+
+ARC a3_0 FROM src TO ptr TYPE 3
+ARC a3_1 FROM ptr TO cache TYPE 1
+ARC a3_2 FROM cache TO tooth TYPE 1
+ARC a3_3 FROM tooth TO sink TYPE 3
+
+HARD_DEADLINE d3_0 ON sink AT 0.06
+SOFT_DEADLINE d3_1 ON sink AT 0.01
+}
+
+# AMD K6-IIIE+ 550Mhz/ACR
+@CLIENT_PE 4 {
+# price buffered preempt_power commun_energy_bit io_energy_bit idle_power
+  125.6 1        3.14          0                 0             0.31
+#------------------------------------------------------------------------------
+# type version valid task_time preempt_time code_bits task_power
+# Angle to Time Conversion
+0       0      1     5.5e-06   150E-6       6.9e+04   3.1
+
+# Basic floating point
+1       0      1     1.05e-05  150E-6       5.8e+04   3.1
+
+# Bit Manipulation
+2       0      1     0.00033   150E-6       2.9e+04   3.1
+
+# Cache Buster
+3       0      1     1.55e-06  150E-6       2e+04     3.1
+
+# CAN Remote Data Request
+4       0      1     1.15e-06  150E-6       1.4e+04   3.1
+
+# Fast Fourier Transform (Auto/Indust. Version)
+5       0      1     0.005     150E-6       7.1e+04   3.1
+
+# Finite Impulse Response Filter (Auto/Indust. Vers)
+6       0      1     3.5e-05   150E-6       1.7e+04   3.1
+
+# Infinite Impulse Response Filter
+7       0      1     4.2e-05   150E-6       8.7e+04   3.1
+
+# Inverse discrete cosine transfom
+8       0      1     0.000305  150E-6       7.5e+04   3.1
+
+# Inverse Fast Fourier Transform (Auto/Indust. Vers)
+9       0      1     0.00465   150E-6       6.9e+04   3.1
+
+# Matrix arithmetic
+10      0      1     0.0029    150E-6       9.3e+04   3.1
+
+# Pointer Chasing
+11      0      1     0.000175  150E-6       9.6e+03   3.1
+
+# Pulse Width Modulation
+12      0      1     2.2e-06   150E-6       1.4e+04   3.1
+
+# Road Speed Calculation
+13      0      1     1.65e-06  150E-6       6.9e+03   3.1
+
+# Table Lookup and Interpolation
+14      0      1     1.3e-05   150E-6       6e+04     3.1
+
+# Tooth To Spark
+15      0      1     3e-05     150E-6       4.1e+04   3.1
+
+# OSPF/Dijkstra
+16      0      1     0.00049   150E-6       3.4e+04   3.1
+
+# Route Lookup/Patricia
+17      0      1     0.0023    150E-6       6.1e+03   3.1
+
+# Packet Flow - 512 kbytes
+18      0      1     0.00055   150E-6       1.8e+04   3.1
+
+# Packet Flow - 1 Mbyte
+19      0      1     0.0011    150E-6       1.8e+04   3.1
+
+# Packet Flow - 2 Mbytes
+20      0      1     0.0022    150E-6       1.8e+04   3.1
+
+# Autocorrelation - Data1 (pulse)
+21      0      1     1e-05     150E-6       4.4e+03   3.1
+
+# Autocorrelation - Data2 (sine)
+22      0      1     0.00135   150E-6       4.4e+03   3.1
+
+# Auto-Correlation - Data3 (speech)
+23      0      1     0.00125   150E-6       4.4e+03   3.1
+
+# Convolutional Encoder - Data1 (xk5r2dt)
+24      0      1     0.00038   150E-6       6.3e+03   3.1
+
+# Convolutional Encoder - Data2 (xk4r2dt)
+25      0      1     0.000445  150E-6       6.3e+03   3.1
+
+# Convolutional Encoder - Data3 (xk3r2dt)
+26      0      1     0.000495  150E-6       6.3e+03   3.1
+
+# Fixed-point Bit Allocation - Data2 (typ)
+27      0      1     0.003     150E-6       5.4e+03   3.1
+
+# Fixed-point Bit Allocation - Data3 (step)
+28      0      1     0.000225  150E-6       5.4e+03   3.1
+
+# Fixed Point Bit Allocation - Data6 (pent)
+29      0      1     0.002     150E-6       5.4e+03   3.1
+
+# Fixed Point Complex FFT - Data1 (pulse)
+30      0      1     0.0005    150E-6       1.3e+05   3.1
+
+# Fixed point Complex FFT - Data2 (spn)
+31      0      1     0.0005    150E-6       1.3e+05   3.1
+
+# Fixed Point Complex FFT - Data3 (sine)
+32      0      1     0.0005    150E-6       1.3e+05   3.1
+
+# Viterbi GSM Decoder - Data1 (get)
+33      0      1     0.0023    150E-6       1.1e+04   3.1
+
+# Viterbi GSM Decoder - Data2 (toggle)
+34      0      1     0.00225   150E-6       1.1e+04   3.1
+
+# Viterbi GSM Decoder - Data3 (ones)
+35      0      1     0.0022    150E-6       1.1e+04   3.1
+
+# Viterbi GSM Decoder - Data4 (zeros)
+36      0      1     0.00215   150E-6       1.1e+04   3.1
+
+# Compress JPEG
+37      0      0     0         150E-6       0         3.1
+
+# Decompress JPEG
+38      0      0     0         150E-6       0         3.1
+
+# High Pass Grey-scale filter
+39      0      0     0         150E-6       0         3.1
+
+# RGB to CYMK Conversion
+40      0      0     0         150E-6       0         3.1
+
+# RGB to YIQ Conversion
+41      0      0     0         150E-6       0         3.1
+
+# Dithering
+42      0      1     0.0175    150E-6       3.6e+03   3.1
+
+# Image Rotation
+43      0      1     0.0055    150E-6       1.2e+04   3.1
+
+# Text Processing
+44      0      1     0.007     150E-6       1.4e+04   3.1
+
+# src-sink
+45      0      1     5e-05     150E-6       80        3.1
+
+}
