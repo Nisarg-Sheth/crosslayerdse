@@ -8,6 +8,7 @@ from deap import *
 
 class Complete_Scenario:
     def __init__(self):
+        self.num_of_added_con=0
         self.attributes = {}
         self.graphs = {}
         self.tables = {}

@@ -164,8 +164,14 @@ def generate_ILP1(output_file, graph):
     num_of_con=0;
     con_val= "constraint"
     with open(output_file, 'w') as f:
+        #randomize the ILP generation
         f.write("Maximize\n")
-        f.write(f"problem: src_iscluster\n")
+        i=1
+        line = ""
+        for task in graph.tasks:
+            line += f"+ 1 {task}_{random.randint(0,(i-1))} "
+            i+=1
+        f.write(f"problem: {line}\n")
         f.write("Subject To"+"\n")
         i=1
         #This represents the equation $summation_(t_i<J)(t_i) = 1
@@ -193,8 +199,6 @@ def generate_ILP1(output_file, graph):
             line += " >= 0"
             f.write(con+line+"\n")
             i+=1
-
-
 
         #Declare the variables as binary
         f.write("\n")
@@ -274,12 +278,25 @@ def process_ILP1(input_file,output_file, graph):
             scenario.constraint_graphs[graph].messages[arc].cluster_from=scenario.constraint_graphs[graph].task_to_cluster[task_from]
 
     #add constraints to problem...
-    #unimplemented
+    is_feasible=True
+    constraints_to_add=[]
     for a in scenario.constraint_graphs[graph].task_cluster:
         if scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped==None or not scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped:
+            #the current cluster is no longer feasible
+            is_feasible=False
+            con_val= "added_constraint"
+            scenario.num_of_added_con+=1
+            con = f"{con_val}_{str(scenario.num_of_added_con)} : "
+            line =""
+            i=0
             for task in scenario.constraint_graphs[graph].task_cluster[a]:
-                add_constraint=1
+                line += f" + 1 {task}_{str(a)} "
+                i+=1
+            line+=f" <= {i}"
+            constraints_to_add.append(con+line)
 
+    edit_ILP(output_file,constraints_to_add,None)
+    return is_feasible
 
 #ILP for assigning the Resource type to cluster and the dvfs mode to each task.
 def generate_ILP2(output_file, graph):
@@ -419,7 +436,19 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
                 line+=f"+ 1 {pe}_{cluster} "
             line+=f" = 1 "
             f.write(con+line+"\n")
-
+        if num_levels != None or num_levels < 3:
+            print("No dvfs assumed")
+        else:
+            for cluster in scenario.constraint_graphs[graph].task_cluster:
+                for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+                    line=""
+                    num_of_con+=1
+                    con = f"{con_val}_{str(num_of_con)} : "
+                    for d in range(num_levels):
+                        line+=f" + 1 {task}_{d}"
+                    line+=f" = 1 "
+                    f.write(con+line+"\n")
+            for
             #Declare the variables as binary
         f.write("\n")
         f.write("Binary\n\n")
@@ -429,33 +458,59 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
             for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
                 line=f"{pe}_{cluster}\n"
                 f.write(line)
+        if num_levels != None or num_levels < 3:
+            print("No dvfs assumed")
+        else:
+            for cluster in scenario.constraint_graphs[graph].task_cluster:
+                for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+                    for d in range(num_levels):
+                        line=f"{task}_{d}\n"
+                        f.write(line)
     print(f"ILP resource mapping written for graph")
 
 def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
     global scenario
+    dvfs_levels = []
+    #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
+    freq=500
+    volt=1.1
+    #ARM processors including A7,A15 all generally have DVFS levels between 200Mhz to 1600 Mhz
+    f_up=1600.0/500;
+    f_down=200.0/500;
+    #The size of each frequency step.
+    step_size=(f_up-f_down)/(num_levels-1)
+    for i in range(num_levels):
+        dvfs_levels.append(f_down+(i*step_size))
+    #this creates a list of size dvfs_num_levels
+    #the contents of this list will range from [1600/500 to 200/500]
+    #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
     with open(input_file) as file:
         for line in file:
             if not line.startswith('#'):
                 vals=line.split()
                 if int(vals[1])==1:
                     more_vals=vals[0].rsplit("_",1)
-                    scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
-
+                    if int(more_vals[1]) in scenario.constraint_graphs[graph].task_cluster:
+                        scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
+                    else:
+                        scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=dvfs_levels[more_vals[1]]
 #function to add constraints and variables to the ILP formulation
 # takes three input the file name, a list of constraints and a list of variables.
 
 def edit_ILP(input_file,constraints,vars):
     global scenario
-    with open(input_file, 'r+') as f:
-        contents=f.readlines()
-        print(contents[3])
-        for constraint in constraints:
-            contents.insert(3,f"{constraint}\n")
-        f.seek(0)
-        f.writelines(contents)
-    with open(input_file, 'a') as f:
-        for var in vars:
-            f.write(f"{var}\n")
+    if constraints!=None:
+        with open(input_file, 'r+') as f:
+            contents=f.readlines()
+            print(contents[3])
+            for constraint in constraints:
+                contents.insert(3,f"{constraint}\n")
+            f.seek(0)
+            f.writelines(contents)
+    if vars!=None:
+        with open(input_file, 'a') as f:
+            for var in vars:
+                f.write(f"{var}\n")
 
 def generate_ILP(output_file, graph):
     global scenario
