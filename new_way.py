@@ -143,12 +143,12 @@ def plot_constraint_graph(graph,phase,dir):
     #SOME TRIAL PLOTTING
     constraint_g = Digraph(comment = graph)
     for task in scenario.constraint_graphs[graph].task_cluster:
-        to_show="{"
+        to_show=""
         mapped_to = scenario.constraint_graphs[graph].task_cluster[task].mapped_to
         for a in scenario.constraint_graphs[graph].task_cluster[task].tasks:
-            to_show=to_show+" "+a+","
+            to_show+=f"{a}(dvfs_level {scenario.constraint_graphs[graph].dvfs_level[a]}), "
         to_show=to_show+"}"
-        to_show=to_show + "\n"+mapped_to
+        to_show+= f"\{{to_show}\}\n"+mapped_to
         constraint_g.node(task,label=to_show)
     for m in scenario.constraint_graphs[graph].messages:
         to_show="m"
@@ -157,7 +157,7 @@ def plot_constraint_graph(graph,phase,dir):
         constraint_g.node(m,label=to_show)
         constraint_g.edge(scenario.constraint_graphs[graph].messages[m].cluster_from, m , constraint='false')
         constraint_g.edge(m,scenario.constraint_graphs[graph].messages[m].cluster_to , constraint='false')
-    constraint_g.render("./yo.view",view=True)
+    constraint_g.render(f"{dir}/plots{phase}.view",view=True)
 
 def generate_ILP1(output_file, graph):
     global scenario
@@ -289,6 +289,7 @@ def process_ILP1(input_file,output_file, graph):
             scenario.num_of_added_con+=1
             con = f"{con_val}_{str(scenario.num_of_added_con)} : "
             line =""
+
             i=0
             for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
                 line += f" + 1 {task}_{str(a)} "
@@ -760,6 +761,7 @@ def main():
         #this processing can be used to reduce the Design space. It also readies for the next ILP
         process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
 
+        plot_constraint_graph(graph,phase,args.dir)
 
         phase+=1
 
