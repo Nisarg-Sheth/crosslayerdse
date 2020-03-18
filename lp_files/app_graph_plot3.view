@@ -1,0 +1,20 @@
+// TASK_GRAPH 3 
+digraph {
+	src [label=src]
+	ptr [label=ptr]
+	cache [label=cache]
+	tooth [label=tooth]
+	sink [label=sink]
+	a3_01 [label=a3_01]
+	src -> a3_01
+	a3_01 -> ptr
+	a3_12 [label=a3_12]
+	ptr -> a3_12
+	a3_12 -> cache
+	a3_23 [label=a3_23]
+	cache -> a3_23
+	a3_23 -> tooth
+	a3_34 [label=a3_34]
+	tooth -> a3_34
+	a3_34 -> sink
+}

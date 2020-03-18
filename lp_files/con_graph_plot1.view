@@ -1,0 +1,19 @@
+// TASK_GRAPH 1 
+digraph {
+	0 [label="[src(dvfs_level 1), iir(dvfs_level 0), ]
+CLIENT_PE13"]
+	1 [label="[idct(dvfs_level 4), ]
+CLIENT_PE7"]
+	3 [label="[sink(dvfs_level 3), ]
+CLIENT_PE11"]
+	a1_12 [label="m
+None
+None"]
+	0 -> a1_12
+	a1_12 -> 1
+	a1_23 [label="m
+None
+None"]
+	1 -> a1_23
+	a1_23 -> 3
+}

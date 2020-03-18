@@ -140,8 +140,7 @@ def generate_con_graph(input_file, graph):
 
 #Plotting the constraint graph
 def plot_constraint_graph(graph,phase,dir):
-    #SOME TRIAL PLOTTING
-    constraint_g = Digraph(comment = graph)
+    constraint_g = Digraph(comment = graph, format='png')
     for task in scenario.constraint_graphs[graph].task_cluster:
         to_show=""
         mapped_to = scenario.constraint_graphs[graph].task_cluster[task].mapped_to
@@ -156,7 +155,17 @@ def plot_constraint_graph(graph,phase,dir):
         constraint_g.node(m,label=to_show)
         constraint_g.edge(str(scenario.constraint_graphs[graph].messages[m].cluster_from), m)
         constraint_g.edge(m,str(scenario.constraint_graphs[graph].messages[m].cluster_to))
-    constraint_g.render(f"{dir}/plots{phase}.view",view=False)
+    constraint_g.render(f"{dir}/con_graph_plot{phase}.view",view=False)
+
+def plot_app_graph(graph,phase,dir):
+    app_g = Digraph(comment = graph,format='png')
+    for task in scenario.graphs[graph].tasks:
+        app_g.node(str(task),label=task)
+    for m in scenario.graphs[graph].arcs:
+        app_g.node(m,label=m)
+        app_g.edge(scenario.graphs[graph].arcs[m].task_from,m)
+        app_g.edge(m,scenario.graphs[graph].arcs[m].task_to)
+    app_g.render(f"{dir}/app_graph_plot{phase}.view",view=False)
 
 def generate_ILP1(output_file, graph):
     global scenario
@@ -512,6 +521,7 @@ def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
 def edit_ILP(input_file,constraints,vars):
     global scenario
     if constraints!=None:
+        #add constraints
         with open(input_file, 'r+') as f:
             contents=f.readlines()
             for constraint in constraints:
@@ -519,6 +529,7 @@ def edit_ILP(input_file,constraints,vars):
             f.seek(0)
             f.writelines(contents)
     if vars!=None:
+        #add variables
         with open(input_file, 'a') as f:
             for var in vars:
                 f.write(f"{var}\n")
@@ -760,6 +771,7 @@ def main():
         #this processing can be used to reduce the Design space. It also readies for the next ILP
         process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
 
+        plot_app_graph(graph,phase,args.dir)
         plot_constraint_graph(graph,phase,args.dir)
 
         phase+=1
