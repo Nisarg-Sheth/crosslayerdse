@@ -14,6 +14,7 @@ class Complete_Scenario:
         self.tables = {}
         self.hyperperiod = None
         self.constraint_graphs = {}
+        self.dvfs_level = []
 
 class Constraint_graph:
     def __init__(self):

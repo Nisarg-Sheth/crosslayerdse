@@ -147,17 +147,16 @@ def plot_constraint_graph(graph,phase,dir):
         mapped_to = scenario.constraint_graphs[graph].task_cluster[task].mapped_to
         for a in scenario.constraint_graphs[graph].task_cluster[task].tasks:
             to_show+=f"{a}(dvfs_level {scenario.constraint_graphs[graph].dvfs_level[a]}), "
-        to_show=to_show+"}"
-        to_show+= f"\{{to_show}\}\n"+mapped_to
-        constraint_g.node(task,label=to_show)
+        to_show= f"[{to_show}]\n"+mapped_to
+        constraint_g.node(str(task),label=to_show)
     for m in scenario.constraint_graphs[graph].messages:
         to_show="m"
         to_show=to_show + "\n"+str(scenario.constraint_graphs[graph].messages[m].sl)
         to_show=to_show + "\n"+str(scenario.constraint_graphs[graph].messages[m].hop)
         constraint_g.node(m,label=to_show)
-        constraint_g.edge(scenario.constraint_graphs[graph].messages[m].cluster_from, m , constraint='false')
-        constraint_g.edge(m,scenario.constraint_graphs[graph].messages[m].cluster_to , constraint='false')
-    constraint_g.render(f"{dir}/plots{phase}.view",view=True)
+        constraint_g.edge(str(scenario.constraint_graphs[graph].messages[m].cluster_from), m)
+        constraint_g.edge(m,str(scenario.constraint_graphs[graph].messages[m].cluster_to))
+    constraint_g.render(f"{dir}/plots{phase}.view",view=False)
 
 def generate_ILP1(output_file, graph):
     global scenario
@@ -503,10 +502,10 @@ def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
                 vals=line.split()
                 if int(vals[1])==1:
                     more_vals=vals[0].rsplit("_",1)
-                    if int(more_vals[1]) in scenario.constraint_graphs[graph].task_cluster:
+                    if more_vals[0] in scenario.tables:
                         scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
                     else:
-                        scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=dvfs_levels[int(more_vals[1])]
+                        scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=int(more_vals[1])
 #function to add constraints and variables to the ILP formulation
 # takes three input the file name, a list of constraints and a list of variables.
 

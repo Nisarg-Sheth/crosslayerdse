@@ -1,0 +1,41 @@
+// TASK_GRAPH 2 
+digraph {
+	0 [label="[src(dvfs_level 1), fft(dvfs_level 3), sink(dvfs_level 2), ]
+CLIENT_PE3"]
+	2 [label="[matrix(dvfs_level 0), road(dvfs_level 0), table(dvfs_level 3), ]
+CLIENT_PE2"]
+	3 [label="[ifft(dvfs_level 0), angle(dvfs_level 2), ]
+CLIENT_PE13"]
+	4 [label="[fir(dvfs_level 1), ]
+CLIENT_PE6"]
+	a2_01 [label="m
+None
+None"]
+	0 -> a2_01
+	a2_01 -> 4
+	a2_12 [label="m
+None
+None"]
+	4 -> a2_12
+	a2_12 -> 3
+	a2_34 [label="m
+None
+None"]
+	0 -> a2_34
+	a2_34 -> 2
+	a2_45 [label="m
+None
+None"]
+	2 -> a2_45
+	a2_45 -> 3
+	a2_67 [label="m
+None
+None"]
+	3 -> a2_67
+	a2_67 -> 2
+	a2_89 [label="m
+None
+None"]
+	2 -> a2_89
+	a2_89 -> 0
+}

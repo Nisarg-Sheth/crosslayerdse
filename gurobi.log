@@ -57380,3 +57380,2943 @@ Best objective 2.000000000000e+00, best bound 2.000000000000e+00, gap 0.0000%
 
 Wrote result file './lp_files/result_3.sol'
 
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:47:13 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xa6e5f81c
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:47:13 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 74 columns, 74 nonzeros
+Optimize a model with 10 rows, 74 columns and 74 nonzeros
+Model fingerprint: 0x32f33c76
+Variable types: 0 continuous, 74 integer (74 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 10.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 10 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.000000000000e+01, best bound 1.000000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:51:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xace6571f
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:51:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 3 rows, 24 columns, 24 nonzeros
+Optimize a model with 3 rows, 24 columns and 24 nonzeros
+Model fingerprint: 0x2c21f4ec
+Variable types: 0 continuous, 24 integer (24 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 3.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 3 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.000000000000e+00, best bound 3.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:52:10 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xc83c1095
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:52:10 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 71 columns, 71 nonzeros
+Optimize a model with 10 rows, 71 columns and 71 nonzeros
+Model fingerprint: 0x2a933a80
+Variable types: 0 continuous, 71 integer (71 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 10.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 10 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.000000000000e+01, best bound 1.000000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:54:04 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xf99f9873
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:54:04 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 54 columns, 54 nonzeros
+Optimize a model with 9 rows, 54 columns and 54 nonzeros
+Model fingerprint: 0x985f5dde
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:56:10 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0x193bc30c
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:56:10 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 63 columns, 63 nonzeros
+Optimize a model with 9 rows, 63 columns and 63 nonzeros
+Model fingerprint: 0x0a330a78
+Variable types: 0 continuous, 63 integer (63 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:57:50 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xa5c07f6b
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 15:57:51 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 62 columns, 62 nonzeros
+Optimize a model with 10 rows, 62 columns and 62 nonzeros
+Model fingerprint: 0x67494854
+Variable types: 0 continuous, 62 integer (62 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 10.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 10 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.000000000000e+01, best bound 1.000000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:06:12 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0x97d73efc
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:06:12 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 80 columns, 80 nonzeros
+Optimize a model with 10 rows, 80 columns and 80 nonzeros
+Model fingerprint: 0x4342a619
+Variable types: 0 continuous, 80 integer (80 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 10.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 10 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.000000000000e+01, best bound 1.000000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xb39cba5b
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 63 columns, 63 nonzeros
+Optimize a model with 9 rows, 63 columns and 63 nonzeros
+Model fingerprint: 0x0b81e6c6
+Variable types: 0 continuous, 63 integer (63 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0x99f79d62
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 53 columns, 53 nonzeros
+Optimize a model with 7 rows, 53 columns and 53 nonzeros
+Model fingerprint: 0x8e2a5c22
+Variable types: 0 continuous, 53 integer (53 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0x1dddd276
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 13 rows, 71 columns, 71 nonzeros
+Optimize a model with 13 rows, 71 columns and 71 nonzeros
+Model fingerprint: 0x52820d92
+Variable types: 0 continuous, 71 integer (71 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 13.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 13 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.300000000000e+01, best bound 1.300000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x06b71c72
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:09:39 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 58 columns, 58 nonzeros
+Optimize a model with 8 rows, 58 columns and 58 nonzeros
+Model fingerprint: 0x80073d34
+Variable types: 0 continuous, 58 integer (58 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 8.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 8 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.000000000000e+00, best bound 8.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xc1e718df
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 46 columns, 46 nonzeros
+Optimize a model with 8 rows, 46 columns and 46 nonzeros
+Model fingerprint: 0x4ea2d072
+Variable types: 0 continuous, 46 integer (46 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 8.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 8 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.000000000000e+00, best bound 8.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0x4a7d6572
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 6 rows, 36 columns, 36 nonzeros
+Optimize a model with 6 rows, 36 columns and 36 nonzeros
+Model fingerprint: 0x7047b4a2
+Variable types: 0 continuous, 36 integer (36 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 6.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0xf19e47a3
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 15 rows, 84 columns, 84 nonzeros
+Optimize a model with 15 rows, 84 columns and 84 nonzeros
+Model fingerprint: 0x1f0ee056
+Variable types: 0 continuous, 84 integer (84 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 15.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 15 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.500000000000e+01, best bound 1.500000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x6243e77a
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:17:42 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 41 columns, 41 nonzeros
+Optimize a model with 7 rows, 41 columns and 41 nonzeros
+Model fingerprint: 0xae456bf3
+Variable types: 0 continuous, 41 integer (41 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:00 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0x90fd1e40
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:00 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 46 columns, 46 nonzeros
+Optimize a model with 8 rows, 46 columns and 46 nonzeros
+Model fingerprint: 0x2104c3cc
+Variable types: 0 continuous, 46 integer (46 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 8.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 8 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.000000000000e+00, best bound 8.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:00 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0x579c1844
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:00 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 53 columns, 53 nonzeros
+Optimize a model with 7 rows, 53 columns and 53 nonzeros
+Model fingerprint: 0x9c8c056a
+Variable types: 0 continuous, 53 integer (53 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:00 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0x04c62d0f
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:00 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 14 rows, 88 columns, 88 nonzeros
+Optimize a model with 14 rows, 88 columns and 88 nonzeros
+Model fingerprint: 0xe02bc91b
+Variable types: 0 continuous, 88 integer (88 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 14.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 14 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.400000000000e+01, best bound 1.400000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:01 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x25d6da39
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:21:01 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 41 columns, 41 nonzeros
+Optimize a model with 7 rows, 41 columns and 41 nonzeros
+Model fingerprint: 0x883c2867
+Variable types: 0 continuous, 41 integer (41 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0x122f64fe
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 54 columns, 54 nonzeros
+Optimize a model with 9 rows, 54 columns and 54 nonzeros
+Model fingerprint: 0xed3783b9
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0x192a2e66
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 62 columns, 62 nonzeros
+Optimize a model with 7 rows, 62 columns and 62 nonzeros
+Model fingerprint: 0xf5ec038d
+Variable types: 0 continuous, 62 integer (62 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0x2581f9ce
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 16 rows, 101 columns, 101 nonzeros
+Optimize a model with 16 rows, 101 columns and 101 nonzeros
+Model fingerprint: 0x520beb70
+Variable types: 0 continuous, 101 integer (101 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 16.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 16 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.600000000000e+01, best bound 1.600000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x964948ee
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:27:02 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 75 columns, 75 nonzeros
+Optimize a model with 9 rows, 75 columns and 75 nonzeros
+Model fingerprint: 0x77de046a
+Variable types: 0 continuous, 75 integer (75 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0x4aaa5bec
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 54 columns, 54 nonzeros
+Optimize a model with 9 rows, 54 columns and 54 nonzeros
+Model fingerprint: 0x0541b4b7
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0x8c005af5
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 53 columns, 53 nonzeros
+Optimize a model with 7 rows, 53 columns and 53 nonzeros
+Model fingerprint: 0x4ef61398
+Variable types: 0 continuous, 53 integer (53 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0x694d03a6
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 14 rows, 79 columns, 79 nonzeros
+Optimize a model with 14 rows, 79 columns and 79 nonzeros
+Model fingerprint: 0xc3929cd5
+Variable types: 0 continuous, 79 integer (79 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 14.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 14 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.400000000000e+01, best bound 1.400000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x78fba0ab
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:28:07 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 66 columns, 66 nonzeros
+Optimize a model with 9 rows, 66 columns and 66 nonzeros
+Model fingerprint: 0x9dc9e806
+Variable types: 0 continuous, 66 integer (66 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:58 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xb39cba5b
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:58 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 57 columns, 57 nonzeros
+Optimize a model with 9 rows, 57 columns and 57 nonzeros
+Model fingerprint: 0xde3bf218
+Variable types: 0 continuous, 57 integer (57 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:58 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0xe85fd22d
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:58 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 6 rows, 41 columns, 41 nonzeros
+Optimize a model with 6 rows, 41 columns and 41 nonzeros
+Model fingerprint: 0xc88e993e
+Variable types: 0 continuous, 41 integer (41 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 6.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:58 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0xa2212c7b
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:59 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 14 rows, 67 columns, 67 nonzeros
+Optimize a model with 14 rows, 67 columns and 67 nonzeros
+Model fingerprint: 0xaf26db94
+Variable types: 0 continuous, 67 integer (67 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 14.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 14 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.400000000000e+01, best bound 1.400000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:59 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x5a630ec1
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:29:59 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 70 columns, 70 nonzeros
+Optimize a model with 9 rows, 70 columns and 70 nonzeros
+Model fingerprint: 0xa7a120d2
+Variable types: 0 continuous, 70 integer (70 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:52 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xf2402e09
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:52 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 9 rows, 54 columns, 54 nonzeros
+Optimize a model with 9 rows, 54 columns and 54 nonzeros
+Model fingerprint: 0x04cc0a8f
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 9.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:52 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0x0521adff
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:52 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 6 rows, 36 columns, 36 nonzeros
+Optimize a model with 6 rows, 36 columns and 36 nonzeros
+Model fingerprint: 0x8df5be82
+Variable types: 0 continuous, 36 integer (36 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 6.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:52 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0x8bfe5096
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:53 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 13 rows, 68 columns, 68 nonzeros
+Optimize a model with 13 rows, 68 columns and 68 nonzeros
+Model fingerprint: 0x1da6b397
+Variable types: 0 continuous, 68 integer (68 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 13.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 13 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.300000000000e+01, best bound 1.300000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:53 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x04b0499c
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:30:53 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 58 columns, 58 nonzeros
+Optimize a model with 8 rows, 58 columns and 58 nonzeros
+Model fingerprint: 0x142710b2
+Variable types: 0 continuous, 58 integer (58 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 8.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 8 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.000000000000e+00, best bound 8.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:22 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0xf5d7ec1d
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:22 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 46 columns, 46 nonzeros
+Optimize a model with 8 rows, 46 columns and 46 nonzeros
+Model fingerprint: 0x7223022a
+Variable types: 0 continuous, 46 integer (46 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 8.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 8 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.000000000000e+00, best bound 8.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:22 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0xfe9ee0f2
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:22 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 53 columns, 53 nonzeros
+Optimize a model with 7 rows, 53 columns and 53 nonzeros
+Model fingerprint: 0x4ef61398
+Variable types: 0 continuous, 53 integer (53 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:22 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0x6f5647e2
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:22 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 63 columns, 63 nonzeros
+Optimize a model with 12 rows, 63 columns and 63 nonzeros
+Model fingerprint: 0xb66a4ed5
+Variable types: 0 continuous, 63 integer (63 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 12.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 12 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.200000000000e+01, best bound 1.200000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:23 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x588f3d44
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:23 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 6 rows, 33 columns, 33 nonzeros
+Optimize a model with 6 rows, 33 columns and 33 nonzeros
+Model fingerprint: 0xa373331c
+Variable types: 0 continuous, 33 integer (33 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 6.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_0.lp
+Reading time = 0.00 seconds
+problem: 12 rows, 27 columns, 48 nonzeros
+Optimize a model with 12 rows, 27 columns and 48 nonzeros
+Model fingerprint: 0x24d0c149
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 12 rows and 27 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.000000000000e+00, best bound 6.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_0.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 80 columns, 80 nonzeros
+Optimize a model with 10 rows, 80 columns and 80 nonzeros
+Model fingerprint: 0x566dacf6
+Variable types: 0 continuous, 80 integer (80 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 10.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 10 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.000000000000e+01, best bound 1.000000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_0.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_1.lp
+Reading time = 0.00 seconds
+problem: 8 rows, 14 columns, 24 nonzeros
+Optimize a model with 8 rows, 14 columns and 24 nonzeros
+Model fingerprint: 0x4afe299b
+Variable types: 0 continuous, 14 integer (14 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 4 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.000000000000e+00, best bound 4.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_1.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 53 columns, 53 nonzeros
+Optimize a model with 7 rows, 53 columns and 53 nonzeros
+Model fingerprint: 0xc0ec6cbf
+Variable types: 0 continuous, 53 integer (53 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_1.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_2.lp
+Reading time = 0.00 seconds
+problem: 18 rows, 54 columns, 99 nonzeros
+Optimize a model with 18 rows, 54 columns and 99 nonzeros
+Model fingerprint: 0x4c1a7ad1
+Variable types: 0 continuous, 54 integer (54 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 18 rows and 54 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 9 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.000000000000e+00, best bound 9.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_2.lp
+Reading time = 0.00 seconds
+problem: 13 rows, 68 columns, 68 nonzeros
+Optimize a model with 13 rows, 68 columns and 68 nonzeros
+Model fingerprint: 0xca9f8c34
+Variable types: 0 continuous, 68 integer (68 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 13.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 13 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.300000000000e+01, best bound 1.300000000000e+01, gap 0.0000%
+
+Wrote result file './lp_files/result_2.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpcluster_3.lp
+Reading time = 0.00 seconds
+problem: 10 rows, 20 columns, 35 nonzeros
+Optimize a model with 10 rows, 20 columns and 35 nonzeros
+Model fingerprint: 0x6c7306ea
+Variable types: 0 continuous, 20 integer (20 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 4.0000000
+Presolve removed 10 rows and 20 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 2: 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
+
+Gurobi 9.0.1 (linux64, gurobi_cl) logging started Wed Mar 18 16:31:44 2020
+
+Using license file /afs/pd.inf.tu-dresden.de/users/nish161c/gurobi.lic
+Set parameter LogFile to value gurobi.log
+Academic license - for non-commercial use only
+
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Copyright (c) 2020, Gurobi Optimization, LLC
+
+Read LP format model from file ./lp_files/ilpresmap_3.lp
+Reading time = 0.00 seconds
+problem: 7 rows, 41 columns, 41 nonzeros
+Optimize a model with 7 rows, 41 columns and 41 nonzeros
+Model fingerprint: 0xae456bf3
+Variable types: 0 continuous, 41 integer (41 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 7.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds
+Thread count was 1 (of 4 available processors)
+
+Solution count 1: 7 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.000000000000e+00, best bound 7.000000000000e+00, gap 0.0000%
+
+Wrote result file './lp_files/result_3.sol'
+
