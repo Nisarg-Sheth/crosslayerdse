@@ -723,7 +723,7 @@ def clustering_pb(graph):
         num_of_con+=1
         l={}
         temp=f"{task}_{str(i-1)}"
-        l[temp]=('+',int((len(scenario.graphs[graph].tasks))))
+        l[temp]=('+',(len(scenario.graphs[graph].tasks)))
         j=0
         for t in scenario.graphs[graph].tasks:
             if (j)>=i:
@@ -808,19 +808,44 @@ def process_withdvfs(graph,num_levels):
         else:
             scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=int(more_vals[1])
 
+def messaging_pb(graph):
+    global scenario
+    num_of_con=0;
+    message="message"
+    i=1
+    scenario.constraint_graphs[graph].pbp_data[message]=PB_data()
+
+    #clustering tasks
+    for task in scenario.graphs[graph].tasks:
+        num_of_con+=1
+        l={}
+        for j in range(i):
+            temp=f"{task}_{str(j)}"
+            print(temp)
+            l[temp]=('+',1)
+        scenario.constraint_graphs[graph].pbp_data[].constraints.append([l,1,'='])
+        i+=1
+    
+
 #ILP for assigning the Resource type to cluster and the dvfs mode to each task.
 
 def dpll_solver(decision_strat,constraints,literal):
+    elem_del=[]
     for con in constraints:
         if not bool(con[0]) and con[1]==0 and con[2]=='=':
-            constraints.remove(con)
+            elem_del.append(con)
         elif not bool(con[0]) and con[1]>=0 and con[2]=='<=':
-            constraints.remove(con)
+            elem_del.append(con)
         elif not bool(con[0]) and con[1]<=0 and con[2]=='>=':
-            print(con)
-            constraints.remove(con)
+            elem_del.append(con)
         elif not bool(con[0]):
             return False, None
+            #constraints.remove(con)
+    for e in elem_del:
+        constraints.remove(e)
+    for con in constraints:
+        if not bool(con[0]) and con[1]<=0 and con[2]=='>=':
+            print(con)
     assignment={}
     if len(constraints) == 0:
         return True, assignment
@@ -888,7 +913,7 @@ def main():
 
         i=0
         while(i<10):
-            isassigned,scenario.2[graph].pbp_data["cluster"].assignment=dpll_solver(scenario.constraint_graphs[graph].pbp_data["cluster"].decision_strat,scenario.constraint_graphs[graph].pbp_data["cluster"].constraints,0)
+            isassigned,scenario.constraint_graphs[graph].pbp_data["cluster"].assignment=dpll_solver(scenario.constraint_graphs[graph].pbp_data["cluster"].decision_strat,scenario.constraint_graphs[graph].pbp_data["cluster"].constraints,0)
             if not isassigned:
                 print("Clustering constraints broken, fix now")
             if not process_clustering(graph):
