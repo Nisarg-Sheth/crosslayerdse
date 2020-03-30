@@ -823,29 +823,34 @@ def messaging_pb(graph):
             temp=f"{task}_{str(j)}"
             print(temp)
             l[temp]=('+',1)
-        scenario.constraint_graphs[graph].pbp_data[].constraints.append([l,1,'='])
+        scenario.constraint_graphs[graph].pbp_data[message].constraints.append([l,1,'='])
         i+=1
-    
+
 
 #ILP for assigning the Resource type to cluster and the dvfs mode to each task.
 
 def dpll_solver(decision_strat,constraints,literal):
     elem_del=[]
     for con in constraints:
-        if not bool(con[0]) and con[1]==0 and con[2]=='=':
-            elem_del.append(con)
-        elif not bool(con[0]) and con[1]>=0 and con[2]=='<=':
+        if not bool(con[0]) and con[1]>=0 and con[2]=='<=':
             elem_del.append(con)
         elif not bool(con[0]) and con[1]<=0 and con[2]=='>=':
+            elem_del.append(con)
+        #Quick assignment for One-hot variables
+        elif con[1]==0 and con[2]=='=':
+            var_list=[]
+            for a in con[0]:
+                var_list.append(a)
+            for vars in var_list:
+                for cons in constraints:
+                    if vars in cons[0]:
+                        del cons[0][vars]
             elem_del.append(con)
         elif not bool(con[0]):
             return False, None
             #constraints.remove(con)
     for e in elem_del:
         constraints.remove(e)
-    for con in constraints:
-        if not bool(con[0]) and con[1]<=0 and con[2]=='>=':
-            print(con)
     assignment={}
     if len(constraints) == 0:
         return True, assignment
