@@ -726,7 +726,7 @@ def process_cons(con_graph):
     gen_comp_con_graph(con_graph,graph)
     feasiblity_con_graph(con_graph,graph)
 
-def gen_con_graph(name="la"):
+def make_individual(name="la"):
     con_graph=creator.Individual()
     con_graph.graph=name
     gen_comp_pb(con_graph,name)
