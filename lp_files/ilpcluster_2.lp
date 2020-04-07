@@ -1,5 +1,5 @@
 Maximize
-problem: + 1 src_0 + 1 fft_1 + 1 matrix_1 + 1 ifft_1 + 1 fir_3 + 1 angle_3 + 1 road_5 + 1 table_2 + 1 sink_8 
+problem: + 1 src_0 + 1 fft_0 + 1 matrix_1 + 1 ifft_0 + 1 fir_1 + 1 angle_2 + 1 road_0 + 1 table_7 + 1 sink_0 
 Subject To
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 fft_0  + 1 fft_1  = 1

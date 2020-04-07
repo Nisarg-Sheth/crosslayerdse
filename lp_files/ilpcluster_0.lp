@@ -1,5 +1,5 @@
 Maximize
-problem: + 1 src_0 + 1 can1_0 + 1 fp_1 + 1 can2_3 + 1 pulse_2 + 1 sink_1 
+problem: + 1 src_0 + 1 can1_1 + 1 fp_2 + 1 can2_1 + 1 pulse_3 + 1 sink_3 
 Subject To
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 can1_0  + 1 can1_1  = 1
