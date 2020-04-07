@@ -145,63 +145,63 @@ def gen_comp_pb(con_graph,graph):
         #con_graph.pbp_data[complete].constraints.append([l2,(scenario.graphs[graph].num_of_tasks-(i+1)),'<='])
         con_graph.pbp_data[complete].constraints.append([l3,0,'='])
 
-        # #Mapping the Tmasters to Resources
-        # l4={}
-        # temp=f"{task}_master"
-        # l4[temp]=('-',1)
-        # for map in map_list[i]:
-        #     temp=f"map_{task}_{map}"
-        #     con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-        #     l4[temp]=('+',1)
-        # #con_graph.pbp_data[complete].constraints.append([l4,0,'='])
-        #
-        # #DVFS Level assignment
-        # if scenario.dvfs!=None and scenario.dvfs>=3:
-        #     l4={}
-        #     temp=f"{task}_master"
-        #     l4[temp]=('-',1)
-        #     for level in range(scenario.dvfs):
-        #         temp=f"dvfs_{level}_{task}"
-        #         con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-        #         l4[temp]=('+',1)
-        #     con_graph.pbp_data[complete].constraints.append([l4,0,'='])
-        # #verifying that mapping is not bad.
-        # j=0
-        # for task1 in scenario.graphs[graph].tasks:
-        #     # if j<i:
-        #     #     temp=f"C_{task}_{task1}"
-        #     #     l5={}
-        #     #     l5[temp]=('-',1)
-        #     #     for pe in map_list[i]:
-        #     #         if pe in map_list[j]:
-        #     #             temp=f"map_{task1}_{pe}"
-        #     #             l5[temp]=('+',1)
-        #     #     con_graph.pbp_data[complete].constraints.append([l5,0,'>='])
-        #     if j>i:
-        #         l6={}
-        #         temp=f"C_{task1}_{task}"
-        #         l6[temp]=('-',1)
-        #         for pe in map_list[i]:
-        #             if pe in map_list[j]:
-        #                 temp=f"map_{task}_{pe}"
-        #                 l6[temp]=('+',1)
-        #         con_graph.pbp_data[complete].constraints.append([l6,0,'>='])
-        #     j+=1
+        #Mapping the Tmasters to Resources
+        l4={}
+        temp=f"{task}_master"
+        l4[temp]=('-',1)
+        for map in map_list[i]:
+            temp=f"map_{task}_{map}"
+            con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
+            l4[temp]=('+',1)
+        #con_graph.pbp_data[complete].constraints.append([l4,0,'='])
+
+        #DVFS Level assignment
+        if scenario.dvfs!=None and scenario.dvfs>=3:
+            l4={}
+            temp=f"{task}_master"
+            l4[temp]=('-',1)
+            for level in range(scenario.dvfs):
+                temp=f"dvfs_{level}_{task}"
+                con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
+                l4[temp]=('+',1)
+            con_graph.pbp_data[complete].constraints.append([l4,0,'='])
+        #verifying that mapping is not bad.
+        j=0
+        for task1 in scenario.graphs[graph].tasks:
+            # if j<i:
+            #     temp=f"C_{task}_{task1}"
+            #     l5={}
+            #     l5[temp]=('-',1)
+            #     for pe in map_list[i]:
+            #         if pe in map_list[j]:
+            #             temp=f"map_{task1}_{pe}"
+            #             l5[temp]=('+',1)
+            #     con_graph.pbp_data[complete].constraints.append([l5,0,'>='])
+            if j>i:
+                l6={}
+                temp=f"C_{task1}_{task}"
+                l6[temp]=('-',1)
+                for pe in map_list[i]:
+                    if pe in map_list[j]:
+                        temp=f"map_{task}_{pe}"
+                        l6[temp]=('+',1)
+                con_graph.pbp_data[complete].constraints.append([l6,0,'>='])
+            j+=1
         i+=1
 
-    # for m in scenario.graphs[graph].arcs:
-    #     #assign service level
-    #     l1={}
-    #     for j in range(scenario.service_level):
-    #         l1[f"sl_{j}_{m}"]=('+',1)
-    #         con_graph.pbp_data[complete].decision_strat[f"sl_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
-    #     con_graph.pbp_data[complete].constraints.append([l1,1,'='])
-    #     #assign hop distance
-    #     l2={}
-    #     for j in range(scenario.max_hop):
-    #         l2[f"hop_{j}_{m}"]=('+',1)
-    #         con_graph.pbp_data[complete].decision_strat[f"hop_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
-    #     con_graph.pbp_data[complete].constraints.append([l2,1,'='])
+    for m in scenario.graphs[graph].arcs:
+        #assign service level
+        l1={}
+        for j in range(scenario.service_level):
+            l1[f"sl_{j}_{m}"]=('+',1)
+            con_graph.pbp_data[complete].decision_strat[f"sl_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
+        con_graph.pbp_data[complete].constraints.append([l1,1,'='])
+        #assign hop distance
+        l2={}
+        for j in range(scenario.max_hop):
+            l2[f"hop_{j}_{m}"]=('+',1)
+            con_graph.pbp_data[complete].decision_strat[f"hop_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
+        con_graph.pbp_data[complete].constraints.append([l2,1,'='])
 
 #generate the constraint graph from the ILP
 def gen_comp_con_graph(con_graph, graph):
@@ -625,7 +625,7 @@ def dpll_solver(decision_strat,constraints,literal):
         decision_strat[cur_var]=[var_priority,var_val]
     return False, None
 
-#Fixed Solver, decision_strat as OrderedDict
+#Changed solver
 def dll_solver(decision_strat,constraints,literal):
     #print(literal)
     elem_del=[]
