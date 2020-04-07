@@ -896,15 +896,15 @@ def main():
                     print(str(gurobi_run.stdout))
                     i=100
                     break
-            #     #this processing can be used to reduce the Design space. It also readies for the next ILP
-            #     cluster_done=process_ILP1(result_file_path,os.path.join(args.dir,out_name1),graph)
-            #     if cluster_done:
-            #         break
-            #     i+=1
-            # if i>=100:
-            #     print("CLUSTERING FAILED")
-            #     phase+=1
-            #     continue
+                #this processing can be used to reduce the Design space. It also readies for the next ILP
+                cluster_done=process_ILP1(result_file_path,os.path.join(args.dir,out_name1),graph)
+                if cluster_done:
+                    break
+                i+=1
+            if i>=100:
+                print("CLUSTERING FAILED")
+                phase+=1
+                continue
             #resource mapping ILP methodology.
             # generate_ILP2(os.path.join(args.dir,out_name2),graph)
             # #running gurobi on the output
