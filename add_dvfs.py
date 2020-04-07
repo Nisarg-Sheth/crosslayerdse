@@ -243,8 +243,6 @@ def plot_constraint_graph(graph,phase,dir):
         constraint_g.edge(scenario.constraint_graphs[graph].messages[m].cluster_from, m , constraint='false')
         constraint_g.edge(m,scenario.constraint_graphs[graph].messages[m].cluster_to , constraint='false')
     #constraint_g.render("./yo.view",view=True)
-
-
 def generate_ILP(output_file, graph):
     global scenario
     master_list=[]

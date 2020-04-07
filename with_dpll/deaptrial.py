@@ -95,7 +95,6 @@ toolboxfunc.register("select", tools.selTournament, tournsize=3)
 
 def main():
     random.seed(64)
-
     # create an initial population of 300 individuals (where
     # each individual is a list of integers)
     pop = toolboxfunc.population(n=300)
@@ -112,6 +111,7 @@ def main():
     fitnesses = list(map(toolboxfunc.evaluate, pop))
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
+        print(fit)
 
     print("  Evaluated %i individuals" % len(pop))
     # Extracting all the fitnesses of
@@ -122,7 +122,7 @@ def main():
     g = 0
 
     # Begin the evolution
-    while max(fits) < 100 and g < 10:
+    while max(fits) < 10 and g < 10:
         # A new generation
         g = g + 1
         print("-- Generation %i --" % g)

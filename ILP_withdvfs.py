@@ -72,7 +72,7 @@ def populate_task_params():
                     if int(scenario.tables[table].values[type_of_task][2])==1:
                         #adding the PE to the pe_list of each task
                         scenario.graphs[graph].tasks[task].pe_list.append(table)
-                        #adding the processing time on the PE for each task
+                        #adding the WCET on the PE for each task
                         scenario.graphs[graph].tasks[task].wcet[table]=float(scenario.tables[table].values[type_of_task][3])
                         #adding the task_power on the PE to the task arc_details
                         scenario.graphs[graph].tasks[task].power[table]=float(scenario.tables[table].values[type_of_task][6])

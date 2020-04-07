@@ -4,7 +4,7 @@ import re
 import argparse
 import subprocess
 from graphviz import Digraph
-from deap import *
+from collections import OrderedDict
 
 class Complete_Scenario:
     def __init__(self):
@@ -16,12 +16,14 @@ class Complete_Scenario:
         self.tables = {}
         self.hyperperiod = None
         self.constraint_graphs = {}
+        self.dvfs=None
         self.dvfs_level = []
-
+        self.service_level = 10
+        self.max_hop=14
 class PB_data:
     def __init__(self):
         self.constraints = []
-        self.decision_strat = []
+        self.decision_strat = OrderedDict()
         self.assignment = None
 
 class Constraint_graph:
@@ -32,7 +34,8 @@ class Constraint_graph:
         self.task_to_cluster = {}
         self.dvfs_level = {}
         self.pbp_data = {}
-
+        self.generation = 1
+        self.graph = None
 class Task_cluster:
     def __init__(self):
         self.mapped_to = None
@@ -90,8 +93,7 @@ class Task:
         self.power = {}
         self.code_bits = {}
         self.preempt_time = {}
-        self.predecessor = []
-        self.successor = []
+        self.priority=0
         self.hard_deadline = None
         self.soft_deadline = None
 class Arc:
