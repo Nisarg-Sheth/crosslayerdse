@@ -875,7 +875,7 @@ def main():
         result_arg = "ResultFile="+result_file_path
 
         #The old 0-1 ILP formulation
-        if (args.m==0):
+        if (args.modular==0):
             generate_ILP(output_file_path,scenario.graphs[graph])
             gurobi_run=subprocess.run(["gurobi_cl",result_arg,output_file_path], capture_output=True)
             if "Optimal solution found" not in str(gurobi_run.stdout):
