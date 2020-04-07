@@ -100,6 +100,7 @@ def generate_con_graph(input_file, graph):
     c_list = []
     sl_list = []
     hop_list = []
+    dvfs_list = []
     with open(input_file) as file:
         for line in file:
             if not line.startswith('#'):
@@ -118,6 +119,8 @@ def generate_con_graph(input_file, graph):
                     sl_list.append(parts[0][3:])
                 elif parts[0].startswith("hop_") and parts[1] is "1":
                     hop_list.append(parts[0][4:])
+                elif parts[0].startswith("dvfs_") and parts[1] is "1":
+                    dvfs_list.append(parts[5:])
 
     for m in master_list:
         scenario.constraint_graphs[graph].task_cluster[m]=Task_cluster()
@@ -132,6 +135,9 @@ def generate_con_graph(input_file, graph):
         a=m.split("_",1)
         scenario.constraint_graphs[graph].task_cluster[a[0]].mapped_to=a[1]
 
+    for d in dvfs_list:
+        a=d.split("_",1)
+        scenario.constraint_graphs[graph].dvfs_level[a[1]]=int(a[0])
     for sl in sl_list:
         a=sl.split("_",1)
         task_from = scenario.graphs[graph].arcs[a[1]].task_from
@@ -154,7 +160,8 @@ def plot_constraint_graph(graph,phase,dir):
         to_show=""
         mapped_to = scenario.constraint_graphs[graph].task_cluster[task].mapped_to
         for a in scenario.constraint_graphs[graph].task_cluster[task].tasks:
-            to_show+=f"{a}(dvfs_level {scenario.constraint_graphs[graph].dvfs_level[a]}), "
+            if scenario.dvfs!=None and scenario.dvfs>=3:
+                to_show+=f"{a}(dvfs_level {scenario.constraint_graphs[graph].dvfs_level[a]}), "
         to_show= f"[{to_show}]\n"+mapped_to
         constraint_g.node(str(task),label=to_show)
     for m in scenario.constraint_graphs[graph].messages:
@@ -747,6 +754,7 @@ def main():
             print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
             break;
         generate_con_graph(result_file_path,graph)
+        print()
 
         #Task clustering ILP formation and processing
         # generate_ILP1(os.path.join(args.dir,out_name1),scenario.graphs[graph])
