@@ -91,6 +91,8 @@ class Task:
         self.pe_list = []
         self.wcet = {}
         self.power = {}
+        self.successor=[]
+        self.predecessor=[]
         self.code_bits = {}
         self.preempt_time = {}
         self.priority=0
