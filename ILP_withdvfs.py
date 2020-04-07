@@ -718,11 +718,13 @@ def generate_ILP(output_file, graph):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("input_tgff", help="*.tgff file to parse")
+    parser.add_argument("--modular","-m" help="Use modular or complete clustering")
     parser.add_argument("--tg", help="*name of task_graph",default="TASK_GRAPH")
     parser.add_argument("--core", help="name of core/PE", default="CLIENT_PE")
     parser.add_argument("-d", "--dir",default="./lp_files", help="output directory")
     parser.add_argument("-o", "--out",action="store", dest="out", default="ilp.lp", help="output file")
     parser.add_argument("--dvfs_level","--dvfs",action="store", dest="dvfs_num_levels", type=int, default=None, help="The number of dvfs_levels possible for each processor")
+
     args = parser.parse_args()
     global scenario
     scenario = Complete_Scenario()
@@ -748,14 +750,16 @@ def main():
         result_arg = "ResultFile="+result_file_path
 
         #The old 0-1 ILP formulation
-        generate_ILP(output_file_path,scenario.graphs[graph])
-        gurobi_run=subprocess.run(["gurobi_cl",result_arg,output_file_path], capture_output=True)
-        if "Optimal solution found" not in str(gurobi_run.stdout):
-            print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
-            break;
-        generate_con_graph(result_file_path,graph)
-        print()
-
+        if (args.m):
+            generate_ILP(output_file_path,scenario.graphs[graph])
+            gurobi_run=subprocess.run(["gurobi_cl",result_arg,output_file_path], capture_output=True)
+            if "Optimal solution found" not in str(gurobi_run.stdout):
+                print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+                break;
+            generate_con_graph(result_file_path,graph)
+            print("Con graph generated")
+        else:
+            print("Args m doesn't exist")
         #Task clustering ILP formation and processing
         # generate_ILP1(os.path.join(args.dir,out_name1),scenario.graphs[graph])
         # i=0

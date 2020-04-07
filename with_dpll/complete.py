@@ -1094,6 +1094,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("input_tgff", help="*.tgff file to parse")
     parser.add_argument("--tg", help="*name of task_graph",default="TASK_GRAPH")
+    parser.add_argument("--modular","-m")
     parser.add_argument("--core", help="name of core/PE", default="CLIENT_PE")
     parser.add_argument("-d", "--dir",default="./lp_files", help="output directory")
     parser.add_argument("-o", "--out",action="store", dest="out", default="ilp.lp", help="output file")
