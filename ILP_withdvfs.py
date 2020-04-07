@@ -715,10 +715,135 @@ def generate_ILP(output_file, graph):
         print("The number of variables: "+str(num_var))
         f.write("End\n")
 
+#feasibilty of constraint on the physical NOC
+def feasiblity_con_graph(con_graph,graph):
+    global scenario
+
+def process_cons(con_graph):
+    isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
+    if not isassigned:
+        print("Clustering constraints broken, fix now")
+    gen_comp_con_graph(con_graph,graph)
+    feasiblity_con_graph(con_graph,graph)
+
+def gen_con_graph(name="la"):
+    con_graph=creator.Individual()
+    con_graph.graph=name
+    gen_comp_pb(con_graph,name)
+    isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
+    if not isassigned:
+        print("Clustering constraints broken, fix now")
+    pop=None
+    print("Population")
+    gen_comp_con_graph(con_graph,name)
+    feasiblity_con_graph(con_graph,name)
+    return con_graph
+
+def makepop(graph_name="la", pop_size=5):
+    l = []
+    for i in range(pop_size):
+        l.append(toolbox.individual(name=graph_name))
+    return l
+
+def evalParams(individual):
+    global scenario
+    graph=individual.graph
+    energy=0
+    task_list=[]
+    task_start={}
+    cluster_time={}
+    dvfs_level=scenario.dvfs_level(individual.dvfs_level[cluster])
+    message_communication_time=0.001
+    #Computing the total energy usage
+    for cluster in individual.task_cluster:
+        temp=0
+        cluster_time[cluster]=0
+        for task in individual.task_cluster[cluster].tasks:
+            mapped=individual.task_cluster[cluster].mapped_to
+            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
+            power=scenario.graphs[graph].tasks[task].power[mapped]
+            energy+=(wcet*power*dvfs_level*dvfs_level)
+            temp+=(wcet/dvfs_level)
+
+    #Sorting tasks according to priority
+    for task in scenario.graphs[graph].tasks:
+        task_list.append([scenario.graphs[graph].tasks[task].priority,task])
+        task_start[task]=0
+    task_list.sort(key=lambda x: x[1])
+    print(task_list)
+
+    #setting lower limit on task start time
+    for task_dets in task_list:
+        task=task_dets[1]
+        cluster=individual.task_to_cluster[task]
+        cluster_time[cluster]+=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        for task1 in cluster.tasks:
+            if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
+                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
+                    task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+        for m in individual.messages:
+            if scenario.graphs[graph].arcs[m].task_from==task:
+                task_to=scenario.graphs[graph].arcs[m].task_to
+                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)):
+                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+
+    max_time=0
+    for cluster in cluster_time:
+        if(cluster_time[cluster]>max_time):
+            max_time=cluster_time[cluster]
+    return (energy,imax_time)
+
+def matefunc(ind1,ind2):
+    complete="complete"
+    print("crossover starts")
+    for a in ind1.pbp_data[complete].decision_strat:
+        if random.randint(0,1)==1:
+            yo=ind1.pbp_data[complete].decision_strat[a]
+            ind1.pbp_data[complete].decision_strat[a]=ind2.pbp_data[complete].decision_strat[a]
+            ind2.pbp_data[complete].decision_strat[a]=yo
+    #process constraints
+    process_cons(ind1)
+    process_cons(ind2)
+    return ind1, ind2
+
+def mutatefunc(ind,indpb=0.1):
+    complete="complete"
+    print("Mutate starts")
+    for a in ind.pbp_data[complete].decision_strat:
+        if random.random() < indpb:
+            ind.pbp_data[complete].decision_strat[a][1]= not ind.pbp_data[complete].decision_strat[a][1]
+            yo=ind.pbp_data[complete].decision_strat[a][0]%1
+            ind.pbp_data[complete].decision_strat[a][0]=(yo+ind.generation)
+    ind.generation+=1
+    process_cons(ind)
+    #process constraints
+    return ind
+
+
+creator.create("Fitness", base.Fitness, weights=(1.0,1.0))
+creator.create("Individual",Constraint_graph,fitness=creator.Fitness)
+
+toolbox = base.Toolbox()
+
+toolbox.register("individual",make_individual)
+toolbox.register("population",makepop)
+#----------
+# Operator registration
+#----------
+# register the goal / fitness function
+toolbox.register("evaluate", evalParams)
+# register the crossover operator
+toolbox.register("mate", matefunc)
+# register a mutation operator with a probability to
+# flip each attribute/gene of 0.05
+toolbox.register("mutate",mutatefunc, indpb=0.05)
+#fittest of the individuals is selected for breeding..
+toolbox.register("select", tools.selTournament, tournsize=3)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("input_tgff", help="*.tgff file to parse")
-    parser.add_argument("--modular","-m",default=0 help="Use modular or complete clustering, Modular=1/Complete=0")
+    parser.add_argument("--modular","-m",default=0, help="Use modular or complete clustering, Modular=1/Complete=0")
     parser.add_argument("--tg", help="*name of task_graph",default="TASK_GRAPH")
     parser.add_argument("--core", help="name of core/PE", default="CLIENT_PE")
     parser.add_argument("-d", "--dir",default="./lp_files", help="output directory")
@@ -750,7 +875,7 @@ def main():
         result_arg = "ResultFile="+result_file_path
 
         #The old 0-1 ILP formulation
-        if (args.m):
+        if (args.m==0):
             generate_ILP(output_file_path,scenario.graphs[graph])
             gurobi_run=subprocess.run(["gurobi_cl",result_arg,output_file_path], capture_output=True)
             if "Optimal solution found" not in str(gurobi_run.stdout):
@@ -759,58 +884,58 @@ def main():
             generate_con_graph(result_file_path,graph)
             print("Con graph generated")
         else:
-            print("Args m doesn't exist")
+            print("Modular approach")
         #Task clustering ILP formation and processing
-        # generate_ILP1(os.path.join(args.dir,out_name1),scenario.graphs[graph])
-        # i=0
-        # while i<=100:
-        #     #running gurobi on the output
-        #     gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name1)], capture_output=True)
-        #     if "solution found" not in str(gurobi_run.stdout):
-        #         print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
-        #         print(str(gurobi_run.stdout))
-        #         i=100
-        #         break
-        #     #this processing can be used to reduce the Design space. It also readies for the next ILP
-        #     cluster_done=process_ILP1(result_file_path,os.path.join(args.dir,out_name1),graph)
-        #     if cluster_done:
-        #         break
-        #     i+=1
-        # if i>=100:
-        #     print("CLUSTERING FAILED")
-        #     phase+=1
-        #     continue
-        #resource mapping ILP methodology.
-        # generate_ILP2(os.path.join(args.dir,out_name2),graph)
-        # #running gurobi on the output
-        # gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
-        # if "solution found" not in str(gurobi_run.stdout):
-        #     print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
-        #     break;
-        # #this processing can be used to reduce the Design space.
-        # process_ILP2(result_file_path,os.path.join(args.dir,out_name2),graph)
-        #
-        # #dvfs_level ILP methodology.
-        # if args.dvfs_num_levels!=None:
-        #     generate_ILP3(os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
-        #     #running gurobi on the output
-        #     gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name3)], capture_output=True)
-        #     if "solution found" not in str(gurobi_run.stdout):
-        #         print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
-        #         break;
-        #     phase+=1
-        #     #this processing can be used to reduce the Design space.
-        #     process_ILP3(result_file_path,os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
-        #
-        # generate_ILP_withdvfs(os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
-        # #running gurobi on the output
-        # gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
-        # if "solution found" not in str(gurobi_run.stdout):
-        #     print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
-        #     print(str(gurobi_run.stdout))
-        #     break;
-        # #this processing can be used to reduce the Design space. It also readies for the next ILP
-        # process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
+            generate_ILP1(os.path.join(args.dir,out_name1),scenario.graphs[graph])
+            i=0
+            while i<=100:
+                #running gurobi on the output
+                gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name1)], capture_output=True)
+                if "solution found" not in str(gurobi_run.stdout):
+                    print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+                    print(str(gurobi_run.stdout))
+                    i=100
+                    break
+            #     #this processing can be used to reduce the Design space. It also readies for the next ILP
+            #     cluster_done=process_ILP1(result_file_path,os.path.join(args.dir,out_name1),graph)
+            #     if cluster_done:
+            #         break
+            #     i+=1
+            # if i>=100:
+            #     print("CLUSTERING FAILED")
+            #     phase+=1
+            #     continue
+            #resource mapping ILP methodology.
+            # generate_ILP2(os.path.join(args.dir,out_name2),graph)
+            # #running gurobi on the output
+            # gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
+            # if "solution found" not in str(gurobi_run.stdout):
+            #     print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+            #     break;
+            # #this processing can be used to reduce the Design space.
+            # process_ILP2(result_file_path,os.path.join(args.dir,out_name2),graph)
+            #
+            # #dvfs_level ILP methodology.
+            # if args.dvfs_num_levels!=None:
+            #     generate_ILP3(os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
+            #     #running gurobi on the output
+            #     gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name3)], capture_output=True)
+            #     if "solution found" not in str(gurobi_run.stdout):
+            #         print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+            #         break;
+            #     phase+=1
+            #     #this processing can be used to reduce the Design space.
+            #     process_ILP3(result_file_path,os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
+            #
+            generate_ILP_withdvfs(os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
+            #running gurobi on the output
+            gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
+            if "solution found" not in str(gurobi_run.stdout):
+                print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
+                print(str(gurobi_run.stdout))
+                break;
+            #this processing can be used to reduce the Design space. It also readies for the next ILP
+            process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
         #
         plot_app_graph(graph,phase,args.dir)
         plot_constraint_graph(graph,phase,args.dir)
