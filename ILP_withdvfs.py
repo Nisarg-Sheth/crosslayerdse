@@ -847,6 +847,8 @@ def main():
         for block in get_blocks(input_file):
             process_block(block,args.tg,args.core)
     populate_task_params()
+    if args.dvfs_num_levels!=None:
+        scenario.dvfs=args.dvfs_num_levels
 
     phase=0
     #Processing each graph seperately
