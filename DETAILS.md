@@ -1,6 +1,6 @@
 # Flow of the code
 
-##Common functions and classes
+## Common functions and classes
 
 The complete .tgff file in the E3S Benchmark represent a scenario with multiple application task graphs with `tasks` and `arcs` between the messages.
 
@@ -14,7 +14,7 @@ The `process_block`function takes this isolated block as input and adds the appr
 The `graph` class is populated with the tasks and the arcs with their names and some basic arc_details.
 The `populate_task_params` function is used to populate the tasks with the list of the valid processing elements and other PE specific details such as WCET, power and pre-emption time.
 
-##LP file based solvers
+## LP file based solvers
 
 Now that the `graph` i.e. the application graph is populated, we use the information in the generate and solve ILPs using ILP lp_files
 
@@ -139,7 +139,7 @@ The solution can varied by the mutate operation as such:
 ```
 The cross over operation will simply be crossing over the bits of the decision values
 
-####Evaluate function
+#### Evaluate function
 
 The evaluate function is independent of the ILP solver implementation
 
@@ -153,4 +153,4 @@ The priority of a task is determined by its precedence constraints. The lower pr
 Now in a cluster, the priority of the task can also aid in deciding the execution time. The higher priority task sets a lower bound on the start of execution time of the lower priority task. Hence now for a low priority task, the lower bound on execution time is set as max((execution time of all high priority tasks on cluster),(execution times of all tasks that are successors of the low priority task)).
 If we iterate over all tasks in the order of their priority while setting the lower bound on start of execution time of lower priority tasks, we can obtain the net execution time of each cluster and subsequently the execution time of the whole application.
 
-An intuitive way of looking at it is considering messaging edges between tasks of the same cluster with zero latency. A low priority task on a cluster can only run after the higher priority task has executed, just like in an DAG. Hence now all we have to do is to iterate over the DAG in a breadth first manner starting from a node with no incoming edges. 
+An intuitive way of looking at it is considering messaging edges between tasks of the same cluster with zero latency. A low priority task on a cluster can only run after the higher priority task has executed, just like in an DAG. Hence now all we have to do is to iterate over the DAG in a breadth first manner starting from a node with no incoming edges.
