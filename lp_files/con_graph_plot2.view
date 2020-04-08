@@ -1,53 +1,31 @@
 // TASK_GRAPH 2 
 digraph {
-	0 [label="[src(dvfs_level 1), ]
-CLIENT_PE4"]
-	1 [label="[fft(dvfs_level 1), ifft(dvfs_level 1), sink(dvfs_level 2), ]
-CLIENT_PE6"]
-	2 [label="[matrix(dvfs_level 0), fir(dvfs_level 0), ]
-CLIENT_PE6"]
-	4 [label="[angle(dvfs_level 1), road(dvfs_level 0), ]
-CLIENT_PE2"]
-	5 [label="[table(dvfs_level 1), ]
+	fft [label="[fft(dvfs_level 4), ]
+CLIENT_PE14"]
+	matrix [label="[matrix(dvfs_level 4), ]
 CLIENT_PE7"]
-	a2_01 [label="m
-None
-None"]
-	0 -> a2_01
-	a2_01 -> 2
-	a2_12 [label="m
-None
-None"]
-	2 -> a2_12
-	a2_12 -> 4
+	ifft [label="[ifft(dvfs_level 4), ]
+CLIENT_PE14"]
+	src [label="[src(dvfs_level 4), fir(dvfs_level 4), angle(dvfs_level 4), road(dvfs_level 4), table(dvfs_level 4), sink(dvfs_level 4), ]
+CLIENT_PE6"]
 	a2_23 [label="m
-None
-None"]
-	0 -> a2_23
-	a2_23 -> 1
+0
+1"]
+	src -> a2_23
+	a2_23 -> fft
 	a2_34 [label="m
-None
-None"]
-	1 -> a2_34
-	a2_34 -> 2
+0
+1"]
+	fft -> a2_34
+	a2_34 -> matrix
 	a2_45 [label="m
-None
-None"]
-	2 -> a2_45
-	a2_45 -> 1
+0
+1"]
+	matrix -> a2_45
+	a2_45 -> ifft
 	a2_56 [label="m
-None
-None"]
-	1 -> a2_56
-	a2_56 -> 4
-	a2_78 [label="m
-None
-None"]
-	4 -> a2_78
-	a2_78 -> 5
-	a2_89 [label="m
-None
-None"]
-	5 -> a2_89
-	a2_89 -> 1
+0
+1"]
+	ifft -> a2_56
+	a2_56 -> src
 }

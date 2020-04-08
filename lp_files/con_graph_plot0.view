@@ -1,19 +1,31 @@
 // TASK_GRAPH 0 
 digraph {
-	0 [label="[src(dvfs_level 3), can1(dvfs_level 2), fp(dvfs_level 3), ]
-CLIENT_PE4"]
-	1 [label="[can2(dvfs_level 1), ]
+	can1 [label="[can1(dvfs_level 4), ]
 CLIENT_PE14"]
-	2 [label="[pulse(dvfs_level 2), sink(dvfs_level 0), ]
-CLIENT_PE3"]
+	fp [label="[fp(dvfs_level 4), ]
+CLIENT_PE6"]
+	can2 [label="[can2(dvfs_level 4), ]
+CLIENT_PE0"]
+	src [label="[src(dvfs_level 4), pulse(dvfs_level 4), sink(dvfs_level 4), ]
+CLIENT_PE0"]
+	a0_01 [label="m
+0
+1"]
+	src -> a0_01
+	a0_01 -> can1
+	a0_12 [label="m
+0
+1"]
+	can1 -> a0_12
+	a0_12 -> fp
 	a0_13 [label="m
-None
-None"]
-	0 -> a0_13
-	a0_13 -> 1
+0
+1"]
+	fp -> a0_13
+	a0_13 -> can2
 	a0_24 [label="m
-None
-None"]
-	1 -> a0_24
-	a0_24 -> 2
+0
+1"]
+	can2 -> a0_24
+	a0_24 -> src
 }

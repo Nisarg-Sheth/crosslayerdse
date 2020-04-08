@@ -160,7 +160,7 @@ def plot_constraint_graph(con_graph,graph,phase,dir):
         mapped_to = con_graph.task_cluster[task].mapped_to
         for a in con_graph.task_cluster[task].tasks:
             if scenario.dvfs!=None and scenario.dvfs>=3:
-                to_show+=f"{a}(dvfs_level {con_graph.dvfs_level[a]}), "
+                to_show+=f"{a}(dvfs_level {con_graph.dvfs_level[task]}), "
         to_show= f"[{to_show}]\n"+mapped_to
         constraint_g.node(str(task),label=to_show)
     for m in con_graph.messages:
