@@ -1,17 +1,12 @@
 // TASK_GRAPH 1 
 digraph {
-	0 [label="[]
-CLIENT_PE0"]
-	1 [label="[]
-CLIENT_PE13"]
-	a1_01 [label="m
-None
-None"]
-	0 -> a1_01
-	a1_01 -> 1
+	0 [label="[src(dvfs_level 1), iir(dvfs_level 4), idct(dvfs_level 4), ]
+CLIENT_PE7"]
+	2 [label="[sink(dvfs_level 2), ]
+CLIENT_PE11"]
 	a1_23 [label="m
 None
 None"]
-	1 -> a1_23
-	a1_23 -> 0
+	0 -> a1_23
+	a1_23 -> 2
 }
