@@ -119,7 +119,7 @@ def generate_con_graph(input_file,con_graph,graph):
                 elif parts[0].startswith("hop_") and parts[1] is "1":
                     hop_list.append(parts[0][4:])
                 elif parts[0].startswith("dvfs_") and parts[1] is "1":
-                    dvfs_list.append(parts[5:])
+                    dvfs_list.append(parts[0][5:])
 
     for m in master_list:
         con_graph.task_cluster[m]=Task_cluster()
@@ -627,7 +627,7 @@ def generate_ILP(output_file,graph):
                 num_of_con+=1
                 con = con_val+"_"+str(num_of_con)+ " : "
                 line = minuss + " 1 "+master_list[i]
-                for level in range(scenario.level):
+                for level in range(scenario.dvfs):
                     line = line + pluss + " 1 " +f"dvfs_{level}_{task_list[i]}"
                 line = line + equalss + "0"
                 f.write(con+line+"\n")
@@ -691,8 +691,8 @@ def generate_ILP(output_file,graph):
                 f.write("map_"+task_list[i]+"_"+j+"\n")
                 num_var+=1
             if scenario.dvfs!=None and scenario.dvfs>=3:
-                for level in range(scenario.level):
-                    lf.write(f"dvfs_{level}_{task_list[i]}\n")
+                for level in range(scenario.dvfs):
+                    f.write(f"dvfs_{level}_{task_list[i]}\n")
                     num_var+=1
 
         for m in graph.arcs:
