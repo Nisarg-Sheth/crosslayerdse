@@ -1,52 +1,53 @@
 // TASK_GRAPH 2 
 digraph {
-	0 [label="[src(dvfs_level 4), fft(dvfs_level 3), matrix(dvfs_level 0), ]
-CLIENT_PE13"]
-	2 [label="[ifft(dvfs_level 1), ]
-CLIENT_PE3"]
-	1 [label="[fir(dvfs_level 1), ]
-CLIENT_PE0"]
-	3 [label="[angle(dvfs_level 1), ]
-CLIENT_PE3"]
-	6 [label="[road(dvfs_level 1), ]
+	0 [label="[src(dvfs_level 1), ]
+CLIENT_PE4"]
+	1 [label="[fft(dvfs_level 1), ifft(dvfs_level 1), sink(dvfs_level 2), ]
+CLIENT_PE6"]
+	2 [label="[matrix(dvfs_level 0), fir(dvfs_level 0), ]
+CLIENT_PE6"]
+	4 [label="[angle(dvfs_level 1), road(dvfs_level 0), ]
 CLIENT_PE2"]
-	4 [label="[table(dvfs_level 1), ]
-CLIENT_PE14"]
-	5 [label="[sink(dvfs_level 4), ]
-CLIENT_PE2"]
+	5 [label="[table(dvfs_level 1), ]
+CLIENT_PE7"]
 	a2_01 [label="m
 None
 None"]
 	0 -> a2_01
-	a2_01 -> 1
+	a2_01 -> 2
 	a2_12 [label="m
 None
 None"]
-	1 -> a2_12
-	a2_12 -> 3
+	2 -> a2_12
+	a2_12 -> 4
+	a2_23 [label="m
+None
+None"]
+	0 -> a2_23
+	a2_23 -> 1
+	a2_34 [label="m
+None
+None"]
+	1 -> a2_34
+	a2_34 -> 2
 	a2_45 [label="m
 None
 None"]
-	0 -> a2_45
-	a2_45 -> 2
+	2 -> a2_45
+	a2_45 -> 1
 	a2_56 [label="m
 None
 None"]
-	2 -> a2_56
-	a2_56 -> 3
-	a2_67 [label="m
-None
-None"]
-	3 -> a2_67
-	a2_67 -> 6
+	1 -> a2_56
+	a2_56 -> 4
 	a2_78 [label="m
 None
 None"]
-	6 -> a2_78
-	a2_78 -> 4
+	4 -> a2_78
+	a2_78 -> 5
 	a2_89 [label="m
 None
 None"]
-	4 -> a2_89
-	a2_89 -> 5
+	5 -> a2_89
+	a2_89 -> 1
 }

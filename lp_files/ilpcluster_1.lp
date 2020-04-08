@@ -1,5 +1,5 @@
 Maximize
-problem: + 1 src_0 + 1 iir_0 + 1 idct_0 + 1 sink_2 
+problem: + 1 src_0 + 1 iir_0 + 1 idct_1 + 1 sink_0 
 Subject To
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 iir_0  + 1 iir_1  = 1

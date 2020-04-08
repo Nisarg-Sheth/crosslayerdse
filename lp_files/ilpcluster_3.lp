@@ -1,5 +1,5 @@
 Maximize
-problem: + 1 src_0 + 1 ptr_1 + 1 cache_1 + 1 tooth_3 + 1 sink_4 
+problem: + 1 src_0 + 1 ptr_0 + 1 cache_2 + 1 tooth_3 + 1 sink_4 
 Subject To
 constraint_1 :   + 1 src_0  = 1
 constraint_2 :   + 1 ptr_0  + 1 ptr_1  = 1
