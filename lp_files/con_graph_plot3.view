@@ -1,31 +1,12 @@
 // TASK_GRAPH 3 
 digraph {
-	0 [label="[src(dvfs_level 3), cache(dvfs_level 0), ]
-CLIENT_PE13"]
-	1 [label="[ptr(dvfs_level 3), ]
+	0 [label="[]
 CLIENT_PE6"]
-	2 [label="[tooth(dvfs_level 2), ]
-CLIENT_PE13"]
-	4 [label="[sink(dvfs_level 2), ]
-CLIENT_PE14"]
-	a3_01 [label="m
-None
-None"]
-	0 -> a3_01
-	a3_01 -> 1
-	a3_12 [label="m
-None
-None"]
-	1 -> a3_12
-	a3_12 -> 0
-	a3_23 [label="m
-None
-None"]
-	0 -> a3_23
-	a3_23 -> 2
+	1 [label="[]
+CLIENT_PE1"]
 	a3_34 [label="m
 None
 None"]
-	2 -> a3_34
-	a3_34 -> 4
+	0 -> a3_34
+	a3_34 -> 1
 }
