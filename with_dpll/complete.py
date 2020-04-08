@@ -1027,9 +1027,9 @@ def evalParams(individual):
     for task_dets in task_list:
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
-        cluster_time[cluster]+=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         for task1 in cluster.tasks:
-            if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
+            if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]):
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
                     task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
         for m in individual.messages:
@@ -1037,12 +1037,11 @@ def evalParams(individual):
                 task_to=scenario.graphs[graph].arcs[m].task_to
                 if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)):
                     task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
-
     max_time=0
     for cluster in cluster_time:
         if(cluster_time[cluster]>max_time):
             max_time=cluster_time[cluster]
-    return (energy,imax_time)
+    return (energy,max_time)
 
 def matefunc(ind1,ind2):
     complete="complete"

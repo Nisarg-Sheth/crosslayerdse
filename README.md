@@ -26,7 +26,9 @@ The code also generates the application graph and the Constraint graph based on 
 To sum up,
     The output can be seen in the ./lp_files directory after running the command
     ```
+    
     python complete.py a.tgff --dvfs 5 -m 0
+
     ```   
 
 The work for integrating the gurobi solver is currently underway.
