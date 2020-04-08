@@ -1,8 +1,8 @@
 # crosslayerdse
 
 The repo contains all the work done on the ILP formulation and solving so far
-The main directory contains the files for running things with gurobi
-The directory /with_dpll contains the work on EA formulation and the implementation of the DSE using david-putnam backtracking algorithm
+The main directory contains the files for running things with the gurobi solver.
+The directory `/with_dpll` contains the work on EA formulation and the implementation of the DSE using david-putnam backtracking algorithm
 
 ## The parent directory
 
@@ -25,7 +25,9 @@ The code also generates the application graph and the Constraint graph based on 
 
 To sum up,
     The output can be seen in the ./lp_files directory after running the command
-    `python complete.py a.tgff --dvfs 5 -m 0`
+    ```
+    python complete.py a.tgff --dvfs 5 -m 0
+    ```   
 
 The work for integrating the gurobi solver is currently underway.
 

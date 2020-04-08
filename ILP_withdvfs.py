@@ -91,9 +91,8 @@ def populate_task_params():
                 scenario.graphs[graph].tasks[task_to].priority=(scenario.graphs[graph].tasks[task_from].priority+1)
 
 #generate the constraint graph from the ILP
-def generate_con_graph(input_file, graph):
+def generate_con_graph(input_file,con_graph,graph):
     global scenario
-    scenario.constraint_graphs[graph] = Constraint_graph()
     slave_list = []
     master_list = []
     map_list = []
@@ -123,54 +122,54 @@ def generate_con_graph(input_file, graph):
                     dvfs_list.append(parts[5:])
 
     for m in master_list:
-        scenario.constraint_graphs[graph].task_cluster[m]=Task_cluster()
-        scenario.constraint_graphs[graph].task_cluster[m].tasks.append(m)
-        scenario.constraint_graphs[graph].task_to_cluster[m]=m
+        con_graph.task_cluster[m]=Task_cluster()
+        con_graph.task_cluster[m].tasks.append(m)
+        con_graph.task_to_cluster[m]=m
     for c in c_list:
         tasks=c.split("_",1)
-        if tasks[1] in scenario.constraint_graphs[graph].task_cluster:
-            scenario.constraint_graphs[graph].task_cluster[tasks[1]].tasks.append(tasks[0])
-            scenario.constraint_graphs[graph].task_to_cluster[tasks[0]]=tasks[1]
+        if tasks[1] in con_graph.task_cluster:
+            con_graph.task_cluster[tasks[1]].tasks.append(tasks[0])
+            con_graph.task_to_cluster[tasks[0]]=tasks[1]
     for m in map_list:
         a=m.split("_",1)
-        scenario.constraint_graphs[graph].task_cluster[a[0]].mapped_to=a[1]
+        con_graph.task_cluster[a[0]].mapped_to=a[1]
 
     for d in dvfs_list:
         a=d.split("_",1)
-        scenario.constraint_graphs[graph].dvfs_level[a[1]]=int(a[0])
+        con_graph.dvfs_level[a[1]]=int(a[0])
     for sl in sl_list:
         a=sl.split("_",1)
         task_from = scenario.graphs[graph].arcs[a[1]].task_from
         task_to = scenario.graphs[graph].arcs[a[1]].task_to
-        if scenario.constraint_graphs[graph].task_to_cluster[task_to] != scenario.constraint_graphs[graph].task_to_cluster[task_from]:
-            scenario.constraint_graphs[graph].messages[a[1]]=Message()
-            scenario.constraint_graphs[graph].messages[a[1]].cluster_from=scenario.constraint_graphs[graph].task_to_cluster[task_from]
-            scenario.constraint_graphs[graph].messages[a[1]].cluster_to=scenario.constraint_graphs[graph].task_to_cluster[task_to]
-            scenario.constraint_graphs[graph].messages[a[1]].sl=int(a[0])
+        if con_graph.task_to_cluster[task_to] != con_graph.task_to_cluster[task_from]:
+            con_graph.messages[a[1]]=Message()
+            con_graph.messages[a[1]].cluster_from=con_graph.task_to_cluster[task_from]
+            con_graph.messages[a[1]].cluster_to=con_graph.task_to_cluster[task_to]
+            con_graph.messages[a[1]].sl=int(a[0])
 
     for hop in hop_list:
         a=hop.split("_",1)
-        if a[1] in scenario.constraint_graphs[graph].messages:
-            scenario.constraint_graphs[graph].messages[a[1]].hop=int(a[0])
+        if a[1] in con_graph.messages:
+            con_graph.messages[a[1]].hop=int(a[0])
 
 #Plotting the constraint graph
-def plot_constraint_graph(graph,phase,dir):
+def plot_constraint_graph(con_graph,graph,phase,dir):
     constraint_g = Digraph(comment = graph, format='png')
-    for task in scenario.constraint_graphs[graph].task_cluster:
+    for task in con_graph.task_cluster:
         to_show=""
-        mapped_to = scenario.constraint_graphs[graph].task_cluster[task].mapped_to
-        for a in scenario.constraint_graphs[graph].task_cluster[task].tasks:
+        mapped_to = con_graph.task_cluster[task].mapped_to
+        for a in con_graph.task_cluster[task].tasks:
             if scenario.dvfs!=None and scenario.dvfs>=3:
-                to_show+=f"{a}(dvfs_level {scenario.constraint_graphs[graph].dvfs_level[a]}), "
+                to_show+=f"{a}(dvfs_level {con_graph.dvfs_level[a]}), "
         to_show= f"[{to_show}]\n"+mapped_to
         constraint_g.node(str(task),label=to_show)
-    for m in scenario.constraint_graphs[graph].messages:
+    for m in con_graph.messages:
         to_show="m"
-        to_show=to_show + "\n"+str(scenario.constraint_graphs[graph].messages[m].sl)
-        to_show=to_show + "\n"+str(scenario.constraint_graphs[graph].messages[m].hop)
+        to_show=to_show + "\n"+str(con_graph.messages[m].sl)
+        to_show=to_show + "\n"+str(con_graph.messages[m].hop)
         constraint_g.node(m,label=to_show)
-        constraint_g.edge(str(scenario.constraint_graphs[graph].messages[m].cluster_from), m)
-        constraint_g.edge(m,str(scenario.constraint_graphs[graph].messages[m].cluster_to))
+        constraint_g.edge(str(con_graph.messages[m].cluster_from), m)
+        constraint_g.edge(m,str(con_graph.messages[m].cluster_to))
     constraint_g.render(f"{dir}/con_graph_plot{phase}.view",view=False)
 
 def plot_app_graph(graph,phase,dir):
@@ -244,9 +243,8 @@ def generate_ILP1(output_file, graph):
 
     print(f"ILP clustering written for graph")
 
-def process_ILP1(input_file,output_file, graph):
+def process_ILP1(input_file,output_file,con_graph, graph):
     global scenario
-    scenario.constraint_graphs[graph] = Constraint_graph()
     #Processing the solution file
     with open(input_file) as file:
         for line in file:
@@ -255,21 +253,21 @@ def process_ILP1(input_file,output_file, graph):
                 if int(vals[1])==1:
                     a=vals[0].rsplit("_",1)
                     if a[1]=="iscluster":
-                        scenario.constraint_graphs[graph].num_of_clusters+=1
-                    elif int(a[1]) in scenario.constraint_graphs[graph].task_cluster:
-                        scenario.constraint_graphs[graph].task_cluster[int(a[1])].tasks.append(a[0])
-                        scenario.constraint_graphs[graph].task_to_cluster[a[0]]=int(a[1])
+                        con_graph.num_of_clusters+=1
+                    elif int(a[1]) in con_graph.task_cluster:
+                        con_graph.task_cluster[int(a[1])].tasks.append(a[0])
+                        con_graph.task_to_cluster[a[0]]=int(a[1])
                     else:
-                        scenario.constraint_graphs[graph].task_cluster[int(a[1])]=Task_cluster()
-                        scenario.constraint_graphs[graph].task_cluster[int(a[1])].tasks.append(a[0])
-                        scenario.constraint_graphs[graph].task_to_cluster[a[0]]=int(a[1])
+                        con_graph.task_cluster[int(a[1])]=Task_cluster()
+                        con_graph.task_cluster[int(a[1])].tasks.append(a[0])
+                        con_graph.task_to_cluster[a[0]]=int(a[1])
 
 
     #Adding the possible PEs to each task cluster
-    for a in scenario.constraint_graphs[graph].task_cluster:
+    for a in con_graph.task_cluster:
         i=0
         pe_dict={}
-        for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
+        for task in con_graph.task_cluster[a].tasks:
             i+=1
             for pe in scenario.graphs[graph].tasks[task].pe_list:
                 if pe in pe_dict:
@@ -278,16 +276,16 @@ def process_ILP1(input_file,output_file, graph):
                     pe_dict[pe]=1
         for pe in pe_dict:
             if pe_dict[pe]==i:
-                scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped.append(pe)
+                con_graph.task_cluster[a].can_be_mapped.append(pe)
 
         #Making sure we don't exceed the hyperperiod on the PE
         #this is an additional check
-        for pe in scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped:
+        for pe in con_graph.task_cluster[a].can_be_mapped:
             tot_exec_t=0
-            for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
+            for task in con_graph.task_cluster[a].tasks:
                 tot_exec_t+=scenario.graphs[graph].tasks[task].wcet[pe]
             if tot_exec_t > scenario.hyperperiod:
-                scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped.remove(pe)
+                con_graph.task_cluster[a].can_be_mapped.remove(pe)
                 #print(pe + " removed")
 
     #Making sure that the messages between the same PEs is ignored in the next ILP
@@ -296,16 +294,16 @@ def process_ILP1(input_file,output_file, graph):
         task_from=scenario.graphs[graph].arcs[arc].task_from
         task_to=scenario.graphs[graph].arcs[arc].task_to
         #print(task_from+"->"+task_to)
-        if scenario.constraint_graphs[graph].task_to_cluster[task_to] != scenario.constraint_graphs[graph].task_to_cluster[task_from]:
-            scenario.constraint_graphs[graph].messages[arc]=Message()
-            scenario.constraint_graphs[graph].messages[arc].cluster_to=scenario.constraint_graphs[graph].task_to_cluster[task_to]
-            scenario.constraint_graphs[graph].messages[arc].cluster_from=scenario.constraint_graphs[graph].task_to_cluster[task_from]
+        if con_graph.task_to_cluster[task_to] != con_graph.task_to_cluster[task_from]:
+            con_graph.messages[arc]=Message()
+            con_graph.messages[arc].cluster_to=con_graph.task_to_cluster[task_to]
+            con_graph.messages[arc].cluster_from=con_graph.task_to_cluster[task_from]
 
     #add constraints to problem...
     is_feasible=True
     constraints_to_add=[]
-    for a in scenario.constraint_graphs[graph].task_cluster:
-        if scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped==None or not scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped:
+    for a in con_graph.task_cluster:
+        if con_graph.task_cluster[a].can_be_mapped==None or not con_graph.task_cluster[a].can_be_mapped:
             #the current cluster is no longer feasible
 
             is_feasible=False
@@ -315,7 +313,7 @@ def process_ILP1(input_file,output_file, graph):
             line =""
 
             i=0
-            for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
+            for task in con_graph.task_cluster[a].tasks:
                 line += f" + 1 {task}_{str(a)} "
                 i+=1
             line+=f" <= {i}"
@@ -325,7 +323,7 @@ def process_ILP1(input_file,output_file, graph):
     return is_feasible
 
 #ILP for assigning the Resource type to cluster and the dvfs mode to each task.
-def generate_ILP2(output_file, graph):
+def generate_ILP2(output_file,con_graph, graph):
     global scenario
     num_of_con=0;
     con_val= "constraint"
@@ -333,20 +331,20 @@ def generate_ILP2(output_file, graph):
         #defining the minimization problem
         f.write("Minimize\n")
         line="problem: "
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+        for cluster in con_graph.task_cluster:
+            for pe in con_graph.task_cluster[cluster].can_be_mapped:
                 energy=0
-                for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+                for task in con_graph.task_cluster[cluster].tasks:
                     energy+=(scenario.graphs[graph].tasks[task].wcet[pe]*scenario.graphs[graph].tasks[task].power[pe])
                 line+=f"+ {energy} {pe}_{cluster} "
         f.write(line+"\n")
         f.write("Subject To\n")
         i=1
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
+        for cluster in con_graph.task_cluster:
             num_of_con+=1
             con = f"{con_val}_{str(num_of_con)} : "
             line=""
-            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+            for pe in con_graph.task_cluster[cluster].can_be_mapped:
                 line+=f"+ 1 {pe}_{cluster} "
             line+=f" = 1 "
             f.write(con+line+"\n")
@@ -356,13 +354,13 @@ def generate_ILP2(output_file, graph):
         f.write("Binary\n\n")
         num_var=0
         i=1
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+        for cluster in con_graph.task_cluster:
+            for pe in con_graph.task_cluster[cluster].can_be_mapped:
                 line=f"{pe}_{cluster}\n"
                 f.write(line)
     print(f"ILP resource mapping written for graph")
 
-def process_ILP2(input_file,output_file, graph):
+def process_ILP2(input_file,output_file,con_graph, graph):
     global scenario
     with open(input_file) as file:
         for line in file:
@@ -370,11 +368,11 @@ def process_ILP2(input_file,output_file, graph):
                 vals=line.split()
                 if int(vals[1])==1:
                     more_vals=vals[0].rsplit("_",1)
-                    scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
+                    con_graph.task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
 
 #ILP for assigning the Resource type to cluster and the dvfs mode to each task.
 #Still incomplete
-def generate_ILP3(output_file, graph, num_levels):
+def generate_ILP3(output_file,con_graph, graph, num_levels):
     #only perform dvfs if 3 or more levels
     if num_levels < 3:
         print("Didnt have proper dvfs input, no dvfs assumed")
@@ -390,8 +388,8 @@ def generate_ILP3(output_file, graph, num_levels):
 
         f.write(line+"\n")
         f.write("Subject To\n")
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+        for cluster in con_graph.task_cluster:
+            for task in con_graph.task_cluster[cluster].tasks:
                 line=""
                 num_of_con+=1
                 con = f"{con_val}_{str(num_of_con)} : "
@@ -405,8 +403,8 @@ def generate_ILP3(output_file, graph, num_levels):
         f.write("Binary\n\n")
         num_var=0
         i=1
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+        for cluster in con_graph.task_cluster:
+            for task in con_graph.task_cluster[cluster].tasks:
                 for d in range(num_levels):
                     line=f"{task}_{d}\n"
                     f.write(line)
@@ -434,10 +432,10 @@ def process_ILP3(input_file,output_file, graph,num_levels):
                 vals=line.split()
                 if int(vals[1])==1:
                     more_vals=vals[0].rsplit("_",1)
-                    scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=dvfs_levels[more_vals[1]]
+                    con_graph.dvfs_level[more_vals[0]]=dvfs_levels[more_vals[1]]
 
 #ILP for assigning the Resource type to cluster and the dvfs mode to each task.
-def generate_ILP_withdvfs(output_file, graph,num_levels):
+def generate_ILP_withdvfs(output_file,con_graph, graph,num_levels):
     global scenario
     num_of_con=0;
     con_val= "constraint"
@@ -445,15 +443,15 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
         #defining the minimization problem
         f.write("Maximize\n")
         line="problem: "
-        # for cluster in scenario.constraint_graphs[graph].task_cluster:
-        #     for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+        # for cluster in con_graph.task_cluster:
+        #     for pe in con_graph.task_cluster[cluster].can_be_mapped:
         #         energy=0
-        #         for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+        #         for task in con_graph.task_cluster[cluster].tasks:
         #             energy+=(scenario.graphs[graph].tasks[task].wcet[pe]*scenario.graphs[graph].tasks[task].power[pe])
         #         line+=f"+ {energy} {pe}_{cluster} "
         #random resource allocation
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            line+= f" + 1 {scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped[random.randint(0,(len(scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped)-1))]}_{cluster} "
+        for cluster in con_graph.task_cluster:
+            line+= f" + 1 {con_graph.task_cluster[cluster].can_be_mapped[random.randint(0,(len(con_graph.task_cluster[cluster].can_be_mapped)-1))]}_{cluster} "
         #random dvfs_levels
         if num_levels == None or num_levels < 3:
             bad_code=1
@@ -463,19 +461,19 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
         f.write(line+"\n")
         f.write("Subject To\n")
         i=1
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
+        for cluster in con_graph.task_cluster:
             num_of_con+=1
             con = f"{con_val}_{str(num_of_con)} : "
             line=""
-            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+            for pe in con_graph.task_cluster[cluster].can_be_mapped:
                 line+=f"+ 1 {pe}_{cluster} "
             line+=f" = 1 "
             f.write(con+line+"\n")
         if num_levels == None or num_levels < 3:
             print("No dvfs assumed")
         else:
-            for cluster in scenario.constraint_graphs[graph].task_cluster:
-                for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+            for cluster in con_graph.task_cluster:
+                for task in con_graph.task_cluster[cluster].tasks:
                     line=""
                     num_of_con+=1
                     con = f"{con_val}_{str(num_of_con)} : "
@@ -488,21 +486,21 @@ def generate_ILP_withdvfs(output_file, graph,num_levels):
         f.write("Binary\n\n")
         num_var=0
         i=1
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
+        for cluster in con_graph.task_cluster:
+            for pe in con_graph.task_cluster[cluster].can_be_mapped:
                 line=f"{pe}_{cluster}\n"
                 f.write(line)
         if num_levels == None or num_levels < 3:
             print("No dvfs assumed")
         else:
-            for cluster in scenario.constraint_graphs[graph].task_cluster:
-                for task in scenario.constraint_graphs[graph].task_cluster[cluster].tasks:
+            for cluster in con_graph.task_cluster:
+                for task in con_graph.task_cluster[cluster].tasks:
                     for d in range(num_levels):
                         line=f"{task}_{d}\n"
                         f.write(line)
     print(f"ILP resource mapping written for graph")
 
-def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
+def process_ILP_withdvfs(input_file,output_file,con_graph, graph,num_levels):
     global scenario
     dvfs_levels = []
     if num_levels == None or num_levels < 3:
@@ -528,9 +526,9 @@ def process_ILP_withdvfs(input_file,output_file, graph,num_levels):
                 if int(vals[1])==1:
                     more_vals=vals[0].rsplit("_",1)
                     if more_vals[0] in scenario.tables:
-                        scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
+                        con_graph.task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
                     else:
-                        scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=int(more_vals[1])
+                        con_graph.dvfs_level[more_vals[0]]=int(more_vals[1])
 #function to add constraints and variables to the ILP formulation
 # takes three input the file name, a list of constraints and a list of variables.
 
@@ -550,7 +548,7 @@ def edit_ILP(input_file,constraints,vars):
             for var in vars:
                 f.write(f"{var}\n")
 
-def generate_ILP(output_file, graph):
+def generate_ILP(output_file,graph):
     global scenario
     master_list=[]
     slave_list=[]
@@ -624,15 +622,7 @@ def generate_ILP(output_file, graph):
             line = line + equalss + "0"
             f.write(con+line+"\n")
 
-            # #DVFS Level assignment
-            #     l4={}
-            #     temp=f"{task}_master"
-            #     l4[temp]=('-',1)
-            #     for level in range(scenario.dvfs):
-            #         temp=f"dvfs_{level}_{task}"
-            #         con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-            #         l4[temp]=('+',1)
-            #     con_graph.pbp_data[complete].constraints.append([l4,0,'='])
+            #DVFS Level assignment
             if scenario.dvfs!=None and scenario.dvfs>=3:
                 num_of_con+=1
                 con = con_val+"_"+str(num_of_con)+ " : "
@@ -874,6 +864,8 @@ def main():
         result_file_path=os.path.join(args.dir,result_file_name)
         result_arg = "ResultFile="+result_file_path
 
+        con_graph=Constraint_graph()
+        con_graph.graph=graph
         #The old 0-1 ILP formulation
         if (args.modular==0):
             generate_ILP(output_file_path,scenario.graphs[graph])
@@ -881,7 +873,7 @@ def main():
             if "Optimal solution found" not in str(gurobi_run.stdout):
                 print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
                 break;
-            generate_con_graph(result_file_path,graph)
+            generate_con_graph(result_file_path,con_graph,graph)
             print("Con graph generated")
         else:
             print("Modular approach")
@@ -897,7 +889,7 @@ def main():
                     i=100
                     break
                 #this processing can be used to reduce the Design space. It also readies for the next ILP
-                cluster_done=process_ILP1(result_file_path,os.path.join(args.dir,out_name1),graph)
+                cluster_done=process_ILP1(result_file_path,os.path.join(args.dir,out_name1),con_graph,graph)
                 if cluster_done:
                     break
                 i+=1
@@ -906,18 +898,18 @@ def main():
                 phase+=1
                 continue
             #resource mapping ILP methodology.
-            # generate_ILP2(os.path.join(args.dir,out_name2),graph)
+            # generate_ILP2(os.path.join(args.dir,out_name2),con_graph,graph)
             # #running gurobi on the output
             # gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
             # if "solution found" not in str(gurobi_run.stdout):
             #     print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
             #     break;
             # #this processing can be used to reduce the Design space.
-            # process_ILP2(result_file_path,os.path.join(args.dir,out_name2),graph)
+            # process_ILP2(result_file_path,os.path.join(args.dir,out_name2),con_graph,graph)
             #
             # #dvfs_level ILP methodology.
             # if args.dvfs_num_levels!=None:
-            #     generate_ILP3(os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
+            #     generate_ILP3(os.path.join(args.dir,out_name3),con_graph,graph,args.dvfs_num_levels)
             #     #running gurobi on the output
             #     gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name3)], capture_output=True)
             #     if "solution found" not in str(gurobi_run.stdout):
@@ -925,9 +917,9 @@ def main():
             #         break;
             #     phase+=1
             #     #this processing can be used to reduce the Design space.
-            #     process_ILP3(result_file_path,os.path.join(args.dir,out_name3),graph,args.dvfs_num_levels)
+            #     process_ILP3(result_file_path,os.path.join(args.dir,out_name3),con_graph,graph,args.dvfs_num_levels)
             #
-            generate_ILP_withdvfs(os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
+            generate_ILP_withdvfs(os.path.join(args.dir,out_name2),con_graph,graph,args.dvfs_num_levels)
             #running gurobi on the output
             gurobi_run=subprocess.run(["gurobi_cl",result_arg,os.path.join(args.dir,out_name2)], capture_output=True)
             if "solution found" not in str(gurobi_run.stdout):
@@ -935,10 +927,10 @@ def main():
                 print(str(gurobi_run.stdout))
                 break;
             #this processing can be used to reduce the Design space. It also readies for the next ILP
-            process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),graph,args.dvfs_num_levels)
+            process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),con_graph,graph,args.dvfs_num_levels)
         #
         plot_app_graph(graph,phase,args.dir)
-        plot_constraint_graph(graph,phase,args.dir)
+        plot_constraint_graph(con_graph,graph,phase,args.dir)
 
         phase+=1
 

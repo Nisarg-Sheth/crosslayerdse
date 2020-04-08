@@ -153,7 +153,7 @@ def gen_comp_pb(con_graph,graph):
             temp=f"map_{task}_{map}"
             con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
             l4[temp]=('+',1)
-        #con_graph.pbp_data[complete].constraints.append([l4,0,'='])
+        con_graph.pbp_data[complete].constraints.append([l4,0,'='])
 
         #DVFS Level assignment
         if scenario.dvfs!=None and scenario.dvfs>=3:
@@ -244,7 +244,6 @@ def gen_comp_con_graph(con_graph, graph):
     for m in map_list:
         a=m.split("_",1)
         con_graph.task_cluster[a[0]].mapped_to=a[1]
-
     for d in dvfs_list:
         vars=d.split("_",1)
         con_graph.dvfs_level[vars[1]]=int(vars[0])
@@ -950,7 +949,7 @@ def process_cons(con_graph):
     gen_comp_con_graph(con_graph,graph)
     feasiblity_con_graph(con_graph,graph)
 
-def gen_con_graph(name="la"):
+def make_individual(name="la"):
     con_graph=creator.Individual()
     con_graph.graph=name
     gen_comp_pb(con_graph,name)
@@ -1076,7 +1075,7 @@ creator.create("Individual",Constraint_graph,fitness=creator.Fitness)
 
 toolbox = base.Toolbox()
 
-toolbox.register("individual",gen_con_graph)
+toolbox.register("individual",make_individual)
 toolbox.register("population",makepop)
 #----------
 # Operator registration
@@ -1121,10 +1120,11 @@ def main():
         if not isassigned:
             print("Clustering constraints broken, fix now")
         pop=None
+        print("dpll solver works")
         gen_comp_con_graph(con_graph,graph)
         feasiblity_con_graph(con_graph,graph)
         print(f"Generating Population for {graph}")
-        pop = toolbox.population(graph_name=graph,pop_size=100)
+        #pop = toolbox.population(graph_name=graph,pop_size=100)
         continue
         # CXPB  is the probability with which two individuals
         #       are crossed
