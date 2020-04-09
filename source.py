@@ -20,6 +20,7 @@ class Complete_Scenario:
         self.dvfs_level = []
         self.service_level = 10
         self.max_hop=14
+        self.output_dir = None
 class PB_data:
     def __init__(self):
         self.constraints = []
@@ -36,6 +37,8 @@ class Constraint_graph:
         self.pbp_data = {}
         self.generation = 1
         self.graph = None
+        self.lp_file = None
+        self.assignment_file = None
 class Task_cluster:
     def __init__(self):
         self.mapped_to = None
