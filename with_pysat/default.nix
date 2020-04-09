@@ -1,4 +1,4 @@
-with import <pdconfig> {};
+with import <nixpkgs> {};
 
 let
  python=python37;
@@ -10,9 +10,9 @@ stdenv.mkDerivation rec
 
   src = fetchFromGitHub {
     owner = "pysathq";
-    repo = "pysatq";
+    repo = "pysat";
     rev = "59e7e53df926e87e0feb04834f694c9ab1becec4";
-    sha256 = "01w3i5d360a3r1g7dwc6q8knch6rvnxfw395p2cm5642hfkczk0h";
+    sha256 = "1f34z8qyvcz61kcvdwz40cldsl7bxrgsjil6d1j9x369xkic87ir";
   };
 
   buildInputs=[python zlib]++(with python37.pkgs; [deap graphviz six]);
