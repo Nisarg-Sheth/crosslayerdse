@@ -511,7 +511,7 @@ def generate_ILP(output_file,graph):
                 line+=f" + 1 master_list[i]"
                 j=random.randint(0,(len(map_list[i])-1))
                 line+=f" + 1 map_{task_list[i]}_{j}"
-            else
+            else:
                 line+=f" + 1 slave_list[i]s"
             if scenario.dvfs!=None and scenario.dvfs>=3:
                 j=random.randint(0,(scenario.dvfs-1))
