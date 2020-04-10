@@ -83,14 +83,13 @@ def populate_task_params():
                         #adding preemeption_time
                         scenario.graphs[graph].tasks[task].preempt_time[table]=float(scenario.tables[table].values[type_of_task][4])
 
-    for task in scenario.graphs[graph].tasks:
-        print("level 1")
-        for arc in scenario.graphs[graph].arcs:
-            task_to=scenario.graphs[graph].arcs[arc].task_to
-            task_from=(scenario.graphs[graph].arcs[arc].task_from)
-            if scenario.graphs[graph].tasks[task_to].priority<(scenario.graphs[graph].tasks[task_from].priority+1):
-                scenario.graphs[graph].tasks[task_to].priority=(scenario.graphs[graph].tasks[task_from].priority+1)
-                print("final level")
+        for task in scenario.graphs[graph].tasks:
+            for arc in scenario.graphs[graph].arcs:
+                task_to=scenario.graphs[graph].arcs[arc].task_to
+                task_from=(scenario.graphs[graph].arcs[arc].task_from)
+                if scenario.graphs[graph].tasks[task_to].priority<(scenario.graphs[graph].tasks[task_from].priority+1):
+                    scenario.graphs[graph].tasks[task_to].priority=(scenario.graphs[graph].tasks[task_from].priority+1)
+
 
 def generate_noc(length,breadth):
     global scenario
@@ -506,7 +505,25 @@ def generate_ILP(output_file,graph):
 
     with open(output_file, 'w') as f:
         f.write("Maximize\n")
-        f.write("problem: "+master_list[1]+ " + "+master_list[2]+" + "+master_list[3]+"\n")
+        line = ""
+        for i in range(len(scenario.graphs[graph].tasks)):
+            if random.randint()==1:
+                line+=f" + 1 master_list[i]"
+                j=random.randint(0,(len(map_list[i])-1))
+                line+=f" + 1 map_{task_list[i]}_{j}"
+            else
+                line+=f" + 1 slave_list[i]s"
+            if scenario.dvfs!=None and scenario.dvfs>=3:
+                j=random.randint(0,(scenario.dvfs-1))
+                line+=f" + 1 dvfs_{level}_{task_list[i]}"
+
+        for m in scenario.graphs[graph].arcs:
+            j=random.randint(0,(service_level-1))
+            line+=f" + 1 sl_{str(j)}_{m}"
+            j=random.randint(0,(hop_level-1))
+            line+=f" + 1 hop_{str(j+1)}_{m}"
+
+        f.write(f"problem: {line} \n")
         f.write("Subject To"+"\n")
         for i in range(len(scenario.graphs[graph].tasks)):
 
@@ -676,7 +693,7 @@ def evalParams(individual):
     task_list=[]
     task_start={}
     cluster_time={}
-    
+
     dvfs_level=1
     message_communication_time=0.001
     #Computing the total energy usage
@@ -695,7 +712,6 @@ def evalParams(individual):
         task_list.append([scenario.graphs[graph].tasks[task].priority,task])
         task_start[task]=0
     task_list.sort(key=lambda x: x[1])
-    print(task_list)
 
     #setting lower limit on task start time
     for task_dets in task_list:
@@ -749,7 +765,9 @@ creator.create("Fitness", base.Fitness, weights=(1.0,1.0))
 creator.create("Individual",Constraint_graph,fitness=creator.Fitness)
 
 toolbox = base.Toolbox()
-
+#----------
+#population registration
+#----------
 toolbox.register("individual",make_individual)
 toolbox.register("population",makepop)
 #----------
@@ -819,7 +837,6 @@ def main():
             print("fitness")
             print(a)
             print(b)
-            continue
             pop = toolbox.population(graph_name=graph,lp_file=f"{args.out}{str(phase)}",assignment_file=f"result{phase}",pop_size=10)
 
             # CXPB  is the probability with which two individuals
