@@ -506,24 +506,28 @@ def generate_ILP(output_file,graph):
     with open(output_file, 'w') as f:
         f.write("Maximize\n")
         line = ""
-        for i in range(len(scenario.graphs[graph].tasks)):
-            if random.randint(0,1)==1:
-                line+=f" + 1 master_list[i]"
-                j=random.randint(0,(len(map_list[i])-1))
-                line+=f" + 1 map_{task_list[i]}_{j}"
-            else:
-                line+=f" + 1 slave_list[i]"
-            if scenario.dvfs!=None and scenario.dvfs>=3:
-                j=random.randint(0,(scenario.dvfs-1))
-                line+=f" + 1 dvfs_{level}_{task_list[i]}"
+        # for i in range(len(scenario.graphs[graph].tasks)):
+        #     if random.randint(0,1)==1:
+        #         line+=f" + 1 master_list[i]"
+        #         j=random.randint(0,(len(map_list[i])-1))
+        #         line+=f" + 1 map_{task_list[i]}_{map_list[i][j]}"
+        #     else
+        #         line+=f" + 1 slave_list[i]"
+        #     if scenario.dvfs!=None and scenario.dvfs>=3:
+        #         j=random.randint(0,(scenario.dvfs-1))
+        #         line+=f" + 1 dvfs_{j}_{task_list[i]}"
+        #
+        # for m in scenario.graphs[graph].arcs:
+        #     j=random.randint(0,(service_level-1))
+        #     line+=f" + 1 sl_{str(j)}_{m}"
+        #     j=random.randint(0,(hop_level-1))
+        #     line+=f" + 1 hop_{str(j+1)}_{m}"
+        #     for j in range(hop_level):
+        #         f.write("hop_"+str(j+1)+"_"+m+"\n")
+        #         num_var+=1
+        # f.write(f"problem: {line} \n")
 
-        for m in scenario.graphs[graph].arcs:
-            j=random.randint(0,(service_level-1))
-            line+=f" + 1 sl_{str(j)}_{m}"
-            j=random.randint(0,(hop_level-1))
-            line+=f" + 1 hop_{str(j+1)}_{m}"
-
-        f.write(f"problem: {line} \n")
+        f.write("problem: "+master_list[1]+ " + "+master_list[2]+" + "+master_list[3]+"\n")
         f.write("Subject To"+"\n")
         for i in range(len(scenario.graphs[graph].tasks)):
 
