@@ -101,7 +101,8 @@ def generate_noc(length,breadth):
             l.append(temp[0])
         scenario.NOC.append(l)
 
-def plot_constraint_graph(con_graph,graph,phase,dir):
+def plot_constraint_graph(con_graph,phase,dir):
+    graph=con_graph.graph
     constraint_g = Digraph(comment = graph, format='png')
     for task in con_graph.task_cluster:
         to_show=""
@@ -506,28 +507,25 @@ def generate_ILP(output_file,graph):
     with open(output_file, 'w') as f:
         f.write("Maximize\n")
         line = ""
-        # for i in range(len(scenario.graphs[graph].tasks)):
-        #     if random.randint(0,1)==1:
-        #         line+=f" + 1 master_list[i]"
-        #         j=random.randint(0,(len(map_list[i])-1))
-        #         line+=f" + 1 map_{task_list[i]}_{map_list[i][j]}"
-        #     else
-        #         line+=f" + 1 slave_list[i]"
-        #     if scenario.dvfs!=None and scenario.dvfs>=3:
-        #         j=random.randint(0,(scenario.dvfs-1))
-        #         line+=f" + 1 dvfs_{j}_{task_list[i]}"
-        #
-        # for m in scenario.graphs[graph].arcs:
-        #     j=random.randint(0,(service_level-1))
-        #     line+=f" + 1 sl_{str(j)}_{m}"
-        #     j=random.randint(0,(hop_level-1))
-        #     line+=f" + 1 hop_{str(j+1)}_{m}"
-        #     for j in range(hop_level):
-        #         f.write("hop_"+str(j+1)+"_"+m+"\n")
-        #         num_var+=1
-        # f.write(f"problem: {line} \n")
+        for i in range(len(scenario.graphs[graph].tasks)):
+            if random.randint(0,1)==1:
+                line+=f" + 1 {master_list[i]}"
+                j=random.randint(0,(len(map_list[i])-1))
+                line+=f" + 1 map_{task_list[i]}_{map_list[i][j]}"
+            else
+                line+=f" + 1 {slave_list[i]}"
+            if scenario.dvfs!=None and scenario.dvfs>=3:
+                j=random.randint(0,(scenario.dvfs-1))
+                line+=f" + 1 dvfs_{j}_{task_list[i]}"
 
-        f.write("problem: "+master_list[1]+ " + "+master_list[2]+" + "+master_list[3]+"\n")
+        for m in scenario.graphs[graph].arcs:
+            j=random.randint(0,(service_level-1))
+            line+=f" + 1 sl_{str(j)}_{m}"
+            j=random.randint(0,(hop_level-1))
+            line+=f" + 1 hop_{str(j+1)}_{m}"
+        f.write(f"problem: {line} \n")
+
+        #f.write("problem: "+master_list[1]+ " + "+master_list[2]+" + "+master_list[3]+"\n")
         f.write("Subject To"+"\n")
         for i in range(len(scenario.graphs[graph].tasks)):
 
@@ -827,7 +825,7 @@ def main():
 
         con_graph=Constraint_graph()
         con_graph.graph=graph
-        #The old 0-1 ILP formulation
+        #The complete 0-1 ILP formulation
         if (args.modular==0):
             generate_ILP(output_file_path,graph)
             gurobi_run=subprocess.run(["gurobi_cl",result_arg,output_file_path], capture_output=True)
@@ -956,7 +954,7 @@ def main():
             process_ILP_withdvfs(result_file_path,os.path.join(args.dir,out_name2),con_graph,graph,args.dvfs_num_levels)
         #
         plot_app_graph(graph,phase,args.dir)
-        plot_constraint_graph(con_graph,graph,phase,args.dir)
+        plot_constraint_graph(con_graph,phase,args.dir)
 
         phase+=1
 
