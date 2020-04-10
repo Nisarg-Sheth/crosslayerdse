@@ -512,7 +512,7 @@ def generate_ILP(output_file,graph):
                 line+=f" + 1 {master_list[i]}"
                 j=random.randint(0,(len(map_list[i])-1))
                 line+=f" + 1 map_{task_list[i]}_{map_list[i][j]}"
-            else
+            else:
                 line+=f" + 1 {slave_list[i]}"
             if scenario.dvfs!=None and scenario.dvfs>=3:
                 j=random.randint(0,(scenario.dvfs-1))
@@ -719,6 +719,7 @@ def evalParams(individual):
     for task_dets in task_list:
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
+        mapped=individual.task_cluster[cluster].mapped_to
         cluster_time[cluster]+=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         for task1 in individual.task_cluster[cluster].tasks:
             if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
