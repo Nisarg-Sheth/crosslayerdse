@@ -507,7 +507,7 @@ def generate_ILP(output_file,graph):
         f.write("Maximize\n")
         line = ""
         for i in range(len(scenario.graphs[graph].tasks)):
-            if random.randint()==1:
+            if random.randint(0,1)==1:
                 line+=f" + 1 master_list[i]"
                 j=random.randint(0,(len(map_list[i])-1))
                 line+=f" + 1 map_{task_list[i]}_{j}"
