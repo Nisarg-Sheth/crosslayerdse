@@ -446,8 +446,9 @@ def generate_con_graph(input_file,con_graph,graph):
         if a[1] in con_graph.messages:
             con_graph.messages[a[1]].hop=int(a[0])
 
-def generate_ILP(output_file,graph):
+def generate_ILP(output_file,name):
     global scenario
+    graph=scenario.graphs[name]
     master_list=[]
     slave_list=[]
     task_list=[]
@@ -615,7 +616,7 @@ def process_cons(con_graph):
     feasiblity_con_graph(con_graph,graph)
 
 def make_individual(graph="pe",lp_file="ilp.lp",assignment_file="result.sol"):
-    global.scenario
+    global scenario
     con_graph=creator.Individual()
     con_graph.graph=graph
     con_graph.lp_file=lp_file
@@ -626,7 +627,7 @@ def make_individual(graph="pe",lp_file="ilp.lp",assignment_file="result.sol"):
     gurobi_run=subprocess.run(["gurobi_cl",f"ResultFile={result_file_path}",output_file_path], capture_output=True)
     if "Optimal solution found" not in str(gurobi_run.stdout):
         print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
-        break;
+        return con_graph
     generate_con_graph(result_file_path,con_graph,graph)
     feasiblity_con_graph(con_graph,graph)
     return con_graph
@@ -634,7 +635,7 @@ def make_individual(graph="pe",lp_file="ilp.lp",assignment_file="result.sol"):
 def makepop(graph_name="pe", lp_file="ilp",assignment_file="result",  pop_size=5):
     l = []
     for i in range(pop_size):
-        l.append(toolbox.individual(graph=graph_name,lp_file=f"{lp_file}_{i}.lp",assignment_file=f"{aassignment_file}_{i}.sol"))
+        l.append(toolbox.individual(graph=graph_name,lp_file=f"{lp_file}_{i}.lp",assignment_file=f"{assignment_file}_{i}.sol"))
     return l
 
 def evalParams(individual):
