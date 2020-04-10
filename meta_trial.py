@@ -84,11 +84,13 @@ def populate_task_params():
                         scenario.graphs[graph].tasks[task].preempt_time[table]=float(scenario.tables[table].values[type_of_task][4])
 
     for task in scenario.graphs[graph].tasks:
+        print("level 1")
         for arc in scenario.graphs[graph].arcs:
             task_to=scenario.graphs[graph].arcs[arc].task_to
             task_from=(scenario.graphs[graph].arcs[arc].task_from)
             if scenario.graphs[graph].tasks[task_to].priority<(scenario.graphs[graph].tasks[task_from].priority+1):
                 scenario.graphs[graph].tasks[task_to].priority=(scenario.graphs[graph].tasks[task_from].priority+1)
+                print("final level")
 
 def generate_noc(length,breadth):
     global scenario
@@ -674,7 +676,8 @@ def evalParams(individual):
     task_list=[]
     task_start={}
     cluster_time={}
-
+    
+    dvfs_level=1
     message_communication_time=0.001
     #Computing the total energy usage
     for cluster in individual.task_cluster:
@@ -699,7 +702,7 @@ def evalParams(individual):
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         cluster_time[cluster]+=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
-        for task1 in cluster.tasks:
+        for task1 in individual.task_cluster[cluster].tasks:
             if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
                     task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
@@ -786,7 +789,7 @@ def main():
         scenario.dvfs=args.dvfs_num_levels
     else:
         scenario.dvfs=1
-    gen_dvfslevel(dvfs_num_levels)
+    gen_dvfslevel(args.dvfs_num_levels)
     phase=0
     #Processing each graph seperately
     for graph in scenario.graphs:
