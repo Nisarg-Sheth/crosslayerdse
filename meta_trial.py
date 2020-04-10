@@ -446,9 +446,8 @@ def generate_con_graph(input_file,con_graph,graph):
         if a[1] in con_graph.messages:
             con_graph.messages[a[1]].hop=int(a[0])
 
-def generate_ILP(output_file,name):
+def generate_ILP(output_file,graph):
     global scenario
-    graph=scenario.graphs[name]
     master_list=[]
     slave_list=[]
     task_list=[]
@@ -456,13 +455,13 @@ def generate_ILP(output_file,name):
     service_level=10
     hop_level=(4*4)-2
     map_list=[]
-    for task in graph.tasks:
+    for task in scenario.graphs[graph].tasks:
         master_list.append(task+"_master")
         slave_list.append(task+"_slave")
-        map_list.append(graph.tasks[task].pe_list)
+        map_list.append(scenario.graphs[graph].tasks[task].pe_list)
         task_list.append(task)
-    for task1 in graph.tasks:
-        for task2 in graph.tasks:
+    for task1 in scenario.graphs[graph].tasks:
+        for task2 in scenario.graphs[graph].tasks:
             c_list.append("C_"+task1+"_"+task2)
     num_of_con=0;
     con_val= "constraint"
@@ -477,7 +476,7 @@ def generate_ILP(output_file,name):
         f.write("Maximize\n")
         f.write("problem: "+master_list[1]+ " + "+master_list[2]+" + "+master_list[3]+"\n")
         f.write("Subject To"+"\n")
-        for i in range(len(graph.tasks)):
+        for i in range(len(scenario.graphs[graph].tasks)):
 
             # Tslave+ Tmaster = 1
             num_of_con+=1
@@ -490,17 +489,17 @@ def generate_ILP(output_file,name):
             con = con_val+"_"+str(num_of_con)+ " : "
             line=pluss+str(i)+" "+master_list[i]
             for j in range(i):
-                line=line+pluss+" 1 "+c_list[(i*graph.num_of_tasks)+j]
+                line=line+pluss+" 1 "+c_list[(i*scenario.graphs[graph].num_of_tasks)+j]
             line = line + lessthan + str(i)
             f.write(con+line+"\n")
 
             # Connected in Horizontal direction,
             num_of_con+=1
             con = con_val+"_"+str(num_of_con)+ " : "
-            line=pluss+str(graph.num_of_tasks-(i+1))+" "+slave_list[i]
-            for j in range((i+1),graph.num_of_tasks):
-                line=line+pluss+" 1 "+c_list[(j*graph.num_of_tasks)+i]
-            line = line + lessthan +str(graph.num_of_tasks-(i+1))
+            line=pluss+str(scenario.graphs[graph].num_of_tasks-(i+1))+" "+slave_list[i]
+            for j in range((i+1),scenario.graphs[graph].num_of_tasks):
+                line=line+pluss+" 1 "+c_list[(j*scenario.graphs[graph].num_of_tasks)+i]
+            line = line + lessthan +str(scenario.graphs[graph].num_of_tasks-(i+1))
             f.write(con+line+"\n")
 
             # Is slave only connected to one??
@@ -508,7 +507,7 @@ def generate_ILP(output_file,name):
             con = con_val+"_"+str(num_of_con)+ " : "
             line = minuss + " 1 "+slave_list[i]
             for j in range(i):
-                line=line+pluss+" 1 "+c_list[(i*graph.num_of_tasks)+j]
+                line=line+pluss+" 1 "+c_list[(i*scenario.graphs[graph].num_of_tasks)+j]
             line = line + equalss + "0"
             f.write(con+line+"\n")
 
@@ -534,23 +533,23 @@ def generate_ILP(output_file,name):
             for j in range(i):
                 num_of_con+=1
                 con = con_val+"_"+str(num_of_con)+ " : "
-                line=minuss+" 1 "+c_list[(i*graph.num_of_tasks)+j]
+                line=minuss+" 1 "+c_list[(i*scenario.graphs[graph].num_of_tasks)+j]
                 for pe in map_list[i]:
                     if pe in map_list[j]:
                         line = line + pluss + " 1 " +"map_"+task_list[j]+"_"+pe
                 line = line + greaterthan + "0"
                 f.write(con+line+"\n")
-            for j in range((i+1),graph.num_of_tasks):
+            for j in range((i+1),scenario.graphs[graph].num_of_tasks):
                 num_of_con+=1
                 con = con_val+"_"+str(num_of_con)+ " : "
-                line=minuss+" 1 "+c_list[(i*graph.num_of_tasks)+j]
+                line=minuss+" 1 "+c_list[(i*scenario.graphs[graph].num_of_tasks)+j]
                 for pe in map_list[i]:
                     if pe in map_list[j]:
                         line = line + pluss + " 1 " +"map_"+task_list[i]+"_"+pe
                 line = line + greaterthan + "0"
                 f.write(con+line+"\n")
 
-        for m in graph.arcs:
+        for m in scenario.graphs[graph].arcs:
 
             #service level for each message
             num_of_con+=1
@@ -575,16 +574,16 @@ def generate_ILP(output_file,name):
         f.write("\n")
         f.write("Binary"+"\n\n")
         num_var=0
-        for i in range(len(graph.tasks)):
+        for i in range(len(scenario.graphs[graph].tasks)):
             f.write(master_list[i]+"\n")
             num_var+=1
             f.write(slave_list[i]+"\n")
             num_var+=1
             for j in range(i):
-                f.write(c_list[(i*graph.num_of_tasks)+j]+"\n")
+                f.write(c_list[(i*scenario.graphs[graph].num_of_tasks)+j]+"\n")
                 num_var+=1
-            for j in range((i+1),graph.num_of_tasks):
-                f.write(c_list[(i*graph.num_of_tasks)+j]+"\n")
+            for j in range((i+1),scenario.graphs[graph].num_of_tasks):
+                f.write(c_list[(i*scenario.graphs[graph].num_of_tasks)+j]+"\n")
                 num_var+=1
             for j in map_list[i]:
                 f.write("map_"+task_list[i]+"_"+j+"\n")
@@ -594,7 +593,7 @@ def generate_ILP(output_file,name):
                     f.write(f"dvfs_{level}_{task_list[i]}\n")
                     num_var+=1
 
-        for m in graph.arcs:
+        for m in scenario.graphs[graph].arcs:
             for j in range(service_level):
                 f.write("sl_"+str(j)+"_"+m+"\n")
                 num_var+=1
