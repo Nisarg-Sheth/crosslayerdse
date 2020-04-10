@@ -57,10 +57,10 @@ def process_block(block,tg,core):
         i = 0
         core_name= block[0].strip('@').strip('{').replace(" ","")
         #print(core_name)
-        scenario.tables[core_name]=Table(core_name,block[1].strip('#'),block[2].strip('#'),block[4].strip('#'))
+        scenario.all_tables[core_name]=Table(core_name,block[1].strip('#'),block[2].strip('#'),block[4].strip('#'))
         for i in range(5, len(block)):
             if not block[i].startswith('#'):
-                scenario.tables[core_name].add_row(block[i])
+                scenario.all_tables[core_name].add_row(block[i])
     elif "HYPERPERIOD" in block[0]:
         scenario.hyperperiod= float(block[0].strip('@HYPERPERIOD '))
 
@@ -89,6 +89,16 @@ def populate_task_params():
             task_from=(scenario.graphs[graph].arcs[arc].task_from)
             if scenario.graphs[graph].tasks[task_to].priority<(scenario.graphs[graph].tasks[task_from].priority+1):
                 scenario.graphs[graph].tasks[task_to].priority=(scenario.graphs[graph].tasks[task_from].priority+1)
+
+def generate_noc(length,breadth):
+    global scenario
+    for i in range(length):
+        l=[]
+        for j in range(breadth):
+            temp=random.sample(scenario.all_tables.keys(),1)
+            scenario.tables[temp[0]]=scenario.all_tables[temp[0]]
+            l.append(temp[0])
+        scenario.NOC.append(l)
 
 def plot_constraint_graph(con_graph,graph,phase,dir):
     constraint_g = Digraph(comment = graph, format='png')
@@ -359,6 +369,26 @@ def process_ILP_withdvfs(input_file,output_file,con_graph, graph,num_levels):
 #function to add constraints and variables to the ILP formulation
 # takes three input the file name, a list of constraints and a list of variables.
 
+def gen_dvfslevel(num_levels):
+    global scenario
+    scenario.dvfs_levels = []
+    if num_levels == None or num_levels < 3:
+        scenario.dvfs_levels = [1]
+    else:
+        #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
+        freq=500
+        volt=1.1
+        #ARM processors including A7,A15 all generally have DVFS levels between 200Mhz to 1600 Mhz
+        f_up=1600.0/500;
+        f_down=200.0/500;
+        #The size of each frequency step.
+        step_size=(f_up-f_down)/(num_levels-1)
+        for i in range(num_levels):
+            scenario.dvfs_levels.append(f_down+(i*step_size))
+    #this creates a list of size dvfs_num_levels
+    #the contents of this list will range from [1600/500 to 200/500]
+    #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
+
 def edit_ILP(input_file,constraints,vars):
     global scenario
     if constraints!=None:
@@ -618,11 +648,11 @@ def make_individual(graph="pe",lp_file="ilp.lp",assignment_file="result.sol"):
     global scenario
     con_graph=creator.Individual()
     con_graph.graph=graph
-    con_graph.lp_file=lp_file
-    con_graph.assignment_file=assignment_file
     output_file_path=os.path.join(scenario.output_dir,lp_file)
     result_file_path=os.path.join(scenario.output_dir,assignment_file)
-    generate_ILP(lp_file,graph)
+    con_graph.lp_file=output_file_path
+    con_graph.assignment_file=result_file_path
+    generate_ILP(output_file_path,graph)
     gurobi_run=subprocess.run(["gurobi_cl",f"ResultFile={result_file_path}",output_file_path], capture_output=True)
     if "Optimal solution found" not in str(gurobi_run.stdout):
         print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
@@ -644,18 +674,18 @@ def evalParams(individual):
     task_list=[]
     task_start={}
     cluster_time={}
-    dvfs_level=scenario.dvfs_level(individual.dvfs_level[cluster])
+
     message_communication_time=0.001
     #Computing the total energy usage
     for cluster in individual.task_cluster:
-        temp=0
         cluster_time[cluster]=0
+        if scenario.dvfs>1:
+            dvfs_level=scenario.dvfs_level[(individual.dvfs_level[cluster])]
         for task in individual.task_cluster[cluster].tasks:
             mapped=individual.task_cluster[cluster].mapped_to
             wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
             power=scenario.graphs[graph].tasks[task].power[mapped]
             energy+=(wcet*power*dvfs_level*dvfs_level)
-            temp+=(wcet/dvfs_level)
 
     #Sorting tasks according to priority
     for task in scenario.graphs[graph].tasks:
@@ -683,7 +713,7 @@ def evalParams(individual):
     for cluster in cluster_time:
         if(cluster_time[cluster]>max_time):
             max_time=cluster_time[cluster]
-    return (energy,imax_time)
+    return (energy,max_time)
 
 def matefunc(ind1,ind2):
     complete="complete"
@@ -739,20 +769,24 @@ def main():
     parser.add_argument("--tg", help="*name of task_graph",default="TASK_GRAPH")
     parser.add_argument("--core", help="name of core/PE", default="CLIENT_PE")
     parser.add_argument("-d", "--dir",default="./lp_files", help="output directory")
-    parser.add_argument("-o", "--out",action="store", dest="out", default="ilp", help="output file")
+    parser.add_argument("-o", "--out",action="store", dest="out", default="ilp_file", help="output file")
     parser.add_argument("--dvfs_level","--dvfs",action="store", dest="dvfs_num_levels", type=int, default=None, help="The number of dvfs_levels possible for each processor")
 
     args = parser.parse_args()
+    random.seed(1223)
     global scenario
     scenario = Complete_Scenario()
     scenario.output_dir=args.dir
     with open(args.input_tgff) as input_file:
         for block in get_blocks(input_file):
             process_block(block,args.tg,args.core)
+    generate_noc(8,8)
     populate_task_params()
     if args.dvfs_num_levels!=None:
         scenario.dvfs=args.dvfs_num_levels
-
+    else:
+        scenario.dvfs=1
+    gen_dvfslevel(dvfs_num_levels)
     phase=0
     #Processing each graph seperately
     for graph in scenario.graphs:
@@ -770,7 +804,7 @@ def main():
         con_graph.graph=graph
         #The old 0-1 ILP formulation
         if (args.modular==0):
-            generate_ILP(output_file_path,scenario.graphs[graph])
+            generate_ILP(output_file_path,graph)
             gurobi_run=subprocess.run(["gurobi_cl",result_arg,output_file_path], capture_output=True)
             if "Optimal solution found" not in str(gurobi_run.stdout):
                 print("THE SOLVER COULD NOT FIND A FEASIBLE SOLUTION, CHANGE CONSTRAINTS")
@@ -778,9 +812,92 @@ def main():
             generate_con_graph(result_file_path,con_graph,graph)
             print("Con graph generated")
 
-
+            a,b=evalParams(con_graph)
+            print("fitness")
+            print(a)
+            print(b)
+            continue
             pop = toolbox.population(graph_name=graph,lp_file=f"{args.out}{str(phase)}",assignment_file=f"result{phase}",pop_size=10)
 
+            # CXPB  is the probability with which two individuals
+            #       are crossed
+            #
+            # MUTPB is the probability for mutating an individual
+            CXPB, MUTPB = 0.5, 0.2
+
+            print("Start of evolution")
+            # Evaluate the entire population
+            fitnesses = list(map(toolbox.evaluate, pop))
+            for ind, fit in zip(pop, fitnesses):
+                ind.fitness.values = fit
+                print(fit)
+
+            print("  Evaluated %i individuals" % len(pop))
+
+            fits = [ind.fitness.values[0] for ind in pop]
+            # Variable keeping track of the number of generations
+            g = 0
+
+            continue
+            # Begin the evolution
+            while max(fits) < 10 and g < 10:
+                # A new generation
+                g = g + 1
+                print("-- Generation %i --" % g)
+
+                # Select the next generation individuals
+                offspring = toolbox.select(pop, len(pop))
+                # Clone the selected individuals
+                offspring = list(map(toolbox.clone, offspring))
+
+                # Apply crossover and mutation on the offspring
+                for child1, child2 in zip(offspring[::2], offspring[1::2]):
+
+                    # cross two individuals with probability CXPB
+                    if random.random() < CXPB:
+                        toolbox.mate(child1, child2)
+                        print("mate runs")
+                        # fitness values of the children
+                        # must be recalculated later
+                        del child1.fitness.values
+                        del child2.fitness.values
+
+                for mutant in offspring:
+
+                    # mutate an individual with probability MUTPB
+                    if random.random() < MUTPB:
+                        toolbox.mutate(mutant)
+                        del mutant.fitness.values
+
+                # Evaluate the individuals with an invalid fitness
+                invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+                fitnesses = map(toolbox.evaluate, invalid_ind)
+                for ind, fit in zip(invalid_ind, fitnesses):
+                    ind.fitness.values = fit
+
+                print("  Evaluated %i individuals" % len(invalid_ind))
+
+                # The population is entirely replaced by the offspring
+                pop[:] = offspring
+
+                # Gather all the fitnesses in one list and print the stats
+                fits = [ind.fitness.values[0] for ind in pop]
+
+                length = len(pop)
+                mean = sum(fits) / length
+                sum2 = sum(x*x for x in fits)
+                std = abs(sum2 / length - mean**2)**0.5
+
+                print("  Min %s" % min(fits))
+                print("  Max %s" % max(fits))
+                print("  Avg %s" % mean)
+                print("  Std %s" % std)
+
+            print("-- End of (successful) evolution --")
+
+            best_ind = tools.selBest(pop, 1)[0]
+            print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
+            phase+=1
 
         else:
             print("Modular approach")
