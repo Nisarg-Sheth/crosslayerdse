@@ -720,7 +720,7 @@ def evalParams(individual):
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         mapped=individual.task_cluster[cluster].mapped_to
-        cluster_time[cluster]+=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         for task1 in individual.task_cluster[cluster].tasks:
             if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):

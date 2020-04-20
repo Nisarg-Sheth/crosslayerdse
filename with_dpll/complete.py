@@ -13,7 +13,7 @@ from copy import deepcopy
 
 
 scenario = None
-random.seed(1223)
+random.seed(64)
 
 def get_blocks(input_file):
     buf=[]
@@ -77,7 +77,7 @@ def populate_task_params():
                     if int(scenario.tables[table].values[type_of_task][2])==1:
                         #adding the PE to the pe_list of each task
                         scenario.graphs[graph].tasks[task].pe_list.append(table)
-                        #adding the processing time on the PE for each task
+                        #adding the WCET on the PE for each task
                         scenario.graphs[graph].tasks[task].wcet[table]=float(scenario.tables[table].values[type_of_task][3])
                         #adding the task_power on the PE to the task arc_details
                         scenario.graphs[graph].tasks[task].power[table]=float(scenario.tables[table].values[type_of_task][6])
@@ -92,6 +92,38 @@ def populate_task_params():
                 task_from=(scenario.graphs[graph].arcs[arc].task_from)
                 if scenario.graphs[graph].tasks[task_to].priority<(scenario.graphs[graph].tasks[task_from].priority+1):
                     scenario.graphs[graph].tasks[task_to].priority=(scenario.graphs[graph].tasks[task_from].priority+1)
+
+def generate_noc(length,breadth):
+    global scenario
+    for i in range(length):
+        l=[]
+        for j in range(breadth):
+            temp=random.sample(scenario.all_tables.keys(),1)
+            scenario.tables[temp[0]]=scenario.all_tables[temp[0]]
+            l.append(temp[0])
+        scenario.NOC.append(l)
+
+def gen_compl_pb(con_graph,graph):
+    global scenario
+    complete="complete"
+    i=0
+    num_of_con=0
+    num_of_vars=0
+    con_graph.pbp_data[complete]=PB_data()
+    map_list=[]
+    for task in scenario.graphs[graph].tasks:
+        map_list.append(scenario.graphs[graph].tasks[task].pe_list)
+    for task in scenario.graphs[graph].tasks:
+        l={}
+        # Tslave+ Tmaster = 1
+        temp=f"{task}_master"
+        con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
+        l[temp]=('+',1)
+        temp=f"{task}_slave"
+        con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
+        l[temp]=('+',1)
+        con_graph.pbp_data[complete].constraints.append([l,1,'='])
+
 
 def gen_comp_pb(con_graph,graph):
     global scenario
@@ -113,7 +145,6 @@ def gen_comp_pb(con_graph,graph):
         con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
         l[temp]=('+',1)
         con_graph.pbp_data[complete].constraints.append([l,1,'='])
-
         # Connnected in Vertical direction,
         # Connected in Horizontal direction,
         # Is slave only connected to one??
@@ -131,18 +162,18 @@ def gen_comp_pb(con_graph,graph):
         j=0
         for task1 in scenario.graphs[graph].tasks:
             if task!=task1:
-                temp=f"C_{task}_{task1}"
+                temp=f"C_{task1}_{task}"
                 con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
+                l2[temp]=('+',1)
             if j<i:
                 temp=f"C_{task}_{task1}"
                 l1[temp]=('+',1)
                 l3[temp]=('+',1)
             elif j>i:
                 temp=f"C_{task1}_{task}"
-                l2[temp]=('+',1)
             j+=1
         con_graph.pbp_data[complete].constraints.append([l1,i,'<='])
-        #con_graph.pbp_data[complete].constraints.append([l2,(scenario.graphs[graph].num_of_tasks-(i+1)),'<='])
+        con_graph.pbp_data[complete].constraints.append([l2,(scenario.graphs[graph].num_of_tasks-(i+1)),'<='])
         con_graph.pbp_data[complete].constraints.append([l3,0,'='])
 
         #Mapping the Tmasters to Resources
@@ -189,19 +220,20 @@ def gen_comp_pb(con_graph,graph):
             j+=1
         i+=1
 
-    for m in scenario.graphs[graph].arcs:
-        #assign service level
-        l1={}
-        for j in range(scenario.service_level):
-            l1[f"sl_{j}_{m}"]=('+',1)
-            con_graph.pbp_data[complete].decision_strat[f"sl_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
-        con_graph.pbp_data[complete].constraints.append([l1,1,'='])
-        #assign hop distance
-        l2={}
-        for j in range(scenario.max_hop):
-            l2[f"hop_{j}_{m}"]=('+',1)
-            con_graph.pbp_data[complete].decision_strat[f"hop_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
-        con_graph.pbp_data[complete].constraints.append([l2,1,'='])
+    # for m in scenario.graphs[graph].arcs:
+    #     #assign service level
+    #     l1={}
+    #     for j in range(scenario.service_level):
+    #         l1[f"sl_{j}_{m}"]=('+',1)
+    #         con_graph.pbp_data[complete].decision_strat[f"sl_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
+    #     con_graph.pbp_data[complete].constraints.append([l1,1,'='])
+    #     #assign hop distance
+    #     l2={}
+    #     for j in range(scenario.max_hop):
+    #         l2[f"hop_{j}_{m}"]=('+',1)
+    #         con_graph.pbp_data[complete].decision_strat[f"hop_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
+    #     con_graph.pbp_data[complete].constraints.append([l2,1,'='])
+
 
 #generate the constraint graph from the ILP
 def gen_comp_con_graph(con_graph, graph):
@@ -295,15 +327,6 @@ def plot_app_graph(graph,phase,dir):
         app_g.edge(m,scenario.graphs[graph].arcs[m].task_to)
     app_g.render(f"{dir}/app_graph_plot{phase}.view",view=False)
 
-def generate_noc(length,breadth):
-    global scenario
-    for i in range(length):
-        l=[]
-        for j in range(breadth):
-            temp=random.sample(scenario.all_tables.keys(),1)
-            scenario.tables[temp[0]]=scenario.all_tables[temp[0]]
-            l.append(temp[0])
-        scenario.NOC.append(l)
 def process_clustering(graph):
     global scenario
     for var in scenario.constraint_graphs[graph].pbp_data["cluster"].assignment:
@@ -372,6 +395,7 @@ def process_clustering(graph):
             print("INFEASIBLEs")
     #edit_ILP(output_file,constraints_to_add,None)
     return is_feasible
+
 def clustering_pb(graph):
     global scenario
     num_of_con=0;
@@ -623,7 +647,6 @@ def dpll_solver(decision_strat,constraints,literal):
     if cur_var!=None:
         decision_strat[cur_var]=[var_priority,var_val]
     return False, None
-
 #Changed solver
 def dll_solver(decision_strat,constraints,literal):
     #print(literal)
@@ -750,6 +773,441 @@ def dll_solver(decision_strat,constraints,literal):
         decision_strat[var_list[i]]=var_dets[i]
     decision_strat[cur_var]=[var_priority,var_val]
     return False, None
+
+def process_pbp_data(con_graph):
+    #sort decision strat by the increasing order of decision priority
+    decision_strat=OrderedDict(deepcopy(sorted(con_graph.pbp_data["complete"].decision_strat.items() , key=lambda x : -x[1][0])))
+    # for var in decision_strat:
+    #     if "fp" in var:
+    #         print(var)
+    #list of constraint details
+    con_dets={}
+    #list of constraints in which the given variable exists
+    var_list={}
+    for var in decision_strat:
+        var_list[var]=[]
+        posCons={}
+        var_list[var].append(posCons)
+        negCons={}
+        var_list[var].append(negCons)
+    i=0
+
+    for con in con_graph.pbp_data["complete"].constraints:
+        con_type=con[2]
+        n=con[1]
+        maxsum=0
+        for var in con[0]:
+            #update maximum possible sum of the constraints
+            maxsum+=con[0][var][1]
+            if con[0][var][0]=='-':
+                #update variable coefficient in constraints in which a variable is negative
+                var_list[var][1][i]=con[0][var][1]
+                #update the value of the constraint value to reflect the negation of the variable
+                n+=con[0][var][1]
+            else:
+                #update variable coefficient in constraints in which a variable is positive
+                var_list[var][0][i]=con[0][var][1]
+        #con_dets is a list of Constraint type(<=,>=,=) the current value of sum, maximum sum the constraint equation can reach and the objective goal
+        con_dets[i]=[con_type,0,maxsum,n]
+        i+=1
+    isAssigned, assignment= pbs_solver(decision_strat,con_graph.pbp_data["complete"].constraints,con_dets,var_list)
+    # for val in decision_strat:
+    #     if val in assignment:
+    #         if "idct" in val:
+    #             print(assignment[val])
+    #             print(val)
+    #     else:
+    #         print("MISSED OUT ON VARS")
+    if isAssigned==False:
+        print("Assignment was not successful")
+        return None
+    return assignment
+
+def pbs_solver(decision_strat,constraints,con_dets,variables):
+    cur_var = None
+    var_val = None
+    assignment={}
+    var_list={}
+    #pick the variable to assign a value using the decision_strat
+    for vars in decision_strat:
+        if decision_strat[vars][0]!=(-1):
+            cur_var=vars
+            var_val = decision_strat[cur_var][1]
+            decision_strat[cur_var][0]=-1
+            break
+    if cur_var==None:
+        return True,assignment
+    print("The current value is ",cur_var,var_val)
+    #print(cur_var)
+    #print(var_val)
+    #variable to check if the assignment is feasible.
+    isFeasible=True
+    #Updating the con_dets for the given assignment
+    #Iterating over the positive constraints associated with the current variable
+    for i in variables[cur_var][0]:
+        #update the constraints list based on the value of the current variable.
+        if var_val==1:
+            #make sure that it is feasible for the constraint to be assigned true or false.
+            if con_dets[i][0]!='>=':
+                #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                if (con_dets[i][1]+variables[cur_var][0][i])>con_dets[i][3]:
+                    isFeasible=False
+            #add value of coefficient to current sum of constraint
+            con_dets[i][1]+=variables[cur_var][0][i]
+        else:
+            #Make sure that assigning the value does not cause conflict
+            if con_dets[i][0]!='<=':
+                if (con_dets[i][2]-variables[cur_var][0][i])<con_dets[i][3]:
+                    isFeasible=False
+            #subtract value of coefficient from maximum posible sum of constraints
+            con_dets[i][2]-=variables[cur_var][0][i]
+        #check for implications or conflicts caused due to this assignment in the given constraint.
+        for vars in constraints[i][0]:
+            if decision_strat[vars][0]!=-1:
+                if con_dets[i][0]!='>=':
+                   #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][1]+variables[vars][0][i])>con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=False:
+                                isFeasible=False
+                        var_list[vars]=False
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+                elif con_dets[i][0]!='<=':
+                    #if the coefficient of vars is necessary, make sure it is true
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][2]-variables[vars][0][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=False:
+                                isFeasible=False
+                        var_list[vars]=False
+                        #print("THIS",vars)
+                    #if the sign of vars is negative in the constraint, then make sure it is false.
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][2]-variables[vars][1][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+
+    for i in variables[cur_var][1]:
+        #update the constraints list based on the value of the current variable.
+        if var_val==0:
+            #make sure that it is feasible for the constraint to be assigned true or false.
+            if con_dets[i][0]!='>=':
+                #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                if (con_dets[i][1]+variables[cur_var][1][i])>con_dets[i][3]:
+                    isFeasible=False
+            con_dets[i][1]+=variables[cur_var][1][i]
+        else:
+            #Make sure that assigning the value does not cause conflict
+            if con_dets[i][0]!='<=':
+                if (con_dets[i][2]-variables[cur_var][1][i])<con_dets[i][3]:
+                    isFeasible=False
+            con_dets[i][2]-=variables[cur_var][1][i]
+        #check for implications or conflicts caused due to this assignment in the given constraint.
+        for vars in constraints[i][0]:
+            if decision_strat[vars][0]!=-1:
+                if con_dets[i][0]!='>=':
+                   #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][1]+variables[vars][0][i])>con_dets[i][3]:
+                        if vars in var_list:
+                           if var_list[vars]!=False:
+                               isFeasible=False
+                        var_list[vars]=False
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+                elif con_dets[i][0]!='<=':
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][2]-variables[vars][0][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=False:
+                                isFeasible=False
+                        var_list[vars]=False
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][2]-variables[vars][1][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+
+    #Now the var_list should be updated, process the list
+    #The list contains the implications of the variable assignment
+    print("The list of implications is:")
+    for val in var_list:
+        print("Implication is", val, var_list[val])
+        #Iterating over the positive constraints associated with the current variable
+        decision_strat[val][0]=(-1)
+        for i in variables[val][0]:
+            #update the constraints list based on the value of the current variable.
+            if var_list[val]==1:
+                #make sure that it is feasible for the constraint to be assigned true or false.
+                if con_dets[i][0]!='>=':
+                    #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if (con_dets[i][1]+variables[val][0][i])>con_dets[i][3]:
+                                isFeasible=False
+                #add value of coefficient to current sum of constraint
+                con_dets[i][1]+=variables[val][0][i]
+            else:
+                #subtract value of coefficient from maximum posible sum of constraints
+                #Make sure that assigning the value does not cause conflict
+                if con_dets[i][0]!='<=':
+                    if (con_dets[i][2]-variables[val][0][i])<con_dets[i][3]:
+                                isFeasible=False
+                con_dets[i][2]-=variables[val][0][i]
+        #Iterating over the negative constraints associated with the current variable
+        for i in variables[val][1]:
+            #update the constraints list based on the value of the current variable.
+            if var_list[val]==0:
+                #make sure that it is feasible for the constraint to be assigned true or false.
+                if con_dets[i][0]!='>=':
+                    #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if (con_dets[i][1]+variables[val][1][i])>con_dets[i][3]:
+                                isFeasible=False
+                #add value of coefficient to current sum of constraint
+                con_dets[i][1]+=variables[val][1][i]
+            else:
+
+                #Make sure that assigning the value does not cause conflict
+                if con_dets[i][0]!='<=':
+                    if (con_dets[i][2]-variables[val][1][i])<con_dets[i][3]:
+                                isFeasible=False
+                #subtract value of coefficient from maximum posible sum of constraints
+                con_dets[i][2]-=variables[val][1][i]
+
+    #after assigning the values of the assignment, lets check if the whole situation is feasible.
+    reprocess=False
+    val_return=None
+    if isFeasible==True:
+        print("____NEXT LEVEL___")
+        isAssigned, vals= pbs_solver(decision_strat,constraints,con_dets,variables)
+        if isAssigned:
+            vals[cur_var]=var_val
+            for val in var_list:
+                vals[val]=var_list[val]
+            return True, vals
+        else:
+            reprocess=True
+            val_return=vals
+            for i in variables[cur_var][0]:
+                if vals in constraints[i][0].keys():
+                    print(constraints[i][0])
+                    reprocess=False
+            for i in variables[cur_var][0]:
+                if vals in constraints[i][0].keys():
+                    print(constraints[i][0])
+                    reprocess=False
+
+    #reset the values of con_dets to what they were before assignment and the implication
+    for i in variables[cur_var][0]:
+        if var_val==1:
+            con_dets[i][1]-=variables[cur_var][0][i]
+        else:
+            con_dets[i][2]+=variables[cur_var][0][i]
+    for i in variables[cur_var][1]:
+        if var_val==0:
+            con_dets[i][1]-=variables[cur_var][1][i]
+        else:
+            con_dets[i][2]+=variables[cur_var][1][i]
+    for val in var_list:
+        #revert the decision strategy.
+        decision_strat[val][0]=1
+        for i in variables[val][0]:
+            if var_list[val]==1:
+                con_dets[i][1]-=variables[val][0][i]
+            else:
+                con_dets[i][2]+=variables[val][0][i]
+        for i in variables[val][1]:
+            if var_list[val]==0:
+                con_dets[i][1]-=variables[val][1][i]
+            else:
+                con_dets[i][2]+=variables[val][1][i]
+    #clear var_list
+    var_list={}
+    if reprocess==True:
+        return False,val_return
+
+    #Change the value if it is infeasible, repeat.
+    var_val=not var_val
+    print(f"Swap decision variable for {cur_var}")
+    #print("The current value is ",cur_var,var_val)
+
+
+    #variable to check if the assignment is feasible.
+    isFeasible=True
+    #Updating the con_dets for the given assignment
+    #Iterating over the positive constraints associated with the current variable
+    for i in variables[cur_var][0]:
+        #update the constraints list based on the value of the current variable.
+        if var_val==1:
+            #make sure that it is feasible for the constraint to be assigned true or false.
+            if con_dets[i][0]!='>=':
+                #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                if (con_dets[i][1]+variables[cur_var][0][i])>con_dets[i][3]:
+                    isFeasible=False
+            #add value of coefficient to current sum of constraint
+            con_dets[i][1]+=variables[cur_var][0][i]
+        else:
+            #Make sure that assigning the value does not cause conflict
+            if con_dets[i][0]!='<=':
+                if (con_dets[i][2]-variables[cur_var][0][i])<con_dets[i][3]:
+                    isFeasible=False
+            #subtract value of coefficient from maximum posible sum of constraints
+            con_dets[i][2]-=variables[cur_var][0][i]
+        #check for implications or conflicts caused due to this assignment in the given constraint.
+        for vars in constraints[i][0]:
+            if decision_strat[vars][0]!=-1:
+                if con_dets[i][0]!='>=':
+                   #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][1]+variables[vars][0][i])>con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=False:
+                                isFeasible=False
+                        var_list[vars]=False
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+                elif con_dets[i][0]!='<=':
+                    #if the coefficient of vars is necessary, make sure it is true
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][2]-variables[vars][0][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=False:
+                                isFeasible=False
+                        var_list[vars]=False
+                        #print("THIS",vars)
+                    #if the sign of vars is negative in the constraint, then make sure it is false.
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][2]-variables[vars][1][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+
+    for i in variables[cur_var][1]:
+        #update the constraints list based on the value of the current variable.
+        if var_val==0:
+            #make sure that it is feasible for the constraint to be assigned true or false.
+            if con_dets[i][0]!='>=':
+                #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                if (con_dets[i][1]+variables[cur_var][1][i])>con_dets[i][3]:
+                    isFeasible=False
+            con_dets[i][1]+=variables[cur_var][1][i]
+        else:
+            #Make sure that assigning the value does not cause conflict
+            if con_dets[i][0]!='<=':
+                if (con_dets[i][2]-variables[cur_var][1][i])<con_dets[i][3]:
+                    isFeasible=False
+            con_dets[i][2]-=variables[cur_var][1][i]
+        #check for implications or conflicts caused due to this assignment in the given constraint.
+        for vars in constraints[i][0]:
+            if decision_strat[vars][0]!=-1:
+                if con_dets[i][0]!='>=':
+                   #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][1]+variables[vars][0][i])>con_dets[i][3]:
+                        if vars in var_list:
+                           if var_list[vars]!=False:
+                               isFeasible=False
+                        var_list[vars]=False
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+                elif con_dets[i][0]!='<=':
+                    if constraints[i][0][vars][0]=='+' and (con_dets[i][2]-variables[vars][0][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=False:
+                                isFeasible=False
+                        var_list[vars]=False
+                    elif constraints[i][0][vars][0]=='-' and (con_dets[i][2]-variables[vars][1][i])<con_dets[i][3]:
+                        if vars in var_list:
+                            if var_list[vars]!=True:
+                                isFeasible=False
+                        var_list[vars]=True
+
+    #Now the var_list should be updated, process the list
+    #The list contains the implications of the variable assignment
+    print("The list of implications is:")
+    for val in var_list:
+        print("Implication is", val, var_list[val])
+        #Iterating over the positive constraints associated with the current variable
+        decision_strat[val][0]=(-1)
+        for i in variables[val][0]:
+            #update the constraints list based on the value of the current variable.
+            if var_list[val]==1:
+                #make sure that it is feasible for the constraint to be assigned true or false.
+                if con_dets[i][0]!='>=':
+                    #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if (con_dets[i][1]+variables[val][0][i])>con_dets[i][3]:
+                                isFeasible=False
+                #add value of coefficient to current sum of constraint
+                con_dets[i][1]+=variables[val][0][i]
+            else:
+                #subtract value of coefficient from maximum posible sum of constraints
+                #Make sure that assigning the value does not cause conflict
+                if con_dets[i][0]!='<=':
+                    if (con_dets[i][2]-variables[val][0][i])<con_dets[i][3]:
+                                isFeasible=False
+                con_dets[i][2]-=variables[val][0][i]
+        #Iterating over the negative constraints associated with the current variable
+        for i in variables[val][1]:
+            #update the constraints list based on the value of the current variable.
+            if var_list[val]==0:
+                #make sure that it is feasible for the constraint to be assigned true or false.
+                if con_dets[i][0]!='>=':
+                    #if current sum + coefficient>objective goal of constraint and coefficient is positive
+                    if (con_dets[i][1]+variables[val][1][i])>con_dets[i][3]:
+                                isFeasible=False
+                #add value of coefficient to current sum of constraint
+                con_dets[i][1]+=variables[val][1][i]
+            else:
+
+                #Make sure that assigning the value does not cause conflict
+                if con_dets[i][0]!='<=':
+                    if (con_dets[i][2]-variables[val][1][i])<con_dets[i][3]:
+                                isFeasible=False
+                #subtract value of coefficient from maximum posible sum of constraints
+                con_dets[i][2]-=variables[val][1][i]
+
+    #after assigning the values of the assignment, lets check if the whole situation is feasible.
+    if isFeasible==True:
+        print("____NEXT LEVEL___")
+        isAssigned, vals= pbs_solver(decision_strat,constraints,con_dets,variables)
+        if isAssigned:
+            vals[cur_var]=var_val
+            for val in var_list:
+                vals[val]=var_list[val]
+            return True, vals
+    #reset the values of con_dets to what they were before assignment and the implication
+    for i in variables[cur_var][0]:
+        if var_val==1:
+            con_dets[i][1]-=variables[cur_var][0][i]
+        else:
+            con_dets[i][2]+=variables[cur_var][0][i]
+    for i in variables[cur_var][1]:
+        if var_val==0:
+            con_dets[i][1]-=variables[cur_var][1][i]
+        else:
+            con_dets[i][2]+=variables[cur_var][1][i]
+    for val in var_list:
+        #revert the decision strategy.
+        decision_strat[val][0]=1
+        for i in variables[val][0]:
+            if var_list[val]==1:
+                con_dets[i][1]-=variables[val][0][i]
+            else:
+                con_dets[i][2]+=variables[val][0][i]
+        for i in variables[val][1]:
+            if var_list[val]==0:
+                con_dets[i][1]-=variables[val][1][i]
+            else:
+                con_dets[i][2]+=variables[val][1][i]
+    print("This statement running implies some conflict")
+    decision_strat[cur_var][0]=1
+    return False,cur_var
 
 def clustering_pb1(graph,con_graph):
     global scenario
@@ -942,22 +1400,44 @@ def process_clustering1(graph,con_graph):
     #edit_ILP(output_file,constraints_to_add,None)
     return is_feasible
 
+def gen_dvfslevel(num_levels):
+    global scenario
+    scenario.dvfs_levels = []
+    if num_levels == None or num_levels < 3:
+        scenario.dvfs_levels = [1]
+    else:
+        #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
+        freq=500
+        volt=1.1
+        #ARM processors including A7,A15 all generally have DVFS levels between 200Mhz to 1600 Mhz
+        f_up=1600.0/500;
+        f_down=200.0/500;
+        #The size of each frequency step.
+        step_size=(f_up-f_down)/(num_levels-1)
+        for i in range(num_levels):
+            scenario.dvfs_levels.append(f_down+(i*step_size))
+    #this creates a list of size dvfs_num_levels
+    #the contents of this list will range from [1600/500 to 200/500]
+    #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
+
 def process_cons(con_graph):
-    isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
-    if not isassigned:
-        print("Clustering constraints broken, fix now")
-    gen_comp_con_graph(con_graph,graph)
-    feasiblity_con_graph(con_graph,graph)
+    con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
+    gen_comp_con_graph(con_graph,con_graph.graph)
+    feasiblity_con_graph(con_graph,con_graph.graph)
 
 def make_individual(name="la"):
     con_graph=creator.Individual()
     con_graph.graph=name
     gen_comp_pb(con_graph,name)
-    isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
-    if not isassigned:
-        print("Clustering constraints broken, fix now")
-    pop=None
-    print("Population")
+    con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
+    # for ass in con_graph.pbp_data["complete"].assignment:
+    #     if "pulse" in ass:
+    #         print(ass)
+    #         print(con_graph.pbp_data["complete"].assignment[ass])
+    # isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
+    # if not isassigned:
+    #     print("Clustering constraints broken, fix now")
+    print("Individual")
     gen_comp_con_graph(con_graph,name)
     feasiblity_con_graph(con_graph,name)
     # clustering_pb1(name,con_graph)
@@ -1003,33 +1483,35 @@ def evalParams(individual):
     task_list=[]
     task_start={}
     cluster_time={}
-    dvfs_level=scenario.dvfs_level(individual.dvfs_level[cluster])
+
+    dvfs_level=1
     message_communication_time=0.001
     #Computing the total energy usage
     for cluster in individual.task_cluster:
-        temp=0
         cluster_time[cluster]=0
+        if scenario.dvfs>1:
+            dvfs_level=scenario.dvfs_level[(individual.dvfs_level[cluster])]
         for task in individual.task_cluster[cluster].tasks:
             mapped=individual.task_cluster[cluster].mapped_to
             wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
             power=scenario.graphs[graph].tasks[task].power[mapped]
             energy+=(wcet*power*dvfs_level*dvfs_level)
-            temp+=(wcet/dvfs_level)
 
     #Sorting tasks according to priority
     for task in scenario.graphs[graph].tasks:
         task_list.append([scenario.graphs[graph].tasks[task].priority,task])
         task_start[task]=0
     task_list.sort(key=lambda x: x[1])
-    print(task_list)
-
+    print("_____!_____")
     #setting lower limit on task start time
     for task_dets in task_list:
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
+        mapped=individual.task_cluster[cluster].mapped_to
+        print(mapped)
         cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
-        for task1 in cluster.tasks:
-            if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]):
+        for task1 in individual.task_cluster[cluster].tasks:
+            if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
                     task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
         for m in individual.messages:
@@ -1037,6 +1519,7 @@ def evalParams(individual):
                 task_to=scenario.graphs[graph].arcs[m].task_to
                 if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)):
                     task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+
     max_time=0
     for cluster in cluster_time:
         if(cluster_time[cluster]>max_time):
@@ -1045,7 +1528,7 @@ def evalParams(individual):
 
 def matefunc(ind1,ind2):
     complete="complete"
-    print("crossover starts")
+    #print("crossover starts")
     for a in ind1.pbp_data[complete].decision_strat:
         if random.randint(0,1)==1:
             yo=ind1.pbp_data[complete].decision_strat[a]
@@ -1058,7 +1541,7 @@ def matefunc(ind1,ind2):
 
 def mutatefunc(ind,indpb=0.1):
     complete="complete"
-    print("Mutate starts")
+    #print("Mutate starts")
     for a in ind.pbp_data[complete].decision_strat:
         if random.random() < indpb:
             ind.pbp_data[complete].decision_strat[a][1]= not ind.pbp_data[complete].decision_strat[a][1]
@@ -1107,7 +1590,12 @@ def main():
             process_block(block,args.tg,args.core)
     generate_noc(8,8)
     populate_task_params()
-
+    if args.dvfs_num_levels!=None:
+        scenario.dvfs=args.dvfs_num_levels
+    else:
+        scenario.dvfs=1
+    gen_dvfslevel(args.dvfs_num_levels)
+    phase=0
     phase=0
     #Processing each graph seperately
 
@@ -1115,24 +1603,25 @@ def main():
         con_graph=Constraint_graph()
         con_graph.graph=graph
         gen_comp_pb(con_graph,graph)
-        isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
-        if not isassigned:
-            print("Clustering constraints broken, fix now")
+        con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
+        # isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
+        # if not isassigned:
+        #     print("Clustering constraints broken, fix now")
         pop=None
         print("dpll solver works")
         gen_comp_con_graph(con_graph,graph)
         feasiblity_con_graph(con_graph,graph)
         print(f"Generating Population for {graph}")
-        #pop = toolbox.population(graph_name=graph,pop_size=100)
-        continue
+        pop = toolbox.population(graph_name=graph,pop_size=20)
         # CXPB  is the probability with which two individuals
         #       are crossed
         #
         # MUTPB is the probability for mutating an individual
         CXPB, MUTPB = 0.5, 0.2
 
-        print("Start of evolution")
+        print("Start of evolution", graph)
 
+        #continue
         # Evaluate the entire population
         fitnesses = list(map(toolbox.evaluate, pop))
         for ind, fit in zip(pop, fitnesses):
@@ -1144,9 +1633,8 @@ def main():
         fits = [ind.fitness.values[0] for ind in pop]
         # Variable keeping track of the number of generations
         g = 0
-
         # Begin the evolution
-        while max(fits) < 10 and g < 10:
+        while g < 25:
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
@@ -1162,7 +1650,7 @@ def main():
                 # cross two individuals with probability CXPB
                 if random.random() < CXPB:
                     toolbox.mate(child1, child2)
-                    print("mate runs")
+                    #print("mate runs")
                     # fitness values of the children
                     # must be recalculated later
                     del child1.fitness.values
@@ -1180,15 +1668,16 @@ def main():
             fitnesses = map(toolbox.evaluate, invalid_ind)
             for ind, fit in zip(invalid_ind, fitnesses):
                 ind.fitness.values = fit
-
-            print("  Evaluated %i individuals" % len(invalid_ind))
+                print(fit)
+            #print("  Evaluated %i individuals" % len(invalid_ind))
 
             # The population is entirely replaced by the offspring
             pop[:] = offspring
 
             # Gather all the fitnesses in one list and print the stats
             fits = [ind.fitness.values[0] for ind in pop]
-
+            fits += [ind.fitness.values[1] for ind in pop]
+            print(fits)
             length = len(pop)
             mean = sum(fits) / length
             sum2 = sum(x*x for x in fits)
