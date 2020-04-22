@@ -13,7 +13,7 @@ from copy import deepcopy
 
 
 scenario = None
-random.seed(622)
+random.seed(124)
 
 def get_blocks(input_file):
     buf=[]
@@ -152,8 +152,7 @@ def gen_comp_pb(con_graph,graph):
         # Is slave only connected to one??
         l1={}
         temp=f"{task}_master"
-        if (i>0):
-            l1[temp]=('+',i)
+        l1[temp]=('+',i)
         l2={}
         temp=f"{task}_slave"
         if ((scenario.graphs[graph].num_of_tasks-(i+1))>0):
@@ -167,14 +166,10 @@ def gen_comp_pb(con_graph,graph):
                 temp=f"C_{task1}_{task}"
                 con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
                 l2[temp]=('+',1)
-            if j<i:
                 temp=f"C_{task}_{task1}"
                 l1[temp]=('+',1)
                 l3[temp]=('+',1)
-            elif j>i:
-                temp=f"C_{task1}_{task}"
             j+=1
-        print(l1,l2,l3)
         con_graph.pbp_data[complete].constraints.append([l1,i,'<='])
         con_graph.pbp_data[complete].constraints.append([l2,(scenario.graphs[graph].num_of_tasks-(i+1)),'<='])
         con_graph.pbp_data[complete].constraints.append([l3,0,'='])
@@ -250,7 +245,7 @@ def gen_comp_con_graph(con_graph, graph):
     dvfs_list = []
     for parts in con_graph.pbp_data["complete"].assignment:
         if con_graph.pbp_data["complete"].assignment[parts]==1:
-            print(parts)
+            #print(parts)
             if parts.endswith("_master"):
                 ext_id = parts.rfind("_")
                 master_list.append(parts[:ext_id])
@@ -1001,15 +996,15 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 vals[val]=var_list[val]
             return True, vals
         else:
-            reprocess=False
+            reprocess=True
             val_return=vals
             for i in variables[cur_var][0]:
                 if vals in constraints[i][0].keys():
-                    print(constraints[i][0])
+                    #print(constraints[i][0])
                     reprocess=False
             for i in variables[cur_var][1]:
                 if vals in constraints[i][0].keys():
-                    print(constraints[i][0])
+                    #print(constraints[i][0])
                     reprocess=False
 
     #reset the values of con_dets to what they were before assignment and the implication
@@ -1469,6 +1464,7 @@ def gen_dvfslevel(num_levels):
     #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
 
 def process_cons(con_graph):
+    print_pb_strat(con_graph)
     con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
     gen_comp_con_graph(con_graph,con_graph.graph)
     feasiblity_con_graph(con_graph,con_graph.graph)
@@ -1477,12 +1473,13 @@ def make_individual(name="la"):
     con_graph=creator.Individual()
     con_graph.graph=name
     gen_comp_pb(con_graph,name)
+    print_pb_strat(con_graph)
     con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
     # for ass in con_graph.pbp_data["complete"].assignment:
     #     if "pulse" in ass:
     #         print(ass)
     #         print(con_graph.pbp_data["complete"].assignment[ass])
-    print("Individual")
+    print("Generated Individual")
     gen_comp_con_graph(con_graph,name)
     feasiblity_con_graph(con_graph,name)
 
@@ -1492,6 +1489,7 @@ def makepop(graph_name="la", pop_size=5):
     l = []
     for i in range(pop_size):
         l.append(toolbox.individual(name=graph_name))
+    print("Population Initiated")
     return l
 
 def evalParams(individual):
@@ -1500,6 +1498,7 @@ def evalParams(individual):
     energy=0
     task_list=[]
     task_start={}
+    task_end={}
     cluster_time={}
 
     dvfs_level=1
@@ -1519,34 +1518,41 @@ def evalParams(individual):
     for task in scenario.graphs[graph].tasks:
         task_list.append([scenario.graphs[graph].tasks[task].priority,task])
         task_start[task]=0
-    task_list.sort(key=lambda x: x[1])
+    task_list.sort(key=lambda x: x[0])
     #setting lower limit on task start time
     for task_dets in task_list:
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         mapped=individual.task_cluster[cluster].mapped_to
         cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         for task1 in individual.task_cluster[cluster].tasks:
             if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
                     task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
-        for m in individual.messages:
+        for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
                 if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)):
                     task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
-    inc=0
-    for cluster in individual.task_cluster:
-        inc+=1
-        mapped=individual.task_cluster[cluster].mapped_to
-        print("Cluster",inc,"is Mapped to PE",mapped)
-        for task in individual.task_cluster[cluster].tasks:
-            print("Time",task,"starts executing is",task_start[task])
 
     max_time=0
     for cluster in cluster_time:
         if(cluster_time[cluster]>max_time):
             max_time=cluster_time[cluster]
+    inc=0
+    print("\nEVALUATION FOR",graph,"\n")
+    for cluster in individual.task_cluster:
+        inc+=1
+        mapped=individual.task_cluster[cluster].mapped_to
+        print("Cluster",inc,"is Mapped to PE",mapped)
+        for task in individual.task_cluster[cluster].tasks:
+            print("------>",task)
+            print("start time",task_start[task])
+            print("end time",task_end[task])
+        print("----------------------------------")
+    print("The total execution time is",max_time,)
+    print("The total energy is",energy,"\n")
     return (energy,max_time)
 
 def matefunc(ind1,ind2):
@@ -1562,7 +1568,7 @@ def matefunc(ind1,ind2):
     process_cons(ind2)
     return ind1, ind2
 
-def mutatefunc(ind,indpb=0.1):
+def mutatefunc(ind,indpb=0.5):
     complete="complete"
     #print("Mutate starts")
     for a in ind.pbp_data[complete].decision_strat:
@@ -1622,21 +1628,19 @@ def main():
 
     #Processing each graph seperately
     for graph in scenario.graphs:
-        #print_app_graph(graph)
+        print_app_graph(graph)
         con_graph=Constraint_graph()
         con_graph.graph=graph
         gen_comp_pb(con_graph,graph)
         #print_pb_strat(con_graph)
+        print("Running the ")
         con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
-        # isassigned,con_graph.pbp_data["complete"].assignment=dpll_solver(con_graph.pbp_data["complete"].decision_strat,con_graph.pbp_data["complete"].constraints,0)
-        # if not isassigned:
-        #     print("Clustering constraints broken, fix now")
-        pop=None
-        #print("Assignment by PB Solver Complete")
+        print("Assignment by PB Solver Complete")
         gen_comp_con_graph(con_graph,graph)
         feasiblity_con_graph(con_graph,graph)
         evalParams(con_graph)
-        continue
+
+        pop=None
         print(f"Generating Population for {graph}")
         pop = toolbox.population(graph_name=graph,pop_size=5)
         # CXPB  is the probability with which two individuals
@@ -1693,31 +1697,38 @@ def main():
             fitnesses = map(toolbox.evaluate, invalid_ind)
             for ind, fit in zip(invalid_ind, fitnesses):
                 ind.fitness.values = fit
-                print(fit)
             #print("  Evaluated %i individuals" % len(invalid_ind))
 
             # The population is entirely replaced by the offspring
             pop[:] = offspring
 
             # Gather all the fitnesses in one list and print the stats
-            fits = [ind.fitness.values[0] for ind in pop]
-            fits += [ind.fitness.values[1] for ind in pop]
-            print(fits)
+            fits0 = [ind.fitness.values[0] for ind in pop]
             length = len(pop)
-            mean = sum(fits) / length
-            sum2 = sum(x*x for x in fits)
+            mean = sum(fits0) / length
+            sum2 = sum(x*x for x in fits0)
             std = abs(sum2 / length - mean**2)**0.5
+            print(" Values of Power")
+            print("   Min %s" % min(fits0))
+            print("   Max %s" % max(fits0))
+            print("   Avg %s" % mean)
+            print("   Std %s" % std)
+            fits0 = [ind.fitness.values[1] for ind in pop]
+            length = len(pop)
+            mean = sum(fits0) / length
+            sum2 = sum(x*x for x in fits0)
+            std = abs(sum2 / length - mean**2)**0.5
+            print(" Values of Execution time")
+            print("   Min %s" % min(fits0))
+            print("   Max %s" % max(fits0))
+            print("   Avg %s" % mean)
+            print("   Std %s" % std)
 
-            print("  Min %s" % min(fits))
-            print("  Max %s" % max(fits))
-            print("  Avg %s" % mean)
-            print("  Std %s" % std)
 
         print("-- End of (successful) evolution --")
 
         best_ind = tools.selBest(pop, 1)[0]
         print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
-        break
         phase+=1
     return
 if __name__ == '__main__':
