@@ -1,0 +1,2570 @@
+Graph name is  TASK_GRAPH 0 
+Number of tasks in Graph is 6
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is can1
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 4.5e-05
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 2.65e-06
+Power 0.2
+Code_bits 42000.0
+--- CLIENT_PE4
+WCET 5.5e-06
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 4.6e-06
+Power 0.4
+Code_bits 39000.0
+--- CLIENT_PE3
+WCET 6e-06
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 7.5e-06
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.00014
+Power 0.5
+Code_bits 18000.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 23000.0
+Task 3  is fp
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.000115
+Power 0.32
+Code_bits 58000.0
+--- CLIENT_PE13
+WCET 4.45e-06
+Power 0.2
+Code_bits 140000.0
+--- CLIENT_PE4
+WCET 1.05e-05
+Power 3.1
+Code_bits 58000.0
+--- CLIENT_PE6
+WCET 9e-06
+Power 0.4
+Code_bits 140000.0
+--- CLIENT_PE3
+WCET 1.15e-05
+Power 2.8
+Code_bits 58000.0
+--- CLIENT_PE2
+WCET 1.45e-05
+Power 2.0
+Code_bits 58000.0
+--- CLIENT_PE14
+WCET 0.0008
+Power 0.5
+Code_bits 15000.0
+--- CLIENT_PE7
+WCET 0.00065
+Power 1.2
+Code_bits 16000.0
+Task 4  is can2
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 4.5e-05
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 2.65e-06
+Power 0.2
+Code_bits 42000.0
+--- CLIENT_PE4
+WCET 5.5e-06
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 4.6e-06
+Power 0.4
+Code_bits 39000.0
+--- CLIENT_PE3
+WCET 6e-06
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 7.5e-06
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.00014
+Power 0.5
+Code_bits 18000.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 23000.0
+Task 5  is pulse
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 2.25e-05
+Power 0.32
+Code_bits 14000.0
+--- CLIENT_PE13
+WCET 1.05e-06
+Power 0.2
+Code_bits 96000.0
+--- CLIENT_PE4
+WCET 2.2e-06
+Power 3.1
+Code_bits 14000.0
+--- CLIENT_PE6
+WCET 1.6e-06
+Power 0.4
+Code_bits 97000.0
+--- CLIENT_PE3
+WCET 2.4e-06
+Power 2.8
+Code_bits 14000.0
+--- CLIENT_PE2
+WCET 3.35e-06
+Power 2.0
+Code_bits 14000.0
+--- CLIENT_PE14
+WCET 1.95e-05
+Power 0.5
+Code_bits 13000.0
+--- CLIENT_PE7
+WCET 1.75e-05
+Power 1.2
+Code_bits 13000.0
+Task 6  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  5
+Arc 1 is a0_01 between :
+src ---> can1
+Arc 2 is a0_12 between :
+can1 ---> fp
+Arc 3 is a0_13 between :
+fp ---> can2
+Arc 4 is a0_24 between :
+can2 ---> pulse
+Arc 5 is a0_35 between :
+pulse ---> sink
+Graph name is  TASK_GRAPH 1 
+Number of tasks in Graph is 4
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is iir
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.0004
+Power 0.32
+Code_bits 87000.0
+--- CLIENT_PE13
+WCET 7.5e-06
+Power 0.2
+Code_bits 70000.0
+--- CLIENT_PE4
+WCET 4.2e-05
+Power 3.1
+Code_bits 87000.0
+--- CLIENT_PE6
+WCET 4.25e-05
+Power 0.4
+Code_bits 70000.0
+--- CLIENT_PE3
+WCET 4.6e-05
+Power 2.8
+Code_bits 87000.0
+--- CLIENT_PE2
+WCET 6e-05
+Power 2.0
+Code_bits 87000.0
+--- CLIENT_PE14
+WCET 0.000415
+Power 0.5
+Code_bits 26000.0
+--- CLIENT_PE7
+WCET 0.00025
+Power 1.2
+Code_bits 37000.0
+Task 3  is idct
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00455
+Power 0.32
+Code_bits 75000.0
+--- CLIENT_PE13
+WCET 0.00013
+Power 0.2
+Code_bits 130000.0
+--- CLIENT_PE4
+WCET 0.000305
+Power 3.1
+Code_bits 75000.0
+--- CLIENT_PE6
+WCET 0.000285
+Power 0.4
+Code_bits 130000.0
+--- CLIENT_PE3
+WCET 0.000335
+Power 2.8
+Code_bits 75000.0
+--- CLIENT_PE2
+WCET 0.000425
+Power 2.0
+Code_bits 75000.0
+--- CLIENT_PE14
+WCET 0.0042
+Power 0.5
+Code_bits 69000.0
+--- CLIENT_PE7
+WCET 0.0038
+Power 1.2
+Code_bits 51000.0
+Task 4  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  3
+Arc 1 is a1_01 between :
+src ---> iir
+Arc 2 is a1_12 between :
+iir ---> idct
+Arc 3 is a1_23 between :
+idct ---> sink
+Graph name is  TASK_GRAPH 2 
+Number of tasks in Graph is 9
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is fft
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.07
+Power 0.32
+Code_bits 71000.0
+--- CLIENT_PE13
+WCET 0.00165
+Power 0.2
+Code_bits 190000.0
+--- CLIENT_PE4
+WCET 0.005
+Power 3.1
+Code_bits 71000.0
+--- CLIENT_PE6
+WCET 0.00405
+Power 0.4
+Code_bits 180000.0
+--- CLIENT_PE3
+WCET 0.0055
+Power 2.8
+Code_bits 71000.0
+--- CLIENT_PE2
+WCET 0.008
+Power 2.0
+Code_bits 71000.0
+--- CLIENT_PE14
+WCET 0.09
+Power 0.5
+Code_bits 40000.0
+--- CLIENT_PE7
+WCET 0.042
+Power 1.2
+Code_bits 31000.0
+Task 3  is matrix
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.0335
+Power 0.32
+Code_bits 93000.0
+--- CLIENT_PE13
+WCET 0.0008
+Power 0.2
+Code_bits 280000.0
+--- CLIENT_PE4
+WCET 0.0029
+Power 3.1
+Code_bits 93000.0
+--- CLIENT_PE6
+WCET 0.00155
+Power 0.4
+Code_bits 270000.0
+--- CLIENT_PE3
+WCET 0.0032
+Power 2.8
+Code_bits 93000.0
+--- CLIENT_PE2
+WCET 0.0045
+Power 2.0
+Code_bits 93000.0
+--- CLIENT_PE14
+WCET 0.18
+Power 0.5
+Code_bits 55000.0
+--- CLIENT_PE7
+WCET 0.11
+Power 1.2
+Code_bits 44000.0
+Task 4  is ifft
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.065
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 0.0016
+Power 0.2
+Code_bits 310000.0
+--- CLIENT_PE4
+WCET 0.00465
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 0.0035
+Power 0.4
+Code_bits 310000.0
+--- CLIENT_PE3
+WCET 0.005
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 0.0075
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.08
+Power 0.5
+Code_bits 38000.0
+--- CLIENT_PE7
+WCET 0.0375
+Power 1.2
+Code_bits 29000.0
+Task 5  is fir
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.000345
+Power 0.32
+Code_bits 17000.0
+--- CLIENT_PE13
+WCET 8.5e-06
+Power 0.2
+Code_bits 53000.0
+--- CLIENT_PE4
+WCET 3.5e-05
+Power 3.1
+Code_bits 17000.0
+--- CLIENT_PE6
+WCET 2.05e-05
+Power 0.4
+Code_bits 53000.0
+--- CLIENT_PE3
+WCET 3.85e-05
+Power 2.8
+Code_bits 17000.0
+--- CLIENT_PE2
+WCET 4.85e-05
+Power 2.0
+Code_bits 17000.0
+--- CLIENT_PE14
+WCET 0.00019
+Power 0.5
+Code_bits 13000.0
+--- CLIENT_PE7
+WCET 0.00024
+Power 1.2
+Code_bits 14000.0
+Task 6  is angle
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 4.5e-05
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 2.65e-06
+Power 0.2
+Code_bits 42000.0
+--- CLIENT_PE4
+WCET 5.5e-06
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 4.6e-06
+Power 0.4
+Code_bits 39000.0
+--- CLIENT_PE3
+WCET 6e-06
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 7.5e-06
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.00014
+Power 0.5
+Code_bits 18000.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 23000.0
+Task 7  is road
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 1.6e-05
+Power 0.32
+Code_bits 6900.0
+--- CLIENT_PE13
+WCET 7e-07
+Power 0.2
+Code_bits 26000.0
+--- CLIENT_PE4
+WCET 1.65e-06
+Power 3.1
+Code_bits 6900.0
+--- CLIENT_PE6
+WCET 1.65e-06
+Power 0.4
+Code_bits 25000.0
+--- CLIENT_PE3
+WCET 1.8e-06
+Power 2.8
+Code_bits 6900.0
+--- CLIENT_PE2
+WCET 2.5e-06
+Power 2.0
+Code_bits 6900.0
+--- CLIENT_PE14
+WCET 1.55e-05
+Power 0.5
+Code_bits 6600.0
+--- CLIENT_PE7
+WCET 1.35e-05
+Power 1.2
+Code_bits 7600.0
+Task 8  is table
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00015
+Power 0.32
+Code_bits 60000.0
+--- CLIENT_PE13
+WCET 9.5e-06
+Power 0.2
+Code_bits 120000.0
+--- CLIENT_PE4
+WCET 1.3e-05
+Power 3.1
+Code_bits 60000.0
+--- CLIENT_PE6
+WCET 1.45e-05
+Power 0.4
+Code_bits 120000.0
+--- CLIENT_PE3
+WCET 1.4e-05
+Power 2.8
+Code_bits 60000.0
+--- CLIENT_PE2
+WCET 1.8e-05
+Power 2.0
+Code_bits 60000.0
+--- CLIENT_PE14
+WCET 0.00065
+Power 0.5
+Code_bits 39000.0
+--- CLIENT_PE7
+WCET 0.00024
+Power 1.2
+Code_bits 20000.0
+Task 9  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  9
+Arc 1 is a2_01 between :
+src ---> fir
+Arc 2 is a2_12 between :
+fir ---> angle
+Arc 3 is a2_23 between :
+src ---> fft
+Arc 4 is a2_34 between :
+fft ---> matrix
+Arc 5 is a2_45 between :
+matrix ---> ifft
+Arc 6 is a2_56 between :
+ifft ---> angle
+Arc 7 is a2_67 between :
+angle ---> road
+Arc 8 is a2_78 between :
+road ---> table
+Arc 9 is a2_89 between :
+table ---> sink
+Graph name is  TASK_GRAPH 3 
+Number of tasks in Graph is 5
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is ptr
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00165
+Power 0.32
+Code_bits 9600.0
+--- CLIENT_PE13
+WCET 8e-05
+Power 0.2
+Code_bits 61000.0
+--- CLIENT_PE4
+WCET 0.000175
+Power 3.1
+Code_bits 9600.0
+--- CLIENT_PE6
+WCET 0.000185
+Power 0.4
+Code_bits 58000.0
+--- CLIENT_PE3
+WCET 0.000195
+Power 2.8
+Code_bits 9600.0
+--- CLIENT_PE2
+WCET 0.000245
+Power 2.0
+Code_bits 9600.0
+--- CLIENT_PE14
+WCET 0.00245
+Power 0.5
+Code_bits 11000.0
+--- CLIENT_PE7
+WCET 0.002
+Power 1.2
+Code_bits 9000.0
+Task 3  is cache
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 1.75e-05
+Power 0.32
+Code_bits 20000.0
+--- CLIENT_PE13
+WCET 7.5e-07
+Power 0.2
+Code_bits 40000.0
+--- CLIENT_PE4
+WCET 1.55e-06
+Power 3.1
+Code_bits 20000.0
+--- CLIENT_PE6
+WCET 1.2e-06
+Power 0.4
+Code_bits 29000.0
+--- CLIENT_PE3
+WCET 1.7e-06
+Power 2.8
+Code_bits 20000.0
+--- CLIENT_PE2
+WCET 2.4e-06
+Power 2.0
+Code_bits 20000.0
+--- CLIENT_PE14
+WCET 1.9e-05
+Power 0.5
+Code_bits 21000.0
+--- CLIENT_PE7
+WCET 1.35e-05
+Power 1.2
+Code_bits 17000.0
+Task 4  is tooth
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00037
+Power 0.32
+Code_bits 41000.0
+--- CLIENT_PE13
+WCET 1.7e-05
+Power 0.2
+Code_bits 430000.0
+--- CLIENT_PE4
+WCET 3e-05
+Power 3.1
+Code_bits 41000.0
+--- CLIENT_PE6
+WCET 3.85e-05
+Power 0.4
+Code_bits 440000.0
+--- CLIENT_PE3
+WCET 3.35e-05
+Power 2.8
+Code_bits 41000.0
+--- CLIENT_PE2
+WCET 4.25e-05
+Power 2.0
+Code_bits 41000.0
+--- CLIENT_PE14
+WCET 0.00042
+Power 0.5
+Code_bits 36000.0
+--- CLIENT_PE7
+WCET 0.000265
+Power 1.2
+Code_bits 35000.0
+Task 5  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  4
+Arc 1 is a3_01 between :
+src ---> ptr
+Arc 2 is a3_12 between :
+ptr ---> cache
+Arc 3 is a3_23 between :
+cache ---> tooth
+Arc 4 is a3_34 between :
+tooth ---> sink
+Graph name is  TASK_GRAPH 0 
+Number of tasks in Graph is 6
+Task 1  is src
+List of PEs it can be scheduled on is:
+graph.tasks[task].pe_list
+Task 2  is can1
+List of PEs it can be scheduled on is:
+graph.tasks[task].pe_list
+Task 3  is fp
+List of PEs it can be scheduled on is:
+graph.tasks[task].pe_list
+Task 4  is can2
+List of PEs it can be scheduled on is:
+graph.tasks[task].pe_list
+Task 5  is pulse
+List of PEs it can be scheduled on is:
+graph.tasks[task].pe_list
+Task 6  is sink
+List of PEs it can be scheduled on is:
+graph.tasks[task].pe_list
+Number of Messsages in Graph is  5
+Arc 1 is a0_01 between :
+src ---> can1
+Arc 2 is a0_12 between :
+can1 ---> fp
+Arc 3 is a0_13 between :
+fp ---> can2
+Arc 4 is a0_24 between :
+can2 ---> pulse
+Arc 5 is a0_35 between :
+pulse ---> sink
+The current value is  C_can1_src True
+The list of implications is:
+Implication is src_slave False
+Implication is can1_master False
+Implication is can1_slave True
+____NEXT LEVEL___
+The current value is  map_can1_CLIENT_PE4 False
+The list of implications is:
+Implication is map_can1_CLIENT_PE0 False
+Implication is map_can1_CLIENT_PE13 False
+Implication is map_can1_CLIENT_PE6 False
+Implication is map_can1_CLIENT_PE3 False
+Implication is map_can1_CLIENT_PE2 False
+Implication is map_can1_CLIENT_PE14 False
+Implication is map_can1_CLIENT_PE7 False
+____NEXT LEVEL___
+The current value is  C_pulse_can1 True
+The list of implications is:
+Implication is C_src_can1 False
+Implication is C_fp_can1 False
+Implication is C_can2_can1 False
+Implication is C_sink_can1 False
+Implication is pulse_master False
+Implication is pulse_slave True
+Implication is C_pulse_src False
+Implication is C_pulse_fp False
+Implication is C_pulse_can2 False
+Swap decision variable for C_pulse_can1
+The list of implications is:
+Implication is C_src_can1 False
+Implication is C_fp_can1 False
+Implication is C_can2_can1 False
+Implication is C_sink_can1 False
+____NEXT LEVEL___
+The current value is  map_can2_CLIENT_PE3 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_sink_CLIENT_PE9 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_can2_CLIENT_PE4 True
+The list of implications is:
+Implication is can2_master True
+Implication is map_can2_CLIENT_PE0 False
+Implication is map_can2_CLIENT_PE13 False
+Implication is map_can2_CLIENT_PE6 False
+Implication is map_can2_CLIENT_PE2 False
+Implication is map_can2_CLIENT_PE14 False
+Implication is map_can2_CLIENT_PE7 False
+____NEXT LEVEL___
+The current value is  map_src_CLIENT_PE11 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  pulse_master True
+The list of implications is:
+Implication is pulse_slave False
+Implication is C_pulse_src False
+Implication is C_pulse_fp False
+Implication is C_pulse_can2 False
+____NEXT LEVEL___
+The current value is  C_can1_can2 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_sink_CLIENT_PE6 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_sink_CLIENT_PE16 True
+The list of implications is:
+Implication is sink_master True
+Implication is map_sink_CLIENT_PE1 False
+Implication is map_sink_CLIENT_PE15 False
+Implication is map_sink_CLIENT_PE0 False
+Implication is map_sink_CLIENT_PE13 False
+Implication is map_sink_CLIENT_PE12 False
+Implication is map_sink_CLIENT_PE10 False
+Implication is map_sink_CLIENT_PE4 False
+Implication is map_sink_CLIENT_PE5 False
+Implication is map_sink_CLIENT_PE8 False
+Implication is map_sink_CLIENT_PE3 False
+Implication is map_sink_CLIENT_PE11 False
+Implication is map_sink_CLIENT_PE2 False
+Implication is map_sink_CLIENT_PE14 False
+Implication is map_sink_CLIENT_PE7 False
+____NEXT LEVEL___
+The current value is  C_fp_pulse True
+The list of implications is:
+Implication is C_src_pulse False
+Implication is C_can1_pulse False
+Implication is C_can2_pulse False
+Implication is C_sink_pulse False
+____NEXT LEVEL___
+The current value is  C_can1_fp True
+The list of implications is:
+Implication is fp_slave False
+____NEXT LEVEL___
+The current value is  map_pulse_CLIENT_PE7 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_pulse_CLIENT_PE6 True
+The list of implications is:
+Implication is map_pulse_CLIENT_PE0 False
+Implication is map_pulse_CLIENT_PE13 False
+Implication is map_pulse_CLIENT_PE4 False
+Implication is map_pulse_CLIENT_PE3 False
+Implication is map_pulse_CLIENT_PE2 False
+Implication is map_pulse_CLIENT_PE14 False
+____NEXT LEVEL___
+The current value is  C_can2_src False
+The list of implications is:
+Implication is C_can2_fp False
+____NEXT LEVEL___
+The current value is  map_src_CLIENT_PE0 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_src_CLIENT_PE16 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_src_CLIENT_PE7 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_fp_CLIENT_PE13 False
+The list of implications is:
+____NEXT LEVEL___
+The current value is  fp_master False
+The list of implications is:
+Implication is map_fp_CLIENT_PE0 False
+Implication is map_fp_CLIENT_PE4 False
+Implication is map_fp_CLIENT_PE6 False
+Implication is map_fp_CLIENT_PE3 False
+Implication is map_fp_CLIENT_PE2 False
+Implication is map_fp_CLIENT_PE14 False
+Implication is map_fp_CLIENT_PE7 False
+Swap decision variable for fp_master
+The list of implications is:
+Implication is C_fp_src False
+____NEXT LEVEL___
+The current value is  map_src_CLIENT_PE1 True
+The list of implications is:
+Implication is src_master True
+Implication is map_src_CLIENT_PE9 False
+Implication is map_src_CLIENT_PE15 False
+Implication is map_src_CLIENT_PE13 False
+Implication is map_src_CLIENT_PE12 False
+Implication is map_src_CLIENT_PE10 False
+Implication is map_src_CLIENT_PE4 False
+Implication is map_src_CLIENT_PE5 False
+Implication is map_src_CLIENT_PE6 False
+Implication is map_src_CLIENT_PE8 False
+Implication is map_src_CLIENT_PE3 False
+Implication is map_src_CLIENT_PE2 False
+Implication is map_src_CLIENT_PE14 False
+Swap decision variable for map_src_CLIENT_PE1
+The list of implications is:
+____NEXT LEVEL___
+The current value is  map_src_CLIENT_PE6 True
+The list of implications is:
+Implication is src_master True
+Implication is map_src_CLIENT_PE9 False
+Implication is map_src_CLIENT_PE15 False
+Implication is map_src_CLIENT_PE13 False
+Implication is map_src_CLIENT_PE12 False
+Implication is map_src_CLIENT_PE10 False
+Implication is map_src_CLIENT_PE4 False
+Implication is map_src_CLIENT_PE5 False
+Implication is map_src_CLIENT_PE8 False
+Implication is map_src_CLIENT_PE3 False
+Implication is map_src_CLIENT_PE2 False
+Implication is map_src_CLIENT_PE14 False
+____NEXT LEVEL___
+The current value is  C_can2_sink True
+The list of implications is:
+Implication is C_src_sink False
+Implication is C_can1_sink False
+Implication is C_fp_sink False
+Implication is C_pulse_sink False
+Swap decision variable for C_can2_sink
+The list of implications is:
+Implication is C_src_sink False
+Implication is C_can1_sink False
+Implication is C_fp_sink False
+Implication is C_pulse_sink False
+____NEXT LEVEL___
+The current value is  C_sink_fp True
+The list of implications is:
+Implication is C_sink_src False
+Implication is C_sink_can2 False
+Implication is sink_slave True
+Swap decision variable for C_sink_fp
+The list of implications is:
+Implication is C_sink_src False
+Implication is C_sink_can2 False
+____NEXT LEVEL___
+The current value is  map_fp_CLIENT_PE6 True
+The list of implications is:
+Implication is map_fp_CLIENT_PE0 False
+Implication is map_fp_CLIENT_PE4 False
+Implication is map_fp_CLIENT_PE3 False
+Implication is map_fp_CLIENT_PE2 False
+Implication is map_fp_CLIENT_PE14 False
+Implication is map_fp_CLIENT_PE7 False
+____NEXT LEVEL___
+The current value is  sink_slave True
+The list of implications is:
+Swap decision variable for sink_slave
+The list of implications is:
+____NEXT LEVEL___
+The current value is  C_src_fp True
+The list of implications is:
+____NEXT LEVEL___
+The current value is  can2_slave True
+The list of implications is:
+Implication is C_src_can2 False
+Implication is C_fp_can2 False
+Swap decision variable for can2_slave
+The list of implications is:
+____NEXT LEVEL___
+The current value is  C_fp_can2 True
+The list of implications is:
+____NEXT LEVEL___
+The current value is  C_src_can2 False
+The list of implications is:
+____NEXT LEVEL___
+dpll solver works
+Graph name is  TASK_GRAPH 0 
+Number of tasks in Graph is 6
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is can1
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 4.5e-05
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 2.65e-06
+Power 0.2
+Code_bits 42000.0
+--- CLIENT_PE4
+WCET 5.5e-06
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 4.6e-06
+Power 0.4
+Code_bits 39000.0
+--- CLIENT_PE3
+WCET 6e-06
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 7.5e-06
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.00014
+Power 0.5
+Code_bits 18000.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 23000.0
+Task 3  is fp
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.000115
+Power 0.32
+Code_bits 58000.0
+--- CLIENT_PE13
+WCET 4.45e-06
+Power 0.2
+Code_bits 140000.0
+--- CLIENT_PE4
+WCET 1.05e-05
+Power 3.1
+Code_bits 58000.0
+--- CLIENT_PE6
+WCET 9e-06
+Power 0.4
+Code_bits 140000.0
+--- CLIENT_PE3
+WCET 1.15e-05
+Power 2.8
+Code_bits 58000.0
+--- CLIENT_PE2
+WCET 1.45e-05
+Power 2.0
+Code_bits 58000.0
+--- CLIENT_PE14
+WCET 0.0008
+Power 0.5
+Code_bits 15000.0
+--- CLIENT_PE7
+WCET 0.00065
+Power 1.2
+Code_bits 16000.0
+Task 4  is can2
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 4.5e-05
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 2.65e-06
+Power 0.2
+Code_bits 42000.0
+--- CLIENT_PE4
+WCET 5.5e-06
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 4.6e-06
+Power 0.4
+Code_bits 39000.0
+--- CLIENT_PE3
+WCET 6e-06
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 7.5e-06
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.00014
+Power 0.5
+Code_bits 18000.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 23000.0
+Task 5  is pulse
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 2.25e-05
+Power 0.32
+Code_bits 14000.0
+--- CLIENT_PE13
+WCET 1.05e-06
+Power 0.2
+Code_bits 96000.0
+--- CLIENT_PE4
+WCET 2.2e-06
+Power 3.1
+Code_bits 14000.0
+--- CLIENT_PE6
+WCET 1.6e-06
+Power 0.4
+Code_bits 97000.0
+--- CLIENT_PE3
+WCET 2.4e-06
+Power 2.8
+Code_bits 14000.0
+--- CLIENT_PE2
+WCET 3.35e-06
+Power 2.0
+Code_bits 14000.0
+--- CLIENT_PE14
+WCET 1.95e-05
+Power 0.5
+Code_bits 13000.0
+--- CLIENT_PE7
+WCET 1.75e-05
+Power 1.2
+Code_bits 13000.0
+Task 6  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  5
+Arc 1 is a0_01 between :
+src ---> can1
+Arc 2 is a0_12 between :
+can1 ---> fp
+Arc 3 is a0_13 between :
+fp ---> can2
+Arc 4 is a0_24 between :
+can2 ---> pulse
+Arc 5 is a0_35 between :
+pulse ---> sink
+Graph name is  TASK_GRAPH 1 
+Number of tasks in Graph is 4
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is iir
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.0004
+Power 0.32
+Code_bits 87000.0
+--- CLIENT_PE13
+WCET 7.5e-06
+Power 0.2
+Code_bits 70000.0
+--- CLIENT_PE4
+WCET 4.2e-05
+Power 3.1
+Code_bits 87000.0
+--- CLIENT_PE6
+WCET 4.25e-05
+Power 0.4
+Code_bits 70000.0
+--- CLIENT_PE3
+WCET 4.6e-05
+Power 2.8
+Code_bits 87000.0
+--- CLIENT_PE2
+WCET 6e-05
+Power 2.0
+Code_bits 87000.0
+--- CLIENT_PE14
+WCET 0.000415
+Power 0.5
+Code_bits 26000.0
+--- CLIENT_PE7
+WCET 0.00025
+Power 1.2
+Code_bits 37000.0
+Task 3  is idct
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00455
+Power 0.32
+Code_bits 75000.0
+--- CLIENT_PE13
+WCET 0.00013
+Power 0.2
+Code_bits 130000.0
+--- CLIENT_PE4
+WCET 0.000305
+Power 3.1
+Code_bits 75000.0
+--- CLIENT_PE6
+WCET 0.000285
+Power 0.4
+Code_bits 130000.0
+--- CLIENT_PE3
+WCET 0.000335
+Power 2.8
+Code_bits 75000.0
+--- CLIENT_PE2
+WCET 0.000425
+Power 2.0
+Code_bits 75000.0
+--- CLIENT_PE14
+WCET 0.0042
+Power 0.5
+Code_bits 69000.0
+--- CLIENT_PE7
+WCET 0.0038
+Power 1.2
+Code_bits 51000.0
+Task 4  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  3
+Arc 1 is a1_01 between :
+src ---> iir
+Arc 2 is a1_12 between :
+iir ---> idct
+Arc 3 is a1_23 between :
+idct ---> sink
+Graph name is  TASK_GRAPH 2 
+Number of tasks in Graph is 9
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is fft
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.07
+Power 0.32
+Code_bits 71000.0
+--- CLIENT_PE13
+WCET 0.00165
+Power 0.2
+Code_bits 190000.0
+--- CLIENT_PE4
+WCET 0.005
+Power 3.1
+Code_bits 71000.0
+--- CLIENT_PE6
+WCET 0.00405
+Power 0.4
+Code_bits 180000.0
+--- CLIENT_PE3
+WCET 0.0055
+Power 2.8
+Code_bits 71000.0
+--- CLIENT_PE2
+WCET 0.008
+Power 2.0
+Code_bits 71000.0
+--- CLIENT_PE14
+WCET 0.09
+Power 0.5
+Code_bits 40000.0
+--- CLIENT_PE7
+WCET 0.042
+Power 1.2
+Code_bits 31000.0
+Task 3  is matrix
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.0335
+Power 0.32
+Code_bits 93000.0
+--- CLIENT_PE13
+WCET 0.0008
+Power 0.2
+Code_bits 280000.0
+--- CLIENT_PE4
+WCET 0.0029
+Power 3.1
+Code_bits 93000.0
+--- CLIENT_PE6
+WCET 0.00155
+Power 0.4
+Code_bits 270000.0
+--- CLIENT_PE3
+WCET 0.0032
+Power 2.8
+Code_bits 93000.0
+--- CLIENT_PE2
+WCET 0.0045
+Power 2.0
+Code_bits 93000.0
+--- CLIENT_PE14
+WCET 0.18
+Power 0.5
+Code_bits 55000.0
+--- CLIENT_PE7
+WCET 0.11
+Power 1.2
+Code_bits 44000.0
+Task 4  is ifft
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.065
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 0.0016
+Power 0.2
+Code_bits 310000.0
+--- CLIENT_PE4
+WCET 0.00465
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 0.0035
+Power 0.4
+Code_bits 310000.0
+--- CLIENT_PE3
+WCET 0.005
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 0.0075
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.08
+Power 0.5
+Code_bits 38000.0
+--- CLIENT_PE7
+WCET 0.0375
+Power 1.2
+Code_bits 29000.0
+Task 5  is fir
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.000345
+Power 0.32
+Code_bits 17000.0
+--- CLIENT_PE13
+WCET 8.5e-06
+Power 0.2
+Code_bits 53000.0
+--- CLIENT_PE4
+WCET 3.5e-05
+Power 3.1
+Code_bits 17000.0
+--- CLIENT_PE6
+WCET 2.05e-05
+Power 0.4
+Code_bits 53000.0
+--- CLIENT_PE3
+WCET 3.85e-05
+Power 2.8
+Code_bits 17000.0
+--- CLIENT_PE2
+WCET 4.85e-05
+Power 2.0
+Code_bits 17000.0
+--- CLIENT_PE14
+WCET 0.00019
+Power 0.5
+Code_bits 13000.0
+--- CLIENT_PE7
+WCET 0.00024
+Power 1.2
+Code_bits 14000.0
+Task 6  is angle
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 4.5e-05
+Power 0.32
+Code_bits 69000.0
+--- CLIENT_PE13
+WCET 2.65e-06
+Power 0.2
+Code_bits 42000.0
+--- CLIENT_PE4
+WCET 5.5e-06
+Power 3.1
+Code_bits 69000.0
+--- CLIENT_PE6
+WCET 4.6e-06
+Power 0.4
+Code_bits 39000.0
+--- CLIENT_PE3
+WCET 6e-06
+Power 2.8
+Code_bits 69000.0
+--- CLIENT_PE2
+WCET 7.5e-06
+Power 2.0
+Code_bits 69000.0
+--- CLIENT_PE14
+WCET 0.00014
+Power 0.5
+Code_bits 18000.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 23000.0
+Task 7  is road
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 1.6e-05
+Power 0.32
+Code_bits 6900.0
+--- CLIENT_PE13
+WCET 7e-07
+Power 0.2
+Code_bits 26000.0
+--- CLIENT_PE4
+WCET 1.65e-06
+Power 3.1
+Code_bits 6900.0
+--- CLIENT_PE6
+WCET 1.65e-06
+Power 0.4
+Code_bits 25000.0
+--- CLIENT_PE3
+WCET 1.8e-06
+Power 2.8
+Code_bits 6900.0
+--- CLIENT_PE2
+WCET 2.5e-06
+Power 2.0
+Code_bits 6900.0
+--- CLIENT_PE14
+WCET 1.55e-05
+Power 0.5
+Code_bits 6600.0
+--- CLIENT_PE7
+WCET 1.35e-05
+Power 1.2
+Code_bits 7600.0
+Task 8  is table
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00015
+Power 0.32
+Code_bits 60000.0
+--- CLIENT_PE13
+WCET 9.5e-06
+Power 0.2
+Code_bits 120000.0
+--- CLIENT_PE4
+WCET 1.3e-05
+Power 3.1
+Code_bits 60000.0
+--- CLIENT_PE6
+WCET 1.45e-05
+Power 0.4
+Code_bits 120000.0
+--- CLIENT_PE3
+WCET 1.4e-05
+Power 2.8
+Code_bits 60000.0
+--- CLIENT_PE2
+WCET 1.8e-05
+Power 2.0
+Code_bits 60000.0
+--- CLIENT_PE14
+WCET 0.00065
+Power 0.5
+Code_bits 39000.0
+--- CLIENT_PE7
+WCET 0.00024
+Power 1.2
+Code_bits 20000.0
+Task 9  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  9
+Arc 1 is a2_01 between :
+src ---> fir
+Arc 2 is a2_12 between :
+fir ---> angle
+Arc 3 is a2_23 between :
+src ---> fft
+Arc 4 is a2_34 between :
+fft ---> matrix
+Arc 5 is a2_45 between :
+matrix ---> ifft
+Arc 6 is a2_56 between :
+ifft ---> angle
+Arc 7 is a2_67 between :
+angle ---> road
+Arc 8 is a2_78 between :
+road ---> table
+Arc 9 is a2_89 between :
+table ---> sink
+Graph name is  TASK_GRAPH 3 
+Number of tasks in Graph is 5
+Task 1  is src
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Task 2  is ptr
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00165
+Power 0.32
+Code_bits 9600.0
+--- CLIENT_PE13
+WCET 8e-05
+Power 0.2
+Code_bits 61000.0
+--- CLIENT_PE4
+WCET 0.000175
+Power 3.1
+Code_bits 9600.0
+--- CLIENT_PE6
+WCET 0.000185
+Power 0.4
+Code_bits 58000.0
+--- CLIENT_PE3
+WCET 0.000195
+Power 2.8
+Code_bits 9600.0
+--- CLIENT_PE2
+WCET 0.000245
+Power 2.0
+Code_bits 9600.0
+--- CLIENT_PE14
+WCET 0.00245
+Power 0.5
+Code_bits 11000.0
+--- CLIENT_PE7
+WCET 0.002
+Power 1.2
+Code_bits 9000.0
+Task 3  is cache
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 1.75e-05
+Power 0.32
+Code_bits 20000.0
+--- CLIENT_PE13
+WCET 7.5e-07
+Power 0.2
+Code_bits 40000.0
+--- CLIENT_PE4
+WCET 1.55e-06
+Power 3.1
+Code_bits 20000.0
+--- CLIENT_PE6
+WCET 1.2e-06
+Power 0.4
+Code_bits 29000.0
+--- CLIENT_PE3
+WCET 1.7e-06
+Power 2.8
+Code_bits 20000.0
+--- CLIENT_PE2
+WCET 2.4e-06
+Power 2.0
+Code_bits 20000.0
+--- CLIENT_PE14
+WCET 1.9e-05
+Power 0.5
+Code_bits 21000.0
+--- CLIENT_PE7
+WCET 1.35e-05
+Power 1.2
+Code_bits 17000.0
+Task 4  is tooth
+List of PEs it can be scheduled on is:
+--- CLIENT_PE0
+WCET 0.00037
+Power 0.32
+Code_bits 41000.0
+--- CLIENT_PE13
+WCET 1.7e-05
+Power 0.2
+Code_bits 430000.0
+--- CLIENT_PE4
+WCET 3e-05
+Power 3.1
+Code_bits 41000.0
+--- CLIENT_PE6
+WCET 3.85e-05
+Power 0.4
+Code_bits 440000.0
+--- CLIENT_PE3
+WCET 3.35e-05
+Power 2.8
+Code_bits 41000.0
+--- CLIENT_PE2
+WCET 4.25e-05
+Power 2.0
+Code_bits 41000.0
+--- CLIENT_PE14
+WCET 0.00042
+Power 0.5
+Code_bits 36000.0
+--- CLIENT_PE7
+WCET 0.000265
+Power 1.2
+Code_bits 35000.0
+Task 5  is sink
+List of PEs it can be scheduled on is:
+--- CLIENT_PE9
+WCET 5e-05
+Power 0.12
+Code_bits 80.0
+--- CLIENT_PE1
+WCET 5e-05
+Power 2.3
+Code_bits 80.0
+--- CLIENT_PE15
+WCET 5e-05
+Power 0.015
+Code_bits 80.0
+--- CLIENT_PE0
+WCET 5e-05
+Power 0.32
+Code_bits 80.0
+--- CLIENT_PE13
+WCET 5e-05
+Power 0.2
+Code_bits 80.0
+--- CLIENT_PE12
+WCET 5e-05
+Power 0.033
+Code_bits 80.0
+--- CLIENT_PE10
+WCET 5e-05
+Power 0.34
+Code_bits 80.0
+--- CLIENT_PE4
+WCET 5e-05
+Power 3.1
+Code_bits 80.0
+--- CLIENT_PE5
+WCET 5e-05
+Power 0.18
+Code_bits 80.0
+--- CLIENT_PE6
+WCET 5e-05
+Power 0.4
+Code_bits 80.0
+--- CLIENT_PE8
+WCET 5e-05
+Power 0.24
+Code_bits 80.0
+--- CLIENT_PE3
+WCET 5e-05
+Power 2.8
+Code_bits 80.0
+--- CLIENT_PE11
+WCET 5e-05
+Power 0.15
+Code_bits 80.0
+--- CLIENT_PE2
+WCET 5e-05
+Power 2.0
+Code_bits 80.0
+--- CLIENT_PE14
+WCET 5e-05
+Power 0.5
+Code_bits 80.0
+--- CLIENT_PE7
+WCET 5e-05
+Power 1.2
+Code_bits 80.0
+--- CLIENT_PE16
+WCET 5e-05
+Power 0.31
+Code_bits 80.0
+Number of Messsages in Graph is  4
+Arc 1 is a3_01 between :
+src ---> ptr
+Arc 2 is a3_12 between :
+ptr ---> cache
+Arc 3 is a3_23 between :
+cache ---> tooth
+Arc 4 is a3_34 between :
+tooth ---> sink

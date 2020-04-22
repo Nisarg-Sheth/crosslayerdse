@@ -49,7 +49,7 @@ Then we will initialize the population for the given application graph and then 
 
 Currently the dpll solver is broken and hence the code will run into an error or hang or give output after a really long time for each evaluation
 
-###Additional details about the MOEA approach
+### Additional details about the MOEA approach
 
 The mutate and mate function are written specifically for dpll solvers using a decision strategy OrderedDict called `decision_strat`.
 The `make_individual` function is used to generate a individual or a constraint graph.

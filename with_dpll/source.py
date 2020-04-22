@@ -23,8 +23,7 @@ class Complete_Scenario:
 class PB_data:
     def __init__(self):
         self.constraints = []
-        self.decision_strat = OrderedDict()
-        
+        self.decision_strat = OrderedDict()    
         self.assignment = None
 
 class Constraint_graph:

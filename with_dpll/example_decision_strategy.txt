@@ -1,0 +1,1374 @@
+
+
+
+THE DECISION STRATEGY IS AS FOLLOWS
+
+ ------ Variable C_can1_src
+Decision Value 0.999549608683551
+Decision Priority True
+ ------ Variable map_can1_CLIENT_PE4
+Decision Value 0.9864450165657144
+Decision Priority False
+ ------ Variable C_pulse_can1
+Decision Value 0.9841263726670819
+Decision Priority True
+ ------ Variable map_can2_CLIENT_PE3
+Decision Value 0.9795964132000818
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE9
+Decision Value 0.977336828334449
+Decision Priority False
+ ------ Variable map_can2_CLIENT_PE4
+Decision Value 0.9745819954358579
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE11
+Decision Value 0.9703329147617604
+Decision Priority False
+ ------ Variable pulse_master
+Decision Value 0.9646734743732154
+Decision Priority True
+ ------ Variable C_can1_can2
+Decision Value 0.9557060361887754
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE6
+Decision Value 0.9395971486565249
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE16
+Decision Value 0.9310568348455902
+Decision Priority True
+ ------ Variable C_fp_pulse
+Decision Value 0.926265074222795
+Decision Priority True
+ ------ Variable C_can1_pulse
+Decision Value 0.9130288388461691
+Decision Priority True
+ ------ Variable C_can1_fp
+Decision Value 0.9038902874492282
+Decision Priority True
+ ------ Variable can1_master
+Decision Value 0.8961861577552216
+Decision Priority True
+ ------ Variable map_pulse_CLIENT_PE7
+Decision Value 0.875351336984662
+Decision Priority False
+ ------ Variable map_pulse_CLIENT_PE6
+Decision Value 0.8619837958765172
+Decision Priority True
+ ------ Variable sink_master
+Decision Value 0.8606368681694035
+Decision Priority False
+ ------ Variable C_can2_src
+Decision Value 0.8510878552552936
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE2
+Decision Value 0.8492448038983798
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE0
+Decision Value 0.8162905899834955
+Decision Priority False
+ ------ Variable map_can1_CLIENT_PE3
+Decision Value 0.81471684937462
+Decision Priority True
+ ------ Variable map_can2_CLIENT_PE2
+Decision Value 0.7607558646110851
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE7
+Decision Value 0.7591924339872367
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE12
+Decision Value 0.7415736910134941
+Decision Priority False
+ ------ Variable map_pulse_CLIENT_PE13
+Decision Value 0.7286043119279533
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE16
+Decision Value 0.723281390755332
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE7
+Decision Value 0.6968344476071414
+Decision Priority False
+ ------ Variable can1_slave
+Decision Value 0.6870787402268118
+Decision Priority True
+ ------ Variable map_fp_CLIENT_PE13
+Decision Value 0.6724239034291085
+Decision Priority False
+ ------ Variable map_can2_CLIENT_PE0
+Decision Value 0.6699809792108644
+Decision Priority True
+ ------ Variable fp_master
+Decision Value 0.6671019965791419
+Decision Priority False
+ ------ Variable fp_slave
+Decision Value 0.6563175738470276
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE1
+Decision Value 0.6548370156714811
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE6
+Decision Value 0.6512142941213187
+Decision Priority True
+ ------ Variable C_can2_sink
+Decision Value 0.6457020531446966
+Decision Priority True
+ ------ Variable map_can1_CLIENT_PE14
+Decision Value 0.6338011894405732
+Decision Priority False
+ ------ Variable map_can1_CLIENT_PE6
+Decision Value 0.6219821677178732
+Decision Priority True
+ ------ Variable map_can2_CLIENT_PE7
+Decision Value 0.6105054346320825
+Decision Priority True
+ ------ Variable map_can1_CLIENT_PE2
+Decision Value 0.6011497435105303
+Decision Priority False
+ ------ Variable map_pulse_CLIENT_PE2
+Decision Value 0.5932789101633837
+Decision Priority False
+ ------ Variable map_can2_CLIENT_PE13
+Decision Value 0.5874012647783537
+Decision Priority False
+ ------ Variable C_fp_can1
+Decision Value 0.582008922531137
+Decision Priority True
+ ------ Variable C_pulse_src
+Decision Value 0.5590593065731572
+Decision Priority False
+ ------ Variable map_can1_CLIENT_PE0
+Decision Value 0.5311828211794938
+Decision Priority False
+ ------ Variable C_src_pulse
+Decision Value 0.5135672366351849
+Decision Priority True
+ ------ Variable C_pulse_sink
+Decision Value 0.5045623631656885
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE2
+Decision Value 0.5039833528022711
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE15
+Decision Value 0.493596507447012
+Decision Priority True
+ ------ Variable src_master
+Decision Value 0.4844840068895996
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE14
+Decision Value 0.48227481678047035
+Decision Priority False
+ ------ Variable C_src_can1
+Decision Value 0.48054229078216915
+Decision Priority False
+ ------ Variable map_can2_CLIENT_PE6
+Decision Value 0.44778581653367167
+Decision Priority True
+ ------ Variable C_sink_fp
+Decision Value 0.44400125605452956
+Decision Priority True
+ ------ Variable map_pulse_CLIENT_PE14
+Decision Value 0.43579396881513377
+Decision Priority False
+ ------ Variable C_can2_pulse
+Decision Value 0.43083380245113145
+Decision Priority True
+ ------ Variable can2_master
+Decision Value 0.40159792360162583
+Decision Priority False
+ ------ Variable C_fp_sink
+Decision Value 0.39671453371280196
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE3
+Decision Value 0.39440841110593106
+Decision Priority False
+ ------ Variable map_fp_CLIENT_PE6
+Decision Value 0.39412284705559975
+Decision Priority True
+ ------ Variable map_fp_CLIENT_PE14
+Decision Value 0.3894585314965272
+Decision Priority True
+ ------ Variable map_fp_CLIENT_PE4
+Decision Value 0.3894404427481004
+Decision Priority True
+ ------ Variable map_fp_CLIENT_PE7
+Decision Value 0.38893061516743377
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE13
+Decision Value 0.3753889810981691
+Decision Priority True
+ ------ Variable map_can1_CLIENT_PE13
+Decision Value 0.3651073989919721
+Decision Priority True
+ ------ Variable C_can1_sink
+Decision Value 0.3635817302236132
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE4
+Decision Value 0.36202822050602834
+Decision Priority False
+ ------ Variable map_pulse_CLIENT_PE0
+Decision Value 0.3459354529868699
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE3
+Decision Value 0.33523979318650765
+Decision Priority True
+ ------ Variable C_fp_src
+Decision Value 0.33157652060704623
+Decision Priority False
+ ------ Variable sink_slave
+Decision Value 0.3102202569586694
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE9
+Decision Value 0.27185102508168313
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE10
+Decision Value 0.2681123782906183
+Decision Priority True
+ ------ Variable map_pulse_CLIENT_PE4
+Decision Value 0.2516154245186957
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE5
+Decision Value 0.2452692423009929
+Decision Priority True
+ ------ Variable C_pulse_can2
+Decision Value 0.2439054515253377
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE15
+Decision Value 0.24232618350171742
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE8
+Decision Value 0.23813134374451517
+Decision Priority False
+ ------ Variable C_sink_can2
+Decision Value 0.23236066967413938
+Decision Priority True
+ ------ Variable C_sink_pulse
+Decision Value 0.21148504568917226
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE10
+Decision Value 0.211481304492393
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE8
+Decision Value 0.20583146417502218
+Decision Priority False
+ ------ Variable C_can2_can1
+Decision Value 0.2057177984140901
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE12
+Decision Value 0.20306507451647904
+Decision Priority False
+ ------ Variable map_fp_CLIENT_PE2
+Decision Value 0.18893619790909133
+Decision Priority True
+ ------ Variable C_src_fp
+Decision Value 0.17127264540253817
+Decision Priority True
+ ------ Variable map_fp_CLIENT_PE0
+Decision Value 0.16430533980014894
+Decision Priority True
+ ------ Variable map_pulse_CLIENT_PE3
+Decision Value 0.159401495794238
+Decision Priority False
+ ------ Variable C_pulse_fp
+Decision Value 0.1557236030098489
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE13
+Decision Value 0.14377870119356617
+Decision Priority False
+ ------ Variable C_src_sink
+Decision Value 0.13648205612984743
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE4
+Decision Value 0.1353950243073767
+Decision Priority True
+ ------ Variable src_slave
+Decision Value 0.13314882788770588
+Decision Priority False
+ ------ Variable C_can2_fp
+Decision Value 0.1280605378504054
+Decision Priority True
+ ------ Variable map_can2_CLIENT_PE14
+Decision Value 0.11415909062123797
+Decision Priority True
+ ------ Variable can2_slave
+Decision Value 0.11414320259737287
+Decision Priority True
+ ------ Variable C_sink_can1
+Decision Value 0.11125367292820354
+Decision Priority False
+ ------ Variable C_fp_can2
+Decision Value 0.10556287789369789
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE5
+Decision Value 0.09726954960048839
+Decision Priority True
+ ------ Variable map_fp_CLIENT_PE3
+Decision Value 0.0859435327752226
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE0
+Decision Value 0.07130169281756571
+Decision Priority True
+ ------ Variable map_can1_CLIENT_PE7
+Decision Value 0.06746258119576198
+Decision Priority True
+ ------ Variable C_sink_src
+Decision Value 0.0641837442542591
+Decision Priority True
+ ------ Variable pulse_slave
+Decision Value 0.06298881825420244
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE14
+Decision Value 0.05977973672114534
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE11
+Decision Value 0.05067305424660473
+Decision Priority False
+ ------ Variable C_src_can2
+Decision Value 0.041131234376224346
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE1
+Decision Value 0.006410446714718576
+Decision Priority True
+
+
+
+
+
+
+
+THE DECISION STRATEGY IS AS FOLLOWS
+
+ ------ Variable C_src_sink
+Decision Value 0.9961302190603213
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE5
+Decision Value 0.9575073065723829
+Decision Priority False
+ ------ Variable C_idct_sink
+Decision Value 0.9369652888020453
+Decision Priority True
+ ------ Variable map_idct_CLIENT_PE3
+Decision Value 0.9272591029452321
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE10
+Decision Value 0.8718927439509584
+Decision Priority True
+ ------ Variable map_idct_CLIENT_PE6
+Decision Value 0.8663132258356754
+Decision Priority False
+ ------ Variable sink_slave
+Decision Value 0.7839942135729256
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE13
+Decision Value 0.7683936895885054
+Decision Priority True
+ ------ Variable sink_master
+Decision Value 0.753870793965143
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE3
+Decision Value 0.7396444356132765
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE10
+Decision Value 0.7377325802127556
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE2
+Decision Value 0.7290717393284317
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE16
+Decision Value 0.6961091498815467
+Decision Priority False
+ ------ Variable C_src_iir
+Decision Value 0.6942934022105592
+Decision Priority True
+ ------ Variable C_iir_sink
+Decision Value 0.6585409042354955
+Decision Priority True
+ ------ Variable map_iir_CLIENT_PE6
+Decision Value 0.6565500209004108
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE12
+Decision Value 0.6395523544976669
+Decision Priority False
+ ------ Variable C_sink_iir
+Decision Value 0.624202335487255
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE7
+Decision Value 0.6199869399572923
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE5
+Decision Value 0.6112360620387426
+Decision Priority True
+ ------ Variable C_src_idct
+Decision Value 0.5990833138958654
+Decision Priority True
+ ------ Variable idct_master
+Decision Value 0.5899595897300222
+Decision Priority False
+ ------ Variable map_idct_CLIENT_PE2
+Decision Value 0.5828072995816425
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE9
+Decision Value 0.569363007984429
+Decision Priority False
+ ------ Variable C_iir_src
+Decision Value 0.5549348313153595
+Decision Priority True
+ ------ Variable iir_master
+Decision Value 0.5480321881887276
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE7
+Decision Value 0.5256737821506224
+Decision Priority False
+ ------ Variable map_idct_CLIENT_PE7
+Decision Value 0.5038457387809693
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE4
+Decision Value 0.5013277179701153
+Decision Priority False
+ ------ Variable C_idct_src
+Decision Value 0.4667843562646984
+Decision Priority False
+ ------ Variable map_iir_CLIENT_PE3
+Decision Value 0.46166428745571053
+Decision Priority True
+ ------ Variable map_iir_CLIENT_PE2
+Decision Value 0.45785377857752196
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE4
+Decision Value 0.449149068887425
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE0
+Decision Value 0.44912347130550523
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE0
+Decision Value 0.42055158049278274
+Decision Priority True
+ ------ Variable C_idct_iir
+Decision Value 0.40600769841636664
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE9
+Decision Value 0.3787040065287923
+Decision Priority True
+ ------ Variable map_idct_CLIENT_PE4
+Decision Value 0.37367340604745103
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE8
+Decision Value 0.36100132272943786
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE15
+Decision Value 0.35767684821305235
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE2
+Decision Value 0.33890747730449367
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE14
+Decision Value 0.3309051392524819
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE12
+Decision Value 0.32818723600856803
+Decision Priority False
+ ------ Variable src_master
+Decision Value 0.3079965242930701
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE14
+Decision Value 0.27882713358139066
+Decision Priority True
+ ------ Variable map_idct_CLIENT_PE13
+Decision Value 0.24200843891165758
+Decision Priority True
+ ------ Variable map_iir_CLIENT_PE7
+Decision Value 0.24015874882220556
+Decision Priority True
+ ------ Variable map_iir_CLIENT_PE0
+Decision Value 0.23335206725670943
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE8
+Decision Value 0.22456939481601446
+Decision Priority True
+ ------ Variable src_slave
+Decision Value 0.2167679687676961
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE6
+Decision Value 0.20785563475823976
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE1
+Decision Value 0.20361357343843234
+Decision Priority True
+ ------ Variable C_sink_src
+Decision Value 0.1885673010449136
+Decision Priority True
+ ------ Variable C_sink_idct
+Decision Value 0.1848036101011047
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE3
+Decision Value 0.17641847114486386
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE11
+Decision Value 0.1658285892400707
+Decision Priority True
+ ------ Variable C_iir_idct
+Decision Value 0.15931453574913668
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE16
+Decision Value 0.1480263391605834
+Decision Priority False
+ ------ Variable iir_slave
+Decision Value 0.1292147879145189
+Decision Priority True
+ ------ Variable map_idct_CLIENT_PE14
+Decision Value 0.1071443459933974
+Decision Priority True
+ ------ Variable map_iir_CLIENT_PE14
+Decision Value 0.09728057324601425
+Decision Priority True
+ ------ Variable map_iir_CLIENT_PE13
+Decision Value 0.07499496967192376
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE1
+Decision Value 0.05541474077441355
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE15
+Decision Value 0.04120290336534449
+Decision Priority True
+ ------ Variable idct_slave
+Decision Value 0.031927853523305405
+Decision Priority True
+ ------ Variable map_iir_CLIENT_PE4
+Decision Value 0.026339886723898087
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE11
+Decision Value 0.024520919804960295
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE13
+Decision Value 0.021390634636890504
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE6
+Decision Value 0.01964662295477193
+Decision Priority False
+ ------ Variable map_idct_CLIENT_PE0
+Decision Value 0.017414896334744245
+Decision Priority True
+
+
+
+
+
+
+
+THE DECISION STRATEGY IS AS FOLLOWS
+
+ ------ Variable C_angle_table
+Decision Value 0.9969916904006171
+Decision Priority True
+ ------ Variable C_matrix_table
+Decision Value 0.9880108830527551
+Decision Priority True
+ ------ Variable map_ifft_CLIENT_PE0
+Decision Value 0.9754713151511837
+Decision Priority False
+ ------ Variable map_fft_CLIENT_PE2
+Decision Value 0.9696600888561566
+Decision Priority False
+ ------ Variable matrix_slave
+Decision Value 0.9620435390406837
+Decision Priority True
+ ------ Variable C_road_src
+Decision Value 0.9597814799910291
+Decision Priority False
+ ------ Variable C_angle_sink
+Decision Value 0.9581782037217708
+Decision Priority True
+ ------ Variable map_table_CLIENT_PE2
+Decision Value 0.9562825314101183
+Decision Priority True
+ ------ Variable C_src_ifft
+Decision Value 0.9526504619116377
+Decision Priority False
+ ------ Variable C_fir_road
+Decision Value 0.9474441746985479
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE10
+Decision Value 0.945061316277329
+Decision Priority True
+ ------ Variable map_angle_CLIENT_PE0
+Decision Value 0.9357638740143489
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE8
+Decision Value 0.9346559238845024
+Decision Priority False
+ ------ Variable C_fir_ifft
+Decision Value 0.9275974021715359
+Decision Priority True
+ ------ Variable map_fft_CLIENT_PE6
+Decision Value 0.9234248282110317
+Decision Priority True
+ ------ Variable map_ifft_CLIENT_PE13
+Decision Value 0.9230897398302039
+Decision Priority False
+ ------ Variable map_fir_CLIENT_PE2
+Decision Value 0.9168263085359344
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE13
+Decision Value 0.9166791445798466
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE10
+Decision Value 0.9075107171601298
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE5
+Decision Value 0.8996626312841611
+Decision Priority True
+ ------ Variable map_ifft_CLIENT_PE14
+Decision Value 0.8751436473898141
+Decision Priority False
+ ------ Variable map_table_CLIENT_PE0
+Decision Value 0.8746390287515217
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE2
+Decision Value 0.8663835420011703
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE8
+Decision Value 0.8531053600319635
+Decision Priority True
+ ------ Variable map_fir_CLIENT_PE0
+Decision Value 0.848376000975761
+Decision Priority False
+ ------ Variable C_ifft_sink
+Decision Value 0.84358797141209
+Decision Priority True
+ ------ Variable C_fir_fft
+Decision Value 0.8301008051744561
+Decision Priority True
+ ------ Variable map_table_CLIENT_PE3
+Decision Value 0.828573303983459
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE16
+Decision Value 0.8266828168741512
+Decision Priority False
+ ------ Variable C_matrix_fir
+Decision Value 0.8205802222728115
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE7
+Decision Value 0.8198828215760109
+Decision Priority False
+ ------ Variable sink_master
+Decision Value 0.8118612363478183
+Decision Priority True
+ ------ Variable C_road_fft
+Decision Value 0.8090639822664205
+Decision Priority True
+ ------ Variable ifft_slave
+Decision Value 0.7916802231310961
+Decision Priority False
+ ------ Variable C_fir_table
+Decision Value 0.7831067480958896
+Decision Priority True
+ ------ Variable C_src_sink
+Decision Value 0.7721762979381415
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE3
+Decision Value 0.77144415216693
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE13
+Decision Value 0.7694521795095344
+Decision Priority False
+ ------ Variable map_fir_CLIENT_PE13
+Decision Value 0.7608569135288367
+Decision Priority True
+ ------ Variable map_ifft_CLIENT_PE4
+Decision Value 0.7546094077707467
+Decision Priority True
+ ------ Variable C_road_matrix
+Decision Value 0.7534525142953029
+Decision Priority False
+ ------ Variable map_matrix_CLIENT_PE13
+Decision Value 0.752152394164805
+Decision Priority True
+ ------ Variable C_table_fir
+Decision Value 0.7478971565295608
+Decision Priority False
+ ------ Variable map_table_CLIENT_PE4
+Decision Value 0.7435247491297234
+Decision Priority True
+ ------ Variable fir_slave
+Decision Value 0.7424781737121718
+Decision Priority False
+ ------ Variable C_sink_table
+Decision Value 0.7358157721127385
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE0
+Decision Value 0.7347773343951388
+Decision Priority False
+ ------ Variable C_sink_fft
+Decision Value 0.7340166242220647
+Decision Priority True
+ ------ Variable C_angle_matrix
+Decision Value 0.7302502345729921
+Decision Priority False
+ ------ Variable map_matrix_CLIENT_PE6
+Decision Value 0.7295203695189276
+Decision Priority False
+ ------ Variable C_road_table
+Decision Value 0.7107816560147694
+Decision Priority True
+ ------ Variable map_angle_CLIENT_PE3
+Decision Value 0.7065163683317863
+Decision Priority True
+ ------ Variable C_ifft_src
+Decision Value 0.6956015050990638
+Decision Priority False
+ ------ Variable C_fft_ifft
+Decision Value 0.6953226628000496
+Decision Priority False
+ ------ Variable C_road_fir
+Decision Value 0.6928347090837845
+Decision Priority True
+ ------ Variable C_src_matrix
+Decision Value 0.6887650071021595
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE4
+Decision Value 0.6878970615903635
+Decision Priority False
+ ------ Variable src_master
+Decision Value 0.681378096746336
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE4
+Decision Value 0.681237650360517
+Decision Priority False
+ ------ Variable C_src_road
+Decision Value 0.6754191303967975
+Decision Priority True
+ ------ Variable C_src_fir
+Decision Value 0.6721972228356885
+Decision Priority True
+ ------ Variable C_sink_matrix
+Decision Value 0.6411758224130777
+Decision Priority False
+ ------ Variable map_matrix_CLIENT_PE2
+Decision Value 0.6352096109567944
+Decision Priority True
+ ------ Variable map_matrix_CLIENT_PE4
+Decision Value 0.6331484626550103
+Decision Priority False
+ ------ Variable C_table_ifft
+Decision Value 0.6324146552220936
+Decision Priority False
+ ------ Variable C_fir_src
+Decision Value 0.6313534270986492
+Decision Priority True
+ ------ Variable table_master
+Decision Value 0.630955368772111
+Decision Priority True
+ ------ Variable sink_slave
+Decision Value 0.6203365892988644
+Decision Priority True
+ ------ Variable map_fir_CLIENT_PE7
+Decision Value 0.6152492130339918
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE7
+Decision Value 0.6112142587673011
+Decision Priority True
+ ------ Variable C_fft_src
+Decision Value 0.6030669514060976
+Decision Priority True
+ ------ Variable map_table_CLIENT_PE13
+Decision Value 0.6024243829383203
+Decision Priority False
+ ------ Variable C_sink_fir
+Decision Value 0.5857407023061442
+Decision Priority False
+ ------ Variable map_fft_CLIENT_PE13
+Decision Value 0.574520746660761
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE1
+Decision Value 0.5717088567689085
+Decision Priority False
+ ------ Variable C_src_angle
+Decision Value 0.570993448983149
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE0
+Decision Value 0.5632556552885322
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE3
+Decision Value 0.5511265294117563
+Decision Priority False
+ ------ Variable src_slave
+Decision Value 0.5502975918229995
+Decision Priority True
+ ------ Variable C_matrix_angle
+Decision Value 0.5440401039485387
+Decision Priority True
+ ------ Variable map_matrix_CLIENT_PE7
+Decision Value 0.5364661899408912
+Decision Priority True
+ ------ Variable road_master
+Decision Value 0.5312847910414004
+Decision Priority True
+ ------ Variable map_matrix_CLIENT_PE14
+Decision Value 0.5077990440369989
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE16
+Decision Value 0.4923011162691949
+Decision Priority True
+ ------ Variable map_ifft_CLIENT_PE2
+Decision Value 0.48538558662828757
+Decision Priority False
+ ------ Variable fft_master
+Decision Value 0.4784258695047583
+Decision Priority False
+ ------ Variable C_src_table
+Decision Value 0.47492392877954137
+Decision Priority True
+ ------ Variable C_table_road
+Decision Value 0.44645177969138694
+Decision Priority False
+ ------ Variable map_angle_CLIENT_PE6
+Decision Value 0.44002970804146035
+Decision Priority False
+ ------ Variable C_angle_fir
+Decision Value 0.4383052798473399
+Decision Priority True
+ ------ Variable C_table_angle
+Decision Value 0.43779014388734727
+Decision Priority True
+ ------ Variable road_slave
+Decision Value 0.43711457770795614
+Decision Priority True
+ ------ Variable map_fft_CLIENT_PE7
+Decision Value 0.43608839963603163
+Decision Priority False
+ ------ Variable map_table_CLIENT_PE7
+Decision Value 0.43603498916710803
+Decision Priority False
+ ------ Variable C_road_ifft
+Decision Value 0.4210725808475504
+Decision Priority False
+ ------ Variable C_src_fft
+Decision Value 0.41991665049001337
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE7
+Decision Value 0.41942269141575583
+Decision Priority True
+ ------ Variable C_fir_angle
+Decision Value 0.4167495987042662
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE6
+Decision Value 0.41593882211070565
+Decision Priority True
+ ------ Variable map_fft_CLIENT_PE4
+Decision Value 0.4140596431284206
+Decision Priority True
+ ------ Variable C_road_sink
+Decision Value 0.41398903556283906
+Decision Priority True
+ ------ Variable matrix_master
+Decision Value 0.41180467337536975
+Decision Priority False
+ ------ Variable map_angle_CLIENT_PE14
+Decision Value 0.4089548064486376
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE15
+Decision Value 0.4063486434764896
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE14
+Decision Value 0.3951492756255639
+Decision Priority True
+ ------ Variable map_fir_CLIENT_PE14
+Decision Value 0.3924855843642254
+Decision Priority True
+ ------ Variable C_matrix_src
+Decision Value 0.392459320482031
+Decision Priority True
+ ------ Variable ifft_master
+Decision Value 0.386212479753527
+Decision Priority False
+ ------ Variable C_fft_angle
+Decision Value 0.385815282738144
+Decision Priority False
+ ------ Variable C_ifft_fir
+Decision Value 0.37484010923064615
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE15
+Decision Value 0.3679424132602328
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE0
+Decision Value 0.3596795904194532
+Decision Priority False
+ ------ Variable C_angle_road
+Decision Value 0.3534170778567538
+Decision Priority True
+ ------ Variable C_road_angle
+Decision Value 0.3471026088213699
+Decision Priority False
+ ------ Variable C_sink_road
+Decision Value 0.34273704300662666
+Decision Priority False
+ ------ Variable map_angle_CLIENT_PE4
+Decision Value 0.33266087613599227
+Decision Priority False
+ ------ Variable C_ifft_angle
+Decision Value 0.32781098910540263
+Decision Priority False
+ ------ Variable C_fft_road
+Decision Value 0.3271461977636837
+Decision Priority False
+ ------ Variable map_angle_CLIENT_PE2
+Decision Value 0.31652255570273424
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE12
+Decision Value 0.3128513340297234
+Decision Priority False
+ ------ Variable map_fir_CLIENT_PE4
+Decision Value 0.30890550169801456
+Decision Priority True
+ ------ Variable map_fft_CLIENT_PE3
+Decision Value 0.3071564927050895
+Decision Priority False
+ ------ Variable map_ifft_CLIENT_PE7
+Decision Value 0.30078212456232845
+Decision Priority True
+ ------ Variable C_matrix_fft
+Decision Value 0.2959534247512362
+Decision Priority True
+ ------ Variable C_sink_src
+Decision Value 0.2913465916295461
+Decision Priority True
+ ------ Variable map_fft_CLIENT_PE14
+Decision Value 0.27889883582550934
+Decision Priority False
+ ------ Variable map_matrix_CLIENT_PE3
+Decision Value 0.2734701810031889
+Decision Priority True
+ ------ Variable C_angle_ifft
+Decision Value 0.2692713461694971
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE14
+Decision Value 0.26125048616880053
+Decision Priority False
+ ------ Variable map_table_CLIENT_PE6
+Decision Value 0.24187014732763268
+Decision Priority False
+ ------ Variable C_table_matrix
+Decision Value 0.2296203900066256
+Decision Priority True
+ ------ Variable map_ifft_CLIENT_PE3
+Decision Value 0.2289921282370142
+Decision Priority True
+ ------ Variable angle_slave
+Decision Value 0.21913713208556196
+Decision Priority False
+ ------ Variable C_ifft_fft
+Decision Value 0.20875837206050096
+Decision Priority False
+ ------ Variable map_fir_CLIENT_PE3
+Decision Value 0.2011495748688804
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE6
+Decision Value 0.1947329850006181
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE9
+Decision Value 0.1845585592429434
+Decision Priority False
+ ------ Variable C_angle_src
+Decision Value 0.18064033023639936
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE1
+Decision Value 0.1773702236526038
+Decision Priority True
+ ------ Variable C_fir_sink
+Decision Value 0.1735518129896516
+Decision Priority False
+ ------ Variable map_angle_CLIENT_PE13
+Decision Value 0.1726564909506777
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE13
+Decision Value 0.1688851595096612
+Decision Priority False
+ ------ Variable map_angle_CLIENT_PE7
+Decision Value 0.1680940057811131
+Decision Priority True
+ ------ Variable C_table_src
+Decision Value 0.16637078940411854
+Decision Priority True
+ ------ Variable C_table_sink
+Decision Value 0.15897228845692313
+Decision Priority True
+ ------ Variable fir_master
+Decision Value 0.1538572763878927
+Decision Priority True
+ ------ Variable map_ifft_CLIENT_PE6
+Decision Value 0.14365425276499066
+Decision Priority True
+ ------ Variable map_road_CLIENT_PE2
+Decision Value 0.13585144004654026
+Decision Priority True
+ ------ Variable angle_master
+Decision Value 0.13216110114929125
+Decision Priority False
+ ------ Variable C_sink_ifft
+Decision Value 0.11739408244575278
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE5
+Decision Value 0.11536536805442066
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE11
+Decision Value 0.1106914947114549
+Decision Priority True
+ ------ Variable map_matrix_CLIENT_PE0
+Decision Value 0.11044075773078621
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE4
+Decision Value 0.10888329545860942
+Decision Priority True
+ ------ Variable C_matrix_road
+Decision Value 0.10621233526049101
+Decision Priority True
+ ------ Variable C_ifft_matrix
+Decision Value 0.10199507571621658
+Decision Priority True
+ ------ Variable C_fft_sink
+Decision Value 0.10164087737081495
+Decision Priority False
+ ------ Variable map_fir_CLIENT_PE6
+Decision Value 0.09837661650638418
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE12
+Decision Value 0.0976029200605919
+Decision Priority True
+ ------ Variable C_sink_angle
+Decision Value 0.09548699710088437
+Decision Priority False
+ ------ Variable map_table_CLIENT_PE14
+Decision Value 0.09117924334981209
+Decision Priority False
+ ------ Variable C_ifft_table
+Decision Value 0.09037590362040471
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE14
+Decision Value 0.09013952932989189
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE9
+Decision Value 0.08238102379806922
+Decision Priority True
+ ------ Variable C_fft_matrix
+Decision Value 0.08184269523120136
+Decision Priority False
+ ------ Variable C_fft_table
+Decision Value 0.08083696403430496
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE2
+Decision Value 0.07638552036896751
+Decision Priority True
+ ------ Variable map_fft_CLIENT_PE0
+Decision Value 0.07385121727647614
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE3
+Decision Value 0.07010553182601942
+Decision Priority False
+ ------ Variable C_matrix_sink
+Decision Value 0.05886581495153087
+Decision Priority True
+ ------ Variable table_slave
+Decision Value 0.05532290621518299
+Decision Priority False
+ ------ Variable C_fir_matrix
+Decision Value 0.050606825423387014
+Decision Priority True
+ ------ Variable C_table_fft
+Decision Value 0.05038102186443372
+Decision Priority True
+ ------ Variable fft_slave
+Decision Value 0.03195504475566502
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE11
+Decision Value 0.029737478238654913
+Decision Priority False
+ ------ Variable C_fft_fir
+Decision Value 0.024392401698546284
+Decision Priority False
+ ------ Variable C_matrix_ifft
+Decision Value 0.016450965802166317
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE6
+Decision Value 0.015504273413361913
+Decision Priority True
+ ------ Variable C_angle_fft
+Decision Value 0.014795798326051823
+Decision Priority False
+ ------ Variable C_ifft_road
+Decision Value 0.0023848012249330086
+Decision Priority False
+
+
+
+
+
+
+
+THE DECISION STRATEGY IS AS FOLLOWS
+
+ ------ Variable map_tooth_CLIENT_PE7
+Decision Value 0.9994179825946778
+Decision Priority False
+ ------ Variable map_tooth_CLIENT_PE2
+Decision Value 0.9947411363594384
+Decision Priority False
+ ------ Variable map_ptr_CLIENT_PE3
+Decision Value 0.9758311415735037
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE14
+Decision Value 0.9459442785078616
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE16
+Decision Value 0.9354477540958939
+Decision Priority False
+ ------ Variable ptr_slave
+Decision Value 0.9191888917109038
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE7
+Decision Value 0.8965592028536477
+Decision Priority True
+ ------ Variable C_ptr_sink
+Decision Value 0.8860564415677622
+Decision Priority True
+ ------ Variable map_ptr_CLIENT_PE14
+Decision Value 0.8749038835555437
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE5
+Decision Value 0.8730298889069777
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE0
+Decision Value 0.8650492635285223
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE16
+Decision Value 0.8502141667079743
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE9
+Decision Value 0.8488417954723132
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE1
+Decision Value 0.8023944404572585
+Decision Priority True
+ ------ Variable sink_slave
+Decision Value 0.7974050832036697
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE11
+Decision Value 0.7747203932429916
+Decision Priority True
+ ------ Variable C_ptr_cache
+Decision Value 0.7373082007047134
+Decision Priority True
+ ------ Variable map_cache_CLIENT_PE6
+Decision Value 0.7263919220540738
+Decision Priority True
+ ------ Variable C_sink_cache
+Decision Value 0.7253357229097649
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE1
+Decision Value 0.7020507762359733
+Decision Priority True
+ ------ Variable map_cache_CLIENT_PE14
+Decision Value 0.7011116498495583
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE4
+Decision Value 0.6797606728058766
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE9
+Decision Value 0.6492798571668527
+Decision Priority True
+ ------ Variable cache_master
+Decision Value 0.6301595908967148
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE12
+Decision Value 0.6105038432363423
+Decision Priority True
+ ------ Variable C_cache_ptr
+Decision Value 0.5988014337718764
+Decision Priority True
+ ------ Variable C_tooth_ptr
+Decision Value 0.5955064066705726
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE2
+Decision Value 0.5802968225618403
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE10
+Decision Value 0.579294233975171
+Decision Priority False
+ ------ Variable map_ptr_CLIENT_PE0
+Decision Value 0.5676420769650449
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE3
+Decision Value 0.5631308725188123
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE3
+Decision Value 0.5509667780006406
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE5
+Decision Value 0.5421114110050586
+Decision Priority True
+ ------ Variable map_tooth_CLIENT_PE4
+Decision Value 0.5340478884636358
+Decision Priority False
+ ------ Variable C_src_sink
+Decision Value 0.5274408425358366
+Decision Priority True
+ ------ Variable C_cache_src
+Decision Value 0.5217894414386367
+Decision Priority False
+ ------ Variable C_src_tooth
+Decision Value 0.5125679060082136
+Decision Priority False
+ ------ Variable src_slave
+Decision Value 0.5108911109330637
+Decision Priority True
+ ------ Variable map_cache_CLIENT_PE2
+Decision Value 0.4986189493072578
+Decision Priority False
+ ------ Variable C_tooth_cache
+Decision Value 0.48737527142878734
+Decision Priority False
+ ------ Variable map_cache_CLIENT_PE13
+Decision Value 0.48094199763236156
+Decision Priority False
+ ------ Variable src_master
+Decision Value 0.4704459314276489
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE8
+Decision Value 0.4687818726280212
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE6
+Decision Value 0.4368919977233988
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE12
+Decision Value 0.43103942961450714
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE14
+Decision Value 0.4197365042334127
+Decision Priority True
+ ------ Variable map_tooth_CLIENT_PE0
+Decision Value 0.408479409598819
+Decision Priority True
+ ------ Variable map_cache_CLIENT_PE7
+Decision Value 0.4077647415908249
+Decision Priority False
+ ------ Variable C_tooth_sink
+Decision Value 0.39166040798901147
+Decision Priority False
+ ------ Variable C_ptr_src
+Decision Value 0.37188472776167436
+Decision Priority False
+ ------ Variable C_src_cache
+Decision Value 0.3587256601254496
+Decision Priority True
+ ------ Variable map_ptr_CLIENT_PE7
+Decision Value 0.34069020691213614
+Decision Priority True
+ ------ Variable map_cache_CLIENT_PE0
+Decision Value 0.33791116298038704
+Decision Priority False
+ ------ Variable tooth_slave
+Decision Value 0.3308037560253604
+Decision Priority True
+ ------ Variable map_ptr_CLIENT_PE2
+Decision Value 0.29833279475102137
+Decision Priority False
+ ------ Variable C_src_ptr
+Decision Value 0.29049245745350194
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE7
+Decision Value 0.24984338714947163
+Decision Priority True
+ ------ Variable C_sink_src
+Decision Value 0.24620109248554323
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE11
+Decision Value 0.23825395845835462
+Decision Priority True
+ ------ Variable cache_slave
+Decision Value 0.23730561784768522
+Decision Priority True
+ ------ Variable map_tooth_CLIENT_PE13
+Decision Value 0.2240075619876497
+Decision Priority False
+ ------ Variable map_tooth_CLIENT_PE14
+Decision Value 0.22093593088980157
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE10
+Decision Value 0.22075960904099545
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE13
+Decision Value 0.20812951645693256
+Decision Priority False
+ ------ Variable C_tooth_src
+Decision Value 0.20717717960691984
+Decision Priority True
+ ------ Variable map_ptr_CLIENT_PE13
+Decision Value 0.1973376212834208
+Decision Priority True
+ ------ Variable map_tooth_CLIENT_PE6
+Decision Value 0.1913353994134741
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE4
+Decision Value 0.18707925041667484
+Decision Priority False
+ ------ Variable map_ptr_CLIENT_PE4
+Decision Value 0.1844577221732887
+Decision Priority True
+ ------ Variable tooth_master
+Decision Value 0.17990703355324633
+Decision Priority False
+ ------ Variable C_sink_ptr
+Decision Value 0.15933451955978473
+Decision Priority False
+ ------ Variable map_cache_CLIENT_PE4
+Decision Value 0.1437116381979382
+Decision Priority False
+ ------ Variable map_ptr_CLIENT_PE6
+Decision Value 0.12340783050489268
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE13
+Decision Value 0.11678293792620309
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE15
+Decision Value 0.10882819766323204
+Decision Priority True
+ ------ Variable map_tooth_CLIENT_PE3
+Decision Value 0.1044030122781121
+Decision Priority False
+ ------ Variable sink_master
+Decision Value 0.10144518485924148
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE6
+Decision Value 0.08892338563992586
+Decision Priority True
+ ------ Variable ptr_master
+Decision Value 0.08569760831197626
+Decision Priority False
+ ------ Variable map_sink_CLIENT_PE0
+Decision Value 0.0777995200736018
+Decision Priority False
+ ------ Variable C_ptr_tooth
+Decision Value 0.06976825055482927
+Decision Priority True
+ ------ Variable C_sink_tooth
+Decision Value 0.06364522734606137
+Decision Priority False
+ ------ Variable C_cache_sink
+Decision Value 0.06338373500291028
+Decision Priority False
+ ------ Variable map_src_CLIENT_PE8
+Decision Value 0.05270909527614842
+Decision Priority True
+ ------ Variable map_sink_CLIENT_PE15
+Decision Value 0.03486301201476427
+Decision Priority True
+ ------ Variable map_src_CLIENT_PE2
+Decision Value 0.024301962966386204
+Decision Priority False
+ ------ Variable C_cache_tooth
+Decision Value 0.011483861453063682
+Decision Priority True
+ ------ Variable map_cache_CLIENT_PE3
+Decision Value 0.00090385016849448
+Decision Priority True
+
+
+
+
