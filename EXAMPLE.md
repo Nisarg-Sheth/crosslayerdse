@@ -62,7 +62,7 @@ Arc 5 is a0_35 between :
 pulse ---> sink
 ```
 
-Detailed output at the end of the pre-processing can be seen in the output file [Task_graph](/with_dpll/task_graph_dets)
+Detailed output at the end of the pre-processing can be seen in the output file [Task_graph](/with_dpll/task_graph_dets.txt)
 
 `print_app_graph(graph)` can be uncommented to print this.
 
@@ -132,7 +132,7 @@ This decision strategy decides the working of the solver.
 
 ### PB Solver
 
-In the case that we use the gurobi solver, the assignment can be observed in the [result](/lp_files/result0.sol) file.
+In the case that we use the gurobi solver, the assignment can be observed in the [result](/lp_files/result_0.sol) file.
 
 In the case of the self-implemented solver the result of the assignment is stored in an assignment dictionary where the key is the variable name and the value corresponds to the value assigned to the variable.
 
@@ -146,11 +146,20 @@ Preprocessing :
         1) Reference to every constraint containing a positive coefficient of the variables
         2) Reference to every constraint containing a negative coefficient of the variables
     Update the objective values of constraints by adding the coefficient of all negative variables.
-    These two steps help us treat all the coefficient as positive variables and all the instances with negative coefficients as the not of the variable.
+    These two steps help us treat all the coefficient as positive variables and all the instances
+    with negative coefficients as the not of the variable.
 
 Recursive step :
-  1)Assign the variable with the highest priority still not assigned the value from the decision strategy
-  2)
+Repeat untill all variables are assigned
+  1) Assign the variable with the highest priority still not assigned the value from the decision strategy
+  2) Check this assignment for implications and conflicts
+  3) Assign implications the implied value, check for conflicts again
+  4) If no conflits, recurse to step 1.
+  5) If returned value from recursion is false or if conflicts exist, move to step 6,
+     else return with assigned values
+  6) Flip value, repeat step 1 to 4.
+  7) If returned value from recursion is false or if conflicts exist, return false,
+     else return with assigned values
 ```
 
 1)Input: Constraints, decision strategy
@@ -168,7 +177,7 @@ This function plots the constraint graph in a png file.
 1)Input : Constraint graph
 2)Output : .png file with the task graph plotted.
 
-The constraint graph can be found in the ./lp_files folder as [Constraint graph](\lp_files\con_graph_plot0.view.png).
+The constraint graph can be found in the ./lp_files folder as [Constraint graph](lp_files/app_graph_plot0.view.png).
 
 ### DVFS-LEVEL
 
@@ -253,6 +262,6 @@ end time 0.000585
 The total execution time is 0.000585
 ```
 
-As we can see by comparision with the application task graph [App 0] this task graph is feasible with accurate values of execution time. The same can be verified for other solutions.
+As we can see by comparision with the application task graph [App 0](/lp_files/app_graph_plot0.view.png) this task graph is feasible with accurate values of execution time. The same can be verified for other solutions.
 
 A complete evaluation of the whole scenario, with 5 individuals in the population, evaluated for 5 generations can be found in [Output](/with_dpll/gen_5.txt)
