@@ -220,6 +220,30 @@ If we iterate over all tasks in the order of their priority while setting the lo
 1)Input : Individual (Constraint Graph) and Task/Message data from TASK_GRAPH
 2)Output : 2 values, the Value of the Power and the execution time.
 
-The evaluate function generates the Task Schedule. We can observe the Task Schedule for a particular task in the particular solution.
+The evaluate function generates the Task Schedule. We can observe the Task Schedule for a particular task graph by particular solution as follows. This is the task schedule for TASK_GRAPH0 with a random particular solution.
 
-*Add print of task schedule here.**
+```
+EVALUATION FOR TASK_GRAPH 1
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+------> src
+start time 0
+end time 5e-05
+------> iir
+start time 5e-05
+end time 0.00011
+------> idct
+start time 0.00011
+end time 0.000535
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+------> sink
+start time 0.000535
+end time 0.000585
+----------------------------------
+The total execution time is 0.000585
+```
+
+As we can see by comparision with the application task graph [App 0] this task graph is feasible with accurate values of execution time. 
+
+A complete evaluation of the whole scenario, with five individuals in the population, evaluated for 5 generations can be found in [location]
