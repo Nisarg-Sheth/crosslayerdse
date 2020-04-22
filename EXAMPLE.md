@@ -1,4 +1,4 @@
-Psuedo code for my current implementation.
+#Explaination of code with example
 
 The current framework consists of 4 major components pre-processing of input tgff data, the ILP problem formulator, the PB Solver and the Meta-Heuristic.
 
