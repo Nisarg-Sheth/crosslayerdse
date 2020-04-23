@@ -177,7 +177,7 @@ This function plots the constraint graph in a png file.
 1)Input : Constraint graph
 2)Output : .png file with the task graph plotted.
 
-The constraint graph can be found in the ./lp_files folder as [Constraint graph](lp_files/app_graph_plot0.view.png).
+The constraint graph can be found in the ./lp_files folder as [Constraint graph](lp_files/con_graph_plot0.view.png).
 
 ### DVFS-LEVEL
 
