@@ -57,7 +57,7 @@ def process_block(block,tg,core):
                 scenario.graphs[tg_name].add_hard_deadline(line.strip('HARD_DEADLINE '))
 
 
-    elif core in block[0]:
+    elif core in block[0] or "PROC" in block[0] or "CORE" in block[0]:
         core_name = None
         i = 0
         core_name= block[0].strip('@').strip('{').replace(" ","")
@@ -107,27 +107,6 @@ def generate_noc(length,breadth):
             l.append(temp[0])
         scenario.NOC.append(l)
 
-def gen_compl_pb(con_graph,graph):
-    global scenario
-    complete="complete"
-    i=0
-    num_of_con=0
-    num_of_vars=0
-    con_graph.pbp_data[complete]=PB_data()
-    map_list=[]
-    for task in scenario.graphs[graph].tasks:
-        map_list.append(scenario.graphs[graph].tasks[task].pe_list)
-    for task in scenario.graphs[graph].tasks:
-        l={}
-        # Tslave+ Tmaster = 1
-        temp=f"{task}_master"
-        con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-        l[temp]=('+',1)
-        temp=f"{task}_slave"
-        con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-        l[temp]=('+',1)
-        con_graph.pbp_data[complete].constraints.append([l,1,'='])
-
 
 def gen_comp_pb(con_graph,graph):
     global scenario
@@ -141,6 +120,7 @@ def gen_comp_pb(con_graph,graph):
         map_list.append(scenario.graphs[graph].tasks[task].pe_list)
     for task in scenario.graphs[graph].tasks:
         l={}
+        print(task)
         # Tslave+ Tmaster = 1
         temp=f"{task}_master"
         con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
@@ -170,7 +150,8 @@ def gen_comp_pb(con_graph,graph):
                 l2[temp]=('+',1)
                 temp=f"C_{task}_{task1}"
                 l1[temp]=('+',1)
-                l3[temp]=('+',1)
+                if j<i:
+                    l3[temp]=('+',1)
             j+=1
         con_graph.pbp_data[complete].constraints.append([l1,i,'<='])
         con_graph.pbp_data[complete].constraints.append([l2,(scenario.graphs[graph].num_of_tasks-(i+1)),'<='])
@@ -247,7 +228,7 @@ def gen_comp_con_graph(con_graph, graph):
     dvfs_list = []
     for parts in con_graph.pbp_data["complete"].assignment:
         if con_graph.pbp_data["complete"].assignment[parts]==1:
-            #print(parts)
+            print(parts)
             if parts.endswith("_master"):
                 ext_id = parts.rfind("_")
                 master_list.append(parts[:ext_id])
@@ -1291,14 +1272,22 @@ def evalParams(individual):
 
     dvfs_level=1
     message_communication_time=0.001
+
+    # print("\nEVALUATION FOR",graph,"\n")
+    # for cluster in individual.task_cluster:
+    #     mapped=individual.task_cluster[cluster].mapped_to
+    #     print("Cluster",cluster,"is Mapped to PE",mapped)
+    #     for task in individual.task_cluster[cluster].tasks:
+    #         print("------>",task)
+            #print(scenario.graphs[graph].tasks[task].pe_list)
     #Computing the total energy usage
     for cluster in individual.task_cluster:
         cluster_time[cluster]=0
+        mapped=individual.task_cluster[cluster].mapped_to
         if scenario.dvfs>1:
             #print((individual.dvfs_level[cluster]))
             dvfs_level=scenario.dvfs_level[(individual.dvfs_level[cluster])]
         for task in individual.task_cluster[cluster].tasks:
-            mapped=individual.task_cluster[cluster].mapped_to
             wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
             power=scenario.graphs[graph].tasks[task].power[mapped]
             energy+=(wcet*power*dvfs_level*dvfs_level)
@@ -1434,7 +1423,7 @@ def main():
 
     #Processing each graph seperately
     for graph in scenario.graphs:
-        plot_app_graph(graph,phase,file_name,args.dir)
+        #plot_app_graph(graph,phase,file_name,args.dir)
         #print_app_graph(graph)
         con_graph=Constraint_graph()
         con_graph.graph=graph
@@ -1474,7 +1463,7 @@ def main():
         pf= tools.HallOfFame(maxsize=20)
         # pf= tools.ParetoFront()
         # Begin the evolution
-        while g < 5:
+        while g < 200:
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
@@ -1584,6 +1573,7 @@ def main():
         labs = [l.get_label() for l in lns]
         ax2.legend(lns, labs, loc="center right")
         plt.savefig(stats_plot_name)
+        plt.close()
         #plt.show()
 
         fig, ax1 = plt.subplots()
@@ -1593,6 +1583,7 @@ def main():
         labs = [l.get_label() for l in line1]
         ax1.legend(lns, labs, loc="center right")
         plt.savefig(hv_plot_name)
+        plt.close()
         #plt.savefig(stats_plot_name)
 
         energy_pf = [ind.fitness.values[0] for ind in pf]
@@ -1604,6 +1595,7 @@ def main():
         labs = [l.get_label() for l in line1]
         ax1.legend(lns, labs, loc="center right")
         plt.savefig(pf_plot_name)
+        plt.close()
 
         best_ind = tools.selBest(pop, 1)[0]
         #plot_constraint_graph(best_ind,graph,file_name,phase,dir)
