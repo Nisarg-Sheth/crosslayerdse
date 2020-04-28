@@ -1,8 +1,0 @@
-// TASK_GRAPH 5 
-digraph {
-	src [label=src]
-	gsm1 [label=gsm1]
-	a5_01 [label=a5_01]
-	src -> a5_01
-	a5_01 -> gsm1
-}

@@ -1,8 +1,0 @@
-// TASK_GRAPH 8 
-digraph {
-	src [label=src]
-	gsm4 [label=gsm4]
-	a8_01 [label=a8_01]
-	src -> a8_01
-	a8_01 -> gsm4
-}
