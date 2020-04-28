@@ -1418,8 +1418,10 @@ def main():
         scenario.dvfs=1
     gen_dvfslevel(args.dvfs_num_levels)
     phase=0
-
-    file_name=(args.input_tgff.split("."))[0]
+    left_ext=args.input_tgff.rfind('/')
+    right_ext=args.input_tgff.rfind('.')
+    file_name=args.input_tgff[left_ext+1:right_ext]
+    print(file_name)
 
     #Processing each graph seperately
     for graph in scenario.graphs:

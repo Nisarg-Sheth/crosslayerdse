@@ -19080,3 +19080,7784 @@ end time 1.2501000000000002
 The total execution time is 1.3951000000000002
 The total energy is 0.44642765000000006 
 
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Running the Solver
+Assignment by PB Solver Complete
+map_cjpeg_CLIENT_PE0
+C_filt-b_rgb-yiq
+C_filt-b_filt-r
+filt-b_slave
+dvfs_3_cjpeg
+dvfs_2_src
+C_filt-g_filt-r
+filt-g_slave
+map_rgb-yiq_CLIENT_PE0
+dvfs_0_sink
+dvfs_1_rgb-yiq
+rgb-yiq_master
+cjpeg_master
+map_sink_CLIENT_PE5
+sink_master
+map_src_CLIENT_PE8
+src_master
+C_filt-b_cjpeg
+map_filt-r_CLIENT_PE14
+dvfs_4_filt-r
+filt-r_master
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> rgb-yiq
+start time 0.10602777777777779
+end time 0.6060277777777778
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.10602777777777779
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> cjpeg
+start time 0.6060277777777778
+end time 1.266027777777778
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.10602777777777779
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE5
+DVFS Level is 0
+------> sink
+start time 1.266027777777778
+end time 1.266152777777778
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE8
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.08127777777777778
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.10602777777777779
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.08127777777777778
+----------------------------------
+The total execution time is 1.266152777777778
+The total energy is 8.139208320000002 
+
+Generating Population for TASK_GRAPH 0 
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE2
+map_cjpeg_CLIENT_PE3
+dvfs_1_sink
+map_filt-b_CLIENT_PE0
+dvfs_0_src
+dvfs_3_filt-b
+filt-b_master
+dvfs_2_cjpeg
+cjpeg_master
+C_filt-g_cjpeg
+C_filt-g_filt-r
+filt-g_slave
+dvfs_3_rgb-yiq
+rgb-yiq_master
+dvfs_3_filt-r
+map_src_CLIENT_PE12
+src_master
+map_sink_CLIENT_PE7
+sink_master
+map_filt-r_CLIENT_PE14
+filt-r_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_sink_cjpeg
+map_filt-b_CLIENT_PE15
+dvfs_0_src
+dvfs_1_filt-b
+dvfs_2_rgb-yiq
+map_filt-r_CLIENT_PE6
+map_cjpeg_CLIENT_PE14
+dvfs_2_filt-r
+filt-r_master
+dvfs_0_filt-g
+map_filt-g_CLIENT_PE14
+filt-g_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+dvfs_4_cjpeg
+cjpeg_master
+map_src_CLIENT_PE7
+src_master
+sink_slave
+filt-b_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_filt-g
+dvfs_4_src
+map_filt-b_CLIENT_PE15
+map_rgb-yiq_CLIENT_PE0
+dvfs_0_sink
+dvfs_2_filt-r
+C_cjpeg_rgb-yiq
+map_filt-r_CLIENT_PE3
+map_filt-g_CLIENT_PE3
+filt-g_master
+map_src_CLIENT_PE12
+src_master
+dvfs_3_rgb-yiq
+rgb-yiq_master
+cjpeg_slave
+dvfs_3_filt-b
+filt-b_master
+filt-r_master
+map_sink_CLIENT_PE5
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-r_CLIENT_PE15
+map_filt-b_CLIENT_PE6
+dvfs_1_filt-r
+dvfs_1_sink
+dvfs_1_cjpeg
+filt-r_master
+map_sink_CLIENT_PE10
+sink_master
+dvfs_0_src
+map_src_CLIENT_PE6
+src_master
+map_cjpeg_CLIENT_PE15
+cjpeg_master
+C_filt-g_filt-r
+filt-g_slave
+dvfs_3_filt-b
+filt-b_master
+C_filt-g_cjpeg
+C_rgb-yiq_src
+rgb-yiq_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_rgb-yiq
+dvfs_0_sink
+C_filt-b_cjpeg
+dvfs_0_cjpeg
+dvfs_4_filt-r
+map_filt-r_CLIENT_PE14
+filt-r_master
+map_filt-g_CLIENT_PE3
+dvfs_4_filt-g
+filt-g_master
+C_filt-b_filt-g
+filt-b_slave
+dvfs_4_src
+map_src_CLIENT_PE0
+src_master
+map_sink_CLIENT_PE5
+sink_master
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+map_rgb-yiq_CLIENT_PE14
+rgb-yiq_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_src_CLIENT_PE3
+C_filt-r_src
+filt-r_slave
+map_sink_CLIENT_PE10
+dvfs_1_src
+src_master
+dvfs_3_sink
+C_rgb-yiq_src
+rgb-yiq_slave
+dvfs_3_cjpeg
+map_filt-g_CLIENT_PE2
+sink_master
+C_rgb-yiq_cjpeg
+C_filt-b_filt-g
+filt-b_slave
+map_cjpeg_CLIENT_PE3
+cjpeg_master
+dvfs_1_filt-g
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_filt-b
+dvfs_0_cjpeg
+dvfs_2_sink
+C_filt-g_cjpeg
+map_filt-r_CLIENT_PE14
+dvfs_3_rgb-yiq
+dvfs_3_src
+map_cjpeg_CLIENT_PE2
+cjpeg_master
+map_rgb-yiq_CLIENT_PE15
+dvfs_1_filt-r
+filt-r_master
+map_filt-b_CLIENT_PE3
+filt-b_master
+rgb-yiq_master
+C_filt-g_filt-r
+filt-g_slave
+map_sink_CLIENT_PE6
+sink_master
+map_src_CLIENT_PE9
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-b_filt-r
+dvfs_2_filt-r
+dvfs_3_filt-g
+dvfs_2_src
+dvfs_1_sink
+dvfs_1_rgb-yiq
+map_filt-g_CLIENT_PE14
+filt-g_master
+C_cjpeg_rgb-yiq
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+map_sink_CLIENT_PE8
+sink_master
+map_src_CLIENT_PE12
+src_master
+map_filt-r_CLIENT_PE0
+filt-r_master
+cjpeg_slave
+filt-b_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-b_filt-r
+C_filt-b_rgb-yiq
+C_filt-g_filt-r
+filt-b_slave
+filt-g_slave
+dvfs_1_filt-r
+map_rgb-yiq_CLIENT_PE2
+map_sink_CLIENT_PE14
+dvfs_2_sink
+sink_master
+dvfs_3_src
+dvfs_4_rgb-yiq
+rgb-yiq_master
+C_filt-b_cjpeg
+map_src_CLIENT_PE10
+src_master
+dvfs_3_cjpeg
+C_filt-g_rgb-yiq
+map_filt-r_CLIENT_PE6
+filt-r_master
+map_cjpeg_CLIENT_PE15
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_cjpeg_rgb-yiq
+dvfs_4_rgb-yiq
+dvfs_1_filt-r
+dvfs_0_src
+map_filt-g_CLIENT_PE2
+dvfs_3_filt-b
+cjpeg_slave
+dvfs_2_sink
+map_rgb-yiq_CLIENT_PE6
+map_filt-r_CLIENT_PE6
+map_filt-b_CLIENT_PE2
+filt-b_master
+dvfs_3_filt-g
+filt-g_master
+map_sink_CLIENT_PE13
+sink_master
+rgb-yiq_master
+filt-r_master
+map_src_CLIENT_PE12
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-r
+dvfs_2_src
+map_filt-b_CLIENT_PE0
+map_filt-r_CLIENT_PE15
+filt-r_master
+map_cjpeg_CLIENT_PE3
+dvfs_0_filt-g
+map_rgb-yiq_CLIENT_PE0
+dvfs_3_filt-b
+filt-b_master
+dvfs_2_cjpeg
+cjpeg_master
+map_src_CLIENT_PE0
+src_master
+dvfs_4_rgb-yiq
+rgb-yiq_master
+map_sink_CLIENT_PE5
+dvfs_2_sink
+sink_master
+map_filt-g_CLIENT_PE15
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_cjpeg
+map_filt-r_CLIENT_PE14
+dvfs_2_rgb-yiq
+dvfs_0_src
+dvfs_1_filt-r
+map_filt-g_CLIENT_PE6
+map_rgb-yiq_CLIENT_PE14
+rgb-yiq_master
+map_cjpeg_CLIENT_PE14
+cjpeg_master
+map_sink_CLIENT_PE5
+dvfs_1_sink
+sink_master
+dvfs_3_filt-g
+filt-g_master
+filt-r_master
+C_filt-b_filt-g
+filt-b_slave
+C_filt-b_cjpeg
+map_src_CLIENT_PE8
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_filt-g
+map_filt-r_CLIENT_PE2
+dvfs_4_sink
+dvfs_0_src
+map_filt-g_CLIENT_PE3
+filt-g_master
+map_sink_CLIENT_PE4
+sink_master
+map_rgb-yiq_CLIENT_PE15
+dvfs_3_filt-r
+filt-r_master
+dvfs_0_rgb-yiq
+rgb-yiq_master
+map_src_CLIENT_PE11
+src_master
+C_cjpeg_filt-r
+cjpeg_slave
+C_filt-b_filt-g
+filt-b_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-b_CLIENT_PE0
+dvfs_2_sink
+dvfs_1_filt-b
+filt-b_master
+map_src_CLIENT_PE15
+dvfs_1_src
+src_master
+C_cjpeg_filt-b
+cjpeg_slave
+map_rgb-yiq_CLIENT_PE15
+C_filt-g_src
+filt-g_slave
+dvfs_3_rgb-yiq
+rgb-yiq_master
+map_sink_CLIENT_PE12
+sink_master
+C_filt-r_src
+filt-r_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_cjpeg
+map_filt-g_CLIENT_PE0
+dvfs_2_filt-g
+filt-g_master
+dvfs_1_filt-b
+dvfs_3_rgb-yiq
+map_cjpeg_CLIENT_PE3
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+cjpeg_master
+map_filt-r_CLIENT_PE2
+map_filt-b_CLIENT_PE15
+filt-b_master
+map_src_CLIENT_PE3
+dvfs_1_src
+src_master
+dvfs_4_filt-r
+filt-r_master
+C_sink_cjpeg
+sink_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-r_CLIENT_PE14
+dvfs_4_sink
+dvfs_1_filt-r
+filt-r_master
+map_filt-b_CLIENT_PE3
+dvfs_2_rgb-yiq
+dvfs_2_filt-g
+dvfs_4_src
+map_src_CLIENT_PE3
+src_master
+dvfs_1_filt-b
+filt-b_master
+map_sink_CLIENT_PE8
+sink_master
+C_cjpeg_src
+cjpeg_slave
+map_filt-g_CLIENT_PE14
+filt-g_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_filt-g
+dvfs_3_sink
+dvfs_1_filt-b
+map_filt-r_CLIENT_PE6
+C_cjpeg_filt-g
+cjpeg_slave
+map_filt-b_CLIENT_PE0
+filt-b_master
+map_src_CLIENT_PE15
+map_filt-g_CLIENT_PE3
+filt-g_master
+dvfs_1_src
+src_master
+dvfs_0_filt-r
+filt-r_master
+map_sink_CLIENT_PE6
+sink_master
+C_rgb-yiq_src
+rgb-yiq_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-r_src
+filt-r_slave
+dvfs_4_src
+dvfs_1_filt-g
+map_cjpeg_CLIENT_PE3
+map_sink_CLIENT_PE5
+map_rgb-yiq_CLIENT_PE14
+dvfs_3_rgb-yiq
+rgb-yiq_master
+map_filt-g_CLIENT_PE14
+dvfs_3_filt-b
+dvfs_0_sink
+sink_master
+dvfs_4_cjpeg
+cjpeg_master
+filt-g_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+map_src_CLIENT_PE14
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_rgb-yiq_filt-r
+dvfs_0_sink
+dvfs_1_src
+map_filt-g_CLIENT_PE3
+map_src_CLIENT_PE9
+dvfs_3_cjpeg
+C_rgb-yiq_cjpeg
+rgb-yiq_slave
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+dvfs_3_filt-r
+dvfs_1_filt-g
+filt-g_master
+map_filt-r_CLIENT_PE15
+filt-r_master
+map_sink_CLIENT_PE8
+sink_master
+C_filt-b_filt-r
+filt-b_slave
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_cjpeg_CLIENT_PE14
+dvfs_3_cjpeg
+dvfs_0_filt-g
+map_filt-b_CLIENT_PE0
+dvfs_2_sink
+dvfs_3_src
+map_src_CLIENT_PE0
+dvfs_1_filt-b
+filt-b_master
+src_master
+cjpeg_master
+map_filt-g_CLIENT_PE6
+filt-g_master
+C_filt-r_src
+filt-r_slave
+map_sink_CLIENT_PE8
+sink_master
+C_rgb-yiq_filt-b
+rgb-yiq_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-g_CLIENT_PE2
+map_filt-r_CLIENT_PE0
+map_cjpeg_CLIENT_PE6
+map_sink_CLIENT_PE11
+dvfs_4_filt-g
+dvfs_4_cjpeg
+cjpeg_master
+filt-g_master
+dvfs_0_rgb-yiq
+map_src_CLIENT_PE8
+dvfs_4_filt-r
+filt-r_master
+dvfs_0_sink
+sink_master
+map_rgb-yiq_CLIENT_PE14
+rgb-yiq_master
+C_filt-b_filt-r
+filt-b_slave
+dvfs_3_src
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-b_rgb-yiq
+C_sink_filt-g
+map_filt-r_CLIENT_PE15
+dvfs_1_rgb-yiq
+map_filt-g_CLIENT_PE3
+dvfs_0_filt-g
+filt-g_master
+dvfs_3_src
+map_cjpeg_CLIENT_PE3
+dvfs_0_filt-r
+filt-r_master
+dvfs_3_cjpeg
+cjpeg_master
+map_src_CLIENT_PE15
+src_master
+sink_slave
+C_filt-b_filt-g
+filt-b_slave
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_filt-r
+C_filt-b_src
+filt-b_slave
+dvfs_1_sink
+dvfs_3_src
+C_cjpeg_rgb-yiq
+cjpeg_slave
+C_filt-g_src
+filt-g_slave
+map_filt-r_CLIENT_PE6
+filt-r_master
+map_rgb-yiq_CLIENT_PE14
+map_src_CLIENT_PE2
+src_master
+dvfs_3_rgb-yiq
+rgb-yiq_master
+C_filt-b_rgb-yiq
+map_sink_CLIENT_PE16
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_filt-b
+dvfs_4_filt-r
+map_filt-b_CLIENT_PE0
+filt-b_master
+map_src_CLIENT_PE7
+dvfs_3_filt-g
+C_sink_filt-b
+C_rgb-yiq_filt-g
+rgb-yiq_slave
+C_cjpeg_filt-g
+cjpeg_slave
+map_filt-r_CLIENT_PE14
+filt-r_master
+map_filt-g_CLIENT_PE15
+filt-g_master
+sink_slave
+dvfs_0_src
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE2
+dvfs_3_filt-r
+dvfs_4_rgb-yiq
+rgb-yiq_master
+dvfs_4_filt-g
+map_filt-r_CLIENT_PE2
+filt-r_master
+map_src_CLIENT_PE8
+dvfs_3_src
+src_master
+map_filt-g_CLIENT_PE6
+filt-g_master
+dvfs_1_filt-b
+C_cjpeg_filt-b
+cjpeg_slave
+C_sink_rgb-yiq
+sink_slave
+map_filt-b_CLIENT_PE15
+filt-b_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_sink
+dvfs_4_filt-b
+dvfs_0_src
+dvfs_1_filt-g
+map_cjpeg_CLIENT_PE14
+dvfs_1_filt-r
+map_filt-g_CLIENT_PE3
+filt-g_master
+map_sink_CLIENT_PE3
+sink_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+map_filt-r_CLIENT_PE0
+filt-r_master
+C_rgb-yiq_filt-b
+rgb-yiq_slave
+map_src_CLIENT_PE11
+src_master
+dvfs_4_cjpeg
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-g_rgb-yiq
+map_rgb-yiq_CLIENT_PE15
+C_filt-b_src
+dvfs_2_filt-r
+map_src_CLIENT_PE2
+dvfs_2_src
+src_master
+dvfs_2_cjpeg
+C_filt-b_cjpeg
+dvfs_2_rgb-yiq
+rgb-yiq_master
+map_cjpeg_CLIENT_PE6
+cjpeg_master
+filt-b_slave
+map_filt-r_CLIENT_PE2
+filt-r_master
+C_filt-g_src
+filt-g_slave
+map_sink_CLIENT_PE5
+dvfs_1_sink
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_sink
+dvfs_1_filt-b
+dvfs_4_rgb-yiq
+dvfs_2_cjpeg
+map_src_CLIENT_PE3
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+C_filt-g_src
+filt-g_slave
+C_filt-r_src
+filt-r_slave
+map_sink_CLIENT_PE9
+sink_master
+C_filt-g_cjpeg
+dvfs_1_src
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_filt-b
+dvfs_2_sink
+dvfs_4_rgb-yiq
+C_filt-g_src
+C_filt-g_filt-b
+dvfs_3_src
+map_src_CLIENT_PE15
+dvfs_2_cjpeg
+src_master
+map_filt-r_CLIENT_PE15
+map_filt-b_CLIENT_PE15
+filt-b_master
+map_rgb-yiq_CLIENT_PE2
+rgb-yiq_master
+filt-g_slave
+dvfs_4_filt-r
+filt-r_master
+map_cjpeg_CLIENT_PE3
+cjpeg_master
+map_sink_CLIENT_PE6
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-b_CLIENT_PE15
+map_cjpeg_CLIENT_PE2
+dvfs_3_src
+map_rgb-yiq_CLIENT_PE3
+dvfs_1_filt-b
+filt-b_master
+dvfs_2_rgb-yiq
+rgb-yiq_master
+dvfs_4_filt-r
+map_sink_CLIENT_PE0
+map_filt-r_CLIENT_PE3
+filt-r_master
+map_filt-g_CLIENT_PE0
+dvfs_4_sink
+sink_master
+dvfs_4_cjpeg
+cjpeg_master
+dvfs_0_filt-g
+filt-g_master
+map_src_CLIENT_PE15
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_rgb-yiq_filt-b
+dvfs_0_src
+map_filt-r_CLIENT_PE14
+C_rgb-yiq_cjpeg
+map_filt-g_CLIENT_PE3
+dvfs_0_cjpeg
+dvfs_1_sink
+map_filt-b_CLIENT_PE6
+dvfs_3_filt-r
+rgb-yiq_slave
+dvfs_4_filt-b
+map_sink_CLIENT_PE1
+sink_master
+filt-r_master
+dvfs_3_filt-g
+filt-g_master
+filt-b_master
+map_src_CLIENT_PE15
+src_master
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-g_CLIENT_PE14
+dvfs_1_cjpeg
+dvfs_2_filt-g
+filt-g_master
+map_src_CLIENT_PE2
+map_cjpeg_CLIENT_PE14
+dvfs_2_filt-b
+cjpeg_master
+dvfs_3_src
+src_master
+dvfs_4_filt-r
+map_rgb-yiq_CLIENT_PE6
+map_filt-b_CLIENT_PE2
+filt-b_master
+map_sink_CLIENT_PE6
+dvfs_3_sink
+sink_master
+dvfs_0_rgb-yiq
+rgb-yiq_master
+map_filt-r_CLIENT_PE14
+filt-r_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_rgb-yiq
+map_rgb-yiq_CLIENT_PE15
+map_filt-r_CLIENT_PE3
+dvfs_2_cjpeg
+dvfs_2_src
+C_filt-g_filt-r
+map_cjpeg_CLIENT_PE14
+cjpeg_master
+rgb-yiq_master
+filt-g_slave
+dvfs_1_filt-r
+filt-r_master
+dvfs_4_filt-b
+C_filt-g_filt-b
+C_sink_cjpeg
+sink_slave
+map_filt-b_CLIENT_PE14
+filt-b_master
+map_src_CLIENT_PE13
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_cjpeg
+dvfs_3_filt-b
+map_cjpeg_CLIENT_PE3
+map_rgb-yiq_CLIENT_PE6
+dvfs_3_filt-g
+dvfs_0_src
+dvfs_0_rgb-yiq
+rgb-yiq_master
+map_filt-g_CLIENT_PE15
+filt-g_master
+map_filt-b_CLIENT_PE6
+filt-b_master
+map_sink_CLIENT_PE14
+cjpeg_master
+map_src_CLIENT_PE5
+src_master
+map_filt-r_CLIENT_PE15
+dvfs_4_filt-r
+filt-r_master
+dvfs_0_sink
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-b_CLIENT_PE6
+C_filt-g_src
+filt-g_slave
+C_sink_src
+sink_slave
+dvfs_1_cjpeg
+C_filt-r_src
+filt-r_slave
+C_filt-g_cjpeg
+dvfs_1_src
+map_cjpeg_CLIENT_PE3
+cjpeg_master
+map_src_CLIENT_PE15
+src_master
+C_rgb-yiq_src
+rgb-yiq_slave
+dvfs_3_filt-b
+filt-b_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+dvfs_2_cjpeg
+dvfs_4_sink
+C_filt-b_filt-g
+map_cjpeg_CLIENT_PE15
+cjpeg_master
+filt-b_slave
+dvfs_1_filt-r
+dvfs_1_filt-g
+map_filt-r_CLIENT_PE2
+filt-r_master
+map_sink_CLIENT_PE2
+sink_master
+dvfs_0_src
+C_filt-b_cjpeg
+map_src_CLIENT_PE14
+src_master
+map_filt-g_CLIENT_PE0
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-r
+C_rgb-yiq_cjpeg
+dvfs_1_cjpeg
+dvfs_3_src
+dvfs_4_filt-g
+map_filt-b_CLIENT_PE14
+map_src_CLIENT_PE6
+src_master
+map_sink_CLIENT_PE15
+dvfs_3_sink
+sink_master
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+dvfs_3_filt-b
+filt-b_master
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+map_filt-r_CLIENT_PE3
+filt-r_master
+map_filt-g_CLIENT_PE0
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE6
+map_filt-r_CLIENT_PE14
+map_filt-g_CLIENT_PE14
+map_src_CLIENT_PE0
+dvfs_3_rgb-yiq
+rgb-yiq_master
+C_cjpeg_rgb-yiq
+cjpeg_slave
+C_sink_filt-b
+sink_slave
+dvfs_4_src
+src_master
+map_filt-b_CLIENT_PE6
+dvfs_2_filt-g
+filt-g_master
+dvfs_3_filt-b
+filt-b_master
+dvfs_4_filt-r
+filt-r_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-r_src
+dvfs_3_filt-b
+dvfs_3_rgb-yiq
+map_src_CLIENT_PE14
+map_filt-g_CLIENT_PE2
+dvfs_2_filt-g
+filt-g_master
+C_cjpeg_src
+cjpeg_slave
+dvfs_2_src
+src_master
+map_sink_CLIENT_PE16
+map_filt-b_CLIENT_PE2
+filt-b_master
+map_rgb-yiq_CLIENT_PE0
+rgb-yiq_master
+dvfs_4_sink
+sink_master
+filt-r_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-b_rgb-yiq
+map_filt-g_CLIENT_PE0
+dvfs_4_filt-g
+dvfs_2_src
+filt-g_master
+C_filt-b_cjpeg
+dvfs_0_filt-r
+map_filt-r_CLIENT_PE3
+filt-r_master
+dvfs_2_sink
+dvfs_1_rgb-yiq
+map_sink_CLIENT_PE11
+sink_master
+map_rgb-yiq_CLIENT_PE3
+rgb-yiq_master
+dvfs_3_cjpeg
+map_src_CLIENT_PE13
+src_master
+map_cjpeg_CLIENT_PE15
+cjpeg_master
+C_filt-b_filt-g
+filt-b_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_src_CLIENT_PE0
+dvfs_3_src
+src_master
+map_rgb-yiq_CLIENT_PE0
+dvfs_3_cjpeg
+dvfs_0_sink
+C_filt-r_src
+map_filt-g_CLIENT_PE15
+map_cjpeg_CLIENT_PE15
+cjpeg_master
+dvfs_3_rgb-yiq
+rgb-yiq_master
+filt-r_slave
+dvfs_2_filt-b
+map_filt-b_CLIENT_PE0
+filt-b_master
+dvfs_4_filt-g
+filt-g_master
+map_sink_CLIENT_PE12
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_cjpeg
+C_filt-b_src
+C_filt-b_rgb-yiq
+dvfs_2_filt-r
+map_rgb-yiq_CLIENT_PE0
+dvfs_4_src
+map_cjpeg_CLIENT_PE3
+map_sink_CLIENT_PE3
+cjpeg_master
+dvfs_3_rgb-yiq
+rgb-yiq_master
+map_src_CLIENT_PE0
+src_master
+C_filt-g_filt-r
+filt-g_slave
+map_filt-r_CLIENT_PE6
+filt-r_master
+filt-b_slave
+dvfs_4_sink
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-g_CLIENT_PE3
+dvfs_3_src
+dvfs_2_filt-g
+filt-g_master
+map_cjpeg_CLIENT_PE6
+map_filt-r_CLIENT_PE3
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+C_rgb-yiq_cjpeg
+dvfs_4_sink
+map_src_CLIENT_PE1
+src_master
+map_filt-b_CLIENT_PE0
+dvfs_0_filt-b
+filt-b_master
+dvfs_3_filt-r
+filt-r_master
+map_sink_CLIENT_PE4
+sink_master
+dvfs_3_cjpeg
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-r_CLIENT_PE14
+dvfs_2_filt-r
+dvfs_0_src
+dvfs_0_rgb-yiq
+map_cjpeg_CLIENT_PE0
+dvfs_2_filt-b
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+map_filt-b_CLIENT_PE0
+filt-b_master
+map_filt-g_CLIENT_PE2
+filt-r_master
+dvfs_2_filt-g
+filt-g_master
+dvfs_1_cjpeg
+cjpeg_master
+dvfs_1_sink
+map_src_CLIENT_PE11
+src_master
+map_sink_CLIENT_PE11
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE2
+map_filt-g_CLIENT_PE14
+dvfs_1_rgb-yiq
+rgb-yiq_master
+map_sink_CLIENT_PE12
+C_filt-b_cjpeg
+dvfs_0_cjpeg
+dvfs_3_sink
+sink_master
+map_filt-r_CLIENT_PE15
+C_filt-b_rgb-yiq
+dvfs_4_src
+map_src_CLIENT_PE6
+src_master
+dvfs_4_filt-g
+filt-g_master
+dvfs_1_filt-r
+filt-r_master
+map_cjpeg_CLIENT_PE14
+cjpeg_master
+C_filt-b_filt-r
+filt-b_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_sink
+C_filt-g_filt-r
+dvfs_2_src
+dvfs_1_filt-r
+dvfs_1_filt-b
+map_filt-b_CLIENT_PE2
+map_rgb-yiq_CLIENT_PE14
+map_cjpeg_CLIENT_PE14
+C_filt-g_rgb-yiq
+filt-g_slave
+dvfs_3_rgb-yiq
+rgb-yiq_master
+map_filt-r_CLIENT_PE2
+filt-r_master
+filt-b_master
+map_sink_CLIENT_PE3
+sink_master
+map_src_CLIENT_PE7
+src_master
+dvfs_4_cjpeg
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-r_CLIENT_PE14
+dvfs_4_rgb-yiq
+map_cjpeg_CLIENT_PE14
+dvfs_2_filt-g
+map_filt-g_CLIENT_PE14
+filt-g_master
+map_filt-b_CLIENT_PE6
+dvfs_3_cjpeg
+cjpeg_master
+map_src_CLIENT_PE4
+dvfs_1_filt-b
+filt-b_master
+dvfs_1_src
+src_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+map_sink_CLIENT_PE5
+dvfs_0_sink
+sink_master
+dvfs_4_filt-r
+filt-r_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_src
+dvfs_3_filt-r
+map_filt-b_CLIENT_PE14
+dvfs_4_sink
+dvfs_0_filt-b
+filt-b_master
+dvfs_1_filt-g
+map_cjpeg_CLIENT_PE6
+map_filt-r_CLIENT_PE2
+filt-r_master
+C_rgb-yiq_filt-b
+rgb-yiq_slave
+dvfs_1_cjpeg
+cjpeg_master
+map_sink_CLIENT_PE10
+sink_master
+map_src_CLIENT_PE1
+src_master
+map_filt-g_CLIENT_PE6
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-b_filt-r
+filt-b_slave
+dvfs_4_sink
+dvfs_4_cjpeg
+dvfs_2_filt-r
+dvfs_0_rgb-yiq
+dvfs_4_src
+map_filt-g_CLIENT_PE0
+map_cjpeg_CLIENT_PE3
+cjpeg_master
+map_src_CLIENT_PE11
+map_filt-r_CLIENT_PE2
+filt-r_master
+src_master
+dvfs_4_filt-g
+filt-g_master
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+map_sink_CLIENT_PE4
+sink_master
+C_filt-b_rgb-yiq
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-r_CLIENT_PE0
+dvfs_3_rgb-yiq
+map_rgb-yiq_CLIENT_PE3
+rgb-yiq_master
+dvfs_1_filt-b
+map_filt-b_CLIENT_PE0
+filt-b_master
+dvfs_4_filt-r
+filt-r_master
+map_filt-g_CLIENT_PE2
+dvfs_3_filt-g
+filt-g_master
+C_cjpeg_src
+cjpeg_slave
+dvfs_2_sink
+dvfs_0_src
+map_src_CLIENT_PE0
+src_master
+map_sink_CLIENT_PE1
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_filt-b
+map_filt-r_CLIENT_PE2
+dvfs_3_src
+dvfs_1_filt-r
+map_filt-g_CLIENT_PE3
+C_rgb-yiq_filt-r
+dvfs_1_sink
+map_filt-b_CLIENT_PE6
+filt-b_master
+rgb-yiq_slave
+filt-r_master
+C_cjpeg_filt-b
+cjpeg_slave
+map_src_CLIENT_PE7
+src_master
+dvfs_3_filt-g
+filt-g_master
+map_sink_CLIENT_PE4
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE14
+dvfs_3_src
+dvfs_2_filt-r
+C_filt-g_filt-r
+filt-g_slave
+C_sink_filt-r
+sink_slave
+dvfs_3_rgb-yiq
+rgb-yiq_master
+dvfs_1_cjpeg
+dvfs_0_filt-b
+map_filt-r_CLIENT_PE6
+filt-r_master
+map_src_CLIENT_PE12
+src_master
+map_cjpeg_CLIENT_PE2
+cjpeg_master
+map_filt-b_CLIENT_PE2
+filt-b_master
+C_filt-g_rgb-yiq
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-b
+map_rgb-yiq_CLIENT_PE15
+map_cjpeg_CLIENT_PE0
+map_filt-g_CLIENT_PE0
+map_src_CLIENT_PE1
+dvfs_2_cjpeg
+cjpeg_master
+map_filt-r_CLIENT_PE2
+map_filt-b_CLIENT_PE3
+filt-b_master
+dvfs_0_sink
+dvfs_4_filt-g
+filt-g_master
+dvfs_3_src
+src_master
+dvfs_3_rgb-yiq
+rgb-yiq_master
+map_sink_CLIENT_PE11
+sink_master
+dvfs_4_filt-r
+filt-r_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_filt-r
+C_filt-b_filt-r
+dvfs_4_src
+map_cjpeg_CLIENT_PE15
+map_filt-g_CLIENT_PE6
+dvfs_2_cjpeg
+cjpeg_master
+map_filt-r_CLIENT_PE6
+filt-r_master
+C_sink_filt-r
+filt-b_slave
+dvfs_0_rgb-yiq
+sink_slave
+map_src_CLIENT_PE11
+src_master
+dvfs_0_filt-g
+filt-g_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE2
+dvfs_3_filt-b
+dvfs_1_filt-r
+map_filt-r_CLIENT_PE14
+dvfs_3_cjpeg
+map_filt-b_CLIENT_PE15
+C_filt-g_rgb-yiq
+filt-r_master
+dvfs_3_src
+dvfs_1_rgb-yiq
+map_cjpeg_CLIENT_PE6
+cjpeg_master
+C_filt-g_src
+filt-g_slave
+map_src_CLIENT_PE0
+src_master
+rgb-yiq_master
+filt-b_master
+C_sink_filt-r
+sink_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_cjpeg
+map_filt-b_CLIENT_PE15
+dvfs_1_sink
+map_cjpeg_CLIENT_PE3
+map_filt-r_CLIENT_PE6
+dvfs_1_rgb-yiq
+cjpeg_master
+dvfs_3_filt-r
+dvfs_0_src
+map_filt-g_CLIENT_PE2
+dvfs_4_filt-b
+filt-b_master
+filt-r_master
+map_src_CLIENT_PE9
+src_master
+dvfs_3_filt-g
+filt-g_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+map_sink_CLIENT_PE12
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_cjpeg
+map_src_CLIENT_PE14
+map_filt-r_CLIENT_PE2
+map_sink_CLIENT_PE16
+dvfs_3_src
+src_master
+dvfs_2_filt-g
+map_filt-g_CLIENT_PE14
+filt-g_master
+map_cjpeg_CLIENT_PE14
+cjpeg_master
+dvfs_1_sink
+sink_master
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+C_filt-b_src
+filt-b_slave
+dvfs_3_filt-r
+filt-r_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_cjpeg_CLIENT_PE6
+dvfs_2_rgb-yiq
+dvfs_1_filt-g
+map_filt-b_CLIENT_PE0
+map_rgb-yiq_CLIENT_PE3
+rgb-yiq_master
+dvfs_0_cjpeg
+cjpeg_master
+map_src_CLIENT_PE15
+C_filt-r_src
+filt-r_slave
+map_sink_CLIENT_PE1
+dvfs_3_src
+src_master
+dvfs_1_sink
+sink_master
+dvfs_3_filt-b
+filt-b_master
+map_filt-g_CLIENT_PE14
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_filt-g
+dvfs_2_filt-r
+dvfs_0_src
+dvfs_4_sink
+map_filt-g_CLIENT_PE14
+map_filt-r_CLIENT_PE6
+dvfs_4_filt-b
+dvfs_4_rgb-yiq
+map_rgb-yiq_CLIENT_PE0
+rgb-yiq_master
+filt-r_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+map_src_CLIENT_PE4
+src_master
+filt-g_master
+map_sink_CLIENT_PE3
+sink_master
+C_cjpeg_filt-g
+cjpeg_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_rgb-yiq_filt-g
+dvfs_1_src
+rgb-yiq_slave
+C_rgb-yiq_cjpeg
+dvfs_4_filt-r
+dvfs_3_filt-b
+map_filt-b_CLIENT_PE6
+filt-b_master
+dvfs_0_sink
+map_src_CLIENT_PE9
+map_filt-r_CLIENT_PE3
+filt-r_master
+map_filt-g_CLIENT_PE0
+src_master
+map_cjpeg_CLIENT_PE15
+dvfs_4_filt-g
+filt-g_master
+map_sink_CLIENT_PE0
+sink_master
+dvfs_1_cjpeg
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-b_cjpeg
+C_filt-b_rgb-yiq
+dvfs_0_sink
+map_cjpeg_CLIENT_PE15
+dvfs_4_src
+map_filt-r_CLIENT_PE2
+dvfs_4_filt-g
+map_rgb-yiq_CLIENT_PE2
+dvfs_2_rgb-yiq
+rgb-yiq_master
+dvfs_3_filt-r
+filt-r_master
+map_filt-g_CLIENT_PE6
+filt-g_master
+C_filt-b_filt-r
+filt-b_slave
+dvfs_0_cjpeg
+cjpeg_master
+map_sink_CLIENT_PE5
+sink_master
+map_src_CLIENT_PE15
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_src
+map_filt-b_CLIENT_PE15
+map_filt-r_CLIENT_PE15
+C_filt-g_filt-r
+filt-g_slave
+dvfs_3_filt-r
+filt-r_master
+map_cjpeg_CLIENT_PE15
+dvfs_3_filt-b
+dvfs_1_sink
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+dvfs_2_cjpeg
+cjpeg_master
+C_filt-g_cjpeg
+map_src_CLIENT_PE9
+src_master
+map_sink_CLIENT_PE4
+sink_master
+filt-b_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_cjpeg
+dvfs_0_rgb-yiq
+dvfs_1_filt-b
+dvfs_0_src
+map_filt-b_CLIENT_PE14
+filt-b_master
+map_filt-r_CLIENT_PE0
+map_filt-g_CLIENT_PE6
+map_sink_CLIENT_PE14
+map_rgb-yiq_CLIENT_PE0
+rgb-yiq_master
+dvfs_0_filt-r
+filt-r_master
+map_cjpeg_CLIENT_PE6
+cjpeg_master
+dvfs_3_sink
+sink_master
+dvfs_1_filt-g
+filt-g_master
+map_src_CLIENT_PE8
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_sink
+map_rgb-yiq_CLIENT_PE6
+dvfs_0_src
+dvfs_4_filt-b
+dvfs_1_rgb-yiq
+rgb-yiq_master
+map_filt-r_CLIENT_PE15
+map_filt-g_CLIENT_PE14
+map_filt-b_CLIENT_PE15
+filt-b_master
+dvfs_2_filt-g
+filt-g_master
+dvfs_0_filt-r
+filt-r_master
+C_cjpeg_filt-r
+cjpeg_slave
+map_sink_CLIENT_PE16
+sink_master
+map_src_CLIENT_PE13
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-b
+C_rgb-yiq_filt-g
+rgb-yiq_slave
+dvfs_4_filt-r
+dvfs_3_src
+map_cjpeg_CLIENT_PE14
+map_filt-g_CLIENT_PE0
+dvfs_4_sink
+map_sink_CLIENT_PE3
+sink_master
+dvfs_1_cjpeg
+cjpeg_master
+map_filt-r_CLIENT_PE6
+filt-r_master
+map_src_CLIENT_PE0
+src_master
+dvfs_1_filt-g
+filt-g_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+C_rgb-yiq_cjpeg
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-g_src
+dvfs_4_filt-r
+map_filt-b_CLIENT_PE6
+dvfs_4_src
+map_filt-r_CLIENT_PE14
+filt-r_master
+dvfs_2_cjpeg
+filt-g_slave
+dvfs_0_filt-b
+filt-b_master
+dvfs_2_sink
+C_filt-g_filt-b
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+map_src_CLIENT_PE14
+src_master
+C_rgb-yiq_filt-b
+rgb-yiq_slave
+map_sink_CLIENT_PE13
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_src
+dvfs_3_filt-r
+dvfs_1_cjpeg
+C_filt-b_cjpeg
+map_rgb-yiq_CLIENT_PE2
+dvfs_0_filt-g
+dvfs_2_rgb-yiq
+rgb-yiq_master
+C_filt-b_rgb-yiq
+map_filt-r_CLIENT_PE14
+C_filt-b_src
+filt-b_slave
+map_sink_CLIENT_PE12
+filt-r_master
+map_cjpeg_CLIENT_PE6
+cjpeg_master
+dvfs_2_sink
+sink_master
+map_filt-g_CLIENT_PE3
+filt-g_master
+map_src_CLIENT_PE15
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-g_src
+C_rgb-yiq_filt-b
+rgb-yiq_slave
+filt-g_slave
+map_cjpeg_CLIENT_PE0
+map_filt-r_CLIENT_PE0
+dvfs_2_cjpeg
+cjpeg_master
+map_src_CLIENT_PE2
+C_filt-g_filt-b
+dvfs_0_filt-r
+filt-r_master
+map_sink_CLIENT_PE8
+dvfs_2_filt-b
+dvfs_4_src
+src_master
+map_filt-b_CLIENT_PE0
+filt-b_master
+dvfs_1_sink
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_filt-g_filt-r
+filt-g_slave
+map_rgb-yiq_CLIENT_PE14
+map_filt-r_CLIENT_PE15
+C_cjpeg_rgb-yiq
+C_filt-b_src
+filt-b_slave
+cjpeg_slave
+dvfs_4_rgb-yiq
+C_filt-b_rgb-yiq
+dvfs_4_sink
+dvfs_4_filt-r
+filt-r_master
+dvfs_2_src
+map_sink_CLIENT_PE8
+sink_master
+rgb-yiq_master
+map_src_CLIENT_PE3
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-r_CLIENT_PE0
+dvfs_0_filt-r
+C_sink_filt-r
+C_rgb-yiq_cjpeg
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+dvfs_0_cjpeg
+filt-r_master
+C_filt-b_filt-r
+filt-b_slave
+map_cjpeg_CLIENT_PE2
+cjpeg_master
+sink_slave
+map_src_CLIENT_PE11
+dvfs_3_src
+src_master
+C_filt-g_filt-r
+filt-g_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_filt-g
+dvfs_2_sink
+dvfs_1_filt-r
+dvfs_3_rgb-yiq
+map_filt-r_CLIENT_PE15
+filt-r_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+map_cjpeg_CLIENT_PE0
+dvfs_2_filt-b
+map_filt-b_CLIENT_PE2
+filt-b_master
+map_src_CLIENT_PE14
+dvfs_0_src
+src_master
+map_sink_CLIENT_PE0
+sink_master
+map_filt-g_CLIENT_PE15
+filt-g_master
+dvfs_4_cjpeg
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-g_CLIENT_PE6
+dvfs_1_filt-b
+map_filt-r_CLIENT_PE3
+dvfs_0_src
+map_cjpeg_CLIENT_PE2
+map_rgb-yiq_CLIENT_PE15
+dvfs_1_filt-g
+filt-g_master
+map_src_CLIENT_PE1
+src_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+C_sink_filt-g
+sink_slave
+dvfs_3_cjpeg
+dvfs_0_rgb-yiq
+rgb-yiq_master
+dvfs_2_filt-r
+filt-r_master
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_cjpeg
+C_sink_rgb-yiq
+C_filt-g_filt-r
+dvfs_4_filt-r
+dvfs_2_filt-b
+map_rgb-yiq_CLIENT_PE3
+sink_slave
+C_filt-g_rgb-yiq
+map_filt-r_CLIENT_PE15
+filt-r_master
+dvfs_4_src
+dvfs_4_rgb-yiq
+rgb-yiq_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+map_src_CLIENT_PE7
+src_master
+filt-g_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_rgb-yiq
+map_filt-r_CLIENT_PE14
+dvfs_3_filt-g
+dvfs_4_cjpeg
+map_sink_CLIENT_PE6
+dvfs_2_src
+map_filt-g_CLIENT_PE2
+filt-g_master
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+dvfs_1_filt-r
+filt-r_master
+map_src_CLIENT_PE4
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+dvfs_4_sink
+sink_master
+dvfs_1_filt-b
+src_master
+map_filt-b_CLIENT_PE3
+filt-b_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_sink_filt-g
+dvfs_2_src
+dvfs_2_filt-b
+map_rgb-yiq_CLIENT_PE15
+sink_slave
+dvfs_2_cjpeg
+map_filt-g_CLIENT_PE14
+dvfs_1_filt-g
+filt-g_master
+map_src_CLIENT_PE2
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+dvfs_4_rgb-yiq
+rgb-yiq_master
+C_filt-r_src
+filt-r_slave
+map_filt-b_CLIENT_PE2
+filt-b_master
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-r_CLIENT_PE6
+dvfs_3_filt-b
+dvfs_0_sink
+C_cjpeg_filt-b
+map_filt-b_CLIENT_PE6
+filt-b_master
+map_sink_CLIENT_PE14
+sink_master
+cjpeg_slave
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+dvfs_3_src
+dvfs_0_filt-r
+filt-r_master
+map_filt-g_CLIENT_PE14
+dvfs_4_filt-g
+filt-g_master
+map_src_CLIENT_PE0
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_3_cjpeg
+map_filt-g_CLIENT_PE0
+dvfs_3_src
+map_cjpeg_CLIENT_PE3
+cjpeg_master
+map_rgb-yiq_CLIENT_PE0
+map_filt-r_CLIENT_PE0
+map_sink_CLIENT_PE6
+dvfs_4_rgb-yiq
+rgb-yiq_master
+dvfs_2_sink
+sink_master
+dvfs_0_filt-r
+filt-r_master
+C_filt-b_filt-r
+filt-b_slave
+map_src_CLIENT_PE7
+src_master
+dvfs_4_filt-g
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-g
+dvfs_0_sink
+dvfs_0_filt-r
+map_filt-r_CLIENT_PE15
+filt-r_master
+dvfs_4_rgb-yiq
+map_src_CLIENT_PE12
+map_sink_CLIENT_PE16
+sink_master
+map_filt-g_CLIENT_PE15
+filt-g_master
+dvfs_1_filt-b
+dvfs_2_src
+src_master
+map_filt-b_CLIENT_PE3
+filt-b_master
+C_cjpeg_filt-b
+cjpeg_slave
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-g
+map_cjpeg_CLIENT_PE6
+C_filt-b_filt-r
+filt-b_slave
+dvfs_0_filt-r
+map_rgb-yiq_CLIENT_PE3
+dvfs_3_rgb-yiq
+rgb-yiq_master
+dvfs_2_cjpeg
+cjpeg_master
+dvfs_0_src
+C_filt-b_cjpeg
+map_filt-g_CLIENT_PE3
+filt-g_master
+map_filt-r_CLIENT_PE14
+filt-r_master
+C_sink_rgb-yiq
+sink_slave
+map_src_CLIENT_PE6
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_filt-b_CLIENT_PE3
+C_filt-g_cjpeg
+dvfs_1_src
+dvfs_0_filt-r
+dvfs_4_cjpeg
+map_filt-r_CLIENT_PE14
+filt-r_master
+dvfs_0_filt-b
+C_filt-g_src
+filt-g_slave
+map_src_CLIENT_PE0
+src_master
+map_cjpeg_CLIENT_PE14
+cjpeg_master
+filt-b_master
+C_rgb-yiq_filt-b
+rgb-yiq_slave
+C_sink_filt-b
+sink_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE14
+dvfs_0_filt-r
+dvfs_4_src
+map_src_CLIENT_PE3
+dvfs_0_filt-g
+map_filt-g_CLIENT_PE2
+filt-g_master
+C_filt-b_filt-r
+filt-b_slave
+C_filt-b_rgb-yiq
+src_master
+C_cjpeg_src
+cjpeg_slave
+dvfs_4_rgb-yiq
+rgb-yiq_master
+dvfs_3_sink
+map_filt-r_CLIENT_PE2
+filt-r_master
+map_sink_CLIENT_PE13
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_src
+C_filt-r_src
+map_src_CLIENT_PE15
+src_master
+map_cjpeg_CLIENT_PE3
+dvfs_0_filt-b
+dvfs_3_sink
+C_filt-g_filt-b
+map_filt-b_CLIENT_PE3
+filt-b_master
+dvfs_2_cjpeg
+cjpeg_master
+filt-r_slave
+map_sink_CLIENT_PE0
+sink_master
+map_rgb-yiq_CLIENT_PE14
+dvfs_2_rgb-yiq
+rgb-yiq_master
+C_filt-g_src
+filt-g_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_sink
+dvfs_2_rgb-yiq
+map_rgb-yiq_CLIENT_PE14
+rgb-yiq_master
+dvfs_2_src
+map_src_CLIENT_PE1
+src_master
+map_sink_CLIENT_PE5
+sink_master
+map_filt-r_CLIENT_PE6
+dvfs_3_filt-g
+map_filt-b_CLIENT_PE0
+map_filt-g_CLIENT_PE0
+map_cjpeg_CLIENT_PE14
+dvfs_3_cjpeg
+cjpeg_master
+dvfs_3_filt-r
+filt-r_master
+dvfs_1_filt-b
+filt-g_master
+filt-b_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_filt-r
+dvfs_1_filt-g
+dvfs_1_sink
+dvfs_2_src
+map_filt-g_CLIENT_PE14
+filt-g_master
+dvfs_2_filt-b
+map_rgb-yiq_CLIENT_PE6
+map_filt-r_CLIENT_PE2
+filt-r_master
+dvfs_1_cjpeg
+dvfs_0_rgb-yiq
+rgb-yiq_master
+map_src_CLIENT_PE5
+src_master
+map_filt-b_CLIENT_PE6
+filt-b_master
+map_sink_CLIENT_PE6
+sink_master
+map_cjpeg_CLIENT_PE6
+cjpeg_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_cjpeg_CLIENT_PE6
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+C_filt-g_filt-r
+dvfs_0_src
+dvfs_4_filt-r
+dvfs_0_filt-b
+C_filt-g_filt-b
+dvfs_3_sink
+dvfs_4_cjpeg
+filt-g_slave
+map_filt-r_CLIENT_PE15
+map_src_CLIENT_PE13
+src_master
+map_sink_CLIENT_PE2
+sink_master
+map_filt-b_CLIENT_PE14
+filt-b_master
+cjpeg_master
+filt-r_master
+C_rgb-yiq_cjpeg
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_filt-b
+dvfs_1_src
+dvfs_4_filt-g
+map_filt-r_CLIENT_PE2
+dvfs_0_filt-r
+filt-r_master
+C_rgb-yiq_src
+map_filt-b_CLIENT_PE14
+map_src_CLIENT_PE14
+filt-b_master
+dvfs_3_cjpeg
+map_cjpeg_CLIENT_PE2
+cjpeg_master
+rgb-yiq_slave
+map_filt-g_CLIENT_PE15
+filt-g_master
+src_master
+C_rgb-yiq_cjpeg
+C_sink_filt-r
+sink_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_src
+C_filt-g_src
+map_filt-r_CLIENT_PE3
+dvfs_1_cjpeg
+dvfs_0_filt-r
+filt-r_master
+map_filt-b_CLIENT_PE2
+filt-g_slave
+map_rgb-yiq_CLIENT_PE14
+dvfs_3_filt-b
+filt-b_master
+map_cjpeg_CLIENT_PE6
+cjpeg_master
+dvfs_3_rgb-yiq
+rgb-yiq_master
+map_src_CLIENT_PE6
+src_master
+C_filt-g_cjpeg
+dvfs_3_sink
+map_sink_CLIENT_PE13
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_sink
+dvfs_1_filt-r
+dvfs_0_src
+dvfs_1_rgb-yiq
+map_filt-g_CLIENT_PE6
+map_filt-r_CLIENT_PE0
+filt-r_master
+dvfs_0_filt-b
+map_src_CLIENT_PE9
+src_master
+map_cjpeg_CLIENT_PE14
+dvfs_2_cjpeg
+cjpeg_master
+map_rgb-yiq_CLIENT_PE3
+rgb-yiq_master
+map_filt-b_CLIENT_PE15
+filt-b_master
+dvfs_0_filt-g
+filt-g_master
+map_sink_CLIENT_PE2
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-b
+map_filt-r_CLIENT_PE3
+C_filt-g_rgb-yiq
+map_rgb-yiq_CLIENT_PE2
+C_filt-g_src
+map_sink_CLIENT_PE16
+dvfs_1_filt-r
+map_src_CLIENT_PE15
+map_filt-b_CLIENT_PE3
+filt-b_master
+C_cjpeg_src
+cjpeg_slave
+dvfs_4_rgb-yiq
+rgb-yiq_master
+dvfs_2_sink
+sink_master
+filt-r_master
+dvfs_1_src
+src_master
+filt-g_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_src
+map_filt-b_CLIENT_PE14
+dvfs_3_filt-b
+map_cjpeg_CLIENT_PE3
+map_filt-g_CLIENT_PE15
+map_rgb-yiq_CLIENT_PE2
+dvfs_4_rgb-yiq
+rgb-yiq_master
+map_filt-r_CLIENT_PE15
+map_sink_CLIENT_PE11
+filt-b_master
+dvfs_0_sink
+sink_master
+map_src_CLIENT_PE2
+src_master
+dvfs_2_cjpeg
+cjpeg_master
+dvfs_4_filt-r
+filt-r_master
+dvfs_2_filt-g
+filt-g_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_cjpeg_filt-b
+map_filt-r_CLIENT_PE14
+dvfs_3_filt-r
+filt-r_master
+dvfs_2_filt-b
+dvfs_0_rgb-yiq
+dvfs_4_filt-g
+dvfs_0_src
+map_src_CLIENT_PE12
+src_master
+cjpeg_slave
+map_filt-b_CLIENT_PE6
+filt-b_master
+map_filt-g_CLIENT_PE3
+filt-g_master
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+C_sink_filt-g
+sink_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_4_sink
+C_filt-b_rgb-yiq
+dvfs_3_src
+dvfs_2_rgb-yiq
+map_src_CLIENT_PE12
+src_master
+dvfs_3_cjpeg
+map_cjpeg_CLIENT_PE15
+cjpeg_master
+map_filt-r_CLIENT_PE2
+dvfs_3_filt-g
+map_sink_CLIENT_PE0
+sink_master
+C_filt-b_filt-r
+filt-b_slave
+map_rgb-yiq_CLIENT_PE3
+rgb-yiq_master
+map_filt-g_CLIENT_PE0
+filt-g_master
+dvfs_4_filt-r
+filt-r_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_cjpeg
+dvfs_1_rgb-yiq
+dvfs_0_sink
+C_filt-g_filt-r
+filt-g_slave
+map_filt-b_CLIENT_PE2
+map_filt-r_CLIENT_PE3
+dvfs_4_filt-b
+filt-b_master
+map_cjpeg_CLIENT_PE15
+cjpeg_master
+dvfs_4_src
+C_filt-g_cjpeg
+dvfs_4_filt-r
+filt-r_master
+map_rgb-yiq_CLIENT_PE0
+rgb-yiq_master
+map_sink_CLIENT_PE4
+sink_master
+map_src_CLIENT_PE11
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_rgb-yiq_CLIENT_PE3
+map_cjpeg_CLIENT_PE3
+dvfs_4_cjpeg
+cjpeg_master
+dvfs_2_rgb-yiq
+rgb-yiq_master
+map_filt-b_CLIENT_PE2
+dvfs_0_filt-b
+filt-b_master
+dvfs_1_src
+dvfs_2_filt-g
+dvfs_3_sink
+map_filt-g_CLIENT_PE2
+filt-g_master
+map_src_CLIENT_PE14
+src_master
+C_filt-r_src
+filt-r_slave
+map_sink_CLIENT_PE12
+sink_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_2_cjpeg
+dvfs_3_src
+dvfs_3_filt-g
+map_filt-b_CLIENT_PE0
+dvfs_3_filt-b
+filt-b_master
+map_filt-r_CLIENT_PE15
+map_cjpeg_CLIENT_PE3
+cjpeg_master
+dvfs_4_sink
+map_rgb-yiq_CLIENT_PE0
+map_filt-g_CLIENT_PE3
+filt-g_master
+dvfs_4_filt-r
+filt-r_master
+dvfs_4_rgb-yiq
+rgb-yiq_master
+map_sink_CLIENT_PE5
+sink_master
+map_src_CLIENT_PE10
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_rgb-yiq_filt-b
+C_filt-g_filt-r
+dvfs_2_src
+rgb-yiq_slave
+dvfs_4_filt-r
+filt-g_slave
+C_filt-g_filt-b
+dvfs_4_cjpeg
+map_filt-b_CLIENT_PE3
+map_src_CLIENT_PE12
+src_master
+dvfs_2_filt-b
+filt-b_master
+map_filt-r_CLIENT_PE15
+filt-r_master
+map_cjpeg_CLIENT_PE0
+cjpeg_master
+C_sink_filt-b
+sink_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_1_sink
+dvfs_0_rgb-yiq
+map_filt-r_CLIENT_PE14
+map_cjpeg_CLIENT_PE6
+dvfs_4_filt-b
+map_filt-b_CLIENT_PE15
+filt-b_master
+dvfs_4_filt-r
+filt-r_master
+dvfs_3_cjpeg
+cjpeg_master
+dvfs_0_filt-g
+map_rgb-yiq_CLIENT_PE3
+rgb-yiq_master
+map_filt-g_CLIENT_PE3
+filt-g_master
+map_sink_CLIENT_PE10
+sink_master
+map_src_CLIENT_PE9
+dvfs_3_src
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+C_rgb-yiq_src
+dvfs_1_filt-b
+dvfs_3_filt-g
+map_src_CLIENT_PE3
+dvfs_3_sink
+rgb-yiq_slave
+map_filt-r_CLIENT_PE3
+map_filt-g_CLIENT_PE2
+map_filt-b_CLIENT_PE14
+filt-b_master
+filt-g_master
+map_sink_CLIENT_PE6
+sink_master
+dvfs_0_filt-r
+filt-r_master
+C_cjpeg_filt-b
+cjpeg_slave
+dvfs_1_src
+src_master
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+map_cjpeg_CLIENT_PE3
+dvfs_1_filt-b
+dvfs_4_filt-g
+dvfs_1_rgb-yiq
+map_filt-b_CLIENT_PE3
+filt-b_master
+dvfs_1_src
+map_filt-r_CLIENT_PE6
+map_rgb-yiq_CLIENT_PE2
+rgb-yiq_master
+dvfs_4_filt-r
+filt-r_master
+map_filt-g_CLIENT_PE0
+filt-g_master
+dvfs_4_cjpeg
+cjpeg_master
+map_src_CLIENT_PE12
+src_master
+C_sink_filt-g
+sink_slave
+src
+filt-r
+filt-g
+filt-b
+rgb-yiq
+cjpeg
+sink
+Generated Individual
+dvfs_0_filt-r
+map_filt-b_CLIENT_PE2
+C_filt-g_src
+dvfs_2_filt-b
+map_rgb-yiq_CLIENT_PE2
+filt-g_slave
+map_cjpeg_CLIENT_PE15
+map_filt-r_CLIENT_PE15
+filt-r_master
+filt-b_master
+dvfs_1_cjpeg
+cjpeg_master
+dvfs_4_sink
+dvfs_4_rgb-yiq
+dvfs_2_src
+rgb-yiq_master
+map_src_CLIENT_PE15
+src_master
+map_sink_CLIENT_PE10
+sink_master
+Population Initiated
+Start of evolution TASK_GRAPH 0 
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> filt-b
+start time 0.000125
+end time 0.10612500000000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> cjpeg
+start time 0.138125
+end time 0.25201388888888887
+------> filt-g
+start time 0.000125
+end time 0.10412500000000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> rgb-yiq
+start time 0.10612500000000001
+end time 0.138125
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE12
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE7
+DVFS Level is 1
+------> sink
+start time 0.25201388888888887
+end time 0.25205934343434344
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> filt-r
+start time 0.000125
+end time 0.10412500000000001
+------> filt-g
+start time 0.000125
+end time 0.10412500000000001
+----------------------------------
+The total execution time is 0.25205934343434344
+The total energy is 5.368640864000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> filt-r
+start time 0.000125
+end time 0.004291666666666666
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> filt-g
+start time 0.000125
+end time 0.6501250000000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> rgb-yiq
+start time 0.6501250000000001
+end time 0.6690138888888889
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> cjpeg
+start time 0.6690138888888889
+end time 1.3096388888888888
+------> sink
+start time 1.3096388888888888
+end time 1.3096545138888889
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE7
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-b
+start time 0.000125
+end time 0.039215909090909086
+----------------------------------
+The total execution time is 1.3096545138888889
+The total energy is 10.529218450000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-g
+start time 1.5625e-05
+end time 0.03547017045454545
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE12
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> rgb-yiq
+start time 0.03547017045454545
+end time 0.25547017045454545
+------> cjpeg
+start time 0.25547017045454545
+end time 0.9154701704545455
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-b
+start time 1.5625e-05
+end time 0.017215625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> filt-r
+start time 1.5625e-05
+end time 0.021682291666666662
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE5
+DVFS Level is 0
+------> sink
+start time 0.9154701704545455
+end time 0.9155951704545455
+----------------------------------
+The total execution time is 0.9155951704545455
+The total energy is 4.889989586 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-r
+start time 0.000125
+end time 0.039215909090909086
+------> filt-g
+start time 0.000125
+end time 0.039215909090909086
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE10
+DVFS Level is 1
+------> sink
+start time 0.4546704545454545
+end time 0.4547159090909091
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+------> rgb-yiq
+start time 0.039215909090909086
+end time 0.05921590909090908
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> cjpeg
+start time 0.05921590909090908
+end time 0.4546704545454545
+------> filt-g
+start time 0.000125
+end time 0.039215909090909086
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-b
+start time 0.000125
+end time 0.003125
+----------------------------------
+The total execution time is 0.4547159090909091
+The total energy is 0.02952237 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 1.5625e-05
+end time 0.08126562500000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> filt-g
+start time 1.5625e-05
+end time 0.012203125
+------> filt-b
+start time 1.5625e-05
+end time 0.012203125
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE5
+DVFS Level is 0
+------> sink
+start time 4.286265625
+end time 4.286390625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> cjpeg
+start time 0.16126562500000002
+end time 4.286265625
+------> filt-b
+start time 1.5625e-05
+end time 0.012203125
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> rgb-yiq
+start time 0.08126562500000001
+end time 0.16126562500000002
+----------------------------------
+The total execution time is 4.286390625
+The total energy is 4.2908292800000005 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.0355
+------> rgb-yiq
+start time 0.05004545454545454
+end time 0.07404545454545454
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE10
+DVFS Level is 3
+------> sink
+start time 0.15604545454545454
+end time 0.15606545454545453
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> cjpeg
+start time 0.07404545454545454
+end time 0.15604545454545454
+------> rgb-yiq
+start time 0.05004545454545454
+end time 0.07404545454545454
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.05004545454545454
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.05004545454545454
+----------------------------------
+The total execution time is 0.15606545454545453
+The total energy is 5.239387649999999 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 0
+------> cjpeg
+start time 0.24998363636363635
+end time 0.9499836363636365
+------> filt-g
+start time 2e-05
+end time 0.23638363636363635
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-r
+start time 2e-05
+end time 0.23638363636363635
+------> filt-g
+start time 2e-05
+end time 0.23638363636363635
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> filt-b
+start time 2e-05
+end time 0.01562
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> rgb-yiq
+start time 0.23638363636363635
+end time 0.24998363636363635
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> sink
+start time 0.9499836363636365
+end time 0.9500114141414142
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE9
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+The total execution time is 0.9500114141414142
+The total energy is 1.1075897999999997 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.10402777777777779
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> rgb-yiq
+start time 0.14724999999999996
+end time 0.15452272727272723
+------> cjpeg
+start time 0.15452272727272723
+end time 0.22724999999999995
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE8
+DVFS Level is 1
+------> sink
+start time 0.22724999999999995
+end time 0.2272954545454545
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE12
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.14724999999999996
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.14724999999999996
+----------------------------------
+The total execution time is 0.2272954545454545
+The total energy is 1.404615866 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> sink
+start time 0.21622000000000002
+end time 0.2162477777777778
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> rgb-yiq
+start time 0.01722
+end time 0.04222
+------> filt-b
+start time 2e-05
+end time 0.01722
+------> filt-g
+start time 2e-05
+end time 0.0172075
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE10
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> filt-r
+start time 2e-05
+end time 0.006838181818181818
+------> filt-b
+start time 2e-05
+end time 0.01722
+------> filt-g
+start time 2e-05
+end time 0.0172075
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> cjpeg
+start time 0.04222
+end time 0.21622000000000002
+------> filt-b
+start time 2e-05
+end time 0.01722
+----------------------------------
+The total execution time is 0.2162477777777778
+The total energy is 3.94708975 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-b
+start time 0.000125
+end time 0.022125000000000002
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-g
+start time 0.000125
+end time 0.022125000000000002
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE13
+DVFS Level is 2
+------> sink
+start time 0.049625
+end time 0.04965277777777778
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> rgb-yiq
+start time 0.022125000000000002
+end time 0.024625
+------> cjpeg
+start time 0.024625
+end time 0.049625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> filt-r
+start time 0.000125
+end time 0.006943181818181818
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE12
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+The total execution time is 0.04965277777777778
+The total energy is 1.739110664 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.10752777777777776
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.10602777777777779
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> cjpeg
+start time 0.2794027777777778
+end time 0.39329166666666665
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> rgb-yiq
+start time 0.10752777777777776
+end time 0.2794027777777778
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE5
+DVFS Level is 2
+------> sink
+start time 0.39329166666666665
+end time 0.39331944444444444
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.10752777777777776
+----------------------------------
+The total execution time is 0.39331944444444444
+The total energy is 4.192287400000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> rgb-yiq
+start time 0.23648863636363635
+end time 0.3475997474747474
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> cjpeg
+start time 0.3475997474747474
+end time 1.1675997474747475
+------> filt-b
+start time 0.000125
+end time 0.10412500000000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE5
+DVFS Level is 1
+------> sink
+start time 1.1675997474747475
+end time 1.167645202020202
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-g
+start time 0.000125
+end time 0.003125
+------> filt-b
+start time 0.000125
+end time 0.10412500000000001
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-r
+start time 0.000125
+end time 0.23648863636363635
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE8
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+The total execution time is 1.167645202020202
+The total energy is 7.73756281 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> filt-g
+start time 0.000125
+end time 0.0123125
+------> filt-b
+start time 0.000125
+end time 0.0123125
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE4
+DVFS Level is 4
+------> sink
+start time 0.21912500000000001
+end time 0.219140625
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-r
+start time 0.000125
+end time 0.022125000000000002
+------> cjpeg
+start time 0.10712500000000001
+end time 0.21912500000000001
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> rgb-yiq
+start time 0.022125000000000002
+end time 0.10712500000000001
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE11
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+The total execution time is 0.219140625
+The total energy is 6.425585999999999 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.24095454545454545
+------> cjpeg
+start time 0.2545545454545455
+end time 1.7545545454545453
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> rgb-yiq
+start time 0.24095454545454545
+end time 0.2545545454545455
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE12
+DVFS Level is 2
+------> sink
+start time 1.7545545454545453
+end time 1.754582323232323
+----------------------------------
+The total execution time is 1.754582323232323
+The total energy is 0.7462426535000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.14726767676767674
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> rgb-yiq
+start time 0.14726767676767674
+end time 0.15046767676767675
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> cjpeg
+start time 0.15046767676767675
+end time 0.2643565656565656
+------> sink
+start time 0.2643565656565656
+end time 0.2643843434343434
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.017232954545454548
+----------------------------------
+The total execution time is 0.2643843434343434
+The total energy is 3.2823154500000005 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-r
+start time 1.5625e-05
+end time 0.23637926136363635
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+------> cjpeg
+start time 0.25526815025252525
+end time 0.31933065025252527
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-b
+start time 1.5625e-05
+end time 0.03547017045454545
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE8
+DVFS Level is 4
+------> sink
+start time 0.31933065025252527
+end time 0.3193462752525253
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-g
+start time 1.5625e-05
+end time 0.14446006944444442
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> rgb-yiq
+start time 0.23637926136363635
+end time 0.25526815025252525
+----------------------------------
+The total execution time is 0.3193462752525253
+The total energy is 6.5916008800000006 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.24095454545454545
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.0355
+------> cjpeg
+start time 0.27186363636363636
+end time 0.4582272727272727
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> rgb-yiq
+start time 0.24095454545454545
+end time 0.27186363636363636
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.018795454545454546
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> sink
+start time 0.4582272727272727
+end time 0.4582472727272727
+----------------------------------
+The total execution time is 0.4582472727272727
+The total energy is 0.9305030075000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> rgb-yiq
+start time 0.23637926136363635
+end time 0.31637926136363637
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE5
+DVFS Level is 0
+------> sink
+start time 0.3804417613636364
+end time 0.3805667613636364
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> cjpeg
+start time 0.31637926136363637
+end time 0.3804417613636364
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-g
+start time 1.5625e-05
+end time 0.23637926136363635
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-b
+start time 1.5625e-05
+end time 0.017215625
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+------> filt-r
+start time 1.5625e-05
+end time 0.08126562500000001
+----------------------------------
+The total execution time is 0.3805667613636364
+The total energy is 7.995548690000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> cjpeg
+start time 0.2555
+end time 0.9155
+------> rgb-yiq
+start time 0.0355
+end time 0.2555
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.0355
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.017245454545454546
+------> rgb-yiq
+start time 0.0355
+end time 0.2555
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.017245454545454546
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE8
+DVFS Level is 0
+------> sink
+start time 0.9155
+end time 0.915625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE9
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+----------------------------------
+The total execution time is 0.915625
+The total energy is 4.54339118 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-b
+start time 2e-05
+end time 0.2409290909090909
+------> rgb-yiq
+start time 0.2409290909090909
+end time 0.7409290909090909
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+------> filt-r
+start time 2e-05
+end time 0.10602000000000002
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> cjpeg
+start time 0.7409290909090909
+end time 1.5609290909090907
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> filt-g
+start time 2e-05
+end time 0.01877
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE8
+DVFS Level is 2
+------> sink
+start time 1.5609290909090907
+end time 1.5609568686868684
+----------------------------------
+The total execution time is 1.5609568686868684
+The total energy is 7.252436879999999 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> cjpeg
+start time 0.5828325
+end time 0.6078325
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> filt-g
+start time 2e-05
+end time 0.0172075
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.08283250000000002
+------> filt-b
+start time 2e-05
+end time 0.08283250000000002
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE11
+DVFS Level is 0
+------> sink
+start time 0.6078325
+end time 0.6079575
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> rgb-yiq
+start time 0.08283250000000002
+end time 0.5828325
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE8
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+The total execution time is 0.6079575
+The total energy is 3.2068601999999995 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-g
+start time 2e-05
+end time 0.09752000000000001
+------> sink
+start time 0.2204290909090909
+end time 0.2205540909090909
+------> filt-b
+start time 2e-05
+end time 0.09752000000000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-r
+start time 2e-05
+end time 0.10751999999999999
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> cjpeg
+start time 0.1384290909090909
+end time 0.2204290909090909
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> rgb-yiq
+start time 0.10751999999999999
+end time 0.1384290909090909
+------> filt-b
+start time 2e-05
+end time 0.09752000000000001
+----------------------------------
+The total execution time is 0.2205540909090909
+The total energy is 3.6239718374999996 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.00236375
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+------> filt-b
+start time 2e-05
+end time 0.10402000000000002
+------> filt-g
+start time 2e-05
+end time 0.02202
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> rgb-yiq
+start time 0.10402000000000002
+end time 0.18402000000000002
+------> cjpeg
+start time 0.18402000000000002
+end time 1.00402
+------> filt-b
+start time 2e-05
+end time 0.10402000000000002
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE16
+DVFS Level is 1
+------> sink
+start time 1.00402
+end time 1.0040654545454544
+----------------------------------
+The total execution time is 1.0040654545454544
+The total energy is 9.250113755 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> filt-b
+start time 0.000125
+end time 0.14734722222222219
+------> sink
+start time 0.3349472222222222
+end time 0.33497499999999997
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 0.000125
+end time 0.081375
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-g
+start time 0.000125
+end time 0.017325
+------> rgb-yiq
+start time 0.14734722222222219
+end time 0.16094722222222219
+------> cjpeg
+start time 0.16094722222222219
+end time 0.3349472222222222
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE7
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+The total execution time is 0.33497499999999997
+The total energy is 1.6540134400000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> rgb-yiq
+start time 0.039110909090909085
+end time 0.06411090909090908
+------> sink
+start time 0.4595654545454545
+end time 0.4595810795454545
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-r
+start time 2e-05
+end time 0.02202
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE8
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> filt-g
+start time 2e-05
+end time 0.00236375
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-b
+start time 2e-05
+end time 0.039110909090909085
+------> cjpeg
+start time 0.06411090909090908
+end time 0.4595654545454545
+----------------------------------
+The total execution time is 0.4595810795454545
+The total energy is 2.3663947 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-g
+start time 0.000125
+end time 0.035579545454545454
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> sink
+start time 0.8922840909090909
+end time 0.8923295454545455
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-b
+start time 0.000125
+end time 0.013562499999999998
+------> rgb-yiq
+start time 0.2410340909090909
+end time 0.2516590909090909
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-r
+start time 0.000125
+end time 0.2410340909090909
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE11
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> cjpeg
+start time 0.2516590909090909
+end time 0.8922840909090909
+----------------------------------
+The total execution time is 0.8923295454545455
+The total energy is 10.7427378 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.004194444444444443
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.03058333333333333
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> rgb-yiq
+start time 0.03058333333333333
+end time 0.049472222222222216
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.03058333333333333
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> cjpeg
+start time 0.049472222222222216
+end time 0.09391666666666665
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.004194444444444443
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.03058333333333333
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE5
+DVFS Level is 1
+------> sink
+start time 0.09391666666666665
+end time 0.09396212121212119
+----------------------------------
+The total execution time is 0.09396212121212119
+The total energy is 1.1866770900000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> rgb-yiq
+start time 0.14726767676767674
+end time 0.14976767676767674
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> cjpeg
+start time 0.14976767676767674
+end time 1.0664343434343433
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.14726767676767674
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE9
+DVFS Level is 2
+------> sink
+start time 1.0664343434343433
+end time 1.066462121212121
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.14726767676767674
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.0355
+----------------------------------
+The total execution time is 1.066462121212121
+The total energy is 2.2834732900000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+------> filt-g
+start time 2e-05
+end time 0.023908888888888882
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> filt-b
+start time 2e-05
+end time 0.023908888888888882
+------> filt-g
+start time 2e-05
+end time 0.023908888888888882
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> rgb-yiq
+start time 0.023908888888888882
+end time 0.048908888888888884
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.013457499999999997
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> cjpeg
+start time 0.048908888888888884
+end time 0.16279777777777774
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> sink
+start time 0.16279777777777774
+end time 0.1628255555555555
+----------------------------------
+The total execution time is 0.1628255555555555
+The total energy is 3.5130451375000007 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-b
+start time 2e-05
+end time 0.039110909090909085
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> rgb-yiq
+start time 0.6625200000000001
+end time 0.6958533333333334
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.0122075
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> sink
+start time 0.7833533333333335
+end time 0.7833689583333334
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> cjpeg
+start time 0.6958533333333334
+end time 0.7833533333333335
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> filt-g
+start time 2e-05
+end time 0.6625200000000001
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+The total execution time is 0.7833689583333334
+The total energy is 7.4114449775 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE1
+DVFS Level is 1
+------> sink
+start time 5.604125
+end time 5.6041704545454545
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> filt-r
+start time 0.000125
+end time 0.10412500000000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> filt-g
+start time 0.000125
+end time 0.015725
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> filt-b
+start time 0.000125
+end time 0.00246875
+------> rgb-yiq
+start time 0.10412500000000001
+end time 1.479125
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> cjpeg
+start time 1.479125
+end time 5.604125
+------> rgb-yiq
+start time 0.10412500000000001
+end time 1.479125
+----------------------------------
+The total execution time is 5.6041704545454545
+The total energy is 1.67126727 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-g
+start time 2e-05
+end time 0.14446444444444442
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> cjpeg
+start time 0.1644644444444444
+end time 2.028100808080808
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-b
+start time 2e-05
+end time 0.03057555555555555
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> sink
+start time 2.028100808080808
+end time 2.028120808080808
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> rgb-yiq
+start time 0.14446444444444442
+end time 0.1644644444444444
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.08127000000000001
+----------------------------------
+The total execution time is 2.028120808080808
+The total energy is 3.3503120000000006 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> cjpeg
+start time 0.1121868686868687
+end time 1.2510757575757574
+------> sink
+start time 1.2510757575757574
+end time 1.2511035353535351
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> rgb-yiq
+start time 0.08127777777777778
+end time 0.1121868686868687
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.03548232323232323
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.08127777777777778
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.08127777777777778
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.08127777777777778
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE13
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+The total execution time is 1.2511035353535351
+The total energy is 6.248394500000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> rgb-yiq
+start time 0.017325
+end time 0.037325
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-g
+start time 0.000125
+end time 0.017325
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-b
+start time 0.000125
+end time 0.003125
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> cjpeg
+start time 0.037325
+end time 0.549825
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE5
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 0.000125
+end time 0.013562499999999998
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> sink
+start time 0.549825
+end time 0.54995
+----------------------------------
+The total execution time is 0.54995
+The total energy is 0.12174349000000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> cjpeg
+start time 0.07004545454545454
+end time 0.25640909090909086
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.0355
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.0355
+------> sink
+start time 0.25640909090909086
+end time 0.25645454545454544
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+------> rgb-yiq
+start time 0.03913636363636363
+end time 0.07004545454545454
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.0030454545454545456
+----------------------------------
+The total execution time is 0.25645454545454544
+The total energy is 0.8476018150000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> cjpeg
+start time 0.31376136363636364
+end time 0.5554280303030303
+------> filt-b
+start time 0.000125
+end time 0.024013888888888883
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> filt-r
+start time 0.000125
+end time 0.050124999999999996
+------> rgb-yiq
+start time 0.2410340909090909
+end time 0.31376136363636364
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> sink
+start time 0.5554280303030303
+end time 0.5554436553030303
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-g
+start time 0.000125
+end time 0.2410340909090909
+------> filt-b
+start time 0.000125
+end time 0.024013888888888883
+----------------------------------
+The total execution time is 0.5554436553030303
+The total energy is 0.5561748000000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> sink
+start time 1.7540199999999997
+end time 1.7540399999999996
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> cjpeg
+start time 0.25402
+end time 1.7540199999999997
+------> rgb-yiq
+start time 0.10402000000000002
+end time 0.25402
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> filt-b
+start time 2e-05
+end time 0.10402000000000002
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-r
+start time 2e-05
+end time 0.09752000000000001
+------> rgb-yiq
+start time 0.10402000000000002
+end time 0.25402
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-g
+start time 2e-05
+end time 0.08283250000000002
+----------------------------------
+The total execution time is 1.7540399999999996
+The total energy is 2.5771736875 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> rgb-yiq
+start time 0.14446006944444442
+end time 0.14766006944444443
+------> cjpeg
+start time 0.14766006944444443
+end time 0.17966006944444443
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-g
+start time 1.5625e-05
+end time 0.14446006944444442
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-b
+start time 1.5625e-05
+end time 0.003015625
+------> sink
+start time 0.17966006944444443
+end time 0.17968006944444442
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 1.5625e-05
+end time 0.08126562500000001
+----------------------------------
+The total execution time is 0.17968006944444442
+The total energy is 1.9914388400000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.03058333333333333
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.1444722222222222
+------> cjpeg
+start time 0.3644722222222222
+end time 1.503361111111111
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.02202777777777778
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> rgb-yiq
+start time 0.1444722222222222
+end time 0.3644722222222222
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE16
+DVFS Level is 4
+------> sink
+start time 1.503361111111111
+end time 1.503376736111111
+----------------------------------
+The total execution time is 1.503376736111111
+The total energy is 5.8863397200000005 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.08284027777777779
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.08284027777777779
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.09752777777777778
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE11
+DVFS Level is 2
+------> sink
+start time 0.3260732323232324
+end time 0.32610101010101017
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> rgb-yiq
+start time 0.09752777777777778
+end time 0.15207323232323233
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.08284027777777779
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE13
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> cjpeg
+start time 0.15207323232323233
+end time 0.3260732323232324
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.08284027777777779
+----------------------------------
+The total execution time is 0.32610101010101017
+The total energy is 2.1344572 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+------> filt-r
+start time 2e-05
+end time 0.10602000000000002
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> cjpeg
+start time 0.36724222222222225
+end time 0.5412422222222223
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> rgb-yiq
+start time 0.1472422222222222
+end time 0.36724222222222225
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> filt-b
+start time 2e-05
+end time 0.1472422222222222
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-g
+start time 2e-05
+end time 0.013457499999999997
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE12
+DVFS Level is 0
+------> sink
+start time 0.5412422222222223
+end time 0.5413672222222223
+----------------------------------
+The total execution time is 0.5413672222222223
+The total energy is 1.9522383140000004 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> cjpeg
+start time 0.32601562500000003
+end time 0.838515625
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> rgb-yiq
+start time 0.10601562500000002
+end time 0.32601562500000003
+------> filt-b
+start time 1.5625e-05
+end time 0.10601562500000002
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+------> filt-b
+start time 1.5625e-05
+end time 0.10601562500000002
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> filt-r
+start time 1.5625e-05
+end time 0.004182291666666666
+------> filt-g
+start time 1.5625e-05
+end time 0.004182291666666666
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> sink
+start time 0.838515625
+end time 0.83853125
+----------------------------------
+The total execution time is 0.83853125
+The total energy is 2.6112294400000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> filt-g
+start time 2e-05
+end time 0.021686666666666663
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE1
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> filt-b
+start time 2e-05
+end time 0.6625200000000001
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> filt-r
+start time 2e-05
+end time 0.01562
+------> rgb-yiq
+start time 0.6625200000000001
+end time 0.6657200000000001
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE4
+DVFS Level is 4
+------> sink
+start time 0.6977200000000001
+end time 0.6977356250000001
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> cjpeg
+start time 0.6657200000000001
+end time 0.6977200000000001
+------> rgb-yiq
+start time 0.6625200000000001
+end time 0.6657200000000001
+----------------------------------
+The total execution time is 0.6977356250000001
+The total energy is 2.32218195 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> rgb-yiq
+start time 0.14734722222222219
+end time 0.16734722222222218
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> filt-b
+start time 0.000125
+end time 0.14734722222222219
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-r
+start time 0.000125
+end time 0.14456944444444442
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-g
+start time 0.000125
+end time 0.03068055555555555
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> cjpeg
+start time 0.16734722222222218
+end time 1.6673472222222219
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE11
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE11
+DVFS Level is 1
+------> sink
+start time 1.6673472222222219
+end time 1.6673926767676763
+----------------------------------
+The total execution time is 1.6673926767676763
+The total energy is 1.6917542750000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> rgb-yiq
+start time 0.08126562500000001
+end time 0.15399289772727273
+------> filt-b
+start time 1.5625e-05
+end time 0.039106534090909084
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE12
+DVFS Level is 3
+------> sink
+start time 5.278992897727273
+end time 5.279012897727273
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-g
+start time 1.5625e-05
+end time 0.08126562500000001
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-r
+start time 1.5625e-05
+end time 0.039106534090909084
+------> filt-b
+start time 1.5625e-05
+end time 0.039106534090909084
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> cjpeg
+start time 0.15399289772727273
+end time 5.278992897727273
+------> filt-b
+start time 1.5625e-05
+end time 0.039106534090909084
+----------------------------------
+The total execution time is 5.279012897727273
+The total energy is 1.8444760125 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> rgb-yiq
+start time 0.10402777777777779
+end time 0.1840277777777778
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.10402777777777779
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.050027777777777775
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.10402777777777779
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.050027777777777775
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> sink
+start time 0.8246527777777778
+end time 0.8246727777777778
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE7
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> cjpeg
+start time 0.1840277777777778
+end time 0.8246527777777778
+----------------------------------
+The total execution time is 0.8246727777777778
+The total energy is 12.333869400000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.14448989898989897
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> cjpeg
+start time 0.15511489898989897
+end time 0.9751148989898989
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.006863636363636363
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE4
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> rgb-yiq
+start time 0.14448989898989897
+end time 0.15511489898989897
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE5
+DVFS Level is 0
+------> sink
+start time 0.9751148989898989
+end time 0.9752398989898989
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.08129545454545455
+----------------------------------
+The total execution time is 0.9752398989898989
+The total energy is 8.16769139 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.6500277777777778
+------> rgb-yiq
+start time 0.6500277777777778
+end time 1.1500277777777779
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.02202777777777778
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> cjpeg
+start time 1.1500277777777779
+end time 1.2227550505050506
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE10
+DVFS Level is 4
+------> sink
+start time 1.2227550505050506
+end time 1.2227706755050507
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE1
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.0068459595959595955
+----------------------------------
+The total execution time is 1.2227706755050507
+The total energy is 0.76719668 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> cjpeg
+start time 0.10282812500000002
+end time 0.16689062500000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-r
+start time 1.5625e-05
+end time 0.03057118055555555
+------> filt-b
+start time 1.5625e-05
+end time 0.018765624999999998
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE11
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-g
+start time 1.5625e-05
+end time 0.08282812500000002
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> rgb-yiq
+start time 0.08282812500000002
+end time 0.10282812500000002
+------> filt-b
+start time 1.5625e-05
+end time 0.018765624999999998
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE4
+DVFS Level is 4
+------> sink
+start time 0.16689062500000001
+end time 0.16690625
+----------------------------------
+The total execution time is 0.16690625
+The total energy is 7.461568 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> rgb-yiq
+start time 0.2410340909090909
+end time 0.2650340909090909
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-b
+start time 0.000125
+end time 0.2410340909090909
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-r
+start time 0.000125
+end time 0.08293750000000001
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-g
+start time 0.000125
+end time 0.022125000000000002
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+------> cjpeg
+start time 0.2650340909090909
+end time 4.390034090909091
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE1
+DVFS Level is 2
+------> sink
+start time 4.390034090909091
+end time 4.390061868686868
+----------------------------------
+The total execution time is 4.390061868686868
+The total energy is 2.7933151599999997 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> filt-b
+start time 2e-05
+end time 0.006838181818181818
+------> cjpeg
+start time 0.12274727272727272
+end time 0.19547454545454546
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> filt-r
+start time 2e-05
+end time 0.050019999999999995
+------> rgb-yiq
+start time 0.050019999999999995
+end time 0.12274727272727272
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE7
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> filt-g
+start time 2e-05
+end time 0.01562
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE4
+DVFS Level is 1
+------> sink
+start time 0.19547454545454546
+end time 0.19552
+----------------------------------
+The total execution time is 0.19552
+The total energy is 1.05211255 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> rgb-yiq
+start time 0.13752
+end time 0.21752000000000002
+------> filt-g
+start time 2e-05
+end time 0.10402000000000002
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> filt-r
+start time 2e-05
+end time 0.004186666666666666
+------> filt-g
+start time 2e-05
+end time 0.10402000000000002
+------> sink
+start time 0.47206545454545457
+end time 0.47209323232323236
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE12
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> cjpeg
+start time 0.21752000000000002
+end time 0.47206545454545457
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE2
+DVFS Level is 0
+------> filt-b
+start time 2e-05
+end time 0.13752
+----------------------------------
+The total execution time is 0.47209323232323236
+The total energy is 2.1522151125 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> cjpeg
+start time 0.11112000000000001
+end time 1.0277866666666666
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-b
+start time 2e-05
+end time 0.09752000000000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-g
+start time 2e-05
+end time 0.08283250000000002
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE1
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> rgb-yiq
+start time 0.09752000000000001
+end time 0.11112000000000001
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE11
+DVFS Level is 0
+------> sink
+start time 1.0277866666666666
+end time 1.0279116666666666
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.0172075
+----------------------------------
+The total execution time is 1.0279116666666666
+The total energy is 3.7268514500000007 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> cjpeg
+start time 0.103765625
+end time 0.34543229166666667
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-r
+start time 1.5625e-05
+end time 0.003015625
+------> filt-b
+start time 1.5625e-05
+end time 0.003015625
+------> sink
+start time 0.34543229166666667
+end time 0.3454522916666667
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE11
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> filt-g
+start time 1.5625e-05
+end time 0.018765624999999998
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> rgb-yiq
+start time 0.018765624999999998
+end time 0.103765625
+----------------------------------
+The total execution time is 0.3454522916666667
+The total energy is 0.0594044 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-r
+start time 2e-05
+end time 0.23638363636363635
+------> sink
+start time 0.34111090909090913
+end time 0.3411563636363637
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> cjpeg
+start time 0.3091109090909091
+end time 0.34111090909090913
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+------> filt-g
+start time 2e-05
+end time 0.10602000000000002
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> rgb-yiq
+start time 0.23638363636363635
+end time 0.3091109090909091
+------> filt-g
+start time 2e-05
+end time 0.10602000000000002
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-b
+start time 2e-05
+end time 0.01722
+----------------------------------
+The total execution time is 0.3411563636363637
+The total energy is 1.2181615000000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> cjpeg
+start time 0.05303409090909091
+end time 0.23939772727272726
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-b
+start time 0.000125
+end time 0.013562499999999998
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-r
+start time 0.000125
+end time 0.003125
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE9
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-g
+start time 0.000125
+end time 0.022125000000000002
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> rgb-yiq
+start time 0.022125000000000002
+end time 0.05303409090909091
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE12
+DVFS Level is 1
+------> sink
+start time 0.23939772727272726
+end time 0.2394431818181818
+----------------------------------
+The total execution time is 0.2394431818181818
+The total energy is 1.4080148565 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+------> filt-b
+start time 2e-05
+end time 0.10402000000000002
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-g
+start time 2e-05
+end time 0.14446444444444442
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> cjpeg
+start time 0.17646444444444442
+end time 0.9964644444444444
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE16
+DVFS Level is 1
+------> sink
+start time 0.9964644444444444
+end time 0.996509898989899
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-r
+start time 2e-05
+end time 0.02202
+------> rgb-yiq
+start time 0.14446444444444442
+end time 0.17646444444444442
+----------------------------------
+The total execution time is 0.996509898989899
+The total energy is 9.327625005000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> rgb-yiq
+start time 0.23638363636363635
+end time 0.2697169696969697
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> cjpeg
+start time 0.2697169696969697
+end time 0.4697169696969697
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+------> filt-r
+start time 2e-05
+end time 0.01722
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE1
+DVFS Level is 1
+------> sink
+start time 0.4697169696969697
+end time 0.46976242424242426
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> filt-b
+start time 2e-05
+end time 0.10602000000000002
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-g
+start time 2e-05
+end time 0.23638363636363635
+----------------------------------
+The total execution time is 0.46976242424242426
+The total energy is 1.2409150875000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> rgb-yiq
+start time 0.23648863636363635
+end time 0.4083636363636364
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> filt-r
+start time 0.000125
+end time 0.004291666666666666
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-b
+start time 0.000125
+end time 0.013562499999999998
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE4
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-g
+start time 0.000125
+end time 0.23648863636363635
+------> cjpeg
+start time 0.4083636363636364
+end time 2.272
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> sink
+start time 2.272
+end time 2.272015625
+----------------------------------
+The total execution time is 2.272015625
+The total energy is 3.2175732000000004 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.0030454545454545456
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.012232954545454545
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE9
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.08285795454545455
+------> rgb-yiq
+start time 0.08285795454545455
+end time 0.11376704545454547
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> sink
+start time 0.5092215909090909
+end time 0.509346590909091
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> cjpeg
+start time 0.11376704545454547
+end time 0.5092215909090909
+------> rgb-yiq
+start time 0.08285795454545455
+end time 0.11376704545454547
+----------------------------------
+The total execution time is 0.509346590909091
+The total energy is 3.81607217 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> rgb-yiq
+start time 0.022015625
+end time 0.06646006944444444
+------> filt-b
+start time 1.5625e-05
+end time 0.022015625
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-r
+start time 1.5625e-05
+end time 0.022015625
+------> filt-b
+start time 1.5625e-05
+end time 0.022015625
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> filt-g
+start time 1.5625e-05
+end time 0.002359375
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> cjpeg
+start time 0.06646006944444444
+end time 1.1539600694444443
+------> filt-b
+start time 1.5625e-05
+end time 0.022015625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE5
+DVFS Level is 0
+------> sink
+start time 1.1539600694444443
+end time 1.1540850694444442
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+The total execution time is 1.1540850694444442
+The total energy is 2.2816763200000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-r
+start time 0.000125
+end time 0.017325
+------> filt-g
+start time 0.000125
+end time 0.024013888888888883
+------> rgb-yiq
+start time 0.024013888888888883
+end time 0.037613888888888884
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> cjpeg
+start time 0.037613888888888884
+end time 0.27928055555555553
+------> filt-g
+start time 0.000125
+end time 0.024013888888888883
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE9
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE4
+DVFS Level is 1
+------> sink
+start time 0.27928055555555553
+end time 0.2793260101010101
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> filt-b
+start time 0.000125
+end time 0.017325
+----------------------------------
+The total execution time is 0.2793260101010101
+The total energy is 0.03870056000000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-b
+start time 0.000125
+end time 0.23648863636363635
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> rgb-yiq
+start time 0.6626250000000001
+end time 2.0376250000000002
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> filt-r
+start time 0.000125
+end time 0.6626250000000001
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> cjpeg
+start time 2.0376250000000002
+end time 2.062625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> sink
+start time 2.062625
+end time 2.0626450000000003
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> filt-g
+start time 0.000125
+end time 0.006943181818181818
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE8
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+The total execution time is 2.0626450000000003
+The total energy is 0.53049617 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> rgb-yiq
+start time 0.14456944444444442
+end time 0.15184217171717168
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-b
+start time 0.000125
+end time 0.013562499999999998
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-g
+start time 0.000125
+end time 0.14456944444444442
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-r
+start time 0.000125
+end time 0.10762499999999998
+------> cjpeg
+start time 0.15184217171717168
+end time 1.2393421717171715
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE16
+DVFS Level is 2
+------> sink
+start time 1.2393421717171715
+end time 1.2393699494949493
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE13
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+The total execution time is 1.2393699494949493
+The total energy is 0.43287582000000013 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> sink
+start time 2.2863836363636363
+end time 2.2863992613636364
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> cjpeg
+start time 0.42274727272727275
+end time 2.2863836363636363
+------> rgb-yiq
+start time 0.2409290909090909
+end time 0.42274727272727275
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.00236375
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-g
+start time 2e-05
+end time 0.2409290909090909
+------> rgb-yiq
+start time 0.2409290909090909
+end time 0.42274727272727275
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-b
+start time 2e-05
+end time 0.10751999999999999
+----------------------------------
+The total execution time is 2.2863992613636364
+The total energy is 1.7091748000000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 1.5625e-05
+end time 0.08126562500000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> filt-b
+start time 1.5625e-05
+end time 0.018765624999999998
+------> filt-g
+start time 1.5625e-05
+end time 0.018765624999999998
+------> rgb-yiq
+start time 0.08126562500000001
+end time 0.10126562500000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> cjpeg
+start time 0.10126562500000001
+end time 1.0179322916666664
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+------> filt-g
+start time 1.5625e-05
+end time 0.018765624999999998
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE13
+DVFS Level is 2
+------> sink
+start time 1.0179322916666664
+end time 1.0179600694444442
+----------------------------------
+The total execution time is 1.0179600694444442
+The total energy is 4.374880400000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> rgb-yiq
+start time 0.10404545454545455
+end time 0.148489898989899
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.10404545454545455
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> cjpeg
+start time 0.148489898989899
+end time 0.22121717171717173
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE12
+DVFS Level is 2
+------> sink
+start time 0.22121717171717173
+end time 0.2212449494949495
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.09754545454545455
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+----------------------------------
+The total execution time is 0.2212449494949495
+The total energy is 1.7479087035000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> cjpeg
+start time 0.9680711805555555
+end time 1.884737847222222
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> filt-r
+start time 1.5625e-05
+end time 0.662515625
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+------> filt-g
+start time 1.5625e-05
+end time 0.1472378472222222
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> filt-b
+start time 1.5625e-05
+end time 0.1472378472222222
+------> rgb-yiq
+start time 0.662515625
+end time 0.9680711805555555
+------> filt-g
+start time 1.5625e-05
+end time 0.1472378472222222
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE8
+DVFS Level is 1
+------> sink
+start time 1.884737847222222
+end time 1.8847833017676765
+----------------------------------
+The total execution time is 1.8847833017676765
+The total energy is 3.971470520000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.013465277777777776
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.013465277777777776
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE8
+DVFS Level is 4
+------> sink
+start time 0.7844027777777778
+end time 0.7844184027777777
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> rgb-yiq
+start time 0.08127777777777778
+end time 0.14377777777777778
+------> cjpeg
+start time 0.14377777777777778
+end time 0.7844027777777778
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.08127777777777778
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.08127777777777778
+----------------------------------
+The total execution time is 0.7844184027777777
+The total energy is 13.218794080000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> filt-r
+start time 2e-05
+end time 0.6625200000000001
+------> sink
+start time 2.7375200000000004
+end time 2.7376450000000006
+------> rgb-yiq
+start time 0.6625200000000001
+end time 2.03752
+------> filt-b
+start time 2e-05
+end time 0.6625200000000001
+------> filt-g
+start time 2e-05
+end time 0.6625200000000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 0
+------> cjpeg
+start time 2.03752
+end time 2.7375200000000004
+------> rgb-yiq
+start time 0.6625200000000001
+end time 2.03752
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE11
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+The total execution time is 2.7376450000000006
+The total energy is 0.18411343500000005 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-r
+start time 0.000125
+end time 0.039215909090909086
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> rgb-yiq
+start time 0.039215909090909086
+end time 0.05281590909090909
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-b
+start time 0.000125
+end time 0.03068055555555555
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> sink
+start time 0.568440909090909
+end time 0.5684686868686868
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-g
+start time 0.000125
+end time 0.013562499999999998
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> cjpeg
+start time 0.05281590909090909
+end time 0.568440909090909
+----------------------------------
+The total execution time is 0.5684686868686868
+The total energy is 5.773748590000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> filt-g
+start time 0.000125
+end time 0.006943181818181818
+------> sink
+start time 0.23621590909090912
+end time 0.23626136363636366
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE1
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> filt-b
+start time 0.000125
+end time 0.039215909090909086
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> rgb-yiq
+start time 0.039215909090909086
+end time 0.1242159090909091
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> filt-r
+start time 0.000125
+end time 0.021791666666666664
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> cjpeg
+start time 0.1242159090909091
+end time 0.23621590909090912
+----------------------------------
+The total execution time is 0.23626136363636366
+The total energy is 3.8583426500000004 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 1.5625e-05
+end time 0.013453124999999998
+------> filt-g
+start time 1.5625e-05
+end time 0.012203125
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> rgb-yiq
+start time 0.02390451388888888
+end time 0.042654513888888884
+------> sink
+start time 0.7026545138888889
+end time 0.7026701388888889
+------> filt-g
+start time 1.5625e-05
+end time 0.012203125
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> filt-b
+start time 1.5625e-05
+end time 0.02390451388888888
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> cjpeg
+start time 0.042654513888888884
+end time 0.7026545138888889
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE7
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+The total execution time is 0.7026701388888889
+The total energy is 6.155875399999999 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.02202777777777778
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> rgb-yiq
+start time 0.23639141414141412
+end time 0.25639141414141414
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.23639141414141412
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> cjpeg
+start time 0.25639141414141414
+end time 0.7720164141414141
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> sink
+start time 0.7720164141414141
+end time 0.772032039141414
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE4
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.03548232323232323
+----------------------------------
+The total execution time is 0.772032039141414
+The total energy is 6.384871 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.23639141414141412
+------> sink
+start time 1.1636830808080807
+end time 1.1637285353535352
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 2
+------> cjpeg
+start time 0.24701641414141412
+end time 1.1636830808080807
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> rgb-yiq
+start time 0.23639141414141412
+end time 0.24701641414141412
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.03058333333333333
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.03058333333333333
+----------------------------------
+The total execution time is 1.1637285353535352
+The total energy is 2.586396650000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-b
+start time 2e-05
+end time 0.00302
+------> cjpeg
+start time 0.10127000000000001
+end time 0.13327
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> sink
+start time 0.13327
+end time 0.13339499999999999
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> filt-r
+start time 2e-05
+end time 0.01877
+------> rgb-yiq
+start time 0.08127000000000001
+end time 0.10127000000000001
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-g
+start time 2e-05
+end time 0.08127000000000001
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+The total execution time is 0.13339499999999999
+The total energy is 1.5510460000000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> cjpeg
+start time 0.8343950000000001
+end time 0.9163950000000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> rgb-yiq
+start time 0.6625200000000001
+end time 0.8343950000000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> sink
+start time 0.9163950000000001
+end time 0.9164227777777778
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 0
+------> filt-r
+start time 2e-05
+end time 0.6625200000000001
+------> filt-b
+start time 2e-05
+end time 0.6625200000000001
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE7
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-g
+start time 2e-05
+end time 0.08283250000000002
+----------------------------------
+The total execution time is 0.9164227777777778
+The total energy is 6.2856678 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.10752777777777776
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE16
+DVFS Level is 0
+------> sink
+start time 0.3045164141414141
+end time 0.3046414141414141
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.10752777777777776
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE12
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.03548232323232323
+------> cjpeg
+start time 0.11815277777777776
+end time 0.3045164141414141
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> rgb-yiq
+start time 0.10752777777777776
+end time 0.11815277777777776
+----------------------------------
+The total execution time is 0.3046414141414141
+The total energy is 0.832108626 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> rgb-yiq
+start time 0.6501250000000001
+end time 0.6741250000000001
+------> sink
+start time 0.7185694444444445
+end time 0.7185894444444445
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> cjpeg
+start time 0.6741250000000001
+end time 0.7185694444444445
+------> filt-b
+start time 0.000125
+end time 0.004291666666666666
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-g
+start time 0.000125
+end time 0.097625
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> filt-r
+start time 0.000125
+end time 0.6501250000000001
+------> filt-b
+start time 0.000125
+end time 0.004291666666666666
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+The total execution time is 0.7185894444444445
+The total energy is 1.2233501999999996 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.6500454545454546
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.24095454545454545
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> cjpeg
+start time 0.8000454545454546
+end time 1.4406704545454545
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.24095454545454545
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.09754545454545455
+------> rgb-yiq
+start time 0.6500454545454546
+end time 0.8000454545454546
+------> sink
+start time 1.4406704545454545
+end time 1.4407954545454544
+----------------------------------
+The total execution time is 1.4407954545454544
+The total energy is 11.995001760000003 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 0
+------> filt-g
+start time 1.5625e-05
+end time 0.137515625
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+------> cjpeg
+start time 0.200015625
+end time 0.264078125
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> rgb-yiq
+start time 0.137515625
+end time 0.200015625
+------> filt-b
+start time 1.5625e-05
+end time 0.08126562500000001
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 0
+------> filt-r
+start time 1.5625e-05
+end time 0.137515625
+------> filt-b
+start time 1.5625e-05
+end time 0.08126562500000001
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE13
+DVFS Level is 3
+------> sink
+start time 0.264078125
+end time 0.264098125
+----------------------------------
+The total execution time is 0.264098125
+The total energy is 8.2872561 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+------> filt-r
+start time 1.5625e-05
+end time 0.013453124999999998
+------> filt-g
+start time 1.5625e-05
+end time 0.013453124999999998
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-b
+start time 1.5625e-05
+end time 0.09751562500000001
+------> filt-g
+start time 1.5625e-05
+end time 0.013453124999999998
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> cjpeg
+start time 0.2086267361111111
+end time 0.322515625
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> sink
+start time 0.322515625
+end time 0.322535625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> rgb-yiq
+start time 0.09751562500000001
+end time 0.2086267361111111
+----------------------------------
+The total execution time is 0.322535625
+The total energy is 2.2320212800000006 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> rgb-yiq
+start time 0.24093686868686867
+end time 0.35204797979797975
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE1
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE5
+DVFS Level is 1
+------> sink
+start time 1.1720479797979797
+end time 1.1720934343434342
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> cjpeg
+start time 0.35204797979797975
+end time 1.1720479797979797
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.0030277777777777777
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.10602777777777779
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.24093686868686867
+----------------------------------
+The total execution time is 1.1720934343434342
+The total energy is 7.38199149 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.23639141414141412
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.01721527777777778
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> rgb-yiq
+start time 0.23639141414141412
+end time 0.25639141414141414
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE5
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.004194444444444443
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> sink
+start time 0.32911868686868684
+end time 0.3291641414141414
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> cjpeg
+start time 0.25639141414141414
+end time 0.32911868686868684
+----------------------------------
+The total execution time is 0.3291641414141414
+The total energy is 1.33270536 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE13
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> sink
+start time 0.677625
+end time 0.677645
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 0
+------> filt-b
+start time 0.000125
+end time 0.6501250000000001
+------> filt-g
+start time 0.000125
+end time 0.6501250000000001
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> cjpeg
+start time 0.652625
+end time 0.677625
+------> rgb-yiq
+start time 0.6501250000000001
+end time 0.652625
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 0.000125
+end time 0.013562499999999998
+------> rgb-yiq
+start time 0.6501250000000001
+end time 0.652625
+------> filt-g
+start time 0.000125
+end time 0.6501250000000001
+----------------------------------
+The total execution time is 0.677645
+The total energy is 0.4211066000000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 0
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.13754545454545455
+------> sink
+start time 0.28848989898989896
+end time 0.28861489898989895
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.14448989898989897
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> cjpeg
+start time 0.17648989898989897
+end time 0.28848989898989896
+------> rgb-yiq
+start time 0.14448989898989897
+end time 0.17648989898989897
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.013482954545454543
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> rgb-yiq
+start time 0.14448989898989897
+end time 0.17648989898989897
+----------------------------------
+The total execution time is 0.28861489898989895
+The total energy is 5.066451050000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.09752777777777778
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.02202777777777778
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 1
+------> cjpeg
+start time 0.17752777777777778
+end time 0.2502550505050505
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.0068459595959595955
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> rgb-yiq
+start time 0.09752777777777778
+end time 0.17752777777777778
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.0068459595959595955
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE13
+DVFS Level is 3
+------> sink
+start time 0.2502550505050505
+end time 0.2502750505050505
+----------------------------------
+The total execution time is 0.2502750505050505
+The total energy is 1.3821693000000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> filt-r
+start time 0.000125
+end time 0.2410340909090909
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE9
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+DVFS Level is 2
+------> cjpeg
+start time 0.29557954545454546
+end time 1.434468434343434
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> rgb-yiq
+start time 0.2410340909090909
+end time 0.29557954545454546
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-b
+start time 0.000125
+end time 0.10762499999999998
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> filt-g
+start time 0.000125
+end time 0.018875
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> sink
+start time 1.434468434343434
+end time 1.434484059343434
+----------------------------------
+The total execution time is 1.434484059343434
+The total energy is 3.628496160000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.09754545454545455
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> rgb-yiq
+start time 0.09754545454545455
+end time 0.12254545454545454
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE16
+DVFS Level is 2
+------> sink
+start time 0.518
+end time 0.5180277777777778
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.0355
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.03913636363636363
+------> cjpeg
+start time 0.12254545454545454
+end time 0.518
+----------------------------------
+The total execution time is 0.5180277777777778
+The total energy is 2.9231308274999996 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> rgb-yiq
+start time 0.10402777777777779
+end time 0.1290277777777778
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.10402777777777779
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE11
+DVFS Level is 0
+------> sink
+start time 0.24291666666666667
+end time 0.24304166666666666
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> cjpeg
+start time 0.1290277777777778
+end time 0.24291666666666667
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.013465277777777776
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.023916666666666662
+----------------------------------
+The total execution time is 0.24304166666666666
+The total energy is 4.3196798 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 3
+------> filt-r
+start time 0.000125
+end time 0.10412500000000001
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE12
+DVFS Level is 0
+------> src
+start time 0
+end time 0.000125
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 2
+------> filt-b
+start time 0.000125
+end time 0.004291666666666666
+------> cjpeg
+start time 0.12412500000000001
+end time 0.16856944444444444
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> filt-g
+start time 0.000125
+end time 0.0123125
+------> sink
+start time 0.16856944444444444
+end time 0.16858506944444443
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+DVFS Level is 0
+------> rgb-yiq
+start time 0.10412500000000001
+end time 0.12412500000000001
+----------------------------------
+The total execution time is 0.16858506944444443
+The total energy is 2.0460538639999997 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE12
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 3
+------> cjpeg
+start time 0.13935333333333333
+end time 0.3133533333333334
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> sink
+start time 0.3133533333333334
+end time 0.3133689583333334
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> rgb-yiq
+start time 0.10602000000000002
+end time 0.13935333333333333
+------> filt-b
+start time 2e-05
+end time 0.0172075
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> filt-g
+start time 2e-05
+end time 0.10602000000000002
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.0172075
+------> filt-b
+start time 2e-05
+end time 0.0172075
+----------------------------------
+The total execution time is 0.3133689583333334
+The total energy is 3.7218834025000005 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> filt-b
+start time 1.5625e-05
+end time 0.017203125
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> cjpeg
+start time 0.5391065340909091
+end time 0.9345610795454546
+------> filt-g
+start time 1.5625e-05
+end time 0.039106534090909084
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> filt-r
+start time 1.5625e-05
+end time 0.012203125
+------> filt-g
+start time 1.5625e-05
+end time 0.039106534090909084
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 1
+------> rgb-yiq
+start time 0.039106534090909084
+end time 0.5391065340909091
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE4
+DVFS Level is 0
+------> sink
+start time 0.9345610795454546
+end time 0.9346860795454547
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE11
+DVFS Level is 4
+------> src
+start time 0
+end time 1.5625e-05
+----------------------------------
+The total execution time is 0.9346860795454547
+The total energy is 3.5845532999999996 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> cjpeg
+start time 0.26974242424242423
+end time 0.33380492424242425
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> rgb-yiq
+start time 0.2364090909090909
+end time 0.26974242424242423
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+DVFS Level is 0
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.13754545454545455
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.030601010101010098
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.2364090909090909
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE12
+DVFS Level is 3
+------> sink
+start time 0.33380492424242425
+end time 0.33382492424242427
+----------------------------------
+The total execution time is 0.33382492424242427
+The total energy is 6.9534205625 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE0
+DVFS Level is 3
+------> filt-b
+start time 2e-05
+end time 0.10602000000000002
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> cjpeg
+start time 0.277895
+end time 0.3917838888888889
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE3
+DVFS Level is 3
+------> filt-g
+start time 2e-05
+end time 0.01562
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.013457499999999997
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> rgb-yiq
+start time 0.10602000000000002
+end time 0.277895
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE5
+DVFS Level is 4
+------> sink
+start time 0.3917838888888889
+end time 0.3917995138888889
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE10
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+The total execution time is 0.3917995138888889
+The total energy is 4.881303210000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE12
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+DVFS Level is 2
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.021694444444444443
+------> rgb-yiq
+start time 0.021694444444444443
+end time 0.05502777777777777
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.021694444444444443
+------> sink
+start time 0.5706527777777778
+end time 0.5706805555555555
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.013465277777777776
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.021694444444444443
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> cjpeg
+start time 0.05502777777777777
+end time 0.5706527777777778
+----------------------------------
+The total execution time is 0.5706805555555555
+The total energy is 6.672324546000001 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 4
+------> filt-b
+start time 2e-05
+end time 0.013457499999999997
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE14
+DVFS Level is 4
+------> filt-r
+start time 2e-05
+end time 0.08127000000000001
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> cjpeg
+start time 0.24752000000000002
+end time 0.27952
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> rgb-yiq
+start time 0.09752000000000001
+end time 0.24752000000000002
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-g
+start time 2e-05
+end time 0.09752000000000001
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE10
+DVFS Level is 1
+------> sink
+start time 0.27952
+end time 0.27956545454545456
+----------------------------------
+Cluster 7 is Mapped to PE CLIENT_PE9
+DVFS Level is 3
+------> src
+start time 0
+end time 2e-05
+----------------------------------
+The total execution time is 0.27956545454545456
+The total energy is 1.58221487 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+DVFS Level is 1
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.2364090909090909
+------> cjpeg
+start time 0.29095454545454547
+end time 2.154590909090909
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 3
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.02204545454545455
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 3
+------> sink
+start time 2.154590909090909
+end time 2.154610909090909
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE3
+DVFS Level is 0
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.09754545454545455
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+------> rgb-yiq
+start time 0.2364090909090909
+end time 0.29095454545454547
+----------------------------------
+The total execution time is 2.154610909090909
+The total energy is 2.3060964 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE3
+DVFS Level is 1
+------> filt-b
+start time 4.545454545454546e-05
+end time 0.0355
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 1
+------> rgb-yiq
+start time 0.08285795454545455
+end time 0.15558522727272728
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+DVFS Level is 4
+------> filt-r
+start time 4.545454545454546e-05
+end time 0.0023892045454545455
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE0
+DVFS Level is 4
+------> filt-g
+start time 4.545454545454546e-05
+end time 0.08285795454545455
+------> sink
+start time 0.21964772727272727
+end time 0.21966335227272726
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE3
+DVFS Level is 4
+------> cjpeg
+start time 0.15558522727272728
+end time 0.21964772727272727
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE12
+DVFS Level is 1
+------> src
+start time 0
+end time 4.545454545454546e-05
+----------------------------------
+The total execution time is 0.21966335227272726
+The total energy is 7.1027298365 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+DVFS Level is 0
+------> filt-r
+start time 2.7777777777777776e-05
+end time 0.10752777777777776
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+DVFS Level is 2
+------> filt-b
+start time 2.7777777777777776e-05
+end time 0.03058333333333333
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE15
+DVFS Level is 1
+------> cjpeg
+start time 0.13252777777777777
+end time 0.5279823232323232
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE2
+DVFS Level is 4
+------> rgb-yiq
+start time 0.10752777777777776
+end time 0.13252777777777777
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE15
+DVFS Level is 2
+------> src
+start time 0
+end time 2.7777777777777776e-05
+------> filt-g
+start time 2.7777777777777776e-05
+end time 0.023916666666666662
+----------------------------------
+Cluster 6 is Mapped to PE CLIENT_PE10
+DVFS Level is 4
+------> sink
+start time 0.5279823232323232
+end time 0.5279979482323232
+----------------------------------
+The total execution time is 0.5279979482323232
+The total energy is 2.00506476 
+
+  Evaluated 100 individuals
+-- Generation 1 --
+dvfs_0_src
+map_filt-r_CLIENT_PE3
+dvfs_3_filt-r
+filt-r_master
+map_filt-g_CLIENT_PE3
+C_rgb-yiq_filt-r
+dvfs_1_filt-g
+filt-g_master
+dvfs_4_filt-b
+map_filt-b_CLIENT_PE6
+rgb-yiq_slave
+dvfs_1_sink
+C_cjpeg_filt-b
+cjpeg_slave
+map_src_CLIENT_PE9
+src_master
+map_sink_CLIENT_PE4
+sink_master
+filt-b_master
+map_filt-r_CLIENT_PE15
+dvfs_3_src
+dvfs_1_filt-r
+map_filt-b_CLIENT_PE3
+dvfs_1_sink
+map_cjpeg_CLIENT_PE2
+dvfs_3_filt-b
+filt-b_master
+C_rgb-yiq_cjpeg
+map_filt-g_CLIENT_PE2
+filt-r_master
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+dvfs_2_cjpeg
+cjpeg_master
+map_src_CLIENT_PE7
+src_master
+dvfs_3_filt-g
+filt-g_master
+map_sink_CLIENT_PE4
+sink_master
+dvfs_1_sink
+dvfs_0_filt-b
+C_cjpeg_filt-r
+dvfs_3_filt-g
+dvfs_1_rgb-yiq
+map_filt-g_CLIENT_PE14
+map_sink_CLIENT_PE2
+sink_master
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+map_src_CLIENT_PE12
+dvfs_3_src
+src_master
+map_filt-r_CLIENT_PE0
+filt-g_master
+cjpeg_slave
+map_filt-b_CLIENT_PE0
+filt-b_master
+dvfs_0_filt-r
+filt-r_master
+C_filt-b_filt-r
+C_cjpeg_filt-g
+dvfs_2_filt-r
+dvfs_1_src
+dvfs_1_sink
+map_filt-r_CLIENT_PE14
+filt-r_master
+map_sink_CLIENT_PE8
+sink_master
+cjpeg_slave
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+filt-b_slave
+map_filt-g_CLIENT_PE14
+dvfs_4_filt-g
+filt-g_master
+map_src_CLIENT_PE0
+src_master
+map_filt-r_CLIENT_PE15
+dvfs_4_filt-r
+dvfs_2_filt-g
+dvfs_2_filt-b
+filt-r_master
+dvfs_3_sink
+map_filt-g_CLIENT_PE6
+filt-g_master
+dvfs_4_rgb-yiq
+map_src_CLIENT_PE12
+dvfs_3_cjpeg
+map_sink_CLIENT_PE16
+sink_master
+dvfs_2_src
+src_master
+map_cjpeg_CLIENT_PE3
+cjpeg_master
+map_filt-b_CLIENT_PE3
+filt-b_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+C_sink_filt-b
+C_filt-r_src
+map_filt-b_CLIENT_PE14
+dvfs_1_src
+map_src_CLIENT_PE2
+src_master
+filt-r_slave
+sink_slave
+C_rgb-yiq_src
+rgb-yiq_slave
+map_filt-g_CLIENT_PE15
+dvfs_2_filt-b
+filt-b_master
+dvfs_1_filt-g
+filt-g_master
+C_cjpeg_filt-b
+cjpeg_slave
+map_filt-g_CLIENT_PE14
+dvfs_0_cjpeg
+dvfs_3_filt-b
+map_cjpeg_CLIENT_PE3
+C_rgb-yiq_filt-r
+rgb-yiq_slave
+dvfs_4_src
+cjpeg_master
+dvfs_3_filt-r
+map_sink_CLIENT_PE0
+map_filt-b_CLIENT_PE6
+filt-b_master
+C_rgb-yiq_cjpeg
+dvfs_3_filt-g
+filt-g_master
+map_src_CLIENT_PE5
+src_master
+map_filt-r_CLIENT_PE15
+filt-r_master
+dvfs_0_sink
+sink_master
+dvfs_3_cjpeg
+dvfs_1_sink
+map_cjpeg_CLIENT_PE3
+map_filt-b_CLIENT_PE14
+dvfs_3_filt-g
+dvfs_1_rgb-yiq
+dvfs_0_src
+map_filt-r_CLIENT_PE2
+map_filt-g_CLIENT_PE15
+filt-g_master
+dvfs_4_filt-b
+filt-b_master
+cjpeg_master
+map_src_CLIENT_PE9
+src_master
+map_rgb-yiq_CLIENT_PE15
+rgb-yiq_master
+dvfs_4_filt-r
+filt-r_master
+map_sink_CLIENT_PE12
+sink_master
+dvfs_3_filt-g
+map_filt-r_CLIENT_PE14
+dvfs_1_filt-b
+C_cjpeg_filt-g
+cjpeg_slave
+map_filt-b_CLIENT_PE0
+map_src_CLIENT_PE15
+map_filt-g_CLIENT_PE3
+filt-g_master
+dvfs_1_src
+src_master
+filt-b_master
+dvfs_0_filt-r
+filt-r_master
+C_sink_filt-r
+sink_slave
+C_rgb-yiq_src
+rgb-yiq_slave
+dvfs_3_src
+dvfs_0_rgb-yiq
+dvfs_4_filt-b
+dvfs_3_sink
+dvfs_3_cjpeg
+C_filt-r_src
+filt-r_slave
+map_rgb-yiq_CLIENT_PE3
+map_filt-b_CLIENT_PE15
+filt-b_master
+C_filt-g_cjpeg
+C_filt-g_src
+filt-g_slave
+map_cjpeg_CLIENT_PE14
+cjpeg_master
+map_src_CLIENT_PE0
+src_master
+rgb-yiq_master
+map_sink_CLIENT_PE14
+sink_master
+dvfs_1_filt-g
+map_cjpeg_CLIENT_PE3
+dvfs_4_filt-r
+C_filt-b_filt-r
+filt-b_slave
+dvfs_1_sink
+map_filt-g_CLIENT_PE14
+filt-g_master
+dvfs_4_src
+map_rgb-yiq_CLIENT_PE6
+map_filt-r_CLIENT_PE2
+filt-r_master
+dvfs_1_cjpeg
+cjpeg_master
+map_src_CLIENT_PE11
+src_master
+dvfs_0_rgb-yiq
+rgb-yiq_master
+C_filt-b_rgb-yiq
+map_sink_CLIENT_PE6
+sink_master
+C_filt-b_filt-r
+filt-b_slave
+C_filt-b_rgb-yiq
+dvfs_4_sink
+dvfs_4_cjpeg
+dvfs_2_filt-r
+dvfs_0_rgb-yiq
+dvfs_2_src
+map_filt-g_CLIENT_PE0
+map_filt-r_CLIENT_PE2
+filt-r_master
+dvfs_4_filt-g
+filt-g_master
+map_rgb-yiq_CLIENT_PE6
+rgb-yiq_master
+map_src_CLIENT_PE5
+src_master
+map_sink_CLIENT_PE4
+sink_master
+map_cjpeg_CLIENT_PE6
+cjpeg_master
+map_filt-r_CLIENT_PE2
+dvfs_0_src
+map_cjpeg_CLIENT_PE6
+dvfs_4_filt-r
+map_filt-g_CLIENT_PE14
+dvfs_3_sink
+dvfs_3_filt-g
+filt-g_master
+map_filt-b_CLIENT_PE0
+C_rgb-yiq_src
+rgb-yiq_slave
+map_src_CLIENT_PE14
+src_master
+dvfs_0_cjpeg
+cjpeg_master
+filt-r_master
+map_sink_CLIENT_PE1
+sink_master
+dvfs_3_filt-b
+filt-b_master
+C_rgb-yiq_filt-g
+map_cjpeg_CLIENT_PE6
+rgb-yiq_slave
+dvfs_2_filt-b
+dvfs_4_cjpeg
+cjpeg_master
+map_sink_CLIENT_PE10
+dvfs_1_filt-g
+map_filt-b_CLIENT_PE14
+filt-b_master
+C_rgb-yiq_cjpeg
+map_src_CLIENT_PE15
+C_filt-r_src
+filt-r_slave
+dvfs_3_src
+src_master
+dvfs_1_sink
+sink_master
+map_filt-g_CLIENT_PE14
+filt-g_master
+dvfs_2_filt-g
+map_cjpeg_CLIENT_PE14
+map_filt-r_CLIENT_PE3
+C_filt-b_filt-g
+filt-b_slave
+map_rgb-yiq_CLIENT_PE14
+dvfs_0_src
+map_filt-g_CLIENT_PE3
+filt-g_master
+C_sink_filt-r
+sink_slave
+dvfs_0_cjpeg
+map_src_CLIENT_PE16
+src_master
+dvfs_0_rgb-yiq
+rgb-yiq_master
+dvfs_2_filt-r
+filt-r_master
+cjpeg_master
+dvfs_4_src
+C_filt-b_rgb-yiq
+map_filt-r_CLIENT_PE2
+map_filt-g_CLIENT_PE2
+dvfs_1_filt-g
+filt-g_master
+dvfs_2_filt-r
+filt-r_master
+map_rgb-yiq_CLIENT_PE15
+C_sink_filt-g
+sink_slave
+dvfs_0_rgb-yiq
+rgb-yiq_master
+map_src_CLIENT_PE11
+src_master
+C_cjpeg_filt-r
+cjpeg_slave
+C_filt-b_filt-g
+filt-b_slave
+dvfs_2_src
+C_filt-b_cjpeg
+dvfs_4_rgb-yiq
+dvfs_3_filt-g
+dvfs_0_filt-r
+C_sink_filt-g
+C_filt-b_src
+filt-b_slave
+map_src_CLIENT_PE15
+src_master
+map_filt-r_CLIENT_PE14
+filt-r_master
+map_rgb-yiq_CLIENT_PE3
+rgb-yiq_master
