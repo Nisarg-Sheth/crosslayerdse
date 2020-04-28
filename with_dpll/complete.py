@@ -150,7 +150,8 @@ def gen_comp_pb(con_graph,graph):
                 l2[temp]=('+',1)
                 temp=f"C_{task}_{task1}"
                 l1[temp]=('+',1)
-                l3[temp]=('+',1)
+                if j<i:
+                    l3[temp]=('+',1)
             j+=1
         con_graph.pbp_data[complete].constraints.append([l1,i,'<='])
         con_graph.pbp_data[complete].constraints.append([l2,(scenario.graphs[graph].num_of_tasks-(i+1)),'<='])
@@ -179,15 +180,15 @@ def gen_comp_pb(con_graph,graph):
         #verifying that mapping is not bad.
         j=0
         for task1 in scenario.graphs[graph].tasks:
-            if j<i:
-                temp=f"C_{task}_{task1}"
-                l5={}
-                l5[temp]=('-',1)
-                for pe in map_list[i]:
-                    if pe in map_list[j]:
-                        temp=f"map_{task1}_{pe}"
-                        l5[temp]=('+',1)
-                con_graph.pbp_data[complete].constraints.append([l5,0,'>='])
+            # if j<i:
+            #     temp=f"C_{task}_{task1}"
+            #     l5={}
+            #     l5[temp]=('-',1)
+            #     for pe in map_list[i]:
+            #         if pe in map_list[j]:
+            #             temp=f"map_{task1}_{pe}"
+            #             l5[temp]=('+',1)
+            #     con_graph.pbp_data[complete].constraints.append([l5,0,'>='])
             if j>i:
                 l6={}
                 temp=f"C_{task1}_{task}"
@@ -227,7 +228,7 @@ def gen_comp_con_graph(con_graph, graph):
     dvfs_list = []
     for parts in con_graph.pbp_data["complete"].assignment:
         if con_graph.pbp_data["complete"].assignment[parts]==1:
-            #print(parts)
+            print(parts)
             if parts.endswith("_master"):
                 ext_id = parts.rfind("_")
                 master_list.append(parts[:ext_id])
@@ -1272,13 +1273,13 @@ def evalParams(individual):
     dvfs_level=1
     message_communication_time=0.001
 
-    print("\nEVALUATION FOR",graph,"\n")
-    for cluster in individual.task_cluster:
-        mapped=individual.task_cluster[cluster].mapped_to
-        print("Cluster",cluster,"is Mapped to PE",mapped)
-        for task in individual.task_cluster[cluster].tasks:
-            print("------>",task)
-            print(scenario.graphs[graph].tasks[task].pe_list)
+    # print("\nEVALUATION FOR",graph,"\n")
+    # for cluster in individual.task_cluster:
+    #     mapped=individual.task_cluster[cluster].mapped_to
+    #     print("Cluster",cluster,"is Mapped to PE",mapped)
+    #     for task in individual.task_cluster[cluster].tasks:
+    #         print("------>",task)
+            #print(scenario.graphs[graph].tasks[task].pe_list)
     #Computing the total energy usage
     for cluster in individual.task_cluster:
         cluster_time[cluster]=0
