@@ -23,7 +23,7 @@ class Complete_Scenario:
 class PB_data:
     def __init__(self):
         self.constraints = []
-        self.decision_strat = OrderedDict()    
+        self.decision_strat = OrderedDict()
         self.assignment = None
 
 class Constraint_graph:
@@ -61,7 +61,7 @@ class Graph:
     def add_task(self,task_details):
         task_dets=task_details.split()
         self.num_of_tasks+=1
-        self.tasks[task_dets[0]]=Task(task_dets[0],int(task_dets[2]),int(task_dets[4]))
+        self.tasks[task_dets[0]]=Task(task_dets[0],int(task_dets[2]))
         #create a new task with      :name       ,type          ,host
     def add_arc(self,arc_details):
         arc_dets=arc_details.split()
