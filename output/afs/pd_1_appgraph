@@ -1,0 +1,27 @@
+// TASK_GRAPH 1 
+digraph {
+	src [label=src]
+	ac2 [label=ac2]
+	ce2 [label=ce2]
+	fft2 [label=fft2]
+	fpba2 [label=fpba2]
+	sink [label=sink]
+	a1_01 [label=a1_01]
+	src -> a1_01
+	a1_01 -> ac2
+	a1_12 [label=a1_12]
+	ac2 -> a1_12
+	a1_12 -> fpba2
+	a1_23 [label=a1_23]
+	ac2 -> a1_23
+	a1_23 -> ce2
+	a1_34 [label=a1_34]
+	fpba2 -> a1_34
+	a1_34 -> fft2
+	a1_45 [label=a1_45]
+	fft2 -> a1_45
+	a1_45 -> sink
+	a1_56 [label=a1_56]
+	ce2 -> a1_56
+	a1_56 -> sink
+}

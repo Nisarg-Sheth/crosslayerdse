@@ -1,0 +1,418 @@
+Running the Solver
+Assignment by PB Solver Complete
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE5
+------> src
+start time 0
+end time 5e-05
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE4
+------> rotate
+start time 5e-05
+end time 0.005549999999999999
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE12
+------> text
+start time 5e-05
+end time 1.45005
+------> dith
+start time 1.45005
+end time 4.40005
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE13
+------> sink
+start time 4.40005
+end time 4.4001
+----------------------------------
+The total execution time is 4.4001
+The total energy is 0.162269 
+
+Generating Population for TASK_GRAPH 0 
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Generated Individual
+Population Initiated
+Start of evolution TASK_GRAPH 0 
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+------> text
+start time 5e-05
+end time 0.08505
+------> dith
+start time 0.08505
+end time 0.24004999999999999
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE8
+------> sink
+start time 0.24004999999999999
+end time 0.24009999999999998
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+------> src
+start time 0
+end time 5e-05
+------> rotate
+start time 5e-05
+end time 0.041550000000000004
+----------------------------------
+The total execution time is 0.24009999999999998
+The total energy is 0.140787 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+------> rotate
+start time 5e-05
+end time 0.041550000000000004
+------> dith
+start time 0.041550000000000004
+end time 0.19655
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE2
+------> text
+start time 5e-05
+end time 0.01405
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE14
+------> sink
+start time 0.19655
+end time 0.1966
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+------> src
+start time 0
+end time 5e-05
+----------------------------------
+The total execution time is 0.1966
+The total energy is 0.12627575 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+------> dith
+start time 0.03055
+end time 0.18555
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE6
+------> sink
+start time 0.18555
+end time 0.1856
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE0
+------> src
+start time 0
+end time 5e-05
+------> text
+start time 5e-05
+end time 0.04555
+------> rotate
+start time 5e-05
+end time 0.03055
+----------------------------------
+The total execution time is 0.1856
+The total energy is 0.10185600000000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+------> dith
+start time 0.00605
+end time 0.02355
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE3
+------> rotate
+start time 5e-05
+end time 0.00605
+------> text
+start time 5e-05
+end time 0.00805
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE9
+------> src
+start time 0
+end time 5e-05
+------> sink
+start time 0.02355
+end time 0.023600000000000003
+----------------------------------
+The total execution time is 0.023600000000000003
+The total energy is 0.046212 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE12
+------> sink
+start time 0.03855
+end time 0.0386
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE7
+------> rotate
+start time 5e-05
+end time 0.021050000000000003
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE6
+------> text
+start time 5e-05
+end time 0.00805
+------> dith
+start time 0.021050000000000003
+end time 0.03855
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE10
+------> src
+start time 0
+end time 5e-05
+----------------------------------
+The total execution time is 0.0386
+The total energy is 0.03541865 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+------> rotate
+start time 5e-05
+end time 0.041550000000000004
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE7
+------> text
+start time 5e-05
+end time 2.00005
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE2
+------> dith
+start time 0.041550000000000004
+end time 0.06705
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE16
+------> src
+start time 0
+end time 5e-05
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE7
+------> sink
+start time 2.00005
+end time 2.0000999999999998
+----------------------------------
+The total execution time is 2.0000999999999998
+The total energy is 2.4718255 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE8
+------> sink
+start time 3.17505
+end time 3.1751
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE7
+------> src
+start time 0
+end time 5e-05
+------> text
+start time 5e-05
+end time 2.00005
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE12
+------> rotate
+start time 5e-05
+end time 0.22505
+------> dith
+start time 0.22505
+end time 3.17505
+----------------------------------
+The total execution time is 3.1751
+The total energy is 2.504847 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE14
+------> dith
+start time 0.03055
+end time 0.18555
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE0
+------> src
+start time 0
+end time 5e-05
+------> rotate
+start time 5e-05
+end time 0.03055
+------> text
+start time 5e-05
+end time 0.04555
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE9
+------> sink
+start time 0.18555
+end time 0.1856
+----------------------------------
+The total execution time is 0.1856
+The total energy is 0.10184200000000002 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE15
+------> text
+start time 5e-05
+end time 5.50005
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE1
+------> src
+start time 0
+end time 5e-05
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE7
+------> rotate
+start time 5e-05
+end time 0.021050000000000003
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE4
+------> dith
+start time 0.021050000000000003
+end time 0.03855
+----------------------------------
+Cluster 5 is Mapped to PE CLIENT_PE6
+------> sink
+start time 5.50005
+end time 5.5001
+----------------------------------
+The total execution time is 5.5001
+The total energy is 0.162085 
+
+
+EVALUATION FOR TASK_GRAPH 0  
+
+Cluster 1 is Mapped to PE CLIENT_PE6
+------> sink
+start time 12.00555
+end time 12.0056
+----------------------------------
+Cluster 2 is Mapped to PE CLIENT_PE13
+------> src
+start time 0
+end time 5e-05
+----------------------------------
+Cluster 3 is Mapped to PE CLIENT_PE4
+------> rotate
+start time 5e-05
+end time 0.005549999999999999
+------> text
+start time 5e-05
+end time 0.00705
+----------------------------------
+Cluster 4 is Mapped to PE CLIENT_PE15
+------> dith
+start time 0.005549999999999999
+end time 12.00555
+----------------------------------
+The total execution time is 12.0056
+The total energy is 0.21877999999999997 
+

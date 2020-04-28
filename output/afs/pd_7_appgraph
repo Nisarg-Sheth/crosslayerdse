@@ -1,0 +1,8 @@
+// TASK_GRAPH 7 
+digraph {
+	src [label=src]
+	gsm3 [label=gsm3]
+	a7_01 [label=a7_01]
+	src -> a7_01
+	a7_01 -> gsm3
+}
