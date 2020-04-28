@@ -4,14 +4,17 @@ import math
 from deap import base
 from deap import creator
 from deap import tools
+import matplotlib.pyplot as plt
+import numpy
+from deap.benchmarks.tools import hypervolume
 
 class myclass:
     def __init__(self):
         self.yo=[]
 
-creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+creator.create("FitnessMax", base.Fitness, weights=(1.0,1.0))
 creator.create("Individual", list, fitness=creator.FitnessMax)
-creator.create("Fitnessfunc",base.Fitness, weights=(1.0,))
+creator.create("Fitnessfunc",base.Fitness, weights=(1.0,1.0))
 creator.create("Individualfunc",myclass,fitness=creator.FitnessMax)
 ind=creator.Individualfunc()
 print(ind.yo)
@@ -48,7 +51,7 @@ def evalOneMax(individual):
     return sum(individual),
 
 def evalMaxfunc(individual):
-    return sum(individual.yo),
+    return sum(individual.yo),individual.yo[2]
 
 def mutatefunc(individual,indpb=0.1):
     for i in range(len(individual.yo)):
@@ -91,13 +94,19 @@ toolboxfunc.register("mate",matefunc)
 toolboxfunc.register("mutate",mutatefunc,indpb=0.05)
 toolboxfunc.register("select", tools.selTournament, tournsize=3)
 
+stats = tools.Statistics(key=lambda ind: ind.fitness.values)
+stats.register("avg", numpy.mean, axis=0)
+stats.register("std", numpy.std, axis=0)
+stats.register("min", numpy.min, axis=0)
+stats.register("max", numpy.max, axis=0)
+
 #----------
 
 def main():
     random.seed(64)
     # create an initial population of 300 individuals (where
     # each individual is a list of integers)
-    pop = toolboxfunc.population(n=300)
+    pop = toolboxfunc.population(n=3)
 
     # CXPB  is the probability with which two individuals
     #       are crossed
@@ -116,17 +125,15 @@ def main():
     print("  Evaluated %i individuals" % len(pop))
     # Extracting all the fitnesses of
     fits = [ind.fitness.values[0] for ind in pop]
-    for a in fits:
-        print(a)
     # Variable keeping track of the number of generations
     g = 0
-
+    logbook = tools.Logbook()
+    pf= tools.ParetoFront()
     # Begin the evolution
-    while max(fits) < 10 and g < 10:
+    while g < 10:
         # A new generation
         g = g + 1
         print("-- Generation %i --" % g)
-
         # Select the next generation individuals
         offspring = toolboxfunc.select(pop, len(pop))
         # Clone the selected individuals
@@ -165,17 +172,35 @@ def main():
         # Gather all the fitnesses in one list and print the stats
         fits = [ind.fitness.values[0] for ind in pop]
 
-        length = len(pop)
-        mean = sum(fits) / length
-        sum2 = sum(x*x for x in fits)
-        std = abs(sum2 / length - mean**2)**0.5
-
-        print("  Min %s" % min(fits))
-        print("  Max %s" % max(fits))
-        print("  Avg %s" % mean)
-        print("  Std %s" % std)
+        record = stats.compile(pop)
+        pf.update(pop)
+        hv = hypervolume(pop, [0.0,0.0])
+        print(hv)
+        logbook.record(gen=g, evals=100 , hv=hv, **record)
+        logbook.header = "gen", "avg", "max","min"
+        print(logbook.stream)
 
     print("-- End of (successful) evolution --")
+
+    for ind in pf:
+        print(ind.fitness.values)
+
+    gen= logbook.select("gen")
+    avg = logbook.select("avg")
+    hv = logbook.select("hv")
+    avg1, avg2 = zip(*avg)
+    min = logbook.select("min")
+    fig, ax1 = plt.subplots()
+    line1 = ax1.plot(gen, hv, "b-", label="Minimum Fitness")
+    ax1.set_xlabel("Generation")
+    ax1.set_ylabel("Fitness", color="b")
+    for tl in ax1.get_yticklabels():
+        tl.set_color("b")
+
+    labs = [l.get_label() for l in line1]
+    plt.show()
+    #plt.savefig('trial.png')
+
 
     best_ind = tools.selBest(pop, 1)[0]
     print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))

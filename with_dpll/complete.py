@@ -4,13 +4,15 @@ import re
 import argparse
 import random
 import subprocess
+import matplotlib.pyplot as plt
+import numpy
 from graphviz import Digraph
 from deap import base
 from deap import creator
 from deap import tools
 from source import *
 from copy import deepcopy
-
+from deap.benchmarks.tools import hypervolume
 
 scenario = None
 random.seed(124)
@@ -298,7 +300,7 @@ def feasiblity_con_graph(con_graph,graph):
     global scenario
 
 #Plotting the constraint graph
-def plot_constraint_graph(con_graph,graph,phase,dir):
+def plot_constraint_graph(con_graph,graph,file_name,phase,dir):
     constraint_g = Digraph(comment = graph, format='png')
     for task in con_graph.task_cluster:
         to_show=""
@@ -314,9 +316,9 @@ def plot_constraint_graph(con_graph,graph,phase,dir):
         constraint_g.node(m,label=to_show)
         constraint_g.edge(str(con_graph.messages[m].cluster_from), m)
         constraint_g.edge(m,str(con_graph.messages[m].cluster_to))
-    constraint_g.render(f"{dir}/con_graph_plot{phase}.view",view=False)
+    constraint_g.render(f"{dir}/{file_name}_{phase}_congraph",view=False)
 
-def plot_app_graph(graph,phase,dir):
+def plot_app_graph(graph,phase,file_name,dir):
     app_g = Digraph(comment = graph,format='png')
     for task in scenario.graphs[graph].tasks:
         app_g.node(str(task),label=task)
@@ -324,7 +326,7 @@ def plot_app_graph(graph,phase,dir):
         app_g.node(m,label=m)
         app_g.edge(scenario.graphs[graph].arcs[m].task_from,m)
         app_g.edge(m,scenario.graphs[graph].arcs[m].task_to)
-    app_g.render(f"{dir}/app_graph_plot{phase}.view",view=False)
+    app_g.render(f"{dir}/{file_name}_{phase}_appgraph",view=False)
 
 def process_clustering(graph):
     global scenario
@@ -423,7 +425,7 @@ def clustering_pb(graph):
         j=0
         for t in scenario.graphs[graph].tasks:
             if (j)>=i:
-                temp=f"{t}_{str(i-1)}"
+                temp=f"{t}_{str(j)}"
                 l[temp]=('-',1)
             j+=1
         scenario.constraint_graphs[graph].pbp_data[cluster].constraints.append([l,0,'>='])
@@ -520,259 +522,6 @@ def messaging_pb(graph):
         scenario.constraint_graphs[graph].pbp_data[message].constraints.append([l,1,'='])
         i+=1
 
-def dpll_solver(decision_strat,constraints,literal):
-    #print(literal)
-    elem_del=[]
-    var_list=[]
-    var_dets=[]
-    cur_var = None
-    assignment={}
-    for con in constraints:
-        if con[1]==0 and con[2]=='=':
-            temp_vars=[]
-            #append the variables that will inevitably be zero
-            for a in con[0]:
-                if con[0][a][0]!='+':
-                    temp_vars=[]
-                    break
-                temp_vars.append(a)
-            #delete those variables from constraints outright as they will be zero
-            for vars in temp_vars:
-                for cons in constraints:
-                    if vars in cons[0]:
-                        del cons[0][vars]
-            #Remove the variables from the decision_strat
-            for vars in temp_vars:
-                var_dets.append(decision_strat[vars])
-                var_list.append(vars)
-                decision_strat[vars][0]=-1
-        elif con[1]<=0 and con[2]=='<=':
-            temp_vars=[]
-            #append the variables that will inevitably be zero
-            for a in con[0]:
-                if con[0][a][0]!='+':
-                    temp_vars=[]
-                    break
-                temp_vars.append(a)
-            #delete those variables from constraints outright as they will be zero
-            for vars in temp_vars:
-                for cons in constraints:
-                    if vars in cons[0]:
-                        del cons[0][vars]
-            #Remove the variables from the decision_strat
-            for vars in temp_vars:
-                var_dets.append(decision_strat[vars])
-                var_list.append(vars)
-                decision_strat[vars][0]=-1
-
-
-    #find a variable to assign value, else return false
-    for vars in decision_strat:
-        if decision_strat[vars][0]!=(-1):
-            cur_var=vars
-            var_val = decision_strat[cur_var][1]
-            var_priority= decision_strat[cur_var][0]
-            decision_strat[cur_var][0]=-1
-            break
-    l="-"
-    for i in range(literal):
-        l+="-"
-    #print(l+cur_var)
-
-    for con in constraints:
-        if not bool(con[0]) and con[1]>=0 and con[2]=='<=':
-            elem_del.append(con)
-        elif not bool(con[0]) and con[1]<=0 and con[2]=='>=':
-            elem_del.append(con)
-        elif not bool(con[0]) and con[1]==0 and con[2]=='=':
-            elem_del.append(con)
-        elif not bool(con[0]):
-            print(con[1])
-            #print(con[2])
-            for i in range(len(var_list)):
-                decision_strat[var_list[i]]=var_dets[i]
-                #print("rhis is"+var_list[i])
-            if cur_var!=None:
-                decision_strat[cur_var]=[var_priority,var_val]
-            return False, None
-    for e in elem_del:
-        constraints.remove(e)
-    if len(constraints) == 0:
-        #print("valid solution to PBP found")
-        for i in range(len(var_list)):
-            decision_strat[var_list[i]]=var_dets[i]
-        if cur_var!=None:
-            decision_strat[cur_var]=[var_priority,var_val]
-        return True, assignment
-
-    if cur_var!=None:
-        new_cons = deepcopy(constraints)
-        for con in new_cons:
-            if cur_var in con[0]:
-                if con[0][cur_var][0]=='+':
-                    con[1]-=(con[0][cur_var][1]*int(var_val))
-                else:
-                    con[1]+=(con[0][cur_var][1]*int(var_val))
-                del con[0][cur_var]
-
-        isAssigned, vals = dpll_solver(decision_strat,new_cons,(literal+1))
-        if isAssigned:
-            vals[cur_var]=var_val
-            for i in range(len(var_list)):
-                decision_strat[var_list[i]]=var_dets[i]
-            decision_strat[cur_var]=[var_priority,var_val]
-            return True, vals
-
-        var_val = not var_val
-        new_cons = deepcopy(constraints)
-        for con in new_cons:
-            if cur_var in con[0]:
-                if con[0][cur_var][0]=='+':
-                    con[1]-=(con[0][cur_var][1]*int(var_val))
-                else:
-                    con[1]+=(con[0][cur_var][1]*int(var_val))
-                del con[0][cur_var]
-
-        isAssigned, vals = dpll_solver(decision_strat,new_cons,(literal+1))
-        if isAssigned:
-            vals[cur_var]=var_val
-            for i in range(len(var_list)):
-                decision_strat[var_list[i]]=var_dets[i]
-            decision_strat[cur_var]=[var_priority,var_val]
-            return True, vals
-
-    for i in range(len(var_list)):
-        decision_strat[var_list[i]]=var_dets[i]
-    if cur_var!=None:
-        decision_strat[cur_var]=[var_priority,var_val]
-    return False, None
-#Changed solver
-def dll_solver(decision_strat,constraints,literal):
-    #print(literal)
-    elem_del=[]
-    var_list=[]
-    var_dets=[]
-    cur_var = None
-    assignment={}
-    for con in constraints:
-        if con[1]==0 and con[2]=='=':
-            temp_vars=[]
-            for a in con[0]:
-                if con[0][a][0]!='+':
-                    temp_vars=[]
-                    break
-                temp_vars.append(a)
-            for vars in temp_vars:
-                for cons in constraints:
-                    if vars in cons[0]:
-                        del cons[0][vars]
-            for vars in temp_vars:
-                var_dets.append(decision_strat[vars])
-                var_list.append(vars)
-                decision_strat[vars][0]=-1
-        elif con[1]==0 and con[2]=='<=':
-            temp_vars=[]
-            for a in con[0]:
-                if con[0][a][0]!='+':
-                    temp_vars=[]
-                    break
-                temp_vars.append(a)
-            for vars in temp_vars:
-                for cons in constraints:
-                    if vars in cons[0]:
-                        del cons[0][vars]
-            for vars in temp_vars:
-                var_dets.append(decision_strat[vars])
-                var_list.append(vars)
-                decision_strat[vars][0]=-1
-
-    for vars in decision_strat:
-        if decision_strat[vars][0]!=(-1):
-            cur_var=vars
-            var_val = decision_strat[cur_var][1]
-            var_priority= decision_strat[cur_var][0]
-            decision_strat[cur_var][0]=-1
-            break
-    if cur_var==None:
-        for i in range(len(var_list)):
-            decision_strat[var_list[i]]=var_dets[i]
-        return False,None
-    l="-"
-    for i in range(literal):
-        l+="-"
-    print(l+cur_var)
-    # for key,value in decision_strat.items():
-    #     cur_var = key
-    #     var_val = value[1]
-    #     var_priority=value[0]
-    #     decision_strat.pop(cur_var)
-    #     break
-    for con in constraints:
-        if not bool(con[0]) and con[1]>=0 and con[2]=='<=':
-            elem_del.append(con)
-        elif not bool(con[0]) and con[1]<=0 and con[2]=='>=':
-            elem_del.append(con)
-        elif not bool(con[0]) and con[1]==0 and con[2]=='=':
-            elem_del.append(con)
-        elif not bool(con[0]):
-            print(con[1])
-            print(con[2])
-            for i in range(len(var_list)):
-                decision_strat[var_list[i]]=var_dets[i]
-                print("rhis is"+var_list[i])
-            if cur_var!=None:
-                decision_strat[cur_var]=[var_priority,var_val]
-            return False, None
-    for e in elem_del:
-        constraints.remove(e)
-    if len(constraints) == 0:
-        #print("valid solution to PBP found")
-        for i in range(len(var_list)):
-            decision_strat[var_list[i]]=var_dets[i]
-        if cur_var!=None:
-            decision_strat[cur_var]=[var_priority,var_val]
-        return True, assignment
-
-    new_cons = deepcopy(constraints)
-    for con in new_cons:
-        if cur_var in con[0]:
-            if con[0][cur_var][0]=='+':
-                con[1]-=(con[0][cur_var][1]*int(var_val))
-            else:
-                con[1]+=(con[0][cur_var][1]*int(var_val))
-            del con[0][cur_var]
-
-    isAssigned, vals = dpll_solver(decision_strat,new_cons,(literal+1))
-    if isAssigned:
-        vals[cur_var]=var_val
-        for i in range(len(var_list)):
-            decision_strat[var_list[i]]=var_dets[i]
-        decision_strat[cur_var]=[var_priority,var_val]
-        return True, vals
-
-    var_val = not var_val
-    new_cons = deepcopy(constraints)
-    for con in new_cons:
-        if cur_var in con[0]:
-            if con[0][cur_var][0]=='+':
-                con[1]-=(con[0][cur_var][1]*int(var_val))
-            else:
-                con[1]+=(con[0][cur_var][1]*int(var_val))
-            del con[0][cur_var]
-
-    isAssigned, vals = dpll_solver(decision_strat,new_cons,(literal+1))
-    if isAssigned:
-        vals[cur_var]=var_val
-        for i in range(len(var_list)):
-            decision_strat[var_list[i]]=var_dets[i]
-        decision_strat[cur_var]=[var_priority,var_val]
-        return True, vals
-
-    for i in range(len(var_list)):
-        decision_strat[var_list[i]]=var_dets[i]
-    decision_strat[cur_var]=[var_priority,var_val]
-    return False, None
-
 def process_pbp_data(con_graph):
     #sort decision strat by the increasing order of decision priority
     decision_strat=OrderedDict(deepcopy(sorted(con_graph.pbp_data["complete"].decision_strat.items() , key=lambda x : -x[1][0])))
@@ -819,6 +568,8 @@ def process_pbp_data(con_graph):
     #         print("MISSED OUT ON VARS")
     if isAssigned==False:
         print("Assignment was not successful")
+        print(assignment)
+        print_pb_strat(con_graph)
         return None
     return assignment
 
@@ -827,7 +578,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
     var_val = None
     assignment={}
     var_list={}
-    infeasible_con_list=[]
+    infeasible_con_list={}
     #pick the variable to assign a value using the decision_strat
     for vars in decision_strat:
         if decision_strat[vars][0]!=(-1):
@@ -852,7 +603,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 #if current sum + coefficient>objective goal of constraint and coefficient is positive
                 if (con_dets[i][1]+variables[cur_var][0][i])>con_dets[i][3]:
                     isFeasible=False
-                    infeasible_con_list.append(i)
+                    infeasible_con_list[i]=1
             #add value of coefficient to current sum of constraint
             con_dets[i][1]+=variables[cur_var][0][i]
         else:
@@ -860,7 +611,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
             if con_dets[i][0]!='<=':
                 if (con_dets[i][2]-variables[cur_var][0][i])<con_dets[i][3]:
                     isFeasible=False
-                    infeasible_con_list.append(i)
+                    infeasible_con_list[i]=1
             #subtract value of coefficient from maximum posible sum of constraints
             con_dets[i][2]-=variables[cur_var][0][i]
         #check for implications or conflicts caused due to this assignment in the given constraint.
@@ -872,13 +623,13 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                             if var_list[vars]!=False:
                                 isFeasible=False
-                                infeasible_con_list.append(i)
+                                infeasible_con_list[i]=1
                         var_list[vars]=False
                     elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
-                                infeasible_con_list.append(i)
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
                 elif con_dets[i][0]!='<=':
                     #if the coefficient of vars is necessary, make sure it is true
@@ -886,7 +637,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                             if var_list[vars]!=False:
                                 isFeasible=False
-                                infeasible_con_list.append(i)
+                                infeasible_con_list[i]=1
                         var_list[vars]=False
                         #print("THIS",vars)
                     #if the sign of vars is negative in the constraint, then make sure it is false.
@@ -894,7 +645,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
-                                infeasible_con_list.append(i)
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
 
     for i in variables[cur_var][1]:
@@ -905,13 +656,14 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 #if current sum + coefficient>objective goal of constraint and coefficient is positive
                 if (con_dets[i][1]+variables[cur_var][1][i])>con_dets[i][3]:
                     isFeasible=False
-                    infeasible_con_list.append(i)
+                    infeasible_con_list[i]=1
             con_dets[i][1]+=variables[cur_var][1][i]
         else:
             #Make sure that assigning the value does not cause conflict
             if con_dets[i][0]!='<=':
                 if (con_dets[i][2]-variables[cur_var][1][i])<con_dets[i][3]:
                     isFeasible=False
+                    infeasible_con_list[i]=1
             con_dets[i][2]-=variables[cur_var][1][i]
         #check for implications or conflicts caused due to this assignment in the given constraint.
         for vars in constraints[i][0]:
@@ -922,22 +674,26 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                            if var_list[vars]!=False:
                                isFeasible=False
+                               infeasible_con_list[i]=1
                         var_list[vars]=False
                     elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
                 elif con_dets[i][0]!='<=':
                     if constraints[i][0][vars][0]=='+' and (con_dets[i][2]-variables[vars][0][i])<con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=False:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=False
                     elif constraints[i][0][vars][0]=='-' and (con_dets[i][2]-variables[vars][1][i])<con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
 
     #Now the var_list should be updated, process the list
@@ -955,6 +711,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                     #if current sum + coefficient>objective goal of constraint and coefficient is positive
                     if (con_dets[i][1]+variables[val][0][i])>con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 #add value of coefficient to current sum of constraint
                 con_dets[i][1]+=variables[val][0][i]
             else:
@@ -963,6 +720,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 if con_dets[i][0]!='<=':
                     if (con_dets[i][2]-variables[val][0][i])<con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 con_dets[i][2]-=variables[val][0][i]
         #Iterating over the negative constraints associated with the current variable
         for i in variables[val][1]:
@@ -973,6 +731,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                     #if current sum + coefficient>objective goal of constraint and coefficient is positive
                     if (con_dets[i][1]+variables[val][1][i])>con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 #add value of coefficient to current sum of constraint
                 con_dets[i][1]+=variables[val][1][i]
             else:
@@ -981,12 +740,13 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 if con_dets[i][0]!='<=':
                     if (con_dets[i][2]-variables[val][1][i])<con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 #subtract value of coefficient from maximum posible sum of constraints
                 con_dets[i][2]-=variables[val][1][i]
 
     #after assigning the values of the assignment, lets check if the whole situation is feasible.
     reprocess=False
-    val_return=cur_var
+    val_return=infeasible_con_list
     if isFeasible==True:
         #print("____NEXT LEVEL___")
         isAssigned, vals= pbs_solver(decision_strat,constraints,con_dets,variables)
@@ -996,16 +756,24 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 vals[val]=var_list[val]
             return True, vals
         else:
+            #print("recursed back to find source of infeasibility")
             reprocess=True
             val_return=vals
+            for i in vals:
+                infeasible_con_list[i]=1
             for i in variables[cur_var][0]:
-                if vals in constraints[i][0].keys():
-                    #print(constraints[i][0])
+                if i in val_return.keys():
                     reprocess=False
             for i in variables[cur_var][1]:
-                if vals in constraints[i][0].keys():
-                    #print(constraints[i][0])
+                if i in val_return.keys():
                     reprocess=False
+            for varrs in var_list:
+                for i in variables[varrs][0]:
+                    if i in val_return.keys():
+                        reprocess=False
+                for i in variables[varrs][1]:
+                    if i in val_return.keys():
+                        reprocess=False
 
     #reset the values of con_dets to what they were before assignment and the implication
     for i in variables[cur_var][0]:
@@ -1034,13 +802,14 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
     #clear var_list
     var_list={}
     if reprocess==True:
+        #print(cur_var,"isn't source of infeasibility")
         decision_strat[cur_var][0]=1
         return False,val_return
 
     #Change the value if it is infeasible, repeat.
     var_val=not var_val
     #print(f"Swap decision variable for {cur_var}")
-    #print("The current value is ",cur_var,var_val)
+    # print("The current value is ",cur_var,var_val)
 
 
     #variable to check if the assignment is feasible.
@@ -1055,6 +824,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 #if current sum + coefficient>objective goal of constraint and coefficient is positive
                 if (con_dets[i][1]+variables[cur_var][0][i])>con_dets[i][3]:
                     isFeasible=False
+                    infeasible_con_list[i]=1
             #add value of coefficient to current sum of constraint
             con_dets[i][1]+=variables[cur_var][0][i]
         else:
@@ -1062,6 +832,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
             if con_dets[i][0]!='<=':
                 if (con_dets[i][2]-variables[cur_var][0][i])<con_dets[i][3]:
                     isFeasible=False
+                    infeasible_con_list[i]=1
             #subtract value of coefficient from maximum posible sum of constraints
             con_dets[i][2]-=variables[cur_var][0][i]
         #check for implications or conflicts caused due to this assignment in the given constraint.
@@ -1073,11 +844,13 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                             if var_list[vars]!=False:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=False
                     elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
                 elif con_dets[i][0]!='<=':
                     #if the coefficient of vars is necessary, make sure it is true
@@ -1085,6 +858,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                             if var_list[vars]!=False:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=False
                         #print("THIS",vars)
                     #if the sign of vars is negative in the constraint, then make sure it is false.
@@ -1092,6 +866,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
 
     for i in variables[cur_var][1]:
@@ -1102,12 +877,14 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 #if current sum + coefficient>objective goal of constraint and coefficient is positive
                 if (con_dets[i][1]+variables[cur_var][1][i])>con_dets[i][3]:
                     isFeasible=False
+                    infeasible_con_list[i]=1
             con_dets[i][1]+=variables[cur_var][1][i]
         else:
             #Make sure that assigning the value does not cause conflict
             if con_dets[i][0]!='<=':
                 if (con_dets[i][2]-variables[cur_var][1][i])<con_dets[i][3]:
                     isFeasible=False
+                    infeasible_con_list[i]=1
             con_dets[i][2]-=variables[cur_var][1][i]
         #check for implications or conflicts caused due to this assignment in the given constraint.
         for vars in constraints[i][0]:
@@ -1118,22 +895,26 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                         if vars in var_list:
                            if var_list[vars]!=False:
                                isFeasible=False
+                               infeasible_con_list[i]=1
                         var_list[vars]=False
                     elif constraints[i][0][vars][0]=='-' and (con_dets[i][1]+variables[vars][1][i])>con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
                 elif con_dets[i][0]!='<=':
                     if constraints[i][0][vars][0]=='+' and (con_dets[i][2]-variables[vars][0][i])<con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=False:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=False
                     elif constraints[i][0][vars][0]=='-' and (con_dets[i][2]-variables[vars][1][i])<con_dets[i][3]:
                         if vars in var_list:
                             if var_list[vars]!=True:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                         var_list[vars]=True
 
     #Now the var_list should be updated, process the list
@@ -1151,6 +932,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                     #if current sum + coefficient>objective goal of constraint and coefficient is positive
                     if (con_dets[i][1]+variables[val][0][i])>con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 #add value of coefficient to current sum of constraint
                 con_dets[i][1]+=variables[val][0][i]
             else:
@@ -1159,6 +941,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 if con_dets[i][0]!='<=':
                     if (con_dets[i][2]-variables[val][0][i])<con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 con_dets[i][2]-=variables[val][0][i]
         #Iterating over the negative constraints associated with the current variable
         for i in variables[val][1]:
@@ -1169,6 +952,7 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                     #if current sum + coefficient>objective goal of constraint and coefficient is positive
                     if (con_dets[i][1]+variables[val][1][i])>con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 #add value of coefficient to current sum of constraint
                 con_dets[i][1]+=variables[val][1][i]
             else:
@@ -1177,11 +961,12 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 if con_dets[i][0]!='<=':
                     if (con_dets[i][2]-variables[val][1][i])<con_dets[i][3]:
                                 isFeasible=False
+                                infeasible_con_list[i]=1
                 #subtract value of coefficient from maximum posible sum of constraints
                 con_dets[i][2]-=variables[val][1][i]
 
     #after assigning the values of the assignment, lets check if the whole situation is feasible.
-    val_return=cur_var
+    val_return=infeasible_con_list
     if isFeasible==True:
         #print("____NEXT LEVEL___")
         isAssigned, vals= pbs_solver(decision_strat,constraints,con_dets,variables)
@@ -1191,7 +976,8 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
                 vals[val]=var_list[val]
             return True, vals
         else:
-            val_return=vals
+            for i in vals:
+                val_return[i]=1
     #reset the values of con_dets to what they were before assignment and the implication
     for i in variables[cur_var][0]:
         if var_val==1:
@@ -1217,7 +1003,9 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
             else:
                 con_dets[i][2]+=variables[val][1][i]
     decision_strat[cur_var][0]=1
+    #print("----",cur_var,"lead to infeasibility, back-tracking to its source")
     return False,val_return
+    #Maybe instead of just returning value, we need to return implication as well?
 
 def clustering_pb1(graph,con_graph):
     global scenario
@@ -1445,9 +1233,9 @@ def print_pb_strat(con_graph):
 
 def gen_dvfslevel(num_levels):
     global scenario
-    scenario.dvfs_levels = []
+    scenario.dvfs_level = []
     if num_levels == None or num_levels < 3:
-        scenario.dvfs_levels = [1]
+        scenario.dvfs_level = [1]
     else:
         #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
         freq=500
@@ -1458,13 +1246,13 @@ def gen_dvfslevel(num_levels):
         #The size of each frequency step.
         step_size=(f_up-f_down)/(num_levels-1)
         for i in range(num_levels):
-            scenario.dvfs_levels.append(f_down+(i*step_size))
+            scenario.dvfs_level.append(f_down+(i*step_size))
     #this creates a list of size dvfs_num_levels
     #the contents of this list will range from [1600/500 to 200/500]
     #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
 
 def process_cons(con_graph):
-    print_pb_strat(con_graph)
+    #print_pb_strat(con_graph)
     con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
     gen_comp_con_graph(con_graph,con_graph.graph)
     feasiblity_con_graph(con_graph,con_graph.graph)
@@ -1473,7 +1261,7 @@ def make_individual(name="la"):
     con_graph=creator.Individual()
     con_graph.graph=name
     gen_comp_pb(con_graph,name)
-    print_pb_strat(con_graph)
+    #print_pb_strat(con_graph)
     con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
     # for ass in con_graph.pbp_data["complete"].assignment:
     #     if "pulse" in ass:
@@ -1507,6 +1295,7 @@ def evalParams(individual):
     for cluster in individual.task_cluster:
         cluster_time[cluster]=0
         if scenario.dvfs>1:
+            #print((individual.dvfs_level[cluster]))
             dvfs_level=scenario.dvfs_level[(individual.dvfs_level[cluster])]
         for task in individual.task_cluster[cluster].tasks:
             mapped=individual.task_cluster[cluster].mapped_to
@@ -1524,6 +1313,8 @@ def evalParams(individual):
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         mapped=individual.task_cluster[cluster].mapped_to
+        if scenario.dvfs>1:
+            dvfs_level=1/scenario.dvfs_level[(individual.dvfs_level[cluster])]
         cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         for task1 in individual.task_cluster[cluster].tasks:
@@ -1546,6 +1337,8 @@ def evalParams(individual):
         inc+=1
         mapped=individual.task_cluster[cluster].mapped_to
         print("Cluster",inc,"is Mapped to PE",mapped)
+        if scenario.dvfs>1:
+            print("DVFS Level is", (individual.dvfs_level[cluster]))
         for task in individual.task_cluster[cluster].tasks:
             print("------>",task)
             print("start time",task_start[task])
@@ -1553,7 +1346,7 @@ def evalParams(individual):
         print("----------------------------------")
     print("The total execution time is",max_time,)
     print("The total energy is",energy,"\n")
-    return (energy,max_time)
+    return (energy,max_time,)
 
 def matefunc(ind1,ind2):
     complete="complete"
@@ -1568,20 +1361,21 @@ def matefunc(ind1,ind2):
     process_cons(ind2)
     return ind1, ind2
 
-def mutatefunc(ind,indpb=0.5):
+def mutatefunc(ind,indpb=0.1):
     complete="complete"
     #print("Mutate starts")
+
     for a in ind.pbp_data[complete].decision_strat:
         if random.random() < indpb:
             ind.pbp_data[complete].decision_strat[a][1]= not ind.pbp_data[complete].decision_strat[a][1]
-            yo=ind.pbp_data[complete].decision_strat[a][0]%1
+            yo=ind.pbp_data[complete].decision_strat[a][0]
             ind.pbp_data[complete].decision_strat[a][0]=(yo+ind.generation)
     ind.generation+=1
     process_cons(ind)
     #process constraints
     return ind
 
-creator.create("Fitness", base.Fitness, weights=(1.0,1.0))
+creator.create("Fitness", base.Fitness, weights=(-1.0,-4.0,))
 creator.create("Individual",Constraint_graph,fitness=creator.Fitness)
 
 toolbox = base.Toolbox()
@@ -1599,24 +1393,34 @@ toolbox.register("mate", matefunc)
 # flip each attribute/gene of 0.05
 toolbox.register("mutate",mutatefunc, indpb=0.05)
 #fittest of the individuals is selected for breeding..
-toolbox.register("select", tools.selTournament, tournsize=3)
+toolbox.register("select", tools.selNSGA2)
+
+#intialising the statistics functions
+
+stats = tools.Statistics(key=lambda ind: ind.fitness.values)
+stats.register("avg", numpy.mean, axis=0)
+stats.register("std", numpy.std, axis=0)
+stats.register("min", numpy.min, axis=0)
+stats.register("max", numpy.max, axis=0)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("input_tgff", help="*.tgff file to parse")
     parser.add_argument("--tg", help="*name of task_graph",default="TASK_GRAPH")
     parser.add_argument("--modular","-m",default=0,help="Use modular or complete clustering, Modular=1/Complete=0")
     parser.add_argument("--core", help="name of core/PE", default="CLIENT_PE")
-    parser.add_argument("-d", "--dir",default="./lp_files", help="output directory")
-    parser.add_argument("-o", "--out",action="store", dest="out", default="ilp.lp", help="output file")
+    parser.add_argument("-d", "--dir",default="./output", help="output directory")
     parser.add_argument("--dvfs_level","--dvfs",action="store", dest="dvfs_num_levels", type=int, default=None, help="The number of dvfs_levels possible for each processor")
     args = parser.parse_args()
     global scenario
     scenario = Complete_Scenario()
     #saving the number of dvfs levels taken as input
     scenario.dvfs=args.dvfs_num_levels
+    #processing the input tgff file
     with open(args.input_tgff) as input_file:
         for block in get_blocks(input_file):
             process_block(block,args.tg,args.core)
+    #generating the NOC
     generate_noc(8,8)
     populate_task_params()
     if args.dvfs_num_levels!=None:
@@ -1626,14 +1430,17 @@ def main():
     gen_dvfslevel(args.dvfs_num_levels)
     phase=0
 
+    file_name=(args.input_tgff.split("."))[0]
+
     #Processing each graph seperately
     for graph in scenario.graphs:
-        print_app_graph(graph)
+        plot_app_graph(graph,phase,file_name,args.dir)
+        #print_app_graph(graph)
         con_graph=Constraint_graph()
         con_graph.graph=graph
         gen_comp_pb(con_graph,graph)
         #print_pb_strat(con_graph)
-        print("Running the ")
+        print("Running the Solver")
         con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
         print("Assignment by PB Solver Complete")
         gen_comp_con_graph(con_graph,graph)
@@ -1642,7 +1449,7 @@ def main():
 
         pop=None
         print(f"Generating Population for {graph}")
-        pop = toolbox.population(graph_name=graph,pop_size=5)
+        pop = toolbox.population(graph_name=graph,pop_size=100)
         # CXPB  is the probability with which two individuals
         #       are crossed
         #
@@ -1655,13 +1462,17 @@ def main():
         fitnesses = list(map(toolbox.evaluate, pop))
         for ind, fit in zip(pop, fitnesses):
             ind.fitness.values = fit
-            print(fit)
 
         print("  Evaluated %i individuals" % len(pop))
 
         fits = [ind.fitness.values[0] for ind in pop]
         # Variable keeping track of the number of generations
         g = 0
+        #initialising the Logbook
+        logbook = tools.Logbook()
+        #initialising the ParetoFront
+        pf= tools.HallOfFame(maxsize=20)
+        # pf= tools.ParetoFront()
         # Begin the evolution
         while g < 5:
             # A new generation
@@ -1702,7 +1513,14 @@ def main():
             # The population is entirely replaced by the offspring
             pop[:] = offspring
 
-            # Gather all the fitnesses in one list and print the stats
+            record = stats.compile(pop)
+            pf.update(pop)
+            hv = hypervolume(pop, [0.0,0.0])
+            logbook.record(gen=g, evals=100 , hv=hv, **record)
+
+            #Gather all the fitnesses in one list and print the stats
+
+
             fits0 = [ind.fitness.values[0] for ind in pop]
             length = len(pop)
             mean = sum(fits0) / length
@@ -1725,11 +1543,73 @@ def main():
             print("   Std %s" % std)
 
 
+
+        # logbook.header = "gen", "avg", "max","min"
+        # print(logbook)
         print("-- End of (successful) evolution --")
 
+        # Making Plots
+        phase_name=f"{file_name}_{phase}"
+
+        gen= logbook.select("gen")
+        fitness_avg = logbook.select("avg")
+        avg_energy, avg_time = zip(*fitness_avg)
+        fitness_min = logbook.select("min")
+        min_energy, min_time = zip(*fitness_min)
+        hv = logbook.select("hv")
+
+        stats_plot_name=f"{args.dir}/{phase_name}_stats.png"
+        hv_plot_name=f"{args.dir}/{phase_name}_hv.png"
+        pf_plot_name=f"{args.dir}/{phase_name}_pf.png"
+
+        fig, (ax1,ax2) = plt.subplots(2)
+        #Plotting Energy stats for each generation
+        line1 = ax1.plot(gen, avg_energy, "b-", label="Average Energy")
+        ax1.set_xlabel("Generation")
+        ax1.set_ylabel("Energy", color="b")
+        for tl in ax1.get_yticklabels():
+            tl.set_color("b")
+        line2 = ax1.plot(gen, min_energy, "r-", label="Minimum Energy")
+        lns = line1 + line2
+        labs = [l.get_label() for l in lns]
+        ax1.legend(lns, labs, loc="center right")
+        #Plotting Time stats for each generation
+        line1 = ax2.plot(gen, avg_time, "b-", label="Average Time")
+        ax2.set_xlabel("Generation")
+        ax2.set_ylabel("Execution Time", color="b")
+        for tl in ax2.get_yticklabels():
+            tl.set_color("r")
+        line2 = ax2.plot(gen, min_time, "r-", label="Minimum Time")
+        lns = line1 + line2
+        labs = [l.get_label() for l in lns]
+        ax2.legend(lns, labs, loc="center right")
+        plt.savefig(stats_plot_name)
+        #plt.show()
+
+        fig, ax1 = plt.subplots()
+        line1 = ax1.plot(gen, hv, "b-", label="Hypervolume")
+        ax1.set_xlabel("Generation")
+        ax1.set_ylabel("HyperVolume wrt 0,0", color="b")
+        labs = [l.get_label() for l in line1]
+        ax1.legend(lns, labs, loc="center right")
+        plt.savefig(hv_plot_name)
+        #plt.savefig(stats_plot_name)
+
+        energy_pf = [ind.fitness.values[0] for ind in pf]
+        time_pf = [ind.fitness.values[1] for ind in pf]
+        fig, ax1 = plt.subplots()
+        line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront")
+        ax1.set_xlabel("Energy")
+        ax1.set_ylabel("Execution Time", color="b")
+        labs = [l.get_label() for l in line1]
+        ax1.legend(lns, labs, loc="center right")
+        plt.savefig(pf_plot_name)
+
         best_ind = tools.selBest(pop, 1)[0]
+        #plot_constraint_graph(best_ind,graph,file_name,phase,dir)
         print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
         phase+=1
+    print("Discrete Constrainted Meta-Heuristic successful !!!")
     return
 if __name__ == '__main__':
     main()
