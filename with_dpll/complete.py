@@ -1345,7 +1345,7 @@ def evalParams(individual):
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
                 cluster_to=individual.task_to_cluster[task_to]
-                message_time=0.0
+                message_time=0.02
                 if cluster_to!=cluster:
                     mapped_to=individual.task_cluster[cluster_to].mapped_to
                     message_list[m]=message_time
@@ -1501,7 +1501,7 @@ def main():
         pop=None
         print(f"Generating Population for {graph}")
         start_time=time.time()
-        pop = toolbox.population(graph_name=graph,pop_size=10)
+        pop = toolbox.population(graph_name=graph,pop_size=100)
         # CXPB  is the probability with which two individuals
         #       are crossed
         #
@@ -1525,7 +1525,7 @@ def main():
         pf= tools.HallOfFame(maxsize=20)
         # pf= tools.ParetoFront()
         # Begin the evolution
-        while g < 2:
+        while g < 200:
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
