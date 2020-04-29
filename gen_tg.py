@@ -9,13 +9,13 @@ def gen_opt(opt_path):
     print("Generating tgffopt file")
     seed_value=10
     num_graphs=2
-    task_count=20
+    task_count=5
     task_type_cnt=45
     with open(opt_path, 'w') as f:
         f.write(f"seed {seed_value}\n")
         f.write("tg_label TASK_GRAPH\n")
         f.write(f"tg_cnt {num_graphs}\n")
-        f.write(f"task_cnt {task_count} 0.1\n")
+        f.write(f"task_cnt {task_count} 0.5\n")
         f.write(f"task_type_cnt {task_type_cnt}\n")
         f.write(f"period_mul 1\n")
         f.write(f"task_trans_time 1\n")
@@ -35,17 +35,18 @@ def extend_tg(tg_path,template):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--template","-t" help="The template file",default="./template.tgff")
+    parser.add_argument("--template","-t", help="The template file",default="./template.tgff")
     parser.add_argument("-d", "--dir",default="./tg_generated", help="output directory")
     parser.add_argument("-o", "--out",action="store", dest="out", default="trial", help="Name of the output file")
-    parser.add_argument("--tgff",default="./Constraints/tgff-3.6/tgff",help="Path of the tgff binary")
+    parser.add_argument("--tgff",default="./tgff-3.6/tgff",help="Path of the tgff binary")
 
     args = parser.parse_args()
     opt_path=os.path.join(args.dir,f"{args.out}.tgffopt")
     tg_path=os.path.join(args.dir,f"{args.out}.tgff")
+    filename=os.path.join(args.dir,args.out)
     gen_opt(opt_path)
-
-    output_run=subprocess.run([args.tgff,opt_path], capture_output=True)
+    opt_path=os.path.abspath(opt_path)
+    output_run=subprocess.run([args.tgff,filename], capture_output=True)
     print(str(output_run.stdout))
 
     extend_tg(tg_path,args.template)
