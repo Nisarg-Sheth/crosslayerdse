@@ -20,6 +20,7 @@ class Complete_Scenario:
         self.dvfs_level = []
         self.service_level = 10
         self.max_hop=14
+        self.communication={}
 class PB_data:
     def __init__(self):
         self.constraints = []
@@ -57,6 +58,7 @@ class Graph:
         self.tasks = {}
         self.arcs = {}
         self.deadline = {}
+        self.num_of_evals=0
 
     def add_task(self,task_details):
         task_dets=task_details.split()
@@ -104,6 +106,7 @@ class Arc:
         self.task_from=task_from
         self.task_to=task_to
         self.type=type
+        self.quant=5000.0
 
 class Table:
     def __init__(self,name,attribute_row,raw_attribute_row,row4):

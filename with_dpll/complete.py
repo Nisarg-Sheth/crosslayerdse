@@ -4,6 +4,7 @@ import re
 import argparse
 import random
 import subprocess
+import time
 import matplotlib.pyplot as plt
 import numpy
 from graphviz import Digraph
@@ -68,26 +69,17 @@ def process_block(block,tg,core):
                 scenario.all_tables[core_name].add_row(block[i])
     elif "HYPERPERIOD" in block[0]:
         scenario.hyperperiod= float(block[0].strip('@HYPERPERIOD '))
+    elif "COMMUN_QUANT" in block[0]:
+        for i in range(len(block)):
+            if(i==0):
+                continue
+            vals=block[i].split()
+            scenario.communication[vals[0]]=float(vals[1])
 
-def populate_task_params():
+def assign_priorities():
     global scenario
     for graph in scenario.graphs:
-        for task in scenario.graphs[graph].tasks:
-            type_of_task=scenario.graphs[graph].tasks[task].type
-            for table in scenario.tables:
-                if scenario.tables[table].values[type_of_task][0]==type_of_task:
-                    if int(scenario.tables[table].values[type_of_task][2])==1:
-                        #adding the PE to the pe_list of each task
-                        scenario.graphs[graph].tasks[task].pe_list.append(table)
-                        #adding the WCET on the PE for each task
-                        scenario.graphs[graph].tasks[task].wcet[table]=float(scenario.tables[table].values[type_of_task][3])
-                        #adding the task_power on the PE to the task arc_details
-                        scenario.graphs[graph].tasks[task].power[table]=float(scenario.tables[table].values[type_of_task][6])
-                        #adding code bits to the task details
-                        scenario.graphs[graph].tasks[task].code_bits[table]=float(scenario.tables[table].values[type_of_task][5])
-                        #adding preemeption_time
-                        scenario.graphs[graph].tasks[task].preempt_time[table]=float(scenario.tables[table].values[type_of_task][4])
-
+        #Assigning the task priorities
         for task in scenario.graphs[graph].tasks:
             for arc in scenario.graphs[graph].arcs:
                 task_to=scenario.graphs[graph].arcs[arc].task_to
@@ -95,17 +87,65 @@ def populate_task_params():
                 if scenario.graphs[graph].tasks[task_to].priority<(scenario.graphs[graph].tasks[task_from].priority+1):
                     scenario.graphs[graph].tasks[task_to].priority=(scenario.graphs[graph].tasks[task_from].priority+1)
 
+def populate_message_params():
+    global scenario
+    for graph in scenario.graphs:
+        for arc in scenario.graphs[graph].arcs:
+            type=scenario.graphs[graph].arcs[arc].type
+            if type in scenario.communication.keys():
+                scenario.graphs[graph].arcs[arc].quant=scenario.communication[type]
+
+def populate_task_params():
+    global scenario
+    for graph in scenario.graphs:
+        for task in scenario.graphs[graph].tasks:
+            task_feasible=False
+            scenario.graphs[graph].tasks[task].pe_list=[]
+            scenario.graphs[graph].tasks[task].wcet={}
+            scenario.graphs[graph].tasks[task].power={}
+            scenario.graphs[graph].tasks[task].code_bits={}
+            scenario.graphs[graph].tasks[task].preempt_time={}
+            type_of_task=scenario.graphs[graph].tasks[task].type
+            for table in scenario.tables:
+                if scenario.tables[table].values[type_of_task][0]==type_of_task:
+                    if int(scenario.tables[table].values[type_of_task][2])==1:
+                        task_feasible=True
+                        #adding the PE to the pe_list of each task
+                        scenario.graphs[graph].tasks[task].pe_list.append(table)
+                        #adding the WCET on the PE for each task
+                        scenario.graphs[graph].tasks[task].wcet[table]=float(scenario.tables[table].values[type_of_task][3])*(1e5)
+                        #adding the task_power on the PE to the task arc_details
+                        scenario.graphs[graph].tasks[task].power[table]=float(scenario.tables[table].values[type_of_task][6])
+                        #adding code bits to the task details
+                        scenario.graphs[graph].tasks[task].code_bits[table]=float(scenario.tables[table].values[type_of_task][5])
+                        #adding preemeption_time
+                        scenario.graphs[graph].tasks[task].preempt_time[table]=float(scenario.tables[table].values[type_of_task][4])
+            if(task_feasible==False):
+                return False
+
+
+    return True
+
+
 def generate_noc(length,breadth):
     global scenario
     # for temp in scenario.all_tables:
     #     scenario.tables[temp]=scenario.all_tables[temp]
+    # for table in scenario.all_tables:
+    print("NOC Assignment is as follows\n")
     for i in range(length):
         l=[]
+        to_print=""
         for j in range(breadth):
+            name=f"PE_{i}_{j}"
             temp=random.sample(scenario.all_tables.keys(),1)
-            scenario.tables[temp[0]]=scenario.all_tables[temp[0]]
+            scenario.tables[name]=scenario.all_tables[temp[0]]
+            scenario.tables[name].name=temp[0]
+            to_print+=f"|{name} type = {temp[0]}|"
             l.append(temp[0])
+        print(to_print)
         scenario.NOC.append(l)
+    print("____________________________________________")
 
 
 def gen_comp_pb(con_graph,graph):
@@ -120,7 +160,6 @@ def gen_comp_pb(con_graph,graph):
         map_list.append(scenario.graphs[graph].tasks[task].pe_list)
     for task in scenario.graphs[graph].tasks:
         l={}
-        print(task)
         # Tslave+ Tmaster = 1
         temp=f"{task}_master"
         con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
@@ -228,7 +267,7 @@ def gen_comp_con_graph(con_graph, graph):
     dvfs_list = []
     for parts in con_graph.pbp_data["complete"].assignment:
         if con_graph.pbp_data["complete"].assignment[parts]==1:
-            print(parts)
+            #print(parts)
             if parts.endswith("_master"):
                 ext_id = parts.rfind("_")
                 master_list.append(parts[:ext_id])
@@ -1264,12 +1303,13 @@ def makepop(graph_name="la", pop_size=5):
 def evalParams(individual):
     global scenario
     graph=individual.graph
+    scenario.graphs[graph].num_of_evals+=1
     energy=0
     task_list=[]
     task_start={}
     task_end={}
     cluster_time={}
-
+    message_list={}
     dvfs_level=1
     message_communication_time=0.001
 
@@ -1280,17 +1320,8 @@ def evalParams(individual):
     #     for task in individual.task_cluster[cluster].tasks:
     #         print("------>",task)
             #print(scenario.graphs[graph].tasks[task].pe_list)
-    #Computing the total energy usage
     for cluster in individual.task_cluster:
         cluster_time[cluster]=0
-        mapped=individual.task_cluster[cluster].mapped_to
-        if scenario.dvfs>1:
-            #print((individual.dvfs_level[cluster]))
-            dvfs_level=scenario.dvfs_level[(individual.dvfs_level[cluster])]
-        for task in individual.task_cluster[cluster].tasks:
-            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
-            power=scenario.graphs[graph].tasks[task].power[mapped]
-            energy+=(wcet*power*dvfs_level*dvfs_level)
 
     #Sorting tasks according to priority
     for task in scenario.graphs[graph].tasks:
@@ -1313,13 +1344,30 @@ def evalParams(individual):
         for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
-                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)):
-                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+                cluster_to=individual.task_to_cluster[task_to]
+                message_time=0.0
+                if cluster_to!=cluster:
+                    mapped_to=individual.task_cluster[cluster_to].mapped_to
+                    message_list[m]=message_time
+                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time):
+                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time)
 
     max_time=0
     for cluster in cluster_time:
         if(cluster_time[cluster]>max_time):
             max_time=cluster_time[cluster]
+
+    #Computing the total energy usage
+    for cluster in individual.task_cluster:
+        mapped=individual.task_cluster[cluster].mapped_to
+        if scenario.dvfs>1:
+            #print((individual.dvfs_level[cluster]))
+            dvfs_level=scenario.dvfs_level[(individual.dvfs_level[cluster])]
+        for task in individual.task_cluster[cluster].tasks:
+            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
+            power=scenario.graphs[graph].tasks[task].power[mapped]
+            energy+=(wcet*power*dvfs_level*dvfs_level)
+
     inc=0
     print("\nEVALUATION FOR",graph,"\n")
     for cluster in individual.task_cluster:
@@ -1409,9 +1457,23 @@ def main():
     with open(args.input_tgff) as input_file:
         for block in get_blocks(input_file):
             process_block(block,args.tg,args.core)
+
+    assign_priorities()
+    populate_message_params()
     #generating the NOC
-    generate_noc(8,8)
-    populate_task_params()
+    assignment_feasible=False
+    counter=0
+    while(assignment_feasible==False and counter<100):
+        generate_noc(2,2)
+        assignment_feasible=populate_task_params()
+        if(assignment_feasible==False):
+            print("Reassigning NOC")
+        counter+=1
+    if(assignment_feasible==False):
+        print("NOC needs to be more PE")
+        print("Tasks possibly cannot be scheduled")
+        print("!!!!!")
+        return
     if args.dvfs_num_levels!=None:
         scenario.dvfs=args.dvfs_num_levels
     else:
@@ -1421,26 +1483,25 @@ def main():
     left_ext=args.input_tgff.rfind('/')
     right_ext=args.input_tgff.rfind('.')
     file_name=args.input_tgff[left_ext+1:right_ext]
-    print(file_name)
-
     #Processing each graph seperately
     for graph in scenario.graphs:
         #plot_app_graph(graph,phase,file_name,args.dir)
-        #print_app_graph(graph)
-        con_graph=Constraint_graph()
-        con_graph.graph=graph
-        gen_comp_pb(con_graph,graph)
-        #print_pb_strat(con_graph)
-        print("Running the Solver")
-        con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
-        print("Assignment by PB Solver Complete")
-        gen_comp_con_graph(con_graph,graph)
-        feasiblity_con_graph(con_graph,graph)
-        evalParams(con_graph)
+        # print_app_graph(graph)
+        # con_graph=Constraint_graph()
+        # con_graph.graph=graph
+        # gen_comp_pb(con_graph,graph)
+        # print_pb_strat(con_graph)
+        # print("Running the Solver")
+        # con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
+        # print("Assignment by PB Solver Complete")
+        # gen_comp_con_graph(con_graph,graph)
+        # feasiblity_con_graph(con_graph,graph)
+        # evalParams(con_graph)
 
         pop=None
         print(f"Generating Population for {graph}")
-        pop = toolbox.population(graph_name=graph,pop_size=100)
+        start_time=time.time()
+        pop = toolbox.population(graph_name=graph,pop_size=10)
         # CXPB  is the probability with which two individuals
         #       are crossed
         #
@@ -1448,7 +1509,6 @@ def main():
         CXPB, MUTPB = 0.5, 0.2
 
         print("Start of evolution", graph)
-
         # Evaluate the entire population
         fitnesses = list(map(toolbox.evaluate, pop))
         for ind, fit in zip(pop, fitnesses):
@@ -1465,7 +1525,7 @@ def main():
         pf= tools.HallOfFame(maxsize=20)
         # pf= tools.ParetoFront()
         # Begin the evolution
-        while g < 200:
+        while g < 2:
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
@@ -1517,7 +1577,7 @@ def main():
             mean = sum(fits0) / length
             sum2 = sum(x*x for x in fits0)
             std = abs(sum2 / length - mean**2)**0.5
-            print(" Values of Power")
+            print(" Values of Energy")
             print("   Min %s" % min(fits0))
             print("   Max %s" % max(fits0))
             print("   Avg %s" % mean)
@@ -1538,7 +1598,10 @@ def main():
         # logbook.header = "gen", "avg", "max","min"
         # print(logbook)
         print("-- End of (successful) evolution --")
-
+        end_time=time.time()
+        print("---------GENERATING STATISTICS---------")
+        print("\nTotal Seconds taken for evaluation are", (end_time-start_time))
+        print("Total Number of Evaluations are",scenario.graphs[graph].num_of_evals,"\n")
         # Making Plots
         phase_name=f"{file_name}_{phase}"
 
@@ -1601,7 +1664,7 @@ def main():
 
         best_ind = tools.selBest(pop, 1)[0]
         #plot_constraint_graph(best_ind,graph,file_name,phase,dir)
-        print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
+        # print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
         phase+=1
     print("Discrete Constrainted Meta-Heuristic successful !!!")
     return
