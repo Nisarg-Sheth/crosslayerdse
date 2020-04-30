@@ -61,11 +61,14 @@ class Graph:
         self.num_of_evals=0
 
     def add_task(self,task_details):
+        task_details=task_details.replace("_","")
+        #print(task_details)
         task_dets=task_details.split()
         self.num_of_tasks+=1
         self.tasks[task_dets[0]]=Task(task_dets[0],int(task_dets[2]))
         #create a new task with      :name       ,type          ,host
     def add_arc(self,arc_details):
+        arc_details=arc_details.replace("_","")
         arc_dets=arc_details.split()
         self.num_of_arcs+=1
         #IMP - ARCS are not unique in the benchmarks.
@@ -78,10 +81,12 @@ class Graph:
         self.tasks[arc_dets[4]].predecessor.append(arc_dets[2])
 
     def add_hard_deadline(self,deadline_details):
+        deadline_details=deadline_details.replace("_","")
         deadline_dets=deadline_details.split()
         self.tasks[deadline_dets[2]].hard_deadline=float(deadline_dets[4])
 
     def add_soft_deadline(self,deadline_details):
+        deadline_details=deadline_details.replace("_","")
         deadline_dets=deadline_details.split()
         self.tasks[deadline_dets[2]].soft_deadline=float(deadline_dets[4])
 
