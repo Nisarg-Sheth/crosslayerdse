@@ -1366,7 +1366,7 @@ def evalParams(individual):
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
                 cluster_to=individual.task_to_cluster[task_to]
-                message_time=0.0
+                message_time=0.02
                 if cluster_to!=cluster:
                     mapped_to=individual.task_cluster[cluster_to].mapped_to
                     tmp1=mapped.split("_")
@@ -1559,7 +1559,11 @@ def main():
         pf= tools.HallOfFame(maxsize=100)
         # pf= tools.ParetoFront()
         # Begin the evolution
+<<<<<<< HEAD
         while g < 300:
+=======
+        while g < 200:
+>>>>>>> b1844cdac59864373e35eaa88c434481a3212421
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
