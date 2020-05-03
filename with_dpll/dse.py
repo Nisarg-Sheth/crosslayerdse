@@ -168,111 +168,36 @@ def generate_noc(length,breadth):
                 isAssigned=True
                 break
 
-def gen_comp_pb(con_graph,graph):
+#The phenotype of
+def gen_phenotype(individual,graph):
     global scenario
-    complete="complete"
-    i=0
-    num_of_con=0
-    num_of_vars=0
-    con_graph.pbp_data[complete]=PB_data()
-    map_list=[]
     for task in scenario.graphs[graph].tasks:
-        map_list.append(scenario.graphs[graph].tasks[task].pe_list)
-    for task in scenario.graphs[graph].tasks:
-        l={}
-        # Tslave+ Tmaster = 1
-        temp=f"{task}_master"
-        con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-        l[temp]=('+',1)
-        temp=f"{task}_slave"
-        con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-        l[temp]=('+',1)
-        con_graph.pbp_data[complete].constraints.append([l,1,'='])
-        # Connnected in Vertical direction,
-        # Connected in Horizontal direction,
-        # Is slave only connected to one??
-        l1={}
-        temp=f"{task}_master"
-        l1[temp]=('+',i)
-        l2={}
-        temp=f"{task}_slave"
-        if ((scenario.graphs[graph].num_of_tasks-(i+1))>0):
-            l2[temp]=('+',(scenario.graphs[graph].num_of_tasks-(i+1)))
-        l3={}
-        temp=f"{task}_slave"
-        l3[temp]=('-',1)
-        j=0
-        for task1 in scenario.graphs[graph].tasks:
-            if task!=task1:
-                temp=f"C_{task1}_{task}"
-                con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-                l2[temp]=('+',1)
-                temp=f"C_{task}_{task1}"
-                l1[temp]=('+',1)
-                if j<i:
-                    l3[temp]=('+',1)
-            j+=1
-        con_graph.pbp_data[complete].constraints.append([l1,i,'<='])
-        con_graph.pbp_data[complete].constraints.append([l2,(scenario.graphs[graph].num_of_tasks-(i+1)),'<='])
-        con_graph.pbp_data[complete].constraints.append([l3,0,'='])
-
-        #Mapping the Tmasters to Resources
-        l4={}
-        temp=f"{task}_master"
-        l4[temp]=('-',1)
-        for map in map_list[i]:
-            temp=f"map_{task}_{map}"
-            con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-            l4[temp]=('+',1)
-        con_graph.pbp_data[complete].constraints.append([l4,0,'='])
-
-        #DVFS Level assignment
-        if scenario.dvfs!=None and scenario.dvfs>=3:
-            l4={}
-            temp=f"{task}_master"
-            l4[temp]=('-',1)
-            for level in range(scenario.dvfs):
-                temp=f"dvfs_{level}_{task}"
-                con_graph.pbp_data[complete].decision_strat[temp]=[random.uniform(0,1),bool(random.randint(0,1))]
-                l4[temp]=('+',1)
-            con_graph.pbp_data[complete].constraints.append([l4,0,'='])
-        #verifying that mapping is not bad.
-        j=0
-        for task1 in scenario.graphs[graph].tasks:
-            # if j<i:
-            #     temp=f"C_{task}_{task1}"
-            #     l5={}
-            #     l5[temp]=('-',1)
-            #     for pe in map_list[i]:
-            #         if pe in map_list[j]:
-            #             temp=f"map_{task1}_{pe}"
-            #             l5[temp]=('+',1)
-            #     con_graph.pbp_data[complete].constraints.append([l5,0,'>='])
-            if j>i:
-                l6={}
-                temp=f"C_{task1}_{task}"
-                l6[temp]=('-',1)
-                for pe in map_list[i]:
-                    if pe in map_list[j]:
-                        temp=f"map_{task}_{pe}"
-                        l6[temp]=('+',1)
-                con_graph.pbp_data[complete].constraints.append([l6,0,'>='])
-            j+=1
-        i+=1
-
-    # for m in scenario.graphs[graph].arcs:
-    #     #assign service level
-    #     l1={}
-    #     for j in range(scenario.service_level):
-    #         l1[f"sl_{j}_{m}"]=('+',1)
-    #         con_graph.pbp_data[complete].decision_strat[f"sl_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
-    #     con_graph.pbp_data[complete].constraints.append([l1,1,'='])
-    #     #assign hop distance
-    #     l2={}
-    #     for j in range(scenario.max_hop):
-    #         l2[f"hop_{j}_{m}"]=('+',1)
-    #         con_graph.pbp_data[complete].decision_strat[f"hop_{j}_{m}"]=[random.uniform(0,1),bool(random.randint(0,1))]
-    #     con_graph.pbp_data[complete].constraints.append([l2,1,'='])
+        individual.task_list[task]=Task_data(task)
+    for parts in individual.assignment:
+        if individual.assignment[parts]==1:
+            # print(parts)
+            if parts.startswith("dvfs_"):
+                d=(parts[5:])
+                vars=d.split("_",1)
+                individual.task_list[vars[1]].dvfs_level=int(vars[0])
+            else:
+                ext_id = parts.find("_")
+                task=parts[:ext_id]
+                mapped=parts[(ext_id+1):]
+                individual.task_list[task].mapped=mapped
+                if mapped in individual.pe_list.keys():
+                    individual.pe_list[mapped].append(task)
+                else:
+                    individual.pe_list[mapped]=[task]
+    for pe in individual.pe_list:
+        task1=None
+        for task in individual.pe_list[pe]:
+            task1=task
+            individual.task_cluster[task1]=[]
+            break
+        for task in individual.pe_list[pe]:
+            individual.task_to_cluster[task]=task1
+            individual.task_cluster[task1].append(task)
 
 
 #generate the constraint graph from the ILP
@@ -335,28 +260,31 @@ def gen_comp_con_graph(con_graph, graph):
         if a[1] in con_graph.messages:
             con_graph.messages[a[1]].hop=int(a[0])
 
-#feasibilty of constraint on the physical NOC
-def feasiblity_con_graph(con_graph,graph):
+def gen_genotype(individual,graph):
     global scenario
+    num_of_vars=0
+    num_of_con=0
+    individual.pbp_data={}
+    for task in scenario.graphs[graph].tasks:
+        individual.pbp_data[task]=PB_data()
+        l={}
+        for mapped in scenario.graphs[graph].tasks[task].pe_list:
+            temp=f"{task}_{mapped}"
+            num_of_vars+=1
+            individual.pbp_data[task].decision_strat[temp]=[random.uniform(0,1),bool(1)]
+            l[temp]=('+',1)
+        num_of_con+=1
+        individual.constraints.append([l,1,'='])
+        if scenario.dvfs!=None and scenario.dvfs>=3:
+            l={}
+            for level in range(scenario.dvfs):
+                temp=f"dvfs_{level}_{task}"
+                num_of_vars+=1
+                individual.pbp_data[task].decision_strat[temp]=[random.uniform(0,1),bool(1)]
+                l[temp]=('+',1)
+            num_of_con+=1
+            individual.constraints.append([l,1,'='])
 
-#Plotting the constraint graph
-def plot_constraint_graph(con_graph,graph,file_name,phase,dir):
-    constraint_g = Digraph(comment = graph, format='png')
-    for task in con_graph.task_cluster:
-        to_show=""
-        mapped_to = con_graph.task_cluster[task].mapped_to
-        for a in con_graph.task_cluster[task].tasks:
-            to_show+=f"{a}(dvfs_level {con_graph.dvfs_level[a]}), "
-        to_show= f"[{to_show}]\n"+mapped_to
-        constraint_g.node(str(task),label=to_show)
-    for m in con_graph.messages:
-        to_show="m"
-        to_show=to_show + "\n"+str(con_graph.messages[m].sl)
-        to_show=to_show + "\n"+str(con_graph.messages[m].hop)
-        constraint_g.node(m,label=to_show)
-        constraint_g.edge(str(con_graph.messages[m].cluster_from), m)
-        constraint_g.edge(m,str(con_graph.messages[m].cluster_to))
-    constraint_g.render(f"{dir}/{file_name}_{phase}_congraph",view=False)
 
 def plot_app_graph(graph,phase,file_name,dir):
     app_g = Digraph(comment = graph,format='png')
@@ -368,394 +296,14 @@ def plot_app_graph(graph,phase,file_name,dir):
         app_g.edge(m,scenario.graphs[graph].arcs[m].task_to)
     app_g.render(f"{dir}/{file_name}_{phase}_appgraph",view=False)
 
-def process_clustering(graph):
-    global scenario
-    for var in scenario.constraint_graphs[graph].pbp_data["cluster"].assignment:
-        if scenario.constraint_graphs[graph].pbp_data["cluster"].assignment[var]==1:
-            a = var.rsplit("_",1)
-            if int(a[1]) in scenario.constraint_graphs[graph].task_cluster:
-                scenario.constraint_graphs[graph].task_cluster[int(a[1])].tasks.append(a[0])
-                scenario.constraint_graphs[graph].task_to_cluster[a[0]]=int(a[1])
-            else:
-                scenario.constraint_graphs[graph].task_cluster[int(a[1])]=Task_cluster()
-                scenario.constraint_graphs[graph].task_cluster[int(a[1])].tasks.append(a[0])
-                scenario.constraint_graphs[graph].task_to_cluster[a[0]]=int(a[1])
-
-    #Adding the possible PEs to each task cluster
-    for a in scenario.constraint_graphs[graph].task_cluster:
-        i=0
-        pe_dict={}
-        for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
-            i+=1
-            for pe in scenario.graphs[graph].tasks[task].pe_list:
-                if pe in pe_dict:
-                    pe_dict[pe]+=1
-                else:
-                    pe_dict[pe]=1
-        for pe in pe_dict:
-            if pe_dict[pe]==i:
-                scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped.append(pe)
-
-        #Making sure we don't exceed the hyperperiod on the PE
-        #this is an additional check
-        for pe in scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped:
-            tot_exec_t=0
-            for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
-                tot_exec_t+=scenario.graphs[graph].tasks[task].wcet[pe]
-            if tot_exec_t > scenario.hyperperiod:
-                scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped.remove(pe)
-                #print(pe + " removed")
-
-    #Making sure that the messages between the same PEs is ignored in the next ILP
-    #Untested code bits here
-    for arc in scenario.graphs[graph].arcs:
-        task_from=scenario.graphs[graph].arcs[arc].task_from
-        task_to=scenario.graphs[graph].arcs[arc].task_to
-        #print(task_from+"->"+task_to)
-        if scenario.constraint_graphs[graph].task_to_cluster[task_to] != scenario.constraint_graphs[graph].task_to_cluster[task_from]:
-            scenario.constraint_graphs[graph].messages[arc]=Message()
-            scenario.constraint_graphs[graph].messages[arc].cluster_to=scenario.constraint_graphs[graph].task_to_cluster[task_to]
-            scenario.constraint_graphs[graph].messages[arc].cluster_from=scenario.constraint_graphs[graph].task_to_cluster[task_from]
-
-    #add constraints to problem...
-    is_feasible=True
-    constraints_to_add=[]
-    for a in scenario.constraint_graphs[graph].task_cluster:
-        if scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped==None or not scenario.constraint_graphs[graph].task_cluster[a].can_be_mapped:
-            #the current cluster is no longer feasible
-
-            is_feasible=False
-            scenario.num_of_added_con+=1
-            i=0
-            l={}
-            for task in scenario.constraint_graphs[graph].task_cluster[a].tasks:
-                temp=f"{task}_{str(a)}"
-                l[temp]=('+',1)
-                i+=1
-            scenario.constraint_graphs[graph].pbp_data["cluster"].constraints.append([l,i,'<='])
-            print("INFEASIBLEs")
-    #edit_ILP(output_file,constraints_to_add,None)
-    return is_feasible
-
-def clustering_pb(graph):
-    global scenario
-    num_of_con=0;
-    cluster="cluster"
-    i=1
-    scenario.constraint_graphs[graph].pbp_data[cluster]=PB_data()
-
-    #clustering tasks
-    for task in scenario.graphs[graph].tasks:
-        num_of_con+=1
-        l={}
-        for j in range(i):
-            temp=f"{task}_{str(j)}"
-            print(temp)
-            l[temp]=('+',1)
-        scenario.constraint_graphs[graph].pbp_data[cluster].constraints.append([l,1,'='])
-        i+=1
-
-    #additional constraints to reduce symmetry
-    i=1
-    for task in scenario.graphs[graph].tasks:
-        num_of_con+=1
-        l={}
-        temp=f"{task}_{str(i-1)}"
-        l[temp]=('+',(len(scenario.graphs[graph].tasks)))
-        j=0
-        for t in scenario.graphs[graph].tasks:
-            if (j)>=i:
-                temp=f"{t}_{str(j)}"
-                l[temp]=('-',1)
-            j+=1
-        scenario.constraint_graphs[graph].pbp_data[cluster].constraints.append([l,0,'>='])
-        i+=1
-
-    i=1
-    for task in scenario.graphs[graph].tasks:
-        for j in range(i):
-            print((task+"_"+str(j)))
-            scenario.constraint_graphs[graph].pbp_data[cluster].decision_strat.append(((task+"_"+str(j)),random.uniform(0,1),bool(random.randint(0,1))))
-        i+=1
-def withdvfs_pb(graph,num_levels):
-    global scenario
-    num_of_con=0;
-    line=""
-    res_type="resource_alloc"
-    i=1
-    scenario.constraint_graphs[graph].pbp_data[res_type]=PB_data()
-
-    i=1
-    for cluster in scenario.constraint_graphs[graph].task_cluster:
-        num_of_con+=1
-        l={}
-        for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
-            temp=f"{pe}_{cluster}"
-            l[temp]=('+',1)
-        scenario.constraint_graphs[graph].pbp_data[res_type].constraints.append([l,1,'='])
-    if num_levels == None or num_levels < 3:
-        print("No dvfs assumed")
-    else:
-        #assign dvfs level to each task
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            for task in scenario.constraint_graphs[graph].task_cluster[res_type].tasks:
-                l={}
-                num_of_con+=1
-                for d in range(num_levels):
-                    temp=f"{task}_{d}"
-                    l[temp]=('+',1)
-                scenario.constraint_graphs[graph].pbp_data[res_type].constraints.append([l,1,'='])
-    #Declare the variables as binary
-    num_var=0
-    i=1
-    for cluster in scenario.constraint_graphs[graph].task_cluster:
-        for pe in scenario.constraint_graphs[graph].task_cluster[cluster].can_be_mapped:
-            scenario.constraint_graphs[graph].pbp_data[res_type].decision_strat.append(((f"{pe}_{cluster}"),random.uniform(0,1),bool(random.randint(0,1))))
-    if num_levels == None or num_levels < 3:
-        print("No dvfs assumed")
-    else:
-        for cluster in scenario.constraint_graphs[graph].task_cluster:
-            for task in scenario.constraint_graphs[graph].task_cluster[res_type].tasks:
-                for d in range(num_levels):
-                    scenario.constraint_graphs[graph].pbp_data[res_type].decision_strat.append(((f"{task}_{d}"),random.uniform(0,1),bool(random.randint(0,1))))
-    print(f"ILP resource mapping written for graph")
-def process_withdvfs(graph,num_levels):
-    global scenario
-    dvfs_levels = []
-    if num_levels == None or num_levels < 3:
-        dvfs_levels = [1]
-    else:
-        #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
-        freq=500
-        volt=1.1
-        #ARM processors including A7,A15 all generally have DVFS levels between 200Mhz to 1600 Mhz
-        f_up=1600.0/500;
-        f_down=200.0/500;
-        #The size of each frequency step.
-        step_size=(f_up-f_down)/(num_levels-1)
-        for i in range(num_levels):
-            dvfs_levels.append(f_down+(i*step_size))
-    #this creates a list of size dvfs_num_levels
-    #the contents of this list will range from [1600/500 to 200/500]
-    #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
-    for var in scenario.constraint_graphs[graph].pbp_data["resource_alloc"].assignment:
-        more_vals=var.rsplit("_",1)
-        if more_vals[0] in scenario.tables:
-            scenario.constraint_graphs[graph].task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
-        else:
-            scenario.constraint_graphs[graph].dvfs_level[more_vals[0]]=int(more_vals[1])
-def messaging_pb(graph):
-    global scenario
-    num_of_con=0;
-    message="message"
-    i=1
-    scenario.constraint_graphs[graph].pbp_data[message]=PB_data()
-
-    #clustering tasks
-    for task in scenario.graphs[graph].tasks:
-        num_of_con+=1
-        l={}
-        for j in range(i):
-            temp=f"{task}_{str(j)}"
-            print(temp)
-            l[temp]=('+',1)
-        scenario.constraint_graphs[graph].pbp_data[message].constraints.append([l,1,'='])
-        i+=1
-
-def clustering_pb1(graph,con_graph):
-    global scenario
-    num_of_con=0;
-    cluster="cluster"
-    i=1
-    con_graph.pbp_data[cluster]=PB_data()
-
-    #clustering tasks
-    for task in scenario.graphs[graph].tasks:
-        num_of_con+=1
-        l={}
-        for j in range(i):
-            temp=f"{task}_{str(j)}"
-            #print(temp)
-            l[temp]=('+',1)
-        con_graph.pbp_data[cluster].constraints.append([l,1,'='])
-        i+=1
-
-    #additional constraints to reduce symmetry
-    i=1
-    for task in scenario.graphs[graph].tasks:
-        num_of_con+=1
-        l={}
-        temp=f"{task}_{str(i-1)}"
-        l[temp]=('+',(len(scenario.graphs[graph].tasks)))
-        j=0
-        for t in scenario.graphs[graph].tasks:
-            if (j)>=i:
-                temp=f"{t}_{str(i-1)}"
-                l[temp]=('-',1)
-            j+=1
-        con_graph.pbp_data[cluster].constraints.append([l,0,'>='])
-        i+=1
-
-    i=1
-
-    for task in scenario.graphs[graph].tasks:
-        for j in range(i):
-            con_graph.pbp_data[cluster].decision_strat[(f"{task}_{str(j)}")]=[random.uniform(0,1),bool(random.randint(0,1))]
-        i+=1
-def withdvfs_pb1(graph,con_graph,num_levels):
-    global scenario
-    num_of_con=0;
-    line=""
-    res_type="resource_alloc"
-    i=1
-    con_graph.pbp_data[res_type]=PB_data()
-
-    i=1
-    for cluster in con_graph.task_cluster:
-        num_of_con+=1
-        l={}
-        for pe in con_graph.task_cluster[cluster].can_be_mapped:
-            temp=f"{pe}_{cluster}"
-            l[temp]=('+',1)
-        con_graph.pbp_data[res_type].constraints.append([l,1,'='])
-    if num_levels == None or num_levels < 3:
-        print("No dvfs assumed")
-    else:
-        for cluster in con_graph.task_cluster:
-            for task in con_graph.task_cluster[res_type].tasks:
-                l={}
-                num_of_con+=1
-                for d in range(num_levels):
-                    temp=f"{task}_{d}"
-                    l[temp]=('+',1)
-                con_graph.pbp_data[res_type].constraints.append([l,1,'='])
-        #Declare the variables as binary
-    num_var=0
-    i=1
-    for cluster in con_graph.task_cluster:
-        for pe in con_graph.task_cluster[cluster].can_be_mapped:
-            con_graph.pbp_data[res_type].decision_strat.append(((f"{pe}_{cluster}"),random.uniform(0,1),bool(random.randint(0,1))))
-    if num_levels == None or num_levels < 3:
-        print("No dvfs assumed")
-    else:
-        for cluster in con_graph.task_cluster:
-            for task in con_graph.task_cluster[res_type].tasks:
-                for d in range(num_levels):
-                    con_graph.pbp_data[res_type].decision_strat.append(((f"{task}_{d}"),random.uniform(0,1),bool(random.randint(0,1))))
-    print(f"ILP resource mapping written for graph")
-def process_withdvfs1(graph,con_graph,num_levels):
-    global scenario
-    dvfs_levels = []
-    if num_levels == None or num_levels < 3:
-        dvfs_levels = [1]
-    else:
-        #assuming the given frequency is 500 Mhz and the voltage at the given frequency is 1.1 Volt
-        freq=500
-        volt=1.1
-        #ARM processors including A7,A15 all generally have DVFS levels between 200Mhz to 1600 Mhz
-        f_up=1600.0/500;
-        f_down=200.0/500;
-        #The size of each frequency step.
-        step_size=(f_up-f_down)/(num_levels-1)
-        for i in range(num_levels):
-            dvfs_levels.append(f_down+(i*step_size))
-    #this creates a list of size dvfs_num_levels
-    #the contents of this list will range from [1600/500 to 200/500]
-    #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
-    for var in con_graph.pbp_data["resource_alloc"].assignment:
-        more_vals=var.rsplit("_",1)
-        if more_vals[0] in scenario.tables:
-            con_graph.task_cluster[int(more_vals[1])].mapped_to=more_vals[0]
-        else:
-            con_graph.dvfs_level[more_vals[0]]=int(more_vals[1])
-def messaging_pb1(graph,con_graph):
-    global scenario
-    num_of_con=0;
-    message="message"
-    i=1
-    con_graph.pbp_data[message]=PB_data()
-
-    #clustering tasks
-    for task in scenario.graphs[graph].tasks:
-        num_of_con+=1
-        l={}
-        for j in range(i):
-            temp=f"{task}_{str(j)}"
-            print(temp)
-            l[temp]=('+',1)
-        con_graph.pbp_data[message].constraints.append([l,1,'='])
-        i+=1
-def process_clustering1(graph,con_graph):
-    global scenario
-    for var in con_graph.pbp_data["cluster"].assignment:
-        a = var.rsplit("_",1)
-        if int(a[1]) in con_graph.task_cluster:
-            con_graph.task_cluster[int(a[1])].tasks.append(a[0])
-            con_graph.task_to_cluster[a[0]]=int(a[1])
-        else:
-            con_graph.task_cluster[int(a[1])]=Task_cluster()
-            con_graph.task_cluster[int(a[1])].tasks.append(a[0])
-            con_graph.task_to_cluster[a[0]]=int(a[1])
-
-    #Adding the possible PEs to each task cluster
-    for a in con_graph.task_cluster:
-        i=0
-        pe_dict={}
-        for task in con_graph.task_cluster[a].tasks:
-            i+=1
-            for pe in scenario.graphs[graph].tasks[task].pe_list:
-                if pe in pe_dict:
-                    pe_dict[pe]+=1
-                else:
-                    pe_dict[pe]=1
-        for pe in pe_dict:
-            if pe_dict[pe]==i:
-                con_graph.task_cluster[a].can_be_mapped.append(pe)
-
-        #Making sure we don't exceed the hyperperiod on the PE
-        #this is an additional check
-        for pe in con_graph.task_cluster[a].can_be_mapped:
-            tot_exec_t=0
-            for task in con_graph.task_cluster[a].tasks:
-                tot_exec_t+=scenario.graphs[graph].tasks[task].wcet[pe]
-            if tot_exec_t > scenario.hyperperiod:
-                con_graph.task_cluster[a].can_be_mapped.remove(pe)
-                #print(pe + " removed")
-
-    #Making sure that the messages between the same PEs is ignored in the next ILP
-    #Untested code bits here
-    for arc in scenario.graphs[graph].arcs:
-        task_from=scenario.graphs[graph].arcs[arc].task_from
-        task_to=scenario.graphs[graph].arcs[arc].task_to
-        #print(task_from+"->"+task_to)
-        if con_graph.task_to_cluster[task_to] != con_graph.task_to_cluster[task_from]:
-            con_graph.messages[arc]=Message()
-            con_graph.messages[arc].cluster_to=con_graph.task_to_cluster[task_to]
-            con_graph.messages[arc].cluster_from=con_graph.task_to_cluster[task_from]
-
-    #add constraints to problem...
-    is_feasible=True
-    constraints_to_add=[]
-    for a in con_graph.task_cluster:
-        if con_graph.task_cluster[a].can_be_mapped==None or not con_graph.task_cluster[a].can_be_mapped:
-            #the current cluster is no longer feasible
-
-            is_feasible=False
-            scenario.num_of_added_con+=1
-            i=0
-            l={}
-            for task in con_graph.task_cluster[a].tasks:
-                temp=f"{task}_{str(a)}"
-                l[temp]=('+',1)
-                i+=1
-            con_graph.pbp_data["cluster"].constraints.append([l,i,'<='])
-            print("INFEASIBLEs")
-    #edit_ILP(output_file,constraints_to_add,None)
-    return is_feasible
-
-def process_pbp_data(con_graph):
+def process_pbp_data(individual):
     #sort decision strat by the increasing order of decision priority
-    decision_strat=OrderedDict(deepcopy(sorted(con_graph.pbp_data["complete"].decision_strat.items() , key=lambda x : -x[1][0])))
+    decision_strats=OrderedDict()
+    for task in scenario.graphs[individual.graph].tasks:
+        for d in individual.pbp_data[task].decision_strat:
+            decision_strats[d]=deepcopy(individual.pbp_data[task].decision_strat[d])
+
+    decision_strat=OrderedDict(deepcopy(sorted(decision_strats.items() , key=lambda x : -x[1][0])))
     # for var in decision_strat:
     #     if "fp" in var:
     #         print(var)
@@ -771,7 +319,7 @@ def process_pbp_data(con_graph):
         var_list[var].append(negCons)
     i=0
 
-    for con in con_graph.pbp_data["complete"].constraints:
+    for con in individual.constraints:
         con_type=con[2]
         n=con[1]
         maxsum=0
@@ -789,7 +337,7 @@ def process_pbp_data(con_graph):
         #con_dets is a list of Constraint type(<=,>=,=) the current value of sum, maximum sum the constraint equation can reach and the objective goal
         con_dets[i]=[con_type,0,maxsum,n]
         i+=1
-    isAssigned, assignment= pbs_solver(decision_strat,con_graph.pbp_data["complete"].constraints,con_dets,var_list)
+    isAssigned, assignment= pbs_solver(decision_strat,individual.constraints,con_dets,var_list)
     # for val in decision_strat:
     #     if val in assignment:
     #         if "idct" in val:
@@ -1291,27 +839,26 @@ def gen_dvfslevel(num_levels):
     #the contents of this list will range from [1600/500 to 200/500]
     #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
 
-def process_cons(con_graph):
+#CHANGE
+def process_cons(individual):
     #print_pb_strat(con_graph)
-    con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
-    gen_comp_con_graph(con_graph,con_graph.graph)
-    feasiblity_con_graph(con_graph,con_graph.graph)
+    individual.assignment=process_pbp_data(individual)
+    gen_phenotype(individual,individual.graph)
+    #gen_comp_con_graph(individual,individual.graph)
+    #feasiblity_con_graph(con_graph,con_graph.graph)
 
 def make_individual(name="la"):
-    con_graph=creator.Individual()
-    con_graph.graph=name
-    gen_comp_pb(con_graph,name)
+    individual=creator.Individual()
+    individual.graph=name
+    gen_genotype(individual,name)
     #print_pb_strat(con_graph)
-    con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
-    # for ass in con_graph.pbp_data["complete"].assignment:
-    #     if "pulse" in ass:
-    #         print(ass)
-    #         print(con_graph.pbp_data["complete"].assignment[ass])
+    individual.assignment=process_pbp_data(individual)
     print("Generated Individual")
-    gen_comp_con_graph(con_graph,name)
-    feasiblity_con_graph(con_graph,name)
+    gen_phenotype(individual,name)
+    #gen_comp_con_graph(individual,name)
+    #feasiblity_con_graph(individual,name)
 
-    return con_graph
+    return individual
 
 def makepop(graph_name="la", pop_size=5):
     l = []
@@ -1320,6 +867,7 @@ def makepop(graph_name="la", pop_size=5):
     print("Population Initiated")
     return l
 
+#CHANGE THESE 3
 def evalParams(individual):
     global scenario
     graph=individual.graph
@@ -1332,6 +880,7 @@ def evalParams(individual):
     message_list={}
     dvfs_level=1
     message_communication_time=0.001
+
 
     # print("\nEVALUATION FOR",graph,"\n")
     # for cluster in individual.task_cluster:
@@ -1349,15 +898,16 @@ def evalParams(individual):
         task_start[task]=0
     task_list.sort(key=lambda x: x[0])
     #setting lower limit on task start time
+
     for task_dets in task_list:
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
-        mapped=individual.task_cluster[cluster].mapped_to
+        mapped=individual.task_list[task].mapped
         if scenario.dvfs>1:
-            dvfs_level=1/scenario.dvfs_level[(individual.dvfs_level[cluster])]
+            dvfs_level=1/scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
         cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
-        for task1 in individual.task_cluster[cluster].tasks:
+        for task1 in individual.task_cluster[cluster]:
             if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
                     task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
@@ -1367,7 +917,7 @@ def evalParams(individual):
                 cluster_to=individual.task_to_cluster[task_to]
                 message_time=0.02
                 if cluster_to!=cluster:
-                    mapped_to=individual.task_cluster[cluster_to].mapped_to
+                    mapped_to=individual.task_list[cluster_to].mapped
                     tmp1=mapped.split("_")
                     tmp2=mapped_to.split("_")
                     x1=abs(int(tmp1[1])-int(tmp2[1]))
@@ -1385,11 +935,11 @@ def evalParams(individual):
 
     #Computing the total energy usage
     for cluster in individual.task_cluster:
-        mapped=individual.task_cluster[cluster].mapped_to
-        if scenario.dvfs>1:
-            #print((individual.dvfs_level[cluster]))
-            dvfs_level=scenario.dvfs_level[(individual.dvfs_level[cluster])]
-        for task in individual.task_cluster[cluster].tasks:
+        mapped=individual.task_list[cluster].mapped
+        for task in individual.task_cluster[cluster]:
+            if scenario.dvfs>1:
+                #print((individual.dvfs_level[task]))
+                dvfs_level=scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
             wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
             power=scenario.graphs[graph].tasks[task].power[mapped]
             energy+=(wcet*power*dvfs_level*dvfs_level)
@@ -1400,14 +950,14 @@ def evalParams(individual):
     print("\nEVALUATION FOR",graph,"\n")
     for cluster in individual.task_cluster:
         inc+=1
-        mapped=individual.task_cluster[cluster].mapped_to
+        mapped=individual.task_list[cluster].mapped
         print("Cluster",inc,"is Mapped to PE",mapped)
-        if scenario.dvfs>1:
-            print("DVFS Level is", (individual.dvfs_level[cluster]))
-        for task in individual.task_cluster[cluster].tasks:
+        for task in individual.task_cluster[cluster]:
             print("------>",task)
             print("start time",task_start[task])
             print("end time",task_end[task])
+            if scenario.dvfs>1:
+                print("DVFS Level is", (individual.task_list[task].dvfs_level))
         print("----------------------------------")
     # for m in message_list:
     #     print(m,"has hop distance",message_list[m])
@@ -1416,34 +966,32 @@ def evalParams(individual):
     return (energy,max_time,)
 
 def matefunc(ind1,ind2):
-    complete="complete"
     #print("crossover starts")
-    for a in ind1.pbp_data[complete].decision_strat:
+    for task in ind1.pbp_data:
         if random.randint(0,1)==1:
-            yo=ind1.pbp_data[complete].decision_strat[a]
-            ind1.pbp_data[complete].decision_strat[a]=ind2.pbp_data[complete].decision_strat[a]
-            ind2.pbp_data[complete].decision_strat[a]=yo
+            temp=ind1.pbp_data[task]
+            ind1.pbp_data[task]=ind2.pbp_data[task]
+            ind2.pbp_data[task]=temp
     #process constraints
     process_cons(ind1)
     process_cons(ind2)
     return ind1, ind2
 
 def mutatefunc(ind,indpb=0.1):
-    complete="complete"
     #print("Mutate starts")
-
-    for a in ind.pbp_data[complete].decision_strat:
-        if random.random() < indpb:
-            ind.pbp_data[complete].decision_strat[a][1]= not ind.pbp_data[complete].decision_strat[a][1]
-            yo=ind.pbp_data[complete].decision_strat[a][0]
-            ind.pbp_data[complete].decision_strat[a][0]=(yo+ind.generation)
+    for task in ind.pbp_data:
+        for a in ind.pbp_data[task].decision_strat:
+            if random.random() < indpb:
+                ind.pbp_data[task].decision_strat[a][0]+=ind.pbp_data[task].max_priority
+                if ind.pbp_data[task].decision_strat[a][0]>ind.pbp_data[task].max_priority:
+                    ind.pbp_data[task].max_priority=ind.pbp_data[task].decision_strat[a][0]
     ind.generation+=1
     process_cons(ind)
     #process constraints
     return ind
 
-creator.create("Fitness", base.Fitness, weights=(-1.0,-4.0,))
-creator.create("Individual",Constraint_graph,fitness=creator.Fitness)
+creator.create("Fitness", base.Fitness, weights=(-1.0,-1.0,))
+creator.create("Individual",Individual_data,fitness=creator.Fitness)
 
 toolbox = base.Toolbox()
 
@@ -1461,6 +1009,7 @@ toolbox.register("mate", matefunc)
 toolbox.register("mutate",mutatefunc, indpb=0.05)
 #fittest of the individuals is selected for breeding..
 toolbox.register("select", tools.selTournament)
+#toolbox.register("select", tools.selNSGA2)
 
 #intialising the statistics functions
 
@@ -1491,20 +1040,6 @@ def main():
 
     assign_priorities()
     populate_message_params()
-    #generating the NOC
-    # assignment_feasible=False
-    # counter=0
-    # while(assignment_feasible==False and counter<100):
-    #     generate_noc(2,2)
-    #     assignment_feasible=populate_task_params()
-    #     if(assignment_feasible==False):
-    #         print("Reassigning NOC")
-    #     counter+=1
-    # if(assignment_feasible==False):
-    #     print("NOC needs to be more PE")
-    #     print("Tasks possibly cannot be scheduled")
-    #     print("!!!!!")
-    #     return
     generate_noc(2,2)
     populate_task_params()
     if args.dvfs_num_levels!=None:
@@ -1520,16 +1055,7 @@ def main():
     for graph in scenario.graphs:
         #plot_app_graph(graph,phase,file_name,args.dir)
         # print_app_graph(graph)
-        # con_graph=Constraint_graph()
-        # con_graph.graph=graph
-        # gen_comp_pb(con_graph,graph)
-        # print_pb_strat(con_graph)
-        # print("Running the Solver")
-        # con_graph.pbp_data["complete"].assignment=process_pbp_data(con_graph)
-        # print("Assignment by PB Solver Complete")
-        # gen_comp_con_graph(con_graph,graph)
-        # feasiblity_con_graph(con_graph,graph)
-        # evalParams(con_graph)
+
 
         pop=None
         print(f"Generating Population for {graph}")
@@ -1539,7 +1065,7 @@ def main():
         #       are crossed
         #
         # MUTPB is the probability for mutating an individual
-        CXPB, MUTPB = 0.0001, 0.05
+        CXPB, MUTPB = 0.2, 0.03
 
         print("Start of evolution", graph)
         # Evaluate the entire population
@@ -1555,16 +1081,17 @@ def main():
         #initialising the Logbook
         logbook = tools.Logbook()
         #initialising the ParetoFront
-        pf= tools.HallOfFame(maxsize=100)
-        # pf= tools.ParetoFront()
+        # pf= tools.HallOfFame(maxsize=100)
+        pf= tools.ParetoFront()
         # Begin the evolution
-        while g < 30:
+        while g < 5:
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
 
             # Select the next generation individuals
-            offspring = toolbox.select(pop, len(pop),tournsize=10)
+            offspring = toolbox.select(pop, len(pop),tournsize=3)
+            #offspring = toolbox.select(pop, len(pop))
             # Clone the selected individuals
             offspring = list(map(toolbox.clone, offspring))
 
@@ -1600,7 +1127,8 @@ def main():
             record = stats.compile(pop)
             pf.update(pop)
             hv = hypervolume(pop, [0.0,0.0])
-            logbook.record(gen=g, evals=100 , hv=hv, **record)
+            best=tools.selBest(pop, 1)[0]
+            logbook.record(gen=g, evals=100 , hv=hv, best=best.fitness.values, **record)
 
             #Gather all the fitnesses in one list and print the stats
 
@@ -1644,12 +1172,15 @@ def main():
         fitness_min = logbook.select("min")
         min_energy, min_time = zip(*fitness_min)
         hv = logbook.select("hv")
+        fitness_best=logbook.select("best")
+        best_energy, best_time = zip(*fitness_best)
+
 
         stats_plot_name=f"{args.dir}/{phase_name}_stats.png"
-        hv_plot_name=f"{args.dir}/{phase_name}_hv.png"
+        hv_plot_name=f"{args.dir}/{phase_name}_best.png"
         pf_plot_name=f"{args.dir}/{phase_name}_pf.png"
 
-        fig, (ax1,ax2) = plt.subplots(2)
+        fig, (ax1,ax2,ax3) = plt.subplots(3)
         #Plotting Energy stats for each generation
         line1 = ax1.plot(gen, avg_energy, "b-", label="Average Energy")
         ax1.set_xlabel("Generation")
@@ -1670,18 +1201,32 @@ def main():
         lns = line1 + line2
         labs = [l.get_label() for l in lns]
         ax2.legend(lns, labs, loc="center right")
+        #Plotting Best individuals of each generation
+        line1 = ax3.plot(gen, best_time, "b-", label="Best Time")
+        ax3.set_xlabel("Generation")
+        ax3.set_ylabel("Execution Time", color="b")
+        for tl in ax3.get_yticklabels():
+            tl.set_color("b")
+        ax4 = ax3.twinx()
+        line2 = ax4.plot(gen, best_energy, "r-", label="Best Energy")
+        ax4.set_ylabel("Total Energy", color="r")
+        for tl in ax4.get_yticklabels():
+            tl.set_color("r")
+        lns = line1 + line2
+        labs = [l.get_label() for l in lns]
+        ax3.legend(lns, labs, loc="center right")
         plt.savefig(stats_plot_name)
         plt.close()
         #plt.show()
 
-        fig, ax1 = plt.subplots()
-        line1 = ax1.plot(gen, hv, "b-", label="Hypervolume")
-        ax1.set_xlabel("Generation")
-        ax1.set_ylabel("HyperVolume wrt 0,0", color="b")
-        labs = [l.get_label() for l in line1]
-        ax1.legend(lns, labs, loc="center right")
-        plt.savefig(hv_plot_name)
-        plt.close()
+        # fig, ax1 = plt.subplots()
+        # line1 = ax1.plot(gen, hv, "b-", label="Hypervolume")
+        # ax1.set_xlabel("Generation")
+        # ax1.set_ylabel("HyperVolume wrt 0,0", color="b")
+        # labs = [l.get_label() for l in line1]
+        # ax1.legend(lns, labs, loc="center right")
+        # plt.savefig(hv_plot_name)
+        # plt.close()
         #plt.savefig(stats_plot_name)
 
         energy_pf = [ind.fitness.values[0] for ind in pf]
@@ -1692,12 +1237,13 @@ def main():
         ax1.set_ylabel("Execution Time", color="b")
         labs = [l.get_label() for l in line1]
         ax1.legend(lns, labs, loc="center right")
+
         plt.savefig(pf_plot_name)
         plt.close()
 
         best_ind = tools.selBest(pop, 1)[0]
         #plot_constraint_graph(best_ind,graph,file_name,phase,dir)
-        # print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
+        print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
         phase+=1
     total_end_time=(time.time()-total_start_time)
     print("Discrete Constrainted Meta-Heuristic successful !!!")
