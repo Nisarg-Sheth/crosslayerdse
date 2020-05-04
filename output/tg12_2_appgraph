@@ -1,0 +1,64 @@
+// TASK_GRAPH 2 
+digraph {
+	t20 [label=t20]
+	t21 [label=t21]
+	t22 [label=t22]
+	t23 [label=t23]
+	t24 [label=t24]
+	t25 [label=t25]
+	t26 [label=t26]
+	t27 [label=t27]
+	t28 [label=t28]
+	t29 [label=t29]
+	t210 [label=t210]
+	t211 [label=t211]
+	t212 [label=t212]
+	a201 [label=a201]
+	t20 -> a201
+	a201 -> t21
+	a212 [label=a212]
+	t20 -> a212
+	a212 -> t22
+	a223 [label=a223]
+	t22 -> a223
+	a223 -> t23
+	a234 [label=a234]
+	t20 -> a234
+	a234 -> t23
+	a245 [label=a245]
+	t21 -> a245
+	a245 -> t24
+	a256 [label=a256]
+	t23 -> a256
+	a256 -> t25
+	a267 [label=a267]
+	t24 -> a267
+	a267 -> t26
+	a278 [label=a278]
+	t21 -> a278
+	a278 -> t27
+	a289 [label=a289]
+	t24 -> a289
+	a289 -> t27
+	a2910 [label=a2910]
+	t21 -> a2910
+	a2910 -> t28
+	a21011 [label=a21011]
+	t27 -> a21011
+	a21011 -> t28
+	a21112 [label=a21112]
+	t22 -> a21112
+	a21112 -> t29
+	a21213 [label=a21213]
+	t25 -> a21213
+	a21213 -> t29
+	a21314 [label=a21314]
+	t23 -> a21314
+	a21314 -> t210
+	a21415 [label=a21415]
+	t210 -> a21415
+	a21415 -> t211
+	a21516 [label=a21516]
+	t210 -> a21516
+	a21516 -> t212
+}

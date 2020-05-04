@@ -1,0 +1,4 @@
+graph: { label: "./tg_generated/tg8.vcg"
+display_edge_labels: yes
+
+ } 

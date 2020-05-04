@@ -45,6 +45,10 @@ class Task_data:
         self.mapped= None
         self.dvfs_level = 1
 
+class Gene_data:
+    def __init__(self):
+        self.pe=None
+        self.dvfs=1
 
 class Individual_data:
     def __init__(self):
@@ -56,8 +60,8 @@ class Individual_data:
         self.assignment= None
         self.generation = 1
         self.graph = None
-        self.messages = {}
         self.constraints =[]
+
 
 class Task_cluster:
     def __init__(self):
@@ -118,6 +122,7 @@ class Task:
         self.type = type
         self.host = host
         self.pe_list = []
+        self.num_of_pe = 0
         self.wcet = {}
         self.power = {}
         self.successor=[]

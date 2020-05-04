@@ -1,0 +1,4 @@
+graph: { label: "./tg_generated/tg14.vcg"
+display_edge_labels: yes
+
+ } 

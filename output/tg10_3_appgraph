@@ -1,0 +1,54 @@
+// TASK_GRAPH 3 
+digraph {
+	t30 [label=t30]
+	t31 [label=t31]
+	t32 [label=t32]
+	t33 [label=t33]
+	t34 [label=t34]
+	t35 [label=t35]
+	t36 [label=t36]
+	t37 [label=t37]
+	t38 [label=t38]
+	t39 [label=t39]
+	t310 [label=t310]
+	t311 [label=t311]
+	a301 [label=a301]
+	t30 -> a301
+	a301 -> t31
+	a312 [label=a312]
+	t30 -> a312
+	a312 -> t32
+	a323 [label=a323]
+	t30 -> a323
+	a323 -> t33
+	a334 [label=a334]
+	t32 -> a334
+	a334 -> t34
+	a345 [label=a345]
+	t31 -> a345
+	a345 -> t35
+	a356 [label=a356]
+	t34 -> a356
+	a356 -> t35
+	a367 [label=a367]
+	t33 -> a367
+	a367 -> t36
+	a378 [label=a378]
+	t31 -> a378
+	a378 -> t37
+	a389 [label=a389]
+	t36 -> a389
+	a389 -> t37
+	a3910 [label=a3910]
+	t33 -> a3910
+	a3910 -> t38
+	a31011 [label=a31011]
+	t37 -> a31011
+	a31011 -> t39
+	a31112 [label=a31112]
+	t37 -> a31112
+	a31112 -> t310
+	a31213 [label=a31213]
+	t37 -> a31213
+	a31213 -> t311
+}

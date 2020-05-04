@@ -1,0 +1,20 @@
+// TASK_GRAPH 2 
+digraph {
+	t20 [label=t20]
+	t21 [label=t21]
+	t22 [label=t22]
+	t23 [label=t23]
+	t24 [label=t24]
+	a201 [label=a201]
+	t20 -> a201
+	a201 -> t21
+	a212 [label=a212]
+	t21 -> a212
+	a212 -> t22
+	a223 [label=a223]
+	t21 -> a223
+	a223 -> t23
+	a234 [label=a234]
+	t21 -> a234
+	a234 -> t24
+}

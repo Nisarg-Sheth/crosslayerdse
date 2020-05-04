@@ -1008,8 +1008,8 @@ toolbox.register("mate", matefunc)
 # flip each attribute/gene of 0.05
 toolbox.register("mutate",mutatefunc, indpb=0.05)
 #fittest of the individuals is selected for breeding..
-toolbox.register("select", tools.selTournament)
-#toolbox.register("select", tools.selNSGA2)
+#toolbox.register("select", tools.selTournament)
+toolbox.register("select", tools.selNSGA2)
 
 #intialising the statistics functions
 
@@ -1053,7 +1053,7 @@ def main():
     file_name=args.input_tgff[left_ext+1:right_ext]
     #Processing each graph seperately
     for graph in scenario.graphs:
-        #plot_app_graph(graph,phase,file_name,args.dir)
+        plot_app_graph(graph,phase,file_name,args.dir)
         # print_app_graph(graph)
 
 
@@ -1084,14 +1084,14 @@ def main():
         # pf= tools.HallOfFame(maxsize=100)
         pf= tools.ParetoFront()
         # Begin the evolution
-        while g < 5:
+        while g < 100:
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
 
             # Select the next generation individuals
-            offspring = toolbox.select(pop, len(pop),tournsize=3)
-            #offspring = toolbox.select(pop, len(pop))
+            #offspring = toolbox.select(pop, len(pop),tournsize=3)
+            offspring = toolbox.select(pop, len(pop))
             # Clone the selected individuals
             offspring = list(map(toolbox.clone, offspring))
 
@@ -1251,3 +1251,4 @@ def main():
     return
 if __name__ == '__main__':
     main()
+ 

@@ -1,0 +1,11 @@
+seed 10
+tg_label TASK_GRAPH
+tg_cnt 4
+task_cnt 5 0.5
+task_type_cnt 40
+period_mul 1
+task_trans_time 1
+task_degree 2 3
+task_unique false
+tg_write
+eps_write
