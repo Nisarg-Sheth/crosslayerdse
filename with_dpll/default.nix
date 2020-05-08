@@ -7,5 +7,5 @@ in
 stdenv.mkDerivation rec
 {
   name = "yo";
-  buildInputs=[python]++(with python37.pkgs; [matplotlib numpy deap graphviz]);
+  buildInputs=[python]++(with python37.pkgs; [pygmo matplotlib numpy deap graphviz]);
 }

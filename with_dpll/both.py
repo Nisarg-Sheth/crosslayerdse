@@ -1,3 +1,4 @@
+
 import os
 import sys
 import re
@@ -1261,7 +1262,7 @@ def evalParams(individual):
     # #     print(m,"has hop distance",message_list[m])
     # print("The total execution time is",max_time,)
     # print("The total energy is",energy,"\n")
-    isFeasible=check_feasible(individual,energy,max_time)
+    # isFeasible=check_feasible(individual,energy,max_time)
     return (energy,max_time,)
 
 def evalEnergy(individual):
@@ -1792,11 +1793,10 @@ def main():
     file_name=args.input_tgff[left_ext+1:right_ext]
     #Processing each graph seperately
     for graph in scenario.graphs:
-        # plot_app_graph(graph,phase,file_name,args.dir)
+        plot_app_graph(graph,phase,file_name,args.dir)
         # print_app_graph(graph)
-        scenario.graphs[graph].lowest_energy=meta_energy(graph,20)[0]
-        print(scenario.graphs[graph].lowest_energy)
-        scenario.graphs[graph].lowest_time=meta_time(graph,20)[0]
+        # scenario.graphs[graph].lowest_energy=meta_energy(graph,20)[0]
+        # scenario.graphs[graph].lowest_time=meta_time(graph,20)[0]
         # continue
         pf1,logbook1,topPoints1=meta_with_pb(graph,200)
         pf,logbook,topPoints=meta_normal(graph,200)
