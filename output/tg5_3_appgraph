@@ -1,0 +1,20 @@
+// TASK_GRAPH 3 
+digraph {
+	t30 [label=t30]
+	t31 [label=t31]
+	t32 [label=t32]
+	t33 [label=t33]
+	t34 [label=t34]
+	a301 [label=a301]
+	t30 -> a301
+	a301 -> t31
+	a312 [label=a312]
+	t30 -> a312
+	a312 -> t32
+	a323 [label=a323]
+	t30 -> a323
+	a323 -> t33
+	a334 [label=a334]
+	t33 -> a334
+	a334 -> t34
+}

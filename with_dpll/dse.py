@@ -1161,7 +1161,7 @@ def main():
     file_name=args.input_tgff[left_ext+1:right_ext]
     #Processing each graph seperately
     for graph in scenario.graphs:
-        #plot_app_graph(graph,phase,file_name,args.dir)
+        plot_app_graph(graph,phase,file_name,args.dir)
         # print_app_graph(graph)
 
 
@@ -1192,7 +1192,7 @@ def main():
         # pf= tools.HallOfFame(maxsize=100)
         pf= tools.ParetoFront()
         # Begin the evolution
-        while g < 5:
+        while g < 100:
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
@@ -1370,3 +1370,4 @@ def main():
     return
 if __name__ == '__main__':
     main()
+ 
