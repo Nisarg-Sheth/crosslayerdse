@@ -13,12 +13,8 @@ from deap import creator
 from deap import tools
 from source import *
 from copy import deepcopy
-<<<<<<< HEAD
 #from deap.benchmarks.tools import hypervolume
 from pygmo import hypervolume
-=======
-from deap.benchmarks.tools import hypervolume
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
 
 scenario = None
 random.seed(124)
@@ -176,11 +172,8 @@ def generate_noc(length,breadth):
 
 def gen_phenotype(individual,graph):
     global scenario
-<<<<<<< HEAD
     individual.task_cluster={}
     individual.pe_list={}
-=======
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
     for task in scenario.graphs[graph].tasks:
         individual.task_list[task]=Task_data(task)
         if scenario.dvfs!=None and scenario.dvfs>=3:
@@ -807,7 +800,6 @@ def makepop(graph_name="la", pop_size=5):
     print("Population Initiated")
     return l
 
-<<<<<<< HEAD
 def trace_schedule(individual,plot_path):
     global scenario
     graph=individual.graph
@@ -917,8 +909,6 @@ def trace_schedule(individual,plot_path):
 
 
 #CHANGE THESE 3
-=======
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
 def evalParams(individual):
     global scenario
     graph=individual.graph
@@ -959,11 +949,7 @@ def evalParams(individual):
         cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         for task1 in individual.task_cluster[cluster]:
-<<<<<<< HEAD
             if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]):
-=======
-            if (scenario.graphs[graph].tasks[task1].priority>task_dets[0]):
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
                     task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
         for m in scenario.graphs[graph].arcs:
@@ -1002,7 +988,7 @@ def evalParams(individual):
         energy+=((message_list[m]*100-(63))*scenario.graphs[graph].arcs[m].quant)/(1e6)
 
     inc=0
-<<<<<<< HEAD
+
     # print("\nEVALUATION FOR",graph,"\n")
     # for cluster in individual.task_cluster:
     #     inc+=1
@@ -1019,25 +1005,6 @@ def evalParams(individual):
     # #     print(m,"has hop distance",message_list[m])
     # print("The total execution time is",max_time,)
     # print("The total energy is",energy,"\n")
-=======
-    print("\nEVALUATION FOR",graph,"\n")
-    for cluster in individual.task_cluster:
-        inc+=1
-        mapped=individual.task_list[cluster].mapped
-        print("Cluster",inc,"is Mapped to PE",mapped)
-        for task in individual.task_cluster[cluster]:
-            print("------>",task)
-            print("start time",task_start[task])
-            print("end time",task_end[task])
-            if scenario.dvfs>1:
-                print("DVFS Level is", (individual.task_list[task].dvfs_level))
-        print("----------------------------------")
-    # for m in message_list:
-    #     print(m,"has hop distance",message_list[m])
-    print("The total execution time is",max_time,)
-    print("The total energy is",energy,"\n")
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
-    return (energy,max_time,)
 
 def matefunc(ind1,ind2):
     #print("crossover starts")
@@ -1065,11 +1032,7 @@ def mutatefunc(ind,indpb=0.1):
     #process constraints
     return ind
 
-<<<<<<< HEAD
 creator.create("Fitness", base.Fitness, weights=(-1.0,)*2)
-=======
-creator.create("Fitness", base.Fitness, weights=(-1.0,-1.0,))
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
 creator.create("Individual",Individual_data,fitness=creator.Fitness)
 
 toolbox = base.Toolbox()
@@ -1162,11 +1125,7 @@ def main():
         # pf= tools.HallOfFame(maxsize=100)
         pf= tools.ParetoFront()
         # Begin the evolution
-<<<<<<< HEAD
         while g < 5:
-=======
-        while g < 100:
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
             # A new generation
             g = g + 1
             print("-- Generation %i --" % g)
@@ -1208,11 +1167,7 @@ def main():
 
             record = stats.compile(pop)
             pf.update(pop)
-<<<<<<< HEAD
             hv = hypervolume([ind.fitness.values for ind in pf])
-=======
-            hv = hypervolume(pop, [0.0,0.0])
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
             best=tools.selBest(pop, 1)[0]
             logbook.record(gen=g, evals=100 , hv=hv, best=best.fitness.values, **record)
 
@@ -1305,7 +1260,6 @@ def main():
         plt.close()
         #plt.show()
 
-<<<<<<< HEAD
         #HyperVolume Plotting
         hv = logbook.select("hv")
         fitness_max = logbook.select("max")
@@ -1321,17 +1275,6 @@ def main():
         ax1.legend(lns, labs, loc="center right")
         plt.savefig(hv_plot_name)
         plt.close()
-=======
-        # fig, ax1 = plt.subplots()
-        # line1 = ax1.plot(gen, hv, "b-", label="Hypervolume")
-        # ax1.set_xlabel("Generation")
-        # ax1.set_ylabel("HyperVolume wrt 0,0", color="b")
-        # labs = [l.get_label() for l in line1]
-        # ax1.legend(lns, labs, loc="center right")
-        # plt.savefig(hv_plot_name)
-        # plt.close()
-        #plt.savefig(stats_plot_name)
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
 
         energy_pf = [ind.fitness.values[0] for ind in pf]
         time_pf = [ind.fitness.values[1] for ind in pf]
@@ -1345,14 +1288,10 @@ def main():
         plt.savefig(pf_plot_name)
         plt.close()
 
-<<<<<<< HEAD
         i=0
         for ind in pf:
             i+=1
             trace_schedule(ind,f"{args.dir}/{phase_name}_trace{i}.png")
-
-=======
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074
         best_ind = tools.selBest(pop, 1)[0]
         #plot_constraint_graph(best_ind,graph,file_name,phase,dir)
         print("Best individual is %s, %s" % (best_ind, best_ind.fitness.values))
@@ -1363,7 +1302,3 @@ def main():
     return
 if __name__ == '__main__':
     main()
-<<<<<<< HEAD
-=======
- 
->>>>>>> 8f660f43c9ce6eef04bcbaad544065f45507e074

@@ -901,7 +901,8 @@ def trace_schedule(individual,plot_path):
         for task1 in individual.task_cluster[cluster]:
             if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]) and task1!=task:
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
-                    task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+                    if task1 not in task_end.keys():
+                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
         for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
@@ -931,9 +932,9 @@ def trace_schedule(individual,plot_path):
         for task1 in individual.task_list:
             if task!=task1:
                 if individual.task_list[task].mapped==individual.task_list[task1].mapped:
-                    if task_end[task1]>=task_start[task] and task_end[task]>task_start[task1]:
+                    if task_end[task1]>=task_start[task] and task_start[task]>=task_start[task1]:
                         isFeasible=False
-                    if task_end[task]>=task_start[task1] and task_end[task1]>task_start[task]:
+                    if task_end[task]>=task_start[task1] and task_start[task1]>=task_start[task]:
                         isFeasible=False
         #Ensure the Task satisfies Precedence Constraints
         for task1 in scenario.graphs[graph].tasks[task].predecessor:
@@ -958,6 +959,7 @@ def trace_schedule(individual,plot_path):
                     print("DVFS Level is", (individual.task_list[task].dvfs_level))
             print("----------------------------------")
     else:
+        return
         print("Correct Schedule")
         print("Saving plot in "+plot_path)
         fig , gnt = plt.subplots()
@@ -1016,9 +1018,10 @@ def evalParams(individual):
         cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
         for task1 in individual.task_cluster[cluster]:
-            if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]):
+            if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]) and task1!=task:
                 if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
-                    task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+                    if task1 not in task_end.keys():
+                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
         for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
@@ -1072,6 +1075,7 @@ def evalParams(individual):
     # print("The total execution time is",max_time,)
     # print("The total energy is",energy,"\n")
     return (energy,max_time,)
+
 
 def matefunc(ind1,ind2):
     #print("crossover starts")
@@ -1161,7 +1165,7 @@ def main():
     file_name=args.input_tgff[left_ext+1:right_ext]
     #Processing each graph seperately
     for graph in scenario.graphs:
-        plot_app_graph(graph,phase,file_name,args.dir)
+        # plot_app_graph(graph,phase,file_name,args.dir)
         # print_app_graph(graph)
 
 
