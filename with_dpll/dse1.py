@@ -115,6 +115,7 @@ def populate_task_params():
                         task_feasible=True
                         #adding the PE to the pe_list of each task
                         scenario.graphs[graph].tasks[task].pe_list.append(table)
+                        scenario.graphs[graph].tasks[task].num_of_pe+=1
                         #adding the WCET on the PE for each task
                         scenario.graphs[graph].tasks[task].wcet[table]=float(scenario.tables[table].values[type_of_task][3])*(1e6)
                         #adding the task_power on the PE to the task arc_details
@@ -169,29 +170,36 @@ def generate_noc(length,breadth):
                 isAssigned=True
                 break
 
-#The phenotype of
 def gen_phenotype(individual,graph):
     global scenario
     individual.task_cluster={}
     individual.pe_list={}
     for task in scenario.graphs[graph].tasks:
         individual.task_list[task]=Task_data(task)
-    for parts in individual.assignment:
-        if individual.assignment[parts]==1:
-            # print(parts)
-            if parts.startswith("dvfs_"):
-                d=(parts[5:])
-                vars=d.split("_",1)
-                individual.task_list[vars[1]].dvfs_level=int(vars[0])
-            else:
-                ext_id = parts.find("_")
-                task=parts[:ext_id]
-                mapped=parts[(ext_id+1):]
-                individual.task_list[task].mapped=mapped
-                if mapped in individual.pe_list.keys():
-                    individual.pe_list[mapped].append(task)
-                else:
-                    individual.pe_list[mapped]=[task]
+        if scenario.dvfs!=None and scenario.dvfs>=3:
+            individual.task_list[task].dvfs_level=int(individual.pbp_data[task].dvfs)
+        mapped=scenario.graphs[graph].tasks[task].pe_list[individual.pbp_data[task].pe]
+        individual.task_list[task].mapped=mapped
+        if mapped in individual.pe_list.keys():
+            individual.pe_list[mapped].append(task)
+        else:
+            individual.pe_list[mapped]=[task]
+    # for parts in individual.assignment:
+    #     if individual.assignment[parts]==1:
+    #         # print(parts)
+    #         if parts.startswith("dvfs_"):
+    #             d=(parts[5:])
+    #             vars=d.split("_",1)
+    #             individual.task_list[vars[1]].dvfs_level=int(vars[0])
+    #         else:
+    #             ext_id = parts.find("_")
+    #             task=parts[:ext_id]
+    #             mapped=parts[(ext_id+1):]
+    #             individual.task_list[task].mapped=mapped
+    #             if mapped in individual.pe_list.keys():
+    #                 individual.pe_list[mapped].append(task)
+    #             else:
+    #                 individual.pe_list[mapped]=[task]
     for pe in individual.pe_list:
         task1=None
         for task in individual.pe_list[pe]:
@@ -202,91 +210,16 @@ def gen_phenotype(individual,graph):
             individual.task_to_cluster[task]=task1
             individual.task_cluster[task1].append(task)
 
-
-#generate the constraint graph from the ILP
-def gen_comp_con_graph(con_graph, graph):
-    global scenario
-    slave_list = []
-    master_list = []
-    map_list = []
-    c_list = []
-    sl_list = []
-    hop_list = []
-    dvfs_list = []
-    for parts in con_graph.pbp_data["complete"].assignment:
-        if con_graph.pbp_data["complete"].assignment[parts]==1:
-            #print(parts)
-            if parts.endswith("_master"):
-                ext_id = parts.rfind("_")
-                master_list.append(parts[:ext_id])
-            elif parts.endswith("_slave"):
-                ext_id = parts.rfind("_")
-                slave_list.append(parts[:ext_id])
-            elif parts.startswith("map_"):
-                map_list.append(parts[4:])
-            elif parts.startswith("C_"):
-                c_list.append(parts[2:])
-            elif parts.startswith("sl_"):
-                sl_list.append(parts[3:])
-            elif parts.startswith("hop_"):
-                hop_list.append(parts[4:])
-            elif parts.startswith("dvfs_"):
-                dvfs_list.append(parts[5:])
-
-    for m in master_list:
-        con_graph.task_cluster[m]=Task_cluster()
-        con_graph.task_cluster[m].tasks.append(m)
-        con_graph.task_to_cluster[m]=m
-    for c in c_list:
-        tasks=c.split("_",1)
-        if tasks[1] in con_graph.task_cluster:
-            con_graph.task_cluster[tasks[1]].tasks.append(tasks[0])
-            con_graph.task_to_cluster[tasks[0]]=tasks[1]
-    for m in map_list:
-        a=m.split("_",1)
-        con_graph.task_cluster[a[0]].mapped_to=a[1]
-    for d in dvfs_list:
-        vars=d.split("_",1)
-        con_graph.dvfs_level[vars[1]]=int(vars[0])
-    for sl in sl_list:
-        a=sl.split("_",1)
-        task_from = scenario.graphs[graph].arcs[a[1]].task_from
-        task_to = scenario.graphs[graph].arcs[a[1]].task_to
-        if con_graph.task_to_cluster[task_to] != con_graph.task_to_cluster[task_from]:
-            con_graph.messages[a[1]]=Message()
-            con_graph.messages[a[1]].cluster_from=con_graph.task_to_cluster[task_from]
-            con_graph.messages[a[1]].cluster_to=con_graph.task_to_cluster[task_to]
-            con_graph.messages[a[1]].sl=int(a[0])
-
-    for hop in hop_list:
-        a=hop.split("_",1)
-        if a[1] in con_graph.messages:
-            con_graph.messages[a[1]].hop=int(a[0])
-
 def gen_genotype(individual,graph):
     global scenario
     num_of_vars=0
     num_of_con=0
     individual.pbp_data={}
     for task in scenario.graphs[graph].tasks:
-        individual.pbp_data[task]=PB_data()
-        l={}
-        for mapped in scenario.graphs[graph].tasks[task].pe_list:
-            temp=f"{task}_{mapped}"
-            num_of_vars+=1
-            individual.pbp_data[task].decision_strat[temp]=[random.uniform(0,1),bool(1)]
-            l[temp]=('+',1)
-        num_of_con+=1
-        individual.constraints.append([l,1,'='])
+        individual.pbp_data[task]=Gene_data()
+        individual.pbp_data[task].pe=random.randint(0,(scenario.graphs[graph].tasks[task].num_of_pe-1))
         if scenario.dvfs!=None and scenario.dvfs>=3:
-            l={}
-            for level in range(scenario.dvfs):
-                temp=f"dvfs_{level}_{task}"
-                num_of_vars+=1
-                individual.pbp_data[task].decision_strat[temp]=[random.uniform(0,1),bool(1)]
-                l[temp]=('+',1)
-            num_of_con+=1
-            individual.constraints.append([l,1,'='])
+            individual.pbp_data[task].dvfs=random.randint(0,(scenario.dvfs-1))
 
 
 def plot_app_graph(graph,phase,file_name,dir):
@@ -787,7 +720,6 @@ def pbs_solver(decision_strat,constraints,con_dets,variables):
     decision_strat[cur_var][0]=1
     #print("----",cur_var,"lead to infeasibility, back-tracking to its source")
     return False,val_return
-    #Maybe instead of just returning value, we need to return implication as well
 
 def print_app_graph(name):
     global scenario
@@ -842,10 +774,9 @@ def gen_dvfslevel(num_levels):
     #the contents of this list will range from [1600/500 to 200/500]
     #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
 
-#CHANGE
 def process_cons(individual):
     #print_pb_strat(con_graph)
-    individual.assignment=process_pbp_data(individual)
+    # individual.assignment=process_pbp_data(individual)
     gen_phenotype(individual,individual.graph)
     #gen_comp_con_graph(individual,individual.graph)
     #feasiblity_con_graph(con_graph,con_graph.graph)
@@ -855,12 +786,11 @@ def make_individual(name="la"):
     individual.graph=name
     gen_genotype(individual,name)
     #print_pb_strat(con_graph)
-    individual.assignment=process_pbp_data(individual)
+    # individual.assignment=process_pbp_data(individual)
     print("Generated Individual")
     gen_phenotype(individual,name)
     #gen_comp_con_graph(individual,name)
     #feasiblity_con_graph(individual,name)
-
     return individual
 
 def makepop(graph_name="la", pop_size=5):
@@ -975,6 +905,9 @@ def trace_schedule(individual,plot_path):
         plt.savefig(plot_path)
         plt.close()
 
+
+
+
 #CHANGE THESE 3
 def evalParams(individual):
     global scenario
@@ -1087,12 +1020,13 @@ def matefunc(ind1,ind2):
 
 def mutatefunc(ind,indpb=0.1):
     #print("Mutate starts")
+    graph=ind.graph
     for task in ind.pbp_data:
-            for a in ind.pbp_data[task].decision_strat:
-                if random.random() < indpb:
-                    ind.pbp_data[task].decision_strat[a][0]+=ind.pbp_data[task].max_priority
-                    if ind.pbp_data[task].decision_strat[a][0]>ind.pbp_data[task].max_priority:
-                        ind.pbp_data[task].max_priority=ind.pbp_data[task].decision_strat[a][0]
+        if random.random() < indpb:
+            ind.pbp_data[task].pe=random.randint(0,(scenario.graphs[graph].tasks[task].num_of_pe-1))
+        if random.random() < indpb:
+            if scenario.dvfs!=None and scenario.dvfs>=3:
+                ind.pbp_data[task].dvfs=random.randint(0,(scenario.dvfs-1))
     ind.generation+=1
     process_cons(ind)
     #process constraints
@@ -1114,7 +1048,7 @@ toolbox.register("evaluate", evalParams)
 toolbox.register("mate", matefunc)
 # register a mutation operator with a probability to
 # flip each attribute/gene of 0.05
-toolbox.register("mutate",mutatefunc, indpb=0.25)
+toolbox.register("mutate",mutatefunc, indpb=0.05)
 #fittest of the individuals is selected for breeding..
 #toolbox.register("select", tools.selTournament)
 toolbox.register("select", tools.selNSGA2)
@@ -1161,7 +1095,7 @@ def main():
     file_name=args.input_tgff[left_ext+1:right_ext]
     #Processing each graph seperately
     for graph in scenario.graphs:
-        #plot_app_graph(graph,phase,file_name,args.dir)
+        # plot_app_graph(graph,phase,file_name,args.dir)
         # print_app_graph(graph)
 
 
@@ -1173,8 +1107,7 @@ def main():
         #       are crossed
         #
         # MUTPB is the probability for mutating an individual
-        CXPB, MUTPB = 0.5, 0.1
-
+        CXPB, MUTPB = 0.2, 0.03
         print("Start of evolution", graph)
         # Evaluate the entire population
         fitnesses = list(map(toolbox.evaluate, pop))
@@ -1241,26 +1174,26 @@ def main():
             #Gather all the fitnesses in one list and print the stats
 
 
-            # fits0 = [ind.fitness.values[0] for ind in pop]
-            # length = len(pop)
-            # mean = sum(fits0) / length
-            # sum2 = sum(x*x for x in fits0)
-            # std = abs(sum2 / length - mean**2)**0.5
-            # print(" Values of Energy in microwatt/second")
-            # print("   Min %s" % min(fits0))
-            # print("   Max %s" % max(fits0))
-            # print("   Avg %s" % mean)
-            # print("   Std %s" % std)
-            # fits0 = [ind.fitness.values[1] for ind in pop]
-            # length = len(pop)
-            # mean = sum(fits0) / length
-            # sum2 = sum(x*x for x in fits0)
-            # std = abs(sum2 / length - mean**2)**0.5
-            # print(" Values of Execution time in microseconds")
-            # print("   Min %s" % min(fits0))
-            # print("   Max %s" % max(fits0))
-            # print("   Avg %s" % mean)
-            # print("   Std %s" % std)
+            fits0 = [ind.fitness.values[0] for ind in pop]
+            length = len(pop)
+            mean = sum(fits0) / length
+            sum2 = sum(x*x for x in fits0)
+            std = abs(sum2 / length - mean**2)**0.5
+            print(" Values of Energy in microwatt/second")
+            print("   Min %s" % min(fits0))
+            print("   Max %s" % max(fits0))
+            print("   Avg %s" % mean)
+            print("   Std %s" % std)
+            fits0 = [ind.fitness.values[1] for ind in pop]
+            length = len(pop)
+            mean = sum(fits0) / length
+            sum2 = sum(x*x for x in fits0)
+            std = abs(sum2 / length - mean**2)**0.5
+            print(" Values of Execution time in microseconds")
+            print("   Min %s" % min(fits0))
+            print("   Max %s" % max(fits0))
+            print("   Avg %s" % mean)
+            print("   Std %s" % std)
 
 
 
@@ -1285,8 +1218,8 @@ def main():
 
 
         stats_plot_name=f"{args.dir}/{phase_name}_stats.png"
-        hv_plot_name=f"{args.dir}/{phase_name}_hv1.png"
-        pf_plot_name=f"{args.dir}/{phase_name}_pf1.png"
+        hv_plot_name=f"{args.dir}/{phase_name}_best.png"
+        pf_plot_name=f"{args.dir}/{phase_name}_pf.png"
 
         fig, (ax1,ax2,ax3) = plt.subplots(3)
         #Plotting Energy stats for each generation
@@ -1343,7 +1276,6 @@ def main():
         plt.savefig(hv_plot_name)
         plt.close()
 
-
         energy_pf = [ind.fitness.values[0] for ind in pf]
         time_pf = [ind.fitness.values[1] for ind in pf]
         fig, ax1 = plt.subplots()
@@ -1355,10 +1287,11 @@ def main():
 
         plt.savefig(pf_plot_name)
         plt.close()
+
         i=0
         for ind in pf:
             i+=1
-            # trace_schedule(ind,f"{args.dir}/{phase_name}_trace{i}.png")
+            trace_schedule(ind,f"{args.dir}/{phase_name}_trace{i}.png")
 
         best_ind = tools.selBest(pop, 1)[0]
         #plot_constraint_graph(best_ind,graph,file_name,phase,dir)
