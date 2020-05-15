@@ -3,7 +3,9 @@
 To run a parameterized run, follow the following steps
 
 1)Enter the Nix-shell by typing nix-shell in the current directory.
+
 2)Edit the `config.ini` file in the home directory. Mention the path of the files and the folders required correctly.
+
 2)Run the test run by typing `python meta_run.py`
 
 
