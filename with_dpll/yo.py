@@ -337,19 +337,32 @@ def gen_genotype(individual,graph):
             individual.pbp_data[task].dvfs=random.randint(0,(scenario.dvfs-1))
 def gen_genotype1(individual,graph):
     global scenario
-    num_of_vars=0
     individual.pbp_data={}
+    increment=(1.0)/(scenario.graphs[graph].num_of_vars)
+    start=1.0
     for task in scenario.graphs[graph].tasks:
         individual.pbp_data[task]=PB_data()
+        i=0
+        val=random.randint(0,(scenario.graphs[graph].tasks[task].num_of_pe-1))
         for mapped in scenario.graphs[graph].tasks[task].pe_list:
             temp=f"{task}_{mapped}"
-            num_of_vars+=1
-            individual.pbp_data[task].decision_strat[temp]=[random.uniform(0,1),bool(1)]
+            individual.pbp_data[task].decision_strat[temp]=[start,bool(0)]
+            if i==val:
+                individual.pbp_data[task].decision_strat[temp]=[start,bool(1)]
+            start-=increment
+            i+=1
+
         if scenario.dvfs!=None and scenario.dvfs>=3:
+            i=0
+            val=random.randint(0,(scenario.dvfs-1))
             for level in range(scenario.dvfs):
                 temp=f"dvfs_{level}_{task}"
-                num_of_vars+=1
-                individual.pbp_data[task].decision_strat[temp]=[random.uniform(0,1),bool(1)]
+                individual.pbp_data[task].decision_strat[temp]=[start,bool(0)]
+                if i==val:
+                    individual.pbp_data[task].decision_strat[temp]=[start,bool(1)]
+                start-=increment
+                i+=1
+
 
 def gen_basic_constraints(graph):
     global scenario
@@ -359,6 +372,7 @@ def gen_basic_constraints(graph):
         l={}
         for mapped in scenario.graphs[graph].tasks[task].pe_list:
             temp=f"{task}_{mapped}"
+            scenario.graphs[graph].num_of_vars+=1
             l[temp]=('+',1)
         num_of_con+=1
         scenario.graphs[graph].constraints.append([l,1,'='])
@@ -366,6 +380,7 @@ def gen_basic_constraints(graph):
         l={}
         for level in range(scenario.dvfs):
             temp=f"dvfs_{level}_{task}"
+            scenario.graphs[graph].num_of_vars+=1
             l[temp]=('+',1)
         num_of_con+=1
         scenario.graphs[graph].constraints.append([l,1,'='])
@@ -1100,7 +1115,7 @@ def trace_schedule(individual,plot_path):
             val+=10
         plt.savefig(plot_path)
         plt.close()
-        
+
 def evalParams1(individual):
     global scenario
     graph=individual.graph
@@ -1213,8 +1228,6 @@ def evalParams(individual):
     message_list={}
     dvfs_level=1
     message_communication_time=0.001
-
-
     # print("\nEVALUATION FOR",graph,"\n")
     # for cluster in individual.task_cluster:
     #     mapped=individual.task_cluster[cluster].mapped_to
@@ -1298,6 +1311,8 @@ def evalParams(individual):
     # print("The total execution time is",max_time,)
     # print("The total energy is",energy,"\n")
     if scenario.isConstrained==True:
+        # if energy>(2*(scenario.graphs[graph].lowest_energy)):
+        #     max_time=(max_time)*20
         isFeasible=check_feasible(individual,energy,max_time)
     return (energy,max_time,)
 
@@ -1405,7 +1420,7 @@ def meta_normal(graph,num_gens):
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     logbook = tools.Logbook()
-    topPoints= tools.HallOfFame(maxsize=100)
+    topPoints= tools.HallOfFame(maxsize=10)
     pf= tools.ParetoFront()
 
     # Begin the evolution for normal DSE
@@ -1501,7 +1516,7 @@ def meta_with_pb(graph,num_gens):
     for ind, fit in zip(pop1, fitnesses):
         ind.fitness.values = fit
     logbook1 = tools.Logbook()
-    topPoints1= tools.HallOfFame(maxsize=100)
+    topPoints1= tools.HallOfFame(maxsize=10)
     pf1= tools.ParetoFront()
 
     # Begin the evolution for normal DSE
@@ -1592,6 +1607,7 @@ def meta_energy(graph,num_gens):
     start_time=time.time()
     CXPB, MUTPB = 0.5, 0.1
     # print("Start of evolution", graph)
+    gen_basic_constraints(graph)
     pop1 = toolbox1.population(graph_name=graph,pop_size=40)
     fitnesses = list(map(toolbox1.evaluate_energy, pop1))
     for ind, fit in zip(pop1, fitnesses):
@@ -1671,6 +1687,7 @@ def meta_time(graph,num_gens):
     start_time=time.time()
     CXPB, MUTPB = 0.5, 0.1
     # print("Start of evolution", graph)
+    gen_basic_constraints(graph)
     pop1 = toolbox1.population(graph_name=graph,pop_size=40)
     fitnesses = list(map(toolbox1.evaluate_time, pop1))
     for ind, fit in zip(pop1, fitnesses):
@@ -1942,6 +1959,8 @@ def main():
                 i+=1
                 trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
             phase+=1
+            with open(f"{output_dir}/{phase_name}.txt",'a') as f:
+                f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
         total_end_time=(time.time()-total_start_time)
 
     elif Config.get('GA_type','run_type')=="dpll_GA":
@@ -2042,6 +2061,8 @@ def main():
                 i+=1
                 trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
             phase+=1
+            with open(f"{output_dir}/{phase_name}.txt",'a') as f:
+                f.write(f"{graph} pb strat hypervolume is {max(hv_value)}\n")
         total_end_time=(time.time()-total_start_time)
 
     elif Config.get('GA_type','run_type')=="both":
@@ -2160,7 +2181,10 @@ def main():
                 i+=1
                 trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
 
-
+            with open(f"{output_dir}/{phase_name}.txt",'a') as f:
+                f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
+                f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
+                f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
             phase+=1
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately

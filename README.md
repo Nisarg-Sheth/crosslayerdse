@@ -1,8 +1,15 @@
 # crosslayerdse
 
+To run a parameterized run, follow the following steps
+
+1)Enter the Nix-shell by typing nix-shell in the current directory.
+2)Edit the `config.ini` file in the home directory. Mention the path of the files and the folders required correctly.
+2)Run the test run by typing `python meta_run.py`
+
+
 The repo contains all the work done on the ILP formulation and solving so far.
 
-## Refer to [EXAMPLE.md](EXAMPLE.md) for Example. 
+## Refer to [EXAMPLE.md](EXAMPLE.md) for Example.
 
 The main directory contains the files for running things with the gurobi solver.
 The directory `/with_dpll` contains the work on EA formulation and the implementation of the DSE using david-putnam backtracking algorithm

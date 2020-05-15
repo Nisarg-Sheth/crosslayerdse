@@ -1,5 +1,0 @@
-CORE0 is assigned to PE_0_0
-CORE3 is assigned to PE_1_0
-CORE0 is assigned to PE_0_1
-CORE3 is assigned to PE_1_1
-Generating Population for TASK_GRAPH 0 
