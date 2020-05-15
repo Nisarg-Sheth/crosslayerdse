@@ -8,7 +8,6 @@ from collections import OrderedDict
 
 class Complete_Scenario:
     def __init__(self):
-        self.num_of_added_con=0
         self.attributes = {}
         self.graphs = {}
         self.all_tables={}
@@ -21,6 +20,9 @@ class Complete_Scenario:
         self.service_level = 10
         self.max_hop=14
         self.communication={}
+        self.single_pop_size=20
+        self.pop_size=100
+        self.isConstrained=False
 class PB_data:
     def __init__(self):
         self.constraints = []
@@ -88,6 +90,7 @@ class Graph:
         self.constraints =[]
         self.lowest_time=None
         self.lowest_energy=None
+        self.num_of_added_con=0
 
     def add_task(self,task_details):
         task_details=task_details.replace("_","")

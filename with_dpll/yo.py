@@ -15,9 +15,38 @@ from source import *
 from copy import deepcopy
 #from deap.benchmarks.tools import hypervolume
 from pygmo import hypervolume
+import configparser
 
 scenario = None
 random.seed(124)
+
+def gen_opt(opt_path,num_task):
+    print("Generating tgffopt file")
+    seed_value=10
+    num_graphs=4
+    task_count=num_task
+    task_type_cnt=40
+    with open(opt_path, 'w') as f:
+        f.write(f"seed {seed_value}\n")
+        f.write("tg_label TASK_GRAPH\n")
+        f.write(f"tg_cnt {num_graphs}\n")
+        f.write(f"task_cnt {task_count} 0.5\n")
+        f.write(f"task_type_cnt {task_type_cnt}\n")
+        f.write(f"period_mul 1\n")
+        f.write(f"task_trans_time 1\n")
+        f.write(f"task_degree 2 3\n")
+        #Important to keep each task unique in our DSE
+        f.write(f"task_unique false\n")
+        f.write(f"tg_write\n")
+        f.write(f"eps_write\n")
+
+
+def extend_tg(tg_path,template):
+    print("adding template to end of generated file")
+    with open(template, 'r') as f:
+        contents=f.readlines()
+    with open(tg_path, 'a') as f:
+        f.writelines(contents)
 
 def get_blocks(input_file):
     buf=[]
@@ -33,10 +62,10 @@ def get_blocks(input_file):
         elif line and line.strip():
             buf.append(line.strip())
 
-def process_block(block,tg,core):
+def process_block(block):
     global scenario
 
-    if tg in block[0]:
+    if "TASK_GRAPH" in block[0]:
         tg_name = None
         period = None
         for line in block:
@@ -59,9 +88,9 @@ def process_block(block,tg,core):
                 scenario.graphs[tg_name].add_hard_deadline(line.strip('HARD_DEADLINE '))
 
 
-    elif core in block[0] or "PROC" in block[0] or "CORE" in block[0]:
+    elif "CLIENT_PE" in block[0] or "PROC" in block[0] or "CORE" in block[0]:
         #  or " 6 " in block[0] or " 14 " in block[0]
-        if " 0 " in block[0] or " 3 " in block[0] :
+        if " 0 " in block[0] or " 3 " in block[0] or " 6 " in block[0] or " 14 " in block[0]:
             core_name = None
             i = 0
             core_name= block[0].strip('@').strip('{').replace(" ","")
@@ -130,7 +159,7 @@ def populate_task_params():
 
     return True
 
-def generate_noc(length,breadth):
+def generate_noc(length,breadth,num_PE_type):
     global scenario
     # Random Assignment of PEs
     # print("NOC Assignment is as follows\n")
@@ -943,6 +972,8 @@ def check_feasible(individual,energy,time):
     if energy>(2*(scenario.graphs[graph].lowest_energy)):
         num_of_vars=0
         isFeasible=False
+        if scenario.graphs[graph].num_of_added_con>200:
+            return isFeasible
         l={}
         #print("Restricting space")
         #print(energy)
@@ -957,6 +988,7 @@ def check_feasible(individual,energy,time):
                         num_of_vars+=1
                         l[temp]=('+',1)
         scenario.graphs[graph].constraints.append([l,(num_of_vars-1),'<='])
+        scenario.graphs[graph].num_of_added_con+=1
         #print(l)
     return isFeasible
 #imp
@@ -1022,9 +1054,11 @@ def trace_schedule(individual,plot_path):
         for task1 in individual.task_list:
             if task!=task1:
                 if individual.task_list[task].mapped==individual.task_list[task1].mapped:
-                    if task_end[task1]>=task_start[task] and task_start[task]>=task_start[task1]:
+                    if task_end[task1]>task_start[task] and task_start[task]>=task_start[task1]:
+                        print(task1)
                         isFeasible=False
-                    if task_end[task]>=task_start[task1] and task_start[task1]>=task_start[task]:
+                    if task_end[task]>task_start[task1] and task_start[task1]>=task_start[task]:
+                        print("This",task1)
                         isFeasible=False
         #Ensure the Task satisfies Precedence Constraints
         for task1 in scenario.graphs[graph].tasks[task].predecessor:
@@ -1066,6 +1100,7 @@ def trace_schedule(individual,plot_path):
             val+=10
         plt.savefig(plot_path)
         plt.close()
+        
 def evalParams1(individual):
     global scenario
     graph=individual.graph
@@ -1162,7 +1197,8 @@ def evalParams1(individual):
     # #     print(m,"has hop distance",message_list[m])
     # print("The total execution time is",max_time,)
     # print("The total energy is",energy,"\n")
-    # isFeasible=check_feasible(individual,energy,max_time)
+    if scenario.isConstrained==True:
+        isFeasible=check_feasible(individual,energy,max_time)
     return (energy,max_time,)
 
 def evalParams(individual):
@@ -1261,7 +1297,8 @@ def evalParams(individual):
     # #     print(m,"has hop distance",message_list[m])
     # print("The total execution time is",max_time,)
     # print("The total energy is",energy,"\n")
-    isFeasible=check_feasible(individual,energy,max_time)
+    if scenario.isConstrained==True:
+        isFeasible=check_feasible(individual,energy,max_time)
     return (energy,max_time,)
 
 def evalEnergy(individual):
@@ -1363,7 +1400,7 @@ def meta_normal(graph,num_gens):
     print("Start of evolution", graph)
 
     # Evaluate the entire population without PB strat
-    pop = toolbox.population(graph_name=graph,pop_size=100)
+    pop = toolbox.population(graph_name=graph,pop_size=scenario.pop_size)
     fitnesses = list(map(toolbox.evaluate, pop))
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
@@ -1459,7 +1496,7 @@ def meta_with_pb(graph,num_gens):
     CXPB, MUTPB = 0.5, 0.1
     print("Start of evolution", graph)
     gen_basic_constraints(graph)
-    pop1 = toolbox1.population(graph_name=graph,pop_size=100)
+    pop1 = toolbox1.population(graph_name=graph,pop_size=scenario.pop_size)
     fitnesses = list(map(toolbox1.evaluate, pop1))
     for ind, fit in zip(pop1, fitnesses):
         ind.fitness.values = fit
@@ -1718,6 +1755,8 @@ toolbox.register("individual",make_individual)
 toolbox.register("population",makepop)
 # register the goal / fitness function
 toolbox.register("evaluate", evalParams)
+toolbox.register("evaluate_energy",evalEnergy)
+toolbox.register("evaluate_time",evalTime)
 # register the crossover operator
 toolbox.register("mate", matefunc)
 # register a mutation operator with a probability to
@@ -1740,7 +1779,7 @@ toolbox1.register("population",makepop1)
 # Operator registration
 #----------
 # register the goal / fitness function
-toolbox1.register("evaluate", evalParams)
+toolbox1.register("evaluate", evalParams1)
 toolbox1.register("evaluate_energy",evalEnergy)
 toolbox1.register("evaluate_time",evalTime)
 # register the crossover operator
@@ -1760,155 +1799,372 @@ stats1.register("max", numpy.max, axis=0)
 
 def main():
     total_start_time=time.time()
-    parser = argparse.ArgumentParser()
-    parser.add_argument("input_tgff", help="*.tgff file to parse")
-    parser.add_argument("--tg", help="*name of task_graph",default="TASK_GRAPH")
-    parser.add_argument("--modular","-m",default=0,help="Use modular or complete clustering, Modular=1/Complete=0")
-    parser.add_argument("--core", help="name of core/PE", default="CLIENT_PE")
-    parser.add_argument("-d", "--dir",default="./output", help="output directory")
-    parser.add_argument("--dvfs_level","--dvfs",action="store", dest="dvfs_num_levels", type=int, default=None, help="The number of dvfs_levels possible for each processor")
-    args = parser.parse_args()
     global scenario
     scenario = Complete_Scenario()
-    #saving the number of dvfs levels taken as input
-    scenario.dvfs=args.dvfs_num_levels
+    Config = configparser.ConfigParser()
+    Config.read('config.ini')
+    #edit
+    scenario.pop_size=100
+    path_of_tgff=None
+    if Config.get('Input_data','tgff')=="e3s":
+        input_tgff=Config.get('Input_data','e3s_path')
+    else:
+        opt_path=os.path.join(Config.get('Input_data','output_path'),f"{Config.get('Input_data','output_name')}.tgffopt")
+        input_tgff=os.path.join(Config.get('Input_data','output_path'),f"{Config.get('Input_data','output_name')}.tgff")
+        filename=os.path.join(Config.get('Input_data','output_path'),f"{Config.get('Input_data','output_name')}")
+        gen_opt(opt_path,Config.get('Input_data','num_tasks'))
+        output_run=subprocess.run([Config.get('Input_data','tgff_path'),filename], capture_output=True)
+        print(str(output_run.stdout))
+        extend_tg(input_tgff,Config.get('Input_data','template'))
+
     #processing the input tgff file
-    with open(args.input_tgff) as input_file:
+    with open(input_tgff) as input_file:
         for block in get_blocks(input_file):
-            process_block(block,args.tg,args.core)
+            process_block(block)
 
     assign_priorities()
     populate_message_params()
-    generate_noc(2,2)
+    generate_noc(int(Config.get('PE_data','length')),int(Config.get('PE_data','breadth')),int(Config.get('PE_data','num_PE_type')))
     populate_task_params()
-    if args.dvfs_num_levels!=None:
-        scenario.dvfs=args.dvfs_num_levels
-    else:
-        scenario.dvfs=1
-    gen_dvfslevel(args.dvfs_num_levels)
+    #saving the number of dvfs levels taken as input
+    scenario.dvfs=int(Config.get('Cross_Layer_parameters','num_dvfs'))
+    #Input of the number of generations
+    generations=int(Config.get('Meta_data','gen'))
+    #Number of individuals in each Population
+    scenario.pop_size=int(Config.get('Meta_data','multi_ind'))
+    scenario.single_pop_size=int(Config.get('Meta_data','single_ind'))
+    scenario.isConstrained=False
+    gen_dvfslevel(scenario.dvfs)
+    if Config.get('GA_type','objective_type')=="constrained":
+        scenario.isConstrained=True
     phase=0
-    left_ext=args.input_tgff.rfind('/')
-    right_ext=args.input_tgff.rfind('.')
-    file_name=args.input_tgff[left_ext+1:right_ext]
+    left_ext=input_tgff.rfind('/')
+    right_ext=input_tgff.rfind('.')
+    file_name=input_tgff[left_ext+1:right_ext]
+    output_dir=Config.get('Output_data','output_dir')
+
+
+    if Config.get('GA_type','run_type')=="normal_GA":
+        for graph in scenario.graphs:
+            # plot_app_graph(graph,phase,file_name,output_dir)
+            # print_app_graph(graph)
+            if scenario.isConstrained==True:
+                scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
+                scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
+            # continue
+            #pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
+            pf,logbook,topPoints=meta_normal(graph,generations)
+            # Making Plots
+            phase_name=f"{file_name}_{phase}"
+            stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
+            hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
+            pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
+
+            gen= logbook.select("gen")
+            fitness_avg = logbook.select("avg")
+            avg_energy, avg_time = zip(*fitness_avg)
+            fitness_min = logbook.select("min")
+            min_energy, min_time = zip(*fitness_min)
+            fitness_best=logbook.select("best")
+            best_energy, best_time = zip(*fitness_best)
+
+            fig, (ax1,ax2,ax3) = plt.subplots(3)
+            #Plotting Energy stats for each generation
+            line1 = ax1.plot(gen, avg_energy, "b-", label="Average Energy")
+            ax1.set_xlabel("Generation")
+            ax1.set_ylabel("Energy", color="b")
+            for tl in ax1.get_yticklabels():
+                tl.set_color("b")
+            line2 = ax1.plot(gen, min_energy, "r-", label="Minimum Energy")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            #Plotting Time stats for each generation
+            line1 = ax2.plot(gen, avg_time, "b-", label="Average Time")
+            ax2.set_xlabel("Generation")
+            ax2.set_ylabel("Execution Time", color="b")
+            for tl in ax2.get_yticklabels():
+                tl.set_color("r")
+            line2 = ax2.plot(gen, min_time, "r-", label="Minimum Time")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax2.legend(lns, labs, loc="center right")
+            #Plotting Best individuals of each generation
+            line1 = ax3.plot(gen, best_time, "b-", label="Best Time")
+            ax3.set_xlabel("Generation")
+            ax3.set_ylabel("Execution Time", color="b")
+            for tl in ax3.get_yticklabels():
+                tl.set_color("b")
+            ax4 = ax3.twinx()
+            line2 = ax4.plot(gen, best_energy, "r-", label="Best Energy")
+            ax4.set_ylabel("Total Energy", color="r")
+            for tl in ax4.get_yticklabels():
+                tl.set_color("r")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax3.legend(lns, labs, loc="center right")
+            plt.savefig(stats_plot_name)
+            plt.close()
+            #plt.show()
+
+            #HyperVolume Plotting
+            hv = logbook.select("hv")
+            fitness_max = logbook.select("max")
+            max_energy, max_time = zip(*fitness_max)
+            ref_point=[max(max_energy),max(max_time)]
+
+            hv_value=[hype.compute(ref_point) for hype in hv]
+
+            fig, ax1 = plt.subplots()
+            line1 = ax1.plot(gen, hv_value, "b-", label="Hypervolume")
+            ax1.set_xlabel("Generation")
+            ax1.set_ylabel("HyperVolume", color="b")
+            lns = line1
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            plt.savefig(hv_plot_name)
+            plt.close()
+
+            # The ParetoFront Plotting
+            energy_pf = [ind.fitness.values[0] for ind in pf]
+            time_pf = [ind.fitness.values[1] for ind in pf]
+            fig, ax1 = plt.subplots()
+            line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
+            ax1.set_xlabel("Energy")
+            ax1.set_ylabel("Execution Time", color="b")
+            lns = line1
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            plt.savefig(pf_plot_name)
+            plt.close()
+            i=0
+            for ind in topPoints:
+                i+=1
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+            phase+=1
+        total_end_time=(time.time()-total_start_time)
+
+    elif Config.get('GA_type','run_type')=="dpll_GA":
+        for graph in scenario.graphs:
+            # plot_app_graph(graph,phase,file_name,output_dir)
+            # print_app_graph(graph)
+            if scenario.isConstrained==True:
+                scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
+                scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
+            # continue
+            #pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
+            pf,logbook,topPoints=meta_with_pb(graph,generations)
+            # Making Plots
+            phase_name=f"{file_name}_{phase}"
+            stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
+            hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
+            pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
+
+            gen= logbook.select("gen")
+            fitness_avg = logbook.select("avg")
+            avg_energy, avg_time = zip(*fitness_avg)
+            fitness_min = logbook.select("min")
+            min_energy, min_time = zip(*fitness_min)
+            fitness_best=logbook.select("best")
+            best_energy, best_time = zip(*fitness_best)
+
+            fig, (ax1,ax2,ax3) = plt.subplots(3)
+            #Plotting Energy stats for each generation
+            line1 = ax1.plot(gen, avg_energy, "b-", label="Average Energy")
+            ax1.set_xlabel("Generation")
+            ax1.set_ylabel("Energy", color="b")
+            for tl in ax1.get_yticklabels():
+                tl.set_color("b")
+            line2 = ax1.plot(gen, min_energy, "r-", label="Minimum Energy")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            #Plotting Time stats for each generation
+            line1 = ax2.plot(gen, avg_time, "b-", label="Average Time")
+            ax2.set_xlabel("Generation")
+            ax2.set_ylabel("Execution Time", color="b")
+            for tl in ax2.get_yticklabels():
+                tl.set_color("r")
+            line2 = ax2.plot(gen, min_time, "r-", label="Minimum Time")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax2.legend(lns, labs, loc="center right")
+            #Plotting Best individuals of each generation
+            line1 = ax3.plot(gen, best_time, "b-", label="Best Time")
+            ax3.set_xlabel("Generation")
+            ax3.set_ylabel("Execution Time", color="b")
+            for tl in ax3.get_yticklabels():
+                tl.set_color("b")
+            ax4 = ax3.twinx()
+            line2 = ax4.plot(gen, best_energy, "r-", label="Best Energy")
+            ax4.set_ylabel("Total Energy", color="r")
+            for tl in ax4.get_yticklabels():
+                tl.set_color("r")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax3.legend(lns, labs, loc="center right")
+            plt.savefig(stats_plot_name)
+            plt.close()
+            #plt.show()
+
+            #HyperVolume Plotting
+            hv = logbook.select("hv")
+            fitness_max = logbook.select("max")
+            max_energy, max_time = zip(*fitness_max)
+            ref_point=[max(max_energy),max(max_time)]
+
+            hv_value=[hype.compute(ref_point) for hype in hv]
+
+            fig, ax1 = plt.subplots()
+            line1 = ax1.plot(gen, hv_value, "b-", label="Hypervolume")
+            ax1.set_xlabel("Generation")
+            ax1.set_ylabel("HyperVolume", color="b")
+            lns = line1
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            plt.savefig(hv_plot_name)
+            plt.close()
+
+            # The ParetoFront Plotting
+            energy_pf = [ind.fitness.values[0] for ind in pf]
+            time_pf = [ind.fitness.values[1] for ind in pf]
+            fig, ax1 = plt.subplots()
+            line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
+            ax1.set_xlabel("Energy")
+            ax1.set_ylabel("Execution Time", color="b")
+            lns = line1
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            plt.savefig(pf_plot_name)
+            plt.close()
+            i=0
+            for ind in topPoints:
+                i+=1
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+            phase+=1
+        total_end_time=(time.time()-total_start_time)
+
+    elif Config.get('GA_type','run_type')=="both":
+        for graph in scenario.graphs:
+            # plot_app_graph(graph,phase,file_name,output_dir)
+            # print_app_graph(graph)
+            if scenario.isConstrained==True:
+                scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
+                scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
+            # continue
+            pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
+            pf,logbook,topPoints=meta_normal(graph,generations)
+            # Making Plots
+            phase_name=f"{file_name}_{phase}"
+            stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
+            hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
+            pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
+
+            gen= logbook.select("gen")
+            fitness_avg = logbook.select("avg")
+            avg_energy, avg_time = zip(*fitness_avg)
+            fitness_min = logbook.select("min")
+            min_energy, min_time = zip(*fitness_min)
+            fitness_best=logbook.select("best")
+            best_energy, best_time = zip(*fitness_best)
+
+            fig, (ax1,ax2,ax3) = plt.subplots(3)
+            #Plotting Energy stats for each generation
+            line1 = ax1.plot(gen, avg_energy, "b-", label="Average Energy")
+            ax1.set_xlabel("Generation")
+            ax1.set_ylabel("Energy", color="b")
+            for tl in ax1.get_yticklabels():
+                tl.set_color("b")
+            line2 = ax1.plot(gen, min_energy, "r-", label="Minimum Energy")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            #Plotting Time stats for each generation
+            line1 = ax2.plot(gen, avg_time, "b-", label="Average Time")
+            ax2.set_xlabel("Generation")
+            ax2.set_ylabel("Execution Time", color="b")
+            for tl in ax2.get_yticklabels():
+                tl.set_color("r")
+            line2 = ax2.plot(gen, min_time, "r-", label="Minimum Time")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax2.legend(lns, labs, loc="center right")
+            #Plotting Best individuals of each generation
+            line1 = ax3.plot(gen, best_time, "b-", label="Best Time")
+            ax3.set_xlabel("Generation")
+            ax3.set_ylabel("Execution Time", color="b")
+            for tl in ax3.get_yticklabels():
+                tl.set_color("b")
+            ax4 = ax3.twinx()
+            line2 = ax4.plot(gen, best_energy, "r-", label="Best Energy")
+            ax4.set_ylabel("Total Energy", color="r")
+            for tl in ax4.get_yticklabels():
+                tl.set_color("r")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax3.legend(lns, labs, loc="center right")
+            plt.savefig(stats_plot_name)
+            plt.close()
+            #plt.show()
+
+            #HyperVolume Plotting
+            hv = logbook.select("hv")
+            fitness_max = logbook.select("max")
+            max_energy, max_time = zip(*fitness_max)
+            ref_point=[max(max_energy),max(max_time)]
+
+            #With PB strat
+            gen1= logbook1.select("gen")
+            hv1 = logbook1.select("hv")
+            fitness_max = logbook1.select("max")
+            max_energy, max_time = zip(*fitness_max)
+            ref_point1=[max(max_energy),max(max_time)]
+            final_ref_point=[max(ref_point[0],ref_point1[0]),max(ref_point[1],ref_point1[1])]
+
+            hv_value=[hype.compute(final_ref_point) for hype in hv]
+            hv_value1=[hype.compute(final_ref_point) for hype in hv1]
+
+            fig, ax1 = plt.subplots()
+            line1 = ax1.plot(gen, hv_value, "b-", label="Hypervolume")
+            ax1.set_xlabel("Generation")
+            ax1.set_ylabel("HyperVolume", color="b")
+            line2 = ax1.plot(gen1, hv_value1, "r-", label="HyperVolume with PB strat")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            plt.savefig(hv_plot_name)
+            plt.close()
+
+            # The ParetoFront Plotting
+            energy_pf = [ind.fitness.values[0] for ind in pf]
+            time_pf = [ind.fitness.values[1] for ind in pf]
+            energy_pf1 = [ind.fitness.values[0] for ind in pf1]
+            time_pf1 = [ind.fitness.values[1] for ind in pf1]
+            fig, ax1 = plt.subplots()
+            line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
+            ax1.set_xlabel("Energy")
+            ax1.set_ylabel("Execution Time", color="b")
+            line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat")
+            lns = line1 + line2
+            labs = [l.get_label() for l in lns]
+            ax1.legend(lns, labs, loc="center right")
+            plt.savefig(pf_plot_name)
+            plt.close()
+
+
+            i=0
+            for ind in topPoints1:
+                i+=1
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+            for ind in topPoints:
+                i+=1
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+
+
+            phase+=1
+        total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately
-    for graph in scenario.graphs:
-        # plot_app_graph(graph,phase,file_name,args.dir)
-        # print_app_graph(graph)
-        scenario.graphs[graph].lowest_energy=meta_energy(graph,20)[0]
-        print(scenario.graphs[graph].lowest_energy)
-        scenario.graphs[graph].lowest_time=meta_time(graph,20)[0]
-        # continue
-        pf1,logbook1,topPoints1=meta_with_pb(graph,200)
-        pf,logbook,topPoints=meta_normal(graph,200)
-        # Making Plots
-        phase_name=f"{file_name}_{phase}"
-        stats_plot_name=f"{args.dir}/{phase_name}_stats.png"
-        hv_plot_name=f"{args.dir}/{phase_name}_hv.png"
-        pf_plot_name=f"{args.dir}/{phase_name}_pf.png"
 
-        gen= logbook.select("gen")
-        fitness_avg = logbook.select("avg")
-        avg_energy, avg_time = zip(*fitness_avg)
-        fitness_min = logbook.select("min")
-        min_energy, min_time = zip(*fitness_min)
-        fitness_best=logbook.select("best")
-        best_energy, best_time = zip(*fitness_best)
-
-        fig, (ax1,ax2,ax3) = plt.subplots(3)
-        #Plotting Energy stats for each generation
-        line1 = ax1.plot(gen, avg_energy, "b-", label="Average Energy")
-        ax1.set_xlabel("Generation")
-        ax1.set_ylabel("Energy", color="b")
-        for tl in ax1.get_yticklabels():
-            tl.set_color("b")
-        line2 = ax1.plot(gen, min_energy, "r-", label="Minimum Energy")
-        lns = line1 + line2
-        labs = [l.get_label() for l in lns]
-        ax1.legend(lns, labs, loc="center right")
-        #Plotting Time stats for each generation
-        line1 = ax2.plot(gen, avg_time, "b-", label="Average Time")
-        ax2.set_xlabel("Generation")
-        ax2.set_ylabel("Execution Time", color="b")
-        for tl in ax2.get_yticklabels():
-            tl.set_color("r")
-        line2 = ax2.plot(gen, min_time, "r-", label="Minimum Time")
-        lns = line1 + line2
-        labs = [l.get_label() for l in lns]
-        ax2.legend(lns, labs, loc="center right")
-        #Plotting Best individuals of each generation
-        line1 = ax3.plot(gen, best_time, "b-", label="Best Time")
-        ax3.set_xlabel("Generation")
-        ax3.set_ylabel("Execution Time", color="b")
-        for tl in ax3.get_yticklabels():
-            tl.set_color("b")
-        ax4 = ax3.twinx()
-        line2 = ax4.plot(gen, best_energy, "r-", label="Best Energy")
-        ax4.set_ylabel("Total Energy", color="r")
-        for tl in ax4.get_yticklabels():
-            tl.set_color("r")
-        lns = line1 + line2
-        labs = [l.get_label() for l in lns]
-        ax3.legend(lns, labs, loc="center right")
-        plt.savefig(stats_plot_name)
-        plt.close()
-        #plt.show()
-
-        #HyperVolume Plotting
-        hv = logbook.select("hv")
-        fitness_max = logbook.select("max")
-        max_energy, max_time = zip(*fitness_max)
-        ref_point=[max(max_energy),max(max_time)]
-
-        #With PB strat
-        gen1= logbook1.select("gen")
-        hv1 = logbook1.select("hv")
-        fitness_max = logbook1.select("max")
-        max_energy, max_time = zip(*fitness_max)
-        ref_point1=[max(max_energy),max(max_time)]
-        final_ref_point=[max(ref_point[0],ref_point1[0]),max(ref_point[1],ref_point1[1])]
-
-        hv_value=[hype.compute(final_ref_point) for hype in hv]
-        hv_value1=[hype.compute(final_ref_point) for hype in hv1]
-
-        fig, ax1 = plt.subplots()
-        line1 = ax1.plot(gen, hv_value, "b-", label="Hypervolume")
-        ax1.set_xlabel("Generation")
-        ax1.set_ylabel("HyperVolume", color="b")
-        line2 = ax1.plot(gen1, hv_value1, "r-", label="HyperVolume with PB strat")
-        lns = line1 + line2
-        labs = [l.get_label() for l in lns]
-        ax1.legend(lns, labs, loc="center right")
-        plt.savefig(hv_plot_name)
-        plt.close()
-
-        # The ParetoFront Plotting
-        energy_pf = [ind.fitness.values[0] for ind in pf]
-        time_pf = [ind.fitness.values[1] for ind in pf]
-        energy_pf1 = [ind.fitness.values[0] for ind in pf1]
-        time_pf1 = [ind.fitness.values[1] for ind in pf1]
-        fig, ax1 = plt.subplots()
-        line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
-        ax1.set_xlabel("Energy")
-        ax1.set_ylabel("Execution Time", color="b")
-        line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat")
-        lns = line1 + line2
-        labs = [l.get_label() for l in lns]
-        ax1.legend(lns, labs, loc="center right")
-        plt.savefig(pf_plot_name)
-        plt.close()
-
-
-        i=0
-        for ind in topPoints1:
-            i+=1
-            trace_schedule(ind,f"{args.dir}/{phase_name}_trace{i}.png")
-        for ind in topPoints:
-            i+=1
-            trace_schedule(ind,f"{args.dir}/{phase_name}_trace{i}.png")
-
-
-        phase+=1
-    total_end_time=(time.time()-total_start_time)
     print("Discrete Constrainted Meta-Heuristic successful !!!")
     print("Total DSE time is", total_end_time)
     return
