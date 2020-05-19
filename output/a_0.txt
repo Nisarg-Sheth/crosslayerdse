@@ -4,3 +4,58 @@ TASK_GRAPH 0  pb/normal ratio 1.020085823559396
 TASK_GRAPH 0  pb strat hypervolume is 4838550.70172586
 TASK_GRAPH 0  normal hypervolume is 4743278.055607768
 TASK_GRAPH 0  pb/normal ratio 1.020085823559396
+TASK_GRAPH 0  pb strat hypervolume is 4838550.70172586
+TASK_GRAPH 0  normal hypervolume is 4743278.055607768
+TASK_GRAPH 0  pb/normal ratio 1.020085823559396
+TASK_GRAPH 0  pb strat hypervolume is 4838550.70172586
+TASK_GRAPH 0  normal hypervolume is 4743278.055607768
+TASK_GRAPH 0  pb/normal ratio 1.020085823559396
+TASK_GRAPH 0  pb strat hypervolume is 1142680.9171543638
+TASK_GRAPH 0  normal hypervolume is 1114584.1235509529
+TASK_GRAPH 0  pb/normal ratio 1.0252083203140354
+TASK_GRAPH 0  pb strat hypervolume is 1142680.9171543638
+TASK_GRAPH 0  normal hypervolume is 1114584.1235509529
+TASK_GRAPH 0  pb/normal ratio 1.0252083203140354
+TASK_GRAPH 0  pb strat hypervolume is 992923.8263569925
+TASK_GRAPH 0  normal hypervolume is 907905.8235993914
+TASK_GRAPH 0  pb/normal ratio 1.0936418740222937
+TASK_GRAPH 0  pb strat hypervolume is 992923.8263569925
+TASK_GRAPH 0  normal hypervolume is 907905.8235993914
+TASK_GRAPH 0  pb/normal ratio 1.0936418740222937
+TASK_GRAPH 0  pb strat hypervolume is 992923.8263569925
+TASK_GRAPH 0  normal hypervolume is 907905.8235993914
+TASK_GRAPH 0  pb/normal ratio 1.0936418740222937
+TASK_GRAPH 0  pb strat hypervolume is 1142680.9171543638
+TASK_GRAPH 0  normal hypervolume is 1114584.1235509529
+TASK_GRAPH 0  pb/normal ratio 1.0252083203140354
+TASK_GRAPH 0  normal hypervolume is 663891.312715871
+TASK_GRAPH 0  pb strat hypervolume is 1276312.5446341778
+TASK_GRAPH 0  normal hypervolume is 1260947.0603606463
+TASK_GRAPH 0  pb/normal ratio 1.0121856696102187
+TASK_GRAPH 0  pb strat hypervolume is 1276312.5446341778
+TASK_GRAPH 0  normal hypervolume is 1260947.0603606463
+TASK_GRAPH 0  pb/normal ratio 1.0121856696102187
+TASK_GRAPH 0  pb strat hypervolume is 1276312.5446341778
+TASK_GRAPH 0  normal hypervolume is 1260947.0603606463
+TASK_GRAPH 0  pb/normal ratio 1.0121856696102187
+TASK_GRAPH 0  pb strat hypervolume is 1276312.5446341778
+TASK_GRAPH 0  normal hypervolume is 1260947.0603606463
+TASK_GRAPH 0  pb/normal ratio 1.0121856696102187
+TASK_GRAPH 0  pb strat hypervolume is 1276312.5446341778
+TASK_GRAPH 0  normal hypervolume is 1260947.0603606463
+TASK_GRAPH 0  pb/normal ratio 1.0121856696102187
+TASK_GRAPH 0  pb strat hypervolume is 1276312.5446341778
+TASK_GRAPH 0  normal hypervolume is 1260947.0603606463
+TASK_GRAPH 0  pb/normal ratio 1.0121856696102187
+TASK_GRAPH 0  pb strat hypervolume is 1276312.5446341778
+TASK_GRAPH 0  normal hypervolume is 1090130.3133213485
+TASK_GRAPH 0  pb/normal ratio 1.1707889681056383
+TASK_GRAPH 0  pb strat hypervolume is 1201786.667180378
+TASK_GRAPH 0  normal hypervolume is 1163949.12958509
+TASK_GRAPH 0  pb/normal ratio 1.0325078962933507
+scene pb strat hypervolume is 33855539009.133423
+scene normal hypervolume is 2057197884.0138748
+scene pb/normal ratio 16.457113470813333
+scene pb strat hypervolume is 33855539009.133423
+scene normal hypervolume is 2057197884.0138748
+scene pb/normal ratio 16.457113470813333

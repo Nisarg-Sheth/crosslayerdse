@@ -70,21 +70,22 @@ def process_block(block):
         for line in block:
             if line.startswith("@"):
                 tg_name = line.strip('@').strip('{')
-                #print(tg_name)
+                tg_name= tg_name[11:]
+                print(tg_name)
             elif line.startswith("PERIOD"):
                 period = float(line.strip(' PERIOD'))
-                scenario.graphs[tg_name]=Graph(tg_name,period)
+                # scenario.graphs[tg_name]=Graph(tg_name,period)
                 #print(period)
                 break
         for line in block:
             if line.startswith("TASK"):
-                scenario.graphs[tg_name].add_task(line.strip('TASK '))
+                scenario.graphs["scene"].add_task(f"{line.strip('TASK ')}_{tg_name}")
             elif line.startswith("ARC"):
-                scenario.graphs[tg_name].add_arc(line.strip('ARC '))
+                scenario.graphs["scene"].add_arc(line.strip('ARC '))
             elif line.startswith("SOFT_DEADLINE"):
-                scenario.graphs[tg_name].add_soft_deadline(line.strip('SOFT_DEADLINE '))
+                scenario.graphs["scene"].add_soft_deadline(line.strip('SOFT_DEADLINE '))
             elif line.startswith("HARD_DEADLINE"):
-                scenario.graphs[tg_name].add_hard_deadline(line.strip('HARD_DEADLINE '))
+                scenario.graphs["scene"].add_hard_deadline(line.strip('HARD_DEADLINE '))
 
 
     elif "CLIENT_PE" in block[0] or "PROC" in block[0] or "CORE" in block[0]:
@@ -1867,6 +1868,8 @@ def main():
         print(str(output_run.stdout))
         extend_tg(input_tgff,Config.get('Input_data','template'))
 
+    #intialising graph
+    scenario.graphs["scene"]=Graph("scene",0.1)
     #processing the input tgff file
     with open(input_tgff) as input_file:
         for block in get_blocks(input_file):

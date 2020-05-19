@@ -10,7 +10,7 @@ class Complete_Scenario:
     def __init__(self):
         self.attributes = {}
         self.graphs = {}
-        self.all_tables={}
+        self.all_tables= OrderedDict()
         self.NOC=[]
         self.tables = {}
         self.hyperperiod = None
@@ -23,6 +23,10 @@ class Complete_Scenario:
         self.single_pop_size=20
         self.pop_size=100
         self.isConstrained=False
+        self.objective_scale_energy=4
+        self.objective_scale_time=4
+        self.baseline_value_time=2000
+        self.baseline_value_energy=2000
 class PB_data:
     def __init__(self):
         self.constraints = []
@@ -63,7 +67,7 @@ class Individual_data:
         self.generation = 1
         self.graph = None
         self.constraints =[]
-
+        self.isFeasible =True
 
 class Task_cluster:
     def __init__(self):
