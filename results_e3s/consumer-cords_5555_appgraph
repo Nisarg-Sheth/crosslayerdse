@@ -1,0 +1,51 @@
+// scene
+digraph {
+	"0src" [label="0src"]
+	"0filt-r" [label="0filt-r"]
+	"0filt-g" [label="0filt-g"]
+	"0filt-b" [label="0filt-b"]
+	"0rgb-yiq" [label="0rgb-yiq"]
+	"0cjpeg" [label="0cjpeg"]
+	"0sink" [label="0sink"]
+	"1src" [label="1src"]
+	"1djpeg" [label="1djpeg"]
+	"1display" [label="1display"]
+	"1rgb-cymk" [label="1rgb-cymk"]
+	"1print" [label="1print"]
+	a011 [label=a011]
+	"0src" -> a011
+	a011 -> "0filt-r"
+	a022 [label=a022]
+	"0src" -> a022
+	a022 -> "0filt-g"
+	a033 [label=a033]
+	"0src" -> a033
+	a033 -> "0filt-b"
+	a044 [label=a044]
+	"0filt-r" -> a044
+	a044 -> "0rgb-yiq"
+	a055 [label=a055]
+	"0filt-g" -> a055
+	a055 -> "0rgb-yiq"
+	a066 [label=a066]
+	"0filt-b" -> a066
+	a066 -> "0rgb-yiq"
+	a077 [label=a077]
+	"0rgb-yiq" -> a077
+	a077 -> "0cjpeg"
+	a088 [label=a088]
+	"0cjpeg" -> a088
+	a088 -> "0sink"
+	a109 [label=a109]
+	"1src" -> a109
+	a109 -> "1djpeg"
+	a1110 [label=a1110]
+	"1djpeg" -> a1110
+	a1110 -> "1display"
+	a1211 [label=a1211]
+	"1djpeg" -> a1211
+	a1211 -> "1rgb-cymk"
+	a1312 [label=a1312]
+	"1rgb-cymk" -> a1312
+	a1312 -> "1print"
+}

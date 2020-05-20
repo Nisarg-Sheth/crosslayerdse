@@ -1,0 +1,6 @@
+scene pb strat hypervolume is 0.0
+scene normal hypervolume is 17038333506.5872
+scene pb strat hypervolume is 9794.092420570098
+scene normal hypervolume is 17038363494.289633
+scene pb strat hypervolume is 238024176625.56897
+scene normal hypervolume is 237706884904.93246

@@ -1,0 +1,34 @@
+// TASK_GRAPH 0 
+digraph {
+	src [label=src]
+	"filt-r" [label="filt-r"]
+	"filt-g" [label="filt-g"]
+	"filt-b" [label="filt-b"]
+	"rgb-yiq" [label="rgb-yiq"]
+	cjpeg [label=cjpeg]
+	sink [label=sink]
+	a011 [label=a011]
+	src -> a011
+	a011 -> "filt-r"
+	a022 [label=a022]
+	src -> a022
+	a022 -> "filt-g"
+	a033 [label=a033]
+	src -> a033
+	a033 -> "filt-b"
+	a044 [label=a044]
+	"filt-r" -> a044
+	a044 -> "rgb-yiq"
+	a055 [label=a055]
+	"filt-g" -> a055
+	a055 -> "rgb-yiq"
+	a066 [label=a066]
+	"filt-b" -> a066
+	a066 -> "rgb-yiq"
+	a077 [label=a077]
+	"rgb-yiq" -> a077
+	a077 -> cjpeg
+	a088 [label=a088]
+	cjpeg -> a088
+	a088 -> sink
+}

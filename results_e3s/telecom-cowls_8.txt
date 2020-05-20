@@ -1,0 +1,4 @@
+TASK_GRAPH 8  pb strat hypervolume is 788.5404090794343
+TASK_GRAPH 8  normal hypervolume is 4472.50600001627
+TASK_GRAPH 8  pb strat hypervolume is 1999387436.9862707
+TASK_GRAPH 8  normal hypervolume is 1999465547.0747807

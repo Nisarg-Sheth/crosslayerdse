@@ -1,0 +1,105 @@
+// scene
+digraph {
+	"0src" [label="0src"]
+	"0ac1" [label="0ac1"]
+	"0ce1" [label="0ce1"]
+	"0sink" [label="0sink"]
+	"1src" [label="1src"]
+	"1ac2" [label="1ac2"]
+	"1ce2" [label="1ce2"]
+	"1fft2" [label="1fft2"]
+	"1fpba2" [label="1fpba2"]
+	"1sink" [label="1sink"]
+	"2src" [label="2src"]
+	"2ac3" [label="2ac3"]
+	"2ce3" [label="2ce3"]
+	"2fft3" [label="2fft3"]
+	"2fpba3" [label="2fpba3"]
+	"2sink" [label="2sink"]
+	"3src" [label="3src"]
+	"3fft1" [label="3fft1"]
+	"3sink" [label="3sink"]
+	"4src" [label="4src"]
+	"4fpba" [label="4fpba"]
+	"4sink" [label="4sink"]
+	"5src" [label="5src"]
+	"5gsm1" [label="5gsm1"]
+	"6src" [label="6src"]
+	"6gsm2" [label="6gsm2"]
+	"7src" [label="7src"]
+	"7gsm3" [label="7gsm3"]
+	"8src" [label="8src"]
+	"8gsm4" [label="8gsm4"]
+	a001 [label=a001]
+	"0src" -> a001
+	a001 -> "0ac1"
+	a012 [label=a012]
+	"0ac1" -> a012
+	a012 -> "0sink"
+	a023 [label=a023]
+	"0ac1" -> a023
+	a023 -> "0ce1"
+	a034 [label=a034]
+	"0ce1" -> a034
+	a034 -> "0sink"
+	a105 [label=a105]
+	"1src" -> a105
+	a105 -> "1ac2"
+	a116 [label=a116]
+	"1ac2" -> a116
+	a116 -> "1fpba2"
+	a127 [label=a127]
+	"1ac2" -> a127
+	a127 -> "1ce2"
+	a138 [label=a138]
+	"1fpba2" -> a138
+	a138 -> "1fft2"
+	a149 [label=a149]
+	"1fft2" -> a149
+	a149 -> "1sink"
+	a1510 [label=a1510]
+	"1ce2" -> a1510
+	a1510 -> "1sink"
+	a2011 [label=a2011]
+	"2src" -> a2011
+	a2011 -> "2ac3"
+	a2112 [label=a2112]
+	"2ac3" -> a2112
+	a2112 -> "2fpba3"
+	a2213 [label=a2213]
+	"2ac3" -> a2213
+	a2213 -> "2ce3"
+	a2314 [label=a2314]
+	"2fpba3" -> a2314
+	a2314 -> "2fft3"
+	a2415 [label=a2415]
+	"2fft3" -> a2415
+	a2415 -> "2sink"
+	a2516 [label=a2516]
+	"2ce3" -> a2516
+	a2516 -> "2sink"
+	a3017 [label=a3017]
+	"3src" -> a3017
+	a3017 -> "3fft1"
+	a3118 [label=a3118]
+	"3fft1" -> a3118
+	a3118 -> "3sink"
+	a4019 [label=a4019]
+	"4src" -> a4019
+	a4019 -> "4fpba"
+	a4120 [label=a4120]
+	"4fpba" -> a4120
+	a4120 -> "4sink"
+	a5021 [label=a5021]
+	"5src" -> a5021
+	a5021 -> "5gsm1"
+	a6022 [label=a6022]
+	"6src" -> a6022
+	a6022 -> "6gsm2"
+	a7023 [label=a7023]
+	"7src" -> a7023
+	a7023 -> "7gsm3"
+	a8024 [label=a8024]
+	"8src" -> a8024
+	a8024 -> "8gsm4"
+}

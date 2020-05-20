@@ -11,7 +11,7 @@ from graphviz import Digraph
 from deap import base
 from deap import creator
 from deap import tools
-from source import *
+from source1 import *
 from copy import deepcopy
 #from deap.benchmarks.tools import hypervolume
 from pygmo import hypervolume
@@ -70,8 +70,7 @@ def process_block(block):
         for line in block:
             if line.startswith("@"):
                 tg_name = line.strip('@').strip('{')
-                tg_name= tg_name[11:]
-                print(tg_name)
+                tg_name= tg_name[11:12]
             elif line.startswith("PERIOD"):
                 period = float(line.strip(' PERIOD'))
                 # scenario.graphs[tg_name]=Graph(tg_name,period)
@@ -79,13 +78,14 @@ def process_block(block):
                 break
         for line in block:
             if line.startswith("TASK"):
-                scenario.graphs["scene"].add_task(f"{line.strip('TASK ')}_{tg_name}")
+                temp=line.strip('TASK ')
+                scenario.graphs["scene"].add_task(f"{tg_name}{temp}")
             elif line.startswith("ARC"):
-                scenario.graphs["scene"].add_arc(line.strip('ARC '))
+                scenario.graphs["scene"].add_arc(line.strip('ARC '),tg_name)
             elif line.startswith("SOFT_DEADLINE"):
-                scenario.graphs["scene"].add_soft_deadline(line.strip('SOFT_DEADLINE '))
+                scenario.graphs["scene"].add_soft_deadline(line.strip('SOFT_DEADLINE '),tg_name)
             elif line.startswith("HARD_DEADLINE"):
-                scenario.graphs["scene"].add_hard_deadline(line.strip('HARD_DEADLINE '))
+                scenario.graphs["scene"].add_hard_deadline(line.strip('HARD_DEADLINE '),tg_name)
 
 
     elif "CLIENT_PE" in block[0] or "PROC" in block[0] or "CORE" in block[0]:
@@ -1897,7 +1897,7 @@ def main():
     gen_dvfslevel(scenario.dvfs)
     if Config.get('GA_type','objective_type')=="constrained":
         scenario.isConstrained=True
-    phase=0
+    phase=5555
     left_ext=input_tgff.rfind('/')
     right_ext=input_tgff.rfind('.')
     file_name=input_tgff[left_ext+1:right_ext]
@@ -1906,7 +1906,7 @@ def main():
 
     if Config.get('GA_type','run_type')=="normal_GA":
         for graph in scenario.graphs:
-            # plot_app_graph(graph,phase,file_name,output_dir)
+            plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
@@ -1971,7 +1971,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy),max(max_time)]
+            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2008,7 +2008,7 @@ def main():
 
     elif Config.get('GA_type','run_type')=="dpll_GA":
         for graph in scenario.graphs:
-            # plot_app_graph(graph,phase,file_name,output_dir)
+            plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
@@ -2073,7 +2073,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy),max(max_time)]
+            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2110,7 +2110,7 @@ def main():
 
     elif Config.get('GA_type','run_type')=="both":
         for graph in scenario.graphs:
-            # plot_app_graph(graph,phase,file_name,output_dir)
+            plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
@@ -2183,7 +2183,7 @@ def main():
             fitness_max = logbook1.select("max")
             max_energy, max_time = zip(*fitness_max)
             ref_point1=[max(max_energy),max(max_time)]
-            final_ref_point=[max(ref_point[0],ref_point1[0]),max(ref_point[1],ref_point1[1])]
+            final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
 
             hv_value=[hype.compute(final_ref_point) for hype in hv]
             hv_value1=[hype.compute(final_ref_point) for hype in hv1]
@@ -2227,7 +2227,7 @@ def main():
             with open(f"{output_dir}/{phase_name}.txt",'a') as f:
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
-                f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
+                # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
             phase+=1
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately

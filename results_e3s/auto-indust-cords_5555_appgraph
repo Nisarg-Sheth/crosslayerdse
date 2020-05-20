@@ -1,0 +1,90 @@
+// scene
+digraph {
+	"0src" [label="0src"]
+	"0can1" [label="0can1"]
+	"0fp" [label="0fp"]
+	"0can2" [label="0can2"]
+	"0pulse" [label="0pulse"]
+	"0sink" [label="0sink"]
+	"1src" [label="1src"]
+	"1iir" [label="1iir"]
+	"1idct" [label="1idct"]
+	"1sink" [label="1sink"]
+	"2src" [label="2src"]
+	"2fft" [label="2fft"]
+	"2matrix" [label="2matrix"]
+	"2ifft" [label="2ifft"]
+	"2fir" [label="2fir"]
+	"2angle" [label="2angle"]
+	"2road" [label="2road"]
+	"2table" [label="2table"]
+	"2sink" [label="2sink"]
+	"3src" [label="3src"]
+	"3ptr" [label="3ptr"]
+	"3cache" [label="3cache"]
+	"3tooth" [label="3tooth"]
+	"3sink" [label="3sink"]
+	a001 [label=a001]
+	"0src" -> a001
+	a001 -> "0can1"
+	a012 [label=a012]
+	"0can1" -> a012
+	a012 -> "0fp"
+	a013 [label=a013]
+	"0fp" -> a013
+	a013 -> "0can2"
+	a024 [label=a024]
+	"0can2" -> a024
+	a024 -> "0pulse"
+	a035 [label=a035]
+	"0pulse" -> a035
+	a035 -> "0sink"
+	a106 [label=a106]
+	"1src" -> a106
+	a106 -> "1iir"
+	a117 [label=a117]
+	"1iir" -> a117
+	a117 -> "1idct"
+	a128 [label=a128]
+	"1idct" -> a128
+	a128 -> "1sink"
+	a209 [label=a209]
+	"2src" -> a209
+	a209 -> "2fir"
+	a2110 [label=a2110]
+	"2fir" -> a2110
+	a2110 -> "2angle"
+	a2211 [label=a2211]
+	"2src" -> a2211
+	a2211 -> "2fft"
+	a2312 [label=a2312]
+	"2fft" -> a2312
+	a2312 -> "2matrix"
+	a2413 [label=a2413]
+	"2matrix" -> a2413
+	a2413 -> "2ifft"
+	a2514 [label=a2514]
+	"2ifft" -> a2514
+	a2514 -> "2angle"
+	a2615 [label=a2615]
+	"2angle" -> a2615
+	a2615 -> "2road"
+	a2716 [label=a2716]
+	"2road" -> a2716
+	a2716 -> "2table"
+	a2817 [label=a2817]
+	"2table" -> a2817
+	a2817 -> "2sink"
+	a3018 [label=a3018]
+	"3src" -> a3018
+	a3018 -> "3ptr"
+	a3119 [label=a3119]
+	"3ptr" -> a3119
+	a3119 -> "3cache"
+	a3220 [label=a3220]
+	"3cache" -> a3220
+	a3220 -> "3tooth"
+	a3321 [label=a3321]
+	"3tooth" -> a3321
+	a3321 -> "3sink"
+}

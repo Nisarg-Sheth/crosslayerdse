@@ -1,0 +1,6 @@
+TASK_GRAPH 0  pb strat hypervolume is 0.0
+TASK_GRAPH 0  normal hypervolume is 0.0
+TASK_GRAPH 0  pb strat hypervolume is 0.0
+TASK_GRAPH 0  normal hypervolume is 0.0
+TASK_GRAPH 0  pb strat hypervolume is 55511447.326363645
+TASK_GRAPH 0  normal hypervolume is 55511447.326363645

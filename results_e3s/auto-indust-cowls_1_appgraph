@@ -1,0 +1,16 @@
+// TASK_GRAPH 1 
+digraph {
+	src [label=src]
+	iir [label=iir]
+	idct [label=idct]
+	sink [label=sink]
+	a101 [label=a101]
+	src -> a101
+	a101 -> iir
+	a112 [label=a112]
+	iir -> a112
+	a112 -> idct
+	a123 [label=a123]
+	idct -> a123
+	a123 -> sink
+}

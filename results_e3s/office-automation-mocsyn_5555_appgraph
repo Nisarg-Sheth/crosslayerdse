@@ -1,0 +1,23 @@
+// scene
+digraph {
+	"0src" [label="0src"]
+	"0text" [label="0text"]
+	"0sink" [label="0sink"]
+	"0rotate" [label="0rotate"]
+	"0dith" [label="0dith"]
+	a001 [label=a001]
+	"0src" -> a001
+	a001 -> "0text"
+	a012 [label=a012]
+	"0src" -> a012
+	a012 -> "0rotate"
+	a023 [label=a023]
+	"0rotate" -> a023
+	a023 -> "0dith"
+	a034 [label=a034]
+	"0dith" -> a034
+	a034 -> "0sink"
+	a045 [label=a045]
+	"0text" -> a045
+	a045 -> "0sink"
+}

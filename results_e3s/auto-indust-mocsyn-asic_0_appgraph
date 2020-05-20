@@ -1,0 +1,24 @@
+// TASK_GRAPH 0 
+digraph {
+	src [label=src]
+	can1 [label=can1]
+	fp [label=fp]
+	can2 [label=can2]
+	pulse [label=pulse]
+	sink [label=sink]
+	a001 [label=a001]
+	src -> a001
+	a001 -> can1
+	a012 [label=a012]
+	can1 -> a012
+	a012 -> fp
+	a013 [label=a013]
+	fp -> a013
+	a013 -> can2
+	a024 [label=a024]
+	can2 -> a024
+	a024 -> pulse
+	a035 [label=a035]
+	pulse -> a035
+	a035 -> sink
+}

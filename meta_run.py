@@ -1903,7 +1903,7 @@ def main():
 
     if Config.get('GA_type','run_type')=="normal_GA":
         for graph in scenario.graphs:
-            # plot_app_graph(graph,phase,file_name,output_dir)
+            plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
@@ -1968,7 +1968,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy),max(max_time)]
+            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2005,7 +2005,7 @@ def main():
 
     elif Config.get('GA_type','run_type')=="dpll_GA":
         for graph in scenario.graphs:
-            # plot_app_graph(graph,phase,file_name,output_dir)
+            plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
@@ -2070,7 +2070,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy),max(max_time)]
+            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2107,7 +2107,7 @@ def main():
 
     elif Config.get('GA_type','run_type')=="both":
         for graph in scenario.graphs:
-            # plot_app_graph(graph,phase,file_name,output_dir)
+            plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
@@ -2180,7 +2180,7 @@ def main():
             fitness_max = logbook1.select("max")
             max_energy, max_time = zip(*fitness_max)
             ref_point1=[max(max_energy),max(max_time)]
-            final_ref_point=[max(ref_point[0],ref_point1[0]),max(ref_point[1],ref_point1[1])]
+            final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
 
             hv_value=[hype.compute(final_ref_point) for hype in hv]
             hv_value1=[hype.compute(final_ref_point) for hype in hv1]
@@ -2224,7 +2224,7 @@ def main():
             with open(f"{output_dir}/{phase_name}.txt",'a') as f:
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
-                f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
+                # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
             phase+=1
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately

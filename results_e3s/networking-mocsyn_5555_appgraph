@@ -1,0 +1,43 @@
+// scene
+digraph {
+	"0ospf" [label="0ospf"]
+	"1src" [label="1src"]
+	"1patricia" [label="1patricia"]
+	"1pf512" [label="1pf512"]
+	"1sink" [label="1sink"]
+	"2src" [label="2src"]
+	"2patricia" [label="2patricia"]
+	"2pf1m" [label="2pf1m"]
+	"2sink" [label="2sink"]
+	"3src" [label="3src"]
+	"3patricia" [label="3patricia"]
+	"3pf2m" [label="3pf2m"]
+	"3sink" [label="3sink"]
+	a101 [label=a101]
+	"1src" -> a101
+	a101 -> "1patricia"
+	a112 [label=a112]
+	"1patricia" -> a112
+	a112 -> "1pf512"
+	a123 [label=a123]
+	"1pf512" -> a123
+	a123 -> "1sink"
+	a204 [label=a204]
+	"2src" -> a204
+	a204 -> "2patricia"
+	a215 [label=a215]
+	"2patricia" -> a215
+	a215 -> "2pf1m"
+	a226 [label=a226]
+	"2pf1m" -> a226
+	a226 -> "2sink"
+	a307 [label=a307]
+	"3src" -> a307
+	a307 -> "3patricia"
+	a318 [label=a318]
+	"3patricia" -> a318
+	a318 -> "3pf2m"
+	a329 [label=a329]
+	"3pf2m" -> a329
+	a329 -> "3sink"
+}

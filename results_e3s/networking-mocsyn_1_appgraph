@@ -1,0 +1,16 @@
+// TASK_GRAPH 1 
+digraph {
+	src [label=src]
+	patricia [label=patricia]
+	pf512 [label=pf512]
+	sink [label=sink]
+	a101 [label=a101]
+	src -> a101
+	a101 -> patricia
+	a112 [label=a112]
+	patricia -> a112
+	a112 -> pf512
+	a123 [label=a123]
+	pf512 -> a123
+	a123 -> sink
+}
