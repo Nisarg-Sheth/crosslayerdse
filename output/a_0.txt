@@ -59,3 +59,21 @@ scene pb/normal ratio 16.457113470813333
 scene pb strat hypervolume is 33855539009.133423
 scene normal hypervolume is 2057197884.0138748
 scene pb/normal ratio 16.457113470813333
+TASK_GRAPH 0  pb strat hypervolume is 703769.4114612858
+TASK_GRAPH 0  normal hypervolume is 650395.8864850951
+TASK_GRAPH 0  pb/normal ratio 1.0820631342929223
+TASK_GRAPH 0  pb strat hypervolume is 703769.4114612858
+TASK_GRAPH 0  normal hypervolume is 650395.8864850951
+TASK_GRAPH 0  pb/normal ratio 1.0820631342929223
+TASK_GRAPH 0  pb strat hypervolume is 703769.4114612858
+TASK_GRAPH 0  normal hypervolume is 650395.8864850951
+TASK_GRAPH 0  pb/normal ratio 1.0820631342929223
+TASK_GRAPH 0  pb strat hypervolume is 0.0
+TASK_GRAPH 0  normal hypervolume is 1140.9703457142832
+TASK_GRAPH 0  pb/normal ratio 0.0
+TASK_GRAPH 0  pb strat hypervolume is 0.0
+TASK_GRAPH 0  normal hypervolume is 1140.9703457142832
+TASK_GRAPH 0  pb/normal ratio 0.0
+TASK_GRAPH 0  pb strat hypervolume is 0.0
+TASK_GRAPH 0  normal hypervolume is 44171.08755600003
+TASK_GRAPH 0  pb/normal ratio 0.0

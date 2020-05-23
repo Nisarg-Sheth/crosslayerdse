@@ -41,3 +41,12 @@ TASK_GRAPH 3  pb/normal ratio 1.0145469550254727
 TASK_GRAPH 3  pb strat hypervolume is 31469022.108296856
 TASK_GRAPH 3  normal hypervolume is 31623845.883958593
 TASK_GRAPH 3  pb/normal ratio 0.9951042078743411
+TASK_GRAPH 3  pb strat hypervolume is 31524141.724111263
+TASK_GRAPH 3  normal hypervolume is 32490866.814511668
+TASK_GRAPH 3  pb/normal ratio 0.9702462511720793
+TASK_GRAPH 3  pb strat hypervolume is 31524141.724111263
+TASK_GRAPH 3  normal hypervolume is 32490866.814511668
+TASK_GRAPH 3  pb/normal ratio 0.9702462511720793
+TASK_GRAPH 3  pb strat hypervolume is 36276164.84523036
+TASK_GRAPH 3  normal hypervolume is 36668805.07364202
+TASK_GRAPH 3  pb/normal ratio 0.9892922546119755

@@ -41,3 +41,12 @@ TASK_GRAPH 2  pb/normal ratio 1.268512331736702
 TASK_GRAPH 2  pb strat hypervolume is 163790943914.04263
 TASK_GRAPH 2  normal hypervolume is 136786311368.27238
 TASK_GRAPH 2  pb/normal ratio 1.1974220393520603
+TASK_GRAPH 2  pb strat hypervolume is 108148400625.56079
+TASK_GRAPH 2  normal hypervolume is 103195671138.57831
+TASK_GRAPH 2  pb/normal ratio 1.0479935779508776
+TASK_GRAPH 2  pb strat hypervolume is 108148400625.56079
+TASK_GRAPH 2  normal hypervolume is 103195671138.57831
+TASK_GRAPH 2  pb/normal ratio 1.0479935779508776
+TASK_GRAPH 2  pb strat hypervolume is 9226892916.298285
+TASK_GRAPH 2  normal hypervolume is 759710194.3132777
+TASK_GRAPH 2  pb/normal ratio 12.145279851929219

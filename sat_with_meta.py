@@ -386,32 +386,34 @@ def gen_basic_constraints(graph):
             temp=""
             for mapped in scenario.graphs[graph].tasks[task].pe_list:
                 temp+=f" + 1 {task}_{mapped}"
+                scenario.graphs[graph].num_of_vars+=1
             temp+=f" = 1\n"
             f.write(temp)
             if scenario.dvfs!=None and scenario.dvfs>=3:
                 temp=""
                 for level in range(scenario.dvfs):
                     temp+=f" + 1 dvfs_{level}_{task}"
+                    scenario.graphs[graph].num_of_vars+=1
                 temp+=f" = 1\n"
                 f.write(temp)
 
-    scenario.graphs[graph].constraints=[]
-    for task in scenario.graphs[graph].tasks:
-        l={}
-        for mapped in scenario.graphs[graph].tasks[task].pe_list:
-            temp=f"{task}_{mapped}"
-            scenario.graphs[graph].num_of_vars+=1
-            l[temp]=('+',1)
-        num_of_con+=1
-        scenario.graphs[graph].constraints.append([l,1,'='])
-        if scenario.dvfs!=None and scenario.dvfs>=3:
-            l={}
-            for level in range(scenario.dvfs):
-                temp=f"dvfs_{level}_{task}"
-                scenario.graphs[graph].num_of_vars+=1
-                l[temp]=('+',1)
-            num_of_con+=1
-            scenario.graphs[graph].constraints.append([l,1,'='])
+    # scenario.graphs[graph].constraints=[]
+    # for task in scenario.graphs[graph].tasks:
+    #     l={}
+    #     for mapped in scenario.graphs[graph].tasks[task].pe_list:
+    #         temp=f"{task}_{mapped}"
+    #         scenario.graphs[graph].num_of_vars+=1
+    #         l[temp]=('+',1)
+    #     num_of_con+=1
+    #     scenario.graphs[graph].constraints.append([l,1,'='])
+    #     if scenario.dvfs!=None and scenario.dvfs>=3:
+    #         l={}
+    #         for level in range(scenario.dvfs):
+    #             temp=f"dvfs_{level}_{task}"
+    #             scenario.graphs[graph].num_of_vars+=1
+    #             l[temp]=('+',1)
+    #         num_of_con+=1
+    #         scenario.graphs[graph].constraints.append([l,1,'='])
 
 
 #imp
@@ -431,8 +433,14 @@ def process_pb_data(individual):
             f.write(f"{d} {decision_strat[d][1]} {decision_strat[d][0]}\n")
 
     # Running the external Pbsolver
-    run_output=subprocess.run(["java","pbsolver",os.path.join(scenario.graphs[graph].output_dir,"cons.lp"),os.path.join(scenario.graphs[graph].output_dir,f"{individual.num}.lp"),os.path.join(scenario.graphs[graph].output_dir,f"assign_{individual.num}.txt")], capture_output=True,shell=True)
-    print(str(run_output.stdout))
+    # run_output=subprocess.run(["java"],capture_output=True,shell=True)
+    # print(str(run_output.stdout))
+    # run_output=subprocess.run(["java","-jar","pbsolver",os.path.join(scenario.graphs[graph].output_dir,"cons.lp"),os.path.join(scenario.graphs[graph].output_dir,f"{individual.num}.lp"),os.path.join(scenario.graphs[graph].output_dir,f"assign_{individual.num}.txt")], capture_output=True,shell=True)
+    # print(str(run_output.stdout))
+    con_path=os.path.join(scenario.graphs[graph].output_dir,"cons.lp")
+    dp_path=os.path.join(scenario.graphs[graph].output_dir,f"{individual.num}.lp")
+    result_path=os.path.join(scenario.graphs[graph].output_dir,f"assign_{individual.num}.txt")
+    os.system(f"java pbsolver {con_path} {dp_path} {result_path}")
 
     assignment={}
     with open(os.path.join(scenario.graphs[graph].output_dir,f"assign_{individual.num}.txt"), 'r') as f:
@@ -1046,23 +1054,35 @@ def check_feasible(individual,energy,time):
     if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)):
         num_of_vars=0
         isFeasible=False
-        if scenario.graphs[graph].num_of_added_con>200:
+        if scenario.graphs[graph].num_of_added_con>400:
             return isFeasible
         l={}
         #print("Restricting space")
         #print(energy)
-        for task in individual.task_list:
-            temp=f"{task}_{individual.task_list[task].mapped}"
-            num_of_vars+=1
-            l[temp]=('+',1)
-            if scenario.dvfs!=None and scenario.dvfs>=3:
-                for level in range(scenario.dvfs):
-                    if individual.task_list[task].dvfs_level<=level:
-                        temp=f"dvfs_{level}_{task}"
-                        num_of_vars+=1
-                        l[temp]=('+',1)
-        scenario.graphs[graph].constraints.append([l,(num_of_vars-1),'<='])
+        with open(os.path.join(scenario.graphs[graph].output_dir,"cons.lp"), 'a') as f:
+            temp=""
+            for task in individual.task_list:
+                temp+=f" + 1 {task}_{individual.task_list[task].mapped}"
+                num_of_vars+=1
+                if scenario.dvfs!=None and scenario.dvfs>=3:
+                    for level in range(scenario.dvfs):
+                        if individual.task_list[task].dvfs_level<=level:
+                            temp+=f" + 1 dvfs_{level}_{task}"
+                            num_of_vars+=1
+            temp+=f" <= {num_of_vars-1}\n"
+            f.write(temp)
         scenario.graphs[graph].num_of_added_con+=1
+
+        # for task in individual.task_list:
+        #     temp=f"{task}_{individual.task_list[task].mapped}"
+        #     l[temp]=('+',1)
+        #     if scenario.dvfs!=None and scenario.dvfs>=3:
+        #         for level in range(scenario.dvfs):
+        #             if individual.task_list[task].dvfs_level<=level:
+        #                 temp=f"dvfs_{level}_{task}"
+        #                 l[temp]=('+',1)
+        # scenario.graphs[graph].constraints.append([l,(num_of_vars-1),'<='])
+        # scenario.graphs[graph].num_of_added_con+=1
         #print(l)
     return isFeasible
 #imp
@@ -1373,11 +1393,12 @@ def evalParams(individual):
     #     # if energy>(2*(scenario.graphs[graph].lowest_energy)):
     #     #     max_time=(max_time)*20
     #     isFeasible=check_feasible(individual,energy,max_time)
-    if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)):
-        # print(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))
-        individual.isFeasible=False
-    else:
-        individual.isFeasible=True
+    if scenario.isConstrained==True:
+        if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)):
+            # print(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))
+            individual.isFeasible=False
+        else:
+            individual.isFeasible=True
         # print("Or this")
 
     return (energy,max_time,)
