@@ -68,6 +68,7 @@ class Individual_data:
         self.graph = None
         self.constraints =[]
         self.isFeasible =True
+        self.num = 0
 
 class Task_cluster:
     def __init__(self):
@@ -96,6 +97,7 @@ class Graph:
         self.lowest_energy=None
         self.num_of_added_con=0
         self.num_of_vars = 0
+        self.output_dir = None
 
     def add_task(self,task_details):
         task_details=task_details.replace("_","")

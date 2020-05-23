@@ -1,0 +1,12 @@
+ + 1 src_PE_0_0 + 1 src_PE_1_0 + 1 src_PE_0_1 + 1 src_PE_1_1 = 1
+ + 1 dvfs_0_src + 1 dvfs_1_src + 1 dvfs_2_src + 1 dvfs_3_src + 1 dvfs_4_src + 1 dvfs_5_src + 1 dvfs_6_src + 1 dvfs_7_src = 1
+ + 1 can1_PE_0_0 + 1 can1_PE_1_0 + 1 can1_PE_0_1 + 1 can1_PE_1_1 = 1
+ + 1 dvfs_0_can1 + 1 dvfs_1_can1 + 1 dvfs_2_can1 + 1 dvfs_3_can1 + 1 dvfs_4_can1 + 1 dvfs_5_can1 + 1 dvfs_6_can1 + 1 dvfs_7_can1 = 1
+ + 1 fp_PE_0_0 + 1 fp_PE_1_0 + 1 fp_PE_0_1 + 1 fp_PE_1_1 = 1
+ + 1 dvfs_0_fp + 1 dvfs_1_fp + 1 dvfs_2_fp + 1 dvfs_3_fp + 1 dvfs_4_fp + 1 dvfs_5_fp + 1 dvfs_6_fp + 1 dvfs_7_fp = 1
+ + 1 can2_PE_0_0 + 1 can2_PE_1_0 + 1 can2_PE_0_1 + 1 can2_PE_1_1 = 1
+ + 1 dvfs_0_can2 + 1 dvfs_1_can2 + 1 dvfs_2_can2 + 1 dvfs_3_can2 + 1 dvfs_4_can2 + 1 dvfs_5_can2 + 1 dvfs_6_can2 + 1 dvfs_7_can2 = 1
+ + 1 pulse_PE_0_0 + 1 pulse_PE_1_0 + 1 pulse_PE_0_1 + 1 pulse_PE_1_1 = 1
+ + 1 dvfs_0_pulse + 1 dvfs_1_pulse + 1 dvfs_2_pulse + 1 dvfs_3_pulse + 1 dvfs_4_pulse + 1 dvfs_5_pulse + 1 dvfs_6_pulse + 1 dvfs_7_pulse = 1
+ + 1 sink_PE_0_0 + 1 sink_PE_1_0 + 1 sink_PE_0_1 + 1 sink_PE_1_1 = 1
+ + 1 dvfs_0_sink + 1 dvfs_1_sink + 1 dvfs_2_sink + 1 dvfs_3_sink + 1 dvfs_4_sink + 1 dvfs_5_sink + 1 dvfs_6_sink + 1 dvfs_7_sink = 1

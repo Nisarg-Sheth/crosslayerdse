@@ -377,6 +377,24 @@ def gen_genotype1(individual,graph):
 def gen_basic_constraints(graph):
     global scenario
     num_of_con=0
+    try:
+        os.makedirs(scenario.graphs[graph].output_dir)
+    except FileExistsError:
+        print("")
+    with open(os.path.join(scenario.graphs[graph].output_dir,"cons.lp"), 'w') as f:
+        for task in scenario.graphs[graph].tasks:
+            temp=""
+            for mapped in scenario.graphs[graph].tasks[task].pe_list:
+                temp+=f" + 1 {task}_{mapped}"
+            temp+=f" = 1\n"
+            f.write(temp)
+            if scenario.dvfs!=None and scenario.dvfs>=3:
+                temp=""
+                for level in range(scenario.dvfs):
+                    temp+=f" + 1 dvfs_{level}_{task}"
+                temp+=f" = 1\n"
+                f.write(temp)
+
     scenario.graphs[graph].constraints=[]
     for task in scenario.graphs[graph].tasks:
         l={}
@@ -397,6 +415,36 @@ def gen_basic_constraints(graph):
 
 
 #imp
+
+def process_pb_data(individual):
+    #sort decision strat by the increasing order of decision priority
+    global scenario
+    graph=individual.graph
+    decision_strats=OrderedDict()
+    for task in scenario.graphs[individual.graph].tasks:
+        for d in individual.pbp_data[task].decision_strat:
+            decision_strats[d]=deepcopy(individual.pbp_data[task].decision_strat[d])
+
+    decision_strat=OrderedDict(deepcopy(sorted(decision_strats.items() , key=lambda x : -x[1][0])))
+    with open(os.path.join(scenario.graphs[graph].output_dir,f"{individual.num}.lp"), 'w') as f:
+        for d in decision_strats:
+            f.write(f"{d} {decision_strat[d][1]} {decision_strat[d][0]}\n")
+
+    # Running the external Pbsolver
+    run_output=subprocess.run(["java","pbsolver",os.path.join(scenario.graphs[graph].output_dir,"cons.lp"),os.path.join(scenario.graphs[graph].output_dir,f"{individual.num}.lp"),os.path.join(scenario.graphs[graph].output_dir,f"assign_{individual.num}.txt")], capture_output=True,shell=True)
+    print(str(run_output.stdout))
+
+    assignment={}
+    with open(os.path.join(scenario.graphs[graph].output_dir,f"assign_{individual.num}.txt"), 'r') as f:
+        for line in f:
+            temp=line.split();
+            if temp[1]=="true":
+                assignment[temp[0]]=True;
+            else:
+                assignment[temp[0]]=False;
+
+    return assignment
+
 def process_pbp_data(individual):
     #sort decision strat by the increasing order of decision priority
     global scenario
@@ -901,7 +949,7 @@ def process_cons(individual):
     gen_phenotype(individual,individual.graph)
 def process_cons1(individual):
     #print_pb_strat(con_graph)
-    individual.assignment=process_pbp_data(individual)
+    individual.assignment=process_pb_data(individual)
     gen_phenotype1(individual,individual.graph)
 
 def make_individual(name="la"):
@@ -915,12 +963,13 @@ def make_individual(name="la"):
     #gen_comp_con_graph(individual,name)
     #feasiblity_con_graph(individual,name)
     return individual
-def make_individual1(name="la"):
+def make_individual1(name="la",num=0):
     individual=creator.Individual()
     individual.graph=name
+    individual.num=num
     gen_genotype1(individual,name)
     #print_pb_strat(con_graph)
-    individual.assignment=process_pbp_data(individual)
+    individual.assignment=process_pb_data(individual)
     #print("Generated Individual")
     gen_phenotype1(individual,name)
     #gen_comp_con_graph(individual,name)
@@ -936,7 +985,7 @@ def makepop(graph_name="la", pop_size=5):
 def makepop1(graph_name="la", pop_size=5):
     l = []
     for i in range(pop_size):
-        l.append(toolbox1.individual(name=graph_name))
+        l.append(toolbox1.individual(name=graph_name,num=i))
     print("Population Initiated")
     return l
 #imp
@@ -1635,9 +1684,9 @@ def meta_energy(graph,num_gens):
     start_time=time.time()
     CXPB, MUTPB = 0.5, 0.1
     # print("Start of evolution", graph)
-    gen_basic_constraints(graph)
-    pop1 = toolbox1.population(graph_name=graph,pop_size=40)
-    fitnesses = list(map(toolbox1.evaluate_energy, pop1))
+    # gen_basic_constraints(graph)
+    pop1 = toolbox.population(graph_name=graph,pop_size=40)
+    fitnesses = list(map(toolbox.evaluate_energy, pop1))
     for ind, fit in zip(pop1, fitnesses):
         ind.fitness.values = fit
         cur_best_ind = fit
@@ -1649,17 +1698,17 @@ def meta_energy(graph,num_gens):
         # print("-- Generation %i --" % g)
 
         # Select the next generation individuals
-        offspring = toolbox1.select1(pop1, len(pop1),tournsize=3)
+        offspring = toolbox.select1(pop1, len(pop1),tournsize=3)
         #offspring = toolbox1.select(pop1, len(pop1))
         # Clone the selected individuals
-        offspring = list(map(toolbox1.clone, offspring))
+        offspring = list(map(toolbox.clone, offspring))
 
         # Apply crossover and mutation on the offspring
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
 
             # cross two individuals with probability CXPB
             if random.random() < CXPB:
-                toolbox1.mate(child1, child2)
+                toolbox.mate(child1, child2)
                 #print("mate runs")
                 # fitness values of the children
                 # must be recalculated later
@@ -1670,12 +1719,12 @@ def meta_energy(graph,num_gens):
 
             # mutate an individual with probability MUTPB
             if random.random() < MUTPB:
-                toolbox1.mutate(mutant)
+                toolbox.mutate(mutant)
                 del mutant.fitness.values
 
         # Evaluate the individuals with an invalid fitness
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        fitnesses = map(toolbox1.evaluate_energy, invalid_ind)
+        fitnesses = map(toolbox.evaluate_energy, invalid_ind)
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
         # print("  Evaluated %i individuals" % len(invalid_ind))
@@ -1715,9 +1764,9 @@ def meta_time(graph,num_gens):
     start_time=time.time()
     CXPB, MUTPB = 0.5, 0.1
     # print("Start of evolution", graph)
-    gen_basic_constraints(graph)
-    pop1 = toolbox1.population(graph_name=graph,pop_size=40)
-    fitnesses = list(map(toolbox1.evaluate_time, pop1))
+    # gen_basic_constraints(graph)
+    pop1 = toolbox.population(graph_name=graph,pop_size=40)
+    fitnesses = list(map(toolbox.evaluate_time, pop1))
     for ind, fit in zip(pop1, fitnesses):
         ind.fitness.values = fit
         cur_best_ind = fit
@@ -1728,17 +1777,17 @@ def meta_time(graph,num_gens):
         g = g + 1
         # print("-- Generation %i --" % g)
         # Select the next generation individuals
-        offspring = toolbox1.select1(pop1, len(pop1),tournsize=3)
+        offspring = toolbox.select1(pop1, len(pop1),tournsize=3)
         #offspring = toolbox1.select(pop1, len(pop1))
         # Clone the selected individuals
-        offspring = list(map(toolbox1.clone, offspring))
+        offspring = list(map(toolbox.clone, offspring))
 
         # Apply crossover and mutation on the offspring
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
 
             # cross two individuals with probability CXPB
             if random.random() < CXPB:
-                toolbox1.mate(child1, child2)
+                toolbox.mate(child1, child2)
                 #print("mate runs")
                 # fitness values of the children
                 # must be recalculated later
@@ -1749,12 +1798,12 @@ def meta_time(graph,num_gens):
 
             # mutate an individual with probability MUTPB
             if random.random() < MUTPB:
-                toolbox1.mutate(mutant)
+                toolbox.mutate(mutant)
                 del mutant.fitness.values
 
         # Evaluate the individuals with an invalid fitness
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        fitnesses = map(toolbox1.evaluate_time, invalid_ind)
+        fitnesses = map(toolbox.evaluate_time, invalid_ind)
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
         # print("  Evaluated %i individuals" % len(invalid_ind))
@@ -1808,7 +1857,7 @@ toolbox.register("mate", matefunc)
 # flip each attribute/gene of 0.05
 toolbox.register("mutate",mutatefunc, indpb=0.05)
 #fittest of the individuals is selected for breeding..
-#toolbox.register("select", tools.selTournament)
+toolbox.register("select1", tools.selTournament)
 toolbox.register("select", tools.selNSGA2)
 stats = tools.Statistics(key=lambda ind: ind.fitness.values)
 stats.register("avg", numpy.mean, axis=0)
@@ -1899,7 +1948,7 @@ def main():
     right_ext=input_tgff.rfind('.')
     file_name=input_tgff[left_ext+1:right_ext]
     output_dir=Config.get('Output_data','output_dir')
-
+    cons_output=os.path.abspath(Config.get('Output_data','cons_output'))
 
     if Config.get('GA_type','run_type')=="normal_GA":
         for graph in scenario.graphs:
@@ -1968,7 +2017,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
+            ref_point=[max(max_energy),max(max_time)]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2007,6 +2056,8 @@ def main():
         for graph in scenario.graphs:
             # plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
+            phase_name=f"{file_name}_{phase}"
+            scenario.graphs[graph].output_dir=os.path.join(cons_output,phase_name)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
                 scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
@@ -2014,7 +2065,7 @@ def main():
             #pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
             pf,logbook,topPoints=meta_with_pb(graph,generations)
             # Making Plots
-            phase_name=f"{file_name}_{phase}"
+
             stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
             hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
             pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
@@ -2070,7 +2121,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
+            ref_point=[max(max_energy),max(max_time)]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2109,6 +2160,8 @@ def main():
         for graph in scenario.graphs:
             # plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
+            phase_name=f"{file_name}_{phase}"
+            scenario.graphs[graph].output_dir=os.path.join(cons_output,phase_name)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
                 scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
@@ -2116,7 +2169,6 @@ def main():
             pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
             pf,logbook,topPoints=meta_normal(graph,generations)
             # Making Plots
-            phase_name=f"{file_name}_{phase}"
             stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
             hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
             pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
@@ -2180,7 +2232,7 @@ def main():
             fitness_max = logbook1.select("max")
             max_energy, max_time = zip(*fitness_max)
             ref_point1=[max(max_energy),max(max_time)]
-            final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
+            final_ref_point=[max(ref_point[0],ref_point1[0]),max(ref_point[1],ref_point1[1])]
 
             hv_value=[hype.compute(final_ref_point) for hype in hv]
             hv_value1=[hype.compute(final_ref_point) for hype in hv1]
@@ -2224,7 +2276,7 @@ def main():
             with open(f"{output_dir}/{phase_name}.txt",'a') as f:
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
-                # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
+                f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
             phase+=1
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately
