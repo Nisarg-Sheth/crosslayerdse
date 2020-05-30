@@ -1,0 +1,12 @@
+// TASK_GRAPH 3 
+digraph {
+	src [label=src]
+	fft1 [label=fft1]
+	sink [label=sink]
+	a301 [label=a301]
+	src -> a301
+	a301 -> fft1
+	a312 [label=a312]
+	fft1 -> a312
+	a312 -> sink
+}

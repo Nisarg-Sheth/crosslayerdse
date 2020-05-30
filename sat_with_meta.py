@@ -2187,8 +2187,12 @@ def main():
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
                 scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
             # continue
+            pb_time=time.time()
             pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
+            pb_time=(time.time()-pb_time)
+            meta_time=time.time()
             pf,logbook,topPoints=meta_normal(graph,generations)
+            meta_time=(time.time()-meta_time)
             # Making Plots
             stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
             hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
@@ -2294,10 +2298,15 @@ def main():
                 i+=1
                 trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
 
-            with open(f"{output_dir}/{phase_name}.txt",'a') as f:
+            with open(f"{output_dir}/output.txt",'a') as f:
+                f.write("------------------------------------------------\n")
+                f.write(f"{phase_name} {graph}\n")
+                f.write(f"time for sat decoder is {pb_time}\n")
+                f.write(f"time for normal GA is {meta_time}\n")
+                
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
-                f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
+                # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
             phase+=1
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately

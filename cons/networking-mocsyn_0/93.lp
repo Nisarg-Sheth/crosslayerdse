@@ -1,0 +1,12 @@
+ospf_PE_0_0 False 1.0
+ospf_PE_1_0 False 90.5
+ospf_PE_0_1 True 0.8333333333333333
+ospf_PE_1_1 False 151.75
+dvfs_0_ospf False 4.166666666666666
+dvfs_1_ospf False 16.583333333333332
+dvfs_2_ospf False 14.249999999999998
+dvfs_3_ospf False 15.999999999999998
+dvfs_4_ospf False 61.83333333333333
+dvfs_5_ospf False 148.25
+dvfs_6_ospf False 0.16666666666666657
+dvfs_7_ospf True 122.33333333333333

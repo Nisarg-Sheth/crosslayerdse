@@ -1,0 +1,19 @@
+// TASK_GRAPH 0 
+digraph {
+	src [label=src]
+	ac1 [label=ac1]
+	ce1 [label=ce1]
+	sink [label=sink]
+	a001 [label=a001]
+	src -> a001
+	a001 -> ac1
+	a012 [label=a012]
+	ac1 -> a012
+	a012 -> sink
+	a023 [label=a023]
+	ac1 -> a023
+	a023 -> ce1
+	a034 [label=a034]
+	ce1 -> a034
+	a034 -> sink
+}

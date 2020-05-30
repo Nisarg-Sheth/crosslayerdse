@@ -1,0 +1,4 @@
+// TASK_GRAPH 0 
+digraph {
+	ospf [label=ospf]
+}

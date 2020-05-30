@@ -1,0 +1,8 @@
+// TASK_GRAPH 6 
+digraph {
+	src [label=src]
+	gsm2 [label=gsm2]
+	a601 [label=a601]
+	src -> a601
+	a601 -> gsm2
+}

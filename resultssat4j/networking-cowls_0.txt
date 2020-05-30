@@ -1,0 +1,2 @@
+TASK_GRAPH 0  pb strat hypervolume is 273956800.00000006
+TASK_GRAPH 0  normal hypervolume is 273956800.00000006

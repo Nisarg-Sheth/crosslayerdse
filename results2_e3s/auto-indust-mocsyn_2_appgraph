@@ -1,0 +1,39 @@
+// TASK_GRAPH 2 
+digraph {
+	src [label=src]
+	fft [label=fft]
+	matrix [label=matrix]
+	ifft [label=ifft]
+	fir [label=fir]
+	angle [label=angle]
+	road [label=road]
+	table [label=table]
+	sink [label=sink]
+	a201 [label=a201]
+	src -> a201
+	a201 -> fir
+	a212 [label=a212]
+	fir -> a212
+	a212 -> angle
+	a223 [label=a223]
+	src -> a223
+	a223 -> fft
+	a234 [label=a234]
+	fft -> a234
+	a234 -> matrix
+	a245 [label=a245]
+	matrix -> a245
+	a245 -> ifft
+	a256 [label=a256]
+	ifft -> a256
+	a256 -> angle
+	a267 [label=a267]
+	angle -> a267
+	a267 -> road
+	a278 [label=a278]
+	road -> a278
+	a278 -> table
+	a289 [label=a289]
+	table -> a289
+	a289 -> sink
+}

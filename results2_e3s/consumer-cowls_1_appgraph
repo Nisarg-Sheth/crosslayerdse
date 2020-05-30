@@ -1,0 +1,20 @@
+// TASK_GRAPH 1 
+digraph {
+	src [label=src]
+	djpeg [label=djpeg]
+	display [label=display]
+	"rgb-cymk" [label="rgb-cymk"]
+	print [label=print]
+	a101 [label=a101]
+	src -> a101
+	a101 -> djpeg
+	a112 [label=a112]
+	djpeg -> a112
+	a112 -> display
+	a123 [label=a123]
+	djpeg -> a123
+	a123 -> "rgb-cymk"
+	a134 [label=a134]
+	"rgb-cymk" -> a134
+	a134 -> print
+}

@@ -1,5 +1,5 @@
 #nix-shell -p [python27]++(with python.pkgs;[matplotlib]);
-COMPLETE_PATH=~/tmp/Constraints/meta_run.py
+COMPLETE_PATH=~/tmp/Constraints/sat_with_meta.py
 E3S_PATH=~/tmp/Constraints/e3s
 echo "Start of run"
 for file in $E3S_PATH/*.tgff

@@ -1,0 +1,12 @@
+// TASK_GRAPH 4 
+digraph {
+	src [label=src]
+	fpba [label=fpba]
+	sink [label=sink]
+	a401 [label=a401]
+	src -> a401
+	a401 -> fpba
+	a412 [label=a412]
+	fpba -> a412
+	a412 -> sink
+}

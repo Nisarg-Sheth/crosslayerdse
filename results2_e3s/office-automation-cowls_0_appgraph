@@ -1,0 +1,23 @@
+// TASK_GRAPH 0 
+digraph {
+	src [label=src]
+	text [label=text]
+	sink [label=sink]
+	rotate [label=rotate]
+	dith [label=dith]
+	a001 [label=a001]
+	src -> a001
+	a001 -> text
+	a012 [label=a012]
+	src -> a012
+	a012 -> rotate
+	a023 [label=a023]
+	rotate -> a023
+	a023 -> dith
+	a034 [label=a034]
+	dith -> a034
+	a034 -> sink
+	a045 [label=a045]
+	text -> a045
+	a045 -> sink
+}
