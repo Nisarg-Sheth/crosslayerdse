@@ -1,0 +1,229 @@
+
+------------------------------------------------
+a_scenario scene
+time for sat decoder is 836.4724433422089
+time for normal GA is 1.5898962020874023
+scene pb strat hypervolume is 179125500142.86676
+scene normal hypervolume is 185657200985.72772
+------------------------------------------------
+a_0 TASK_GRAPH 0 
+time for sat decoder is 10.595883846282959
+time for normal GA is 0.05984067916870117
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 0  are 6
+Constrain on Energy value is 91.248Total Number of evaluations in pb strat GA are 45
+Total Number of evaluations in normal GA are 28
+TASK_GRAPH 0  pb strat hypervolume is 95222.7882964286
+TASK_GRAPH 0  normal hypervolume is 112640.82866
+------------------------------------------------
+a_1 TASK_GRAPH 1 
+time for sat decoder is 9.153350114822388
+time for normal GA is 0.015956878662109375
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 1  are 4
+Constrain on Energy value is 1358.6640000000002Total Number of evaluations in pb strat GA are 40
+Total Number of evaluations in normal GA are 34
+TASK_GRAPH 1  pb strat hypervolume is 118610363.46485603
+TASK_GRAPH 1  normal hypervolume is 121231712.49793525
+------------------------------------------------
+a_2 TASK_GRAPH 2 
+time for sat decoder is 10.13131308555603
+time for normal GA is 0.04787182807922363
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 2  are 9
+Constrain on Energy value is 65294.6652Total Number of evaluations in pb strat GA are 39
+Total Number of evaluations in normal GA are 25
+TASK_GRAPH 2  pb strat hypervolume is 10423708118.42152
+TASK_GRAPH 2  normal hypervolume is 97992799555.27359
+------------------------------------------------
+a_3 TASK_GRAPH 3 
+time for sat decoder is 12.308387994766235
+time for normal GA is 0.03707385063171387
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 3  are 5
+Constrain on Energy value is 635.1000000000001Total Number of evaluations in pb strat GA are 48
+Total Number of evaluations in normal GA are 22
+TASK_GRAPH 3  pb strat hypervolume is 26320962.938018683
+TASK_GRAPH 3  normal hypervolume is 26304602.861676015
+------------------------------------------------
+a_0 TASK_GRAPH 0 
+time for sat decoder is 9.447492837905884
+time for normal GA is 0.025932788848876953
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 0  are 6
+Lowest Energy Value is 15.208
+Lowest Time Value is 44.49508928571428
+Constraint on Energy value is 91.248
+Total Number of evaluations in pb strat GA are 45
+Total Number of evaluations in normal GA are 28
+TASK_GRAPH 0  pb strat hypervolume is 95222.7882964286
+TASK_GRAPH 0  normal hypervolume is 112640.82866
+------------------------------------------------
+a_1 TASK_GRAPH 1 
+time for sat decoder is 8.500153541564941
+time for normal GA is 0.031914710998535156
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 1  are 4
+Lowest Energy Value is 226.44400000000002
+Lowest Time Value is 187.8525
+Constraint on Energy value is 1358.6640000000002
+Total Number of evaluations in pb strat GA are 40
+Total Number of evaluations in normal GA are 34
+TASK_GRAPH 1  pb strat hypervolume is 118610363.46485603
+TASK_GRAPH 1  normal hypervolume is 121231712.49793525
+------------------------------------------------
+a_2 TASK_GRAPH 2 
+time for sat decoder is 9.755818367004395
+time for normal GA is 0.030916452407836914
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 2  are 9
+Lowest Energy Value is 10882.4442
+Lowest Time Value is 6511.682500000002
+Constraint on Energy value is 65294.6652
+Total Number of evaluations in pb strat GA are 39
+Total Number of evaluations in normal GA are 25
+TASK_GRAPH 2  pb strat hypervolume is 10423708118.42152
+TASK_GRAPH 2  normal hypervolume is 97992799555.27359
+------------------------------------------------
+a_3 TASK_GRAPH 3 
+time for sat decoder is 12.743435144424438
+time for normal GA is 0.027927637100219727
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 3  are 5
+Lowest Energy Value is 105.85000000000002
+Lowest Time Value is 125.40589285714285
+Constraint on Energy value is 635.1000000000001
+Total Number of evaluations in pb strat GA are 48
+Total Number of evaluations in normal GA are 22
+TASK_GRAPH 3  pb strat hypervolume is 26320962.938018683
+TASK_GRAPH 3  normal hypervolume is 26304602.861676015
+------------------------------------------------
+a_0 TASK_GRAPH 0 
+time for sat decoder is 10.052231311798096
+time for normal GA is 0.04369378089904785
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 0  are 6
+Lowest Energy Value is 15.208
+Lowest Time Value is 44.49508928571428
+Constraint on Energy value is 45.624
+Total Number of evaluations in pb strat GA are 45
+Total Number of evaluations in normal GA are 28
+TASK_GRAPH 0  pb strat hypervolume is 95222.7882964286
+TASK_GRAPH 0  normal hypervolume is 112640.82866
+------------------------------------------------
+a_1 TASK_GRAPH 1 
+time for sat decoder is 9.016018867492676
+time for normal GA is 0.025930166244506836
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 1  are 4
+Lowest Energy Value is 226.44400000000002
+Lowest Time Value is 187.8525
+Constraint on Energy value is 679.3320000000001
+Total Number of evaluations in pb strat GA are 40
+Total Number of evaluations in normal GA are 34
+TASK_GRAPH 1  pb strat hypervolume is 133162284.09951335
+TASK_GRAPH 1  normal hypervolume is 8974787.327247621
+------------------------------------------------
+a_2 TASK_GRAPH 2 
+time for sat decoder is 10.140547752380371
+time for normal GA is 0.04388260841369629
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 2  are 9
+Lowest Energy Value is 10882.4442
+Lowest Time Value is 6511.682500000002
+Constraint on Energy value is 32647.3326
+Total Number of evaluations in pb strat GA are 39
+Total Number of evaluations in normal GA are 25
+TASK_GRAPH 2  pb strat hypervolume is 10423708118.42152
+TASK_GRAPH 2  normal hypervolume is 4509603586.3551855
+------------------------------------------------
+a_3 TASK_GRAPH 3 
+time for sat decoder is 12.579950094223022
+time for normal GA is 0.03390765190124512
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 3  are 5
+Lowest Energy Value is 105.85000000000002
+Lowest Time Value is 125.40589285714285
+Constraint on Energy value is 317.55000000000007
+Total Number of evaluations in pb strat GA are 48
+Total Number of evaluations in normal GA are 22
+TASK_GRAPH 3  pb strat hypervolume is 26320962.938018683
+TASK_GRAPH 3  normal hypervolume is 20209771.11036001
+------------------------------------------------
+a_0 scene
+time for sat decoder is 9.894164800643921
+time for normal GA is 0.11268782615661621
+Number of dvfs levels is 8
+Number of Tasks in scene are 24
+Lowest Energy Value is 7341.0038
+Lowest Time Value is 7122.589761904763
+Constraint on Energy value is 22023.011400000003
+Total Number of evaluations in pb strat GA are 37
+Total Number of evaluations in normal GA are 21
+scene pb strat hypervolume is 17822038074.561253
+scene normal hypervolume is 40217782.968139775
+------------------------------------------------
+a_0 scene
+time for sat decoder is 9.566660404205322
+time for normal GA is 0.07978582382202148
+Number of dvfs levels is 8
+Number of Tasks in scene are 24
+Lowest Energy Value is 7341.0038
+Lowest Time Value is 7122.589761904763
+Constraint on Energy value is 22023.011400000003
+Total Number of evaluations in pb strat GA are 37
+Total Number of evaluations in normal GA are 21
+scene pb strat hypervolume is 17822038074.561253
+scene normal hypervolume is 40217782.968139775
+------------------------------------------------
+a_0 TASK_GRAPH 0 
+time for sat decoder is 10.11138391494751
+time for normal GA is 0.015622138977050781
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 0  are 6
+Lowest Energy Value is 15.208
+Lowest Time Value is 44.49508928571428
+Constraint on Energy value is 45.624
+Total Number of evaluations in pb strat GA are 45
+Total Number of evaluations in normal GA are 28
+TASK_GRAPH 0  pb strat hypervolume is 49350.72331499995
+TASK_GRAPH 0  normal hypervolume is 0.00999999999999318
+------------------------------------------------
+a_1 TASK_GRAPH 1 
+time for sat decoder is 9.825083017349243
+time for normal GA is 0.04587960243225098
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 1  are 4
+Lowest Energy Value is 226.44400000000002
+Lowest Time Value is 187.8525
+Constraint on Energy value is 679.3320000000001
+Total Number of evaluations in pb strat GA are 40
+Total Number of evaluations in normal GA are 34
+TASK_GRAPH 1  pb strat hypervolume is 133162284.09951335
+TASK_GRAPH 1  normal hypervolume is 160.01000000058215
+------------------------------------------------
+a_2 TASK_GRAPH 2 
+time for sat decoder is 9.723172903060913
+time for normal GA is 0.07810711860656738
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 2  are 9
+Lowest Energy Value is 10882.4442
+Lowest Time Value is 6511.682500000002
+Constraint on Energy value is 32647.3326
+Total Number of evaluations in pb strat GA are 39
+Total Number of evaluations in normal GA are 25
+TASK_GRAPH 2  pb strat hypervolume is 10423708118.42152
+TASK_GRAPH 2  normal hypervolume is 0.009999999995343387
+------------------------------------------------
+a_3 TASK_GRAPH 3 
+time for sat decoder is 12.413387060165405
+time for normal GA is 0.016954660415649414
+Number of dvfs levels is 8
+Number of Tasks in TASK_GRAPH 3  are 5
+Lowest Energy Value is 105.85000000000002
+Lowest Time Value is 125.40589285714285
+Constraint on Energy value is 317.55000000000007
+Total Number of evaluations in pb strat GA are 48
+Total Number of evaluations in normal GA are 22
+TASK_GRAPH 3  pb strat hypervolume is 26320962.938018683
+TASK_GRAPH 3  normal hypervolume is 20209771.11036001

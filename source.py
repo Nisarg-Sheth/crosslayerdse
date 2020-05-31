@@ -98,6 +98,7 @@ class Graph:
         self.num_of_added_con=0
         self.num_of_vars = 0
         self.output_dir = None
+        self.max_fitness = [0,0]
 
     def add_task(self,task_details):
         task_details=task_details.replace("_","")

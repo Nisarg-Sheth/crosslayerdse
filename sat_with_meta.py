@@ -1051,7 +1051,7 @@ def check_feasible(individual,energy,time):
     global scenario
     graph=individual.graph
     isFeasible=True
-    if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)):
+    if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) and scenario.objective_scale_energy!=0:
         num_of_vars=0
         isFeasible=False
         if scenario.graphs[graph].num_of_added_con>400:
@@ -1066,24 +1066,35 @@ def check_feasible(individual,energy,time):
                 num_of_vars+=1
                 if scenario.dvfs!=None and scenario.dvfs>=3:
                     for level in range(scenario.dvfs):
-                        if individual.task_list[task].dvfs_level<=level:
+                        if individual.task_list[task].dvfs_level==level:
                             temp+=f" + 1 dvfs_{level}_{task}"
-                            num_of_vars+=1
+                        num_of_vars+=1
             temp+=f" <= {num_of_vars-1}\n"
             f.write(temp)
         scenario.graphs[graph].num_of_added_con+=1
 
-        # for task in individual.task_list:
-        #     temp=f"{task}_{individual.task_list[task].mapped}"
-        #     l[temp]=('+',1)
-        #     if scenario.dvfs!=None and scenario.dvfs>=3:
-        #         for level in range(scenario.dvfs):
-        #             if individual.task_list[task].dvfs_level<=level:
-        #                 temp=f"dvfs_{level}_{task}"
-        #                 l[temp]=('+',1)
-        # scenario.graphs[graph].constraints.append([l,(num_of_vars-1),'<='])
-        # scenario.graphs[graph].num_of_added_con+=1
-        #print(l)
+    elif time>(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)) and scenario.objective_scale_time!=0:
+        num_of_vars=0
+        isFeasible=False
+        if scenario.graphs[graph].num_of_added_con>400:
+            return isFeasible
+        l={}
+        #print("Restricting space")
+        #print(energy)
+        with open(os.path.join(scenario.graphs[graph].output_dir,"cons.lp"), 'a') as f:
+            temp=""
+            for task in individual.task_list:
+                temp+=f" + 1 {task}_{individual.task_list[task].mapped}"
+                num_of_vars+=1
+                if scenario.dvfs!=None and scenario.dvfs>=3:
+                    for level in range(scenario.dvfs):
+                        if individual.task_list[task].dvfs_level==level:
+                            temp+=f" + 1 dvfs_{level}_{task}"
+                        num_of_vars+=1
+            temp+=f" <= {num_of_vars-1}\n"
+            f.write(temp)
+        scenario.graphs[graph].num_of_added_con+=1
+
     return isFeasible
 #imp
 def trace_schedule(individual,plot_path):
@@ -1394,8 +1405,10 @@ def evalParams(individual):
     #     #     max_time=(max_time)*20
     #     isFeasible=check_feasible(individual,energy,max_time)
     if scenario.isConstrained==True:
-        if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)):
+        if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) and scenario.objective_scale_energy!=0:
             # print(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))
+            individual.isFeasible=False
+        elif max_time>(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)) and scenario.objective_scale_time!=0:
             individual.isFeasible=False
         else:
             individual.isFeasible=True
@@ -1500,7 +1513,7 @@ def meta_normal(graph,num_gens):
     start_time=time.time()
     CXPB, MUTPB = 0.2, 0.03
     print("Start of evolution", graph)
-
+    scenario.graphs[graph].num_of_evals=0
     # Evaluate the entire population without PB strat
     pop = toolbox.population(graph_name=graph,pop_size=scenario.pop_size)
     fitnesses = list(map(toolbox.evaluate, pop))
@@ -1554,6 +1567,14 @@ def meta_normal(graph,num_gens):
 
         record = stats.compile(pop)
         max_fitness=record['max']
+        if scenario.graphs[graph].max_fitness[0]<max_fitness[0]:
+            scenario.graphs[graph].max_fitness[0]=max_fitness[0]
+        else:
+            max_fitness[0]=scenario.graphs[graph].max_fitness[0]
+        if scenario.graphs[graph].max_fitness[1]<max_fitness[1]:
+            scenario.graphs[graph].max_fitness[1]=max_fitness[1]
+        else:
+            max_fitness[1]=scenario.graphs[graph].max_fitness[1]
         for ind in pop:
             if ind.isFeasible==False:
                 # print("This runs?")
@@ -1593,7 +1614,7 @@ def meta_normal(graph,num_gens):
     print("---------GENERATING STATISTICS---------")
     print("\nTotal Seconds taken for evaluation are", (end_time-start_time))
     print("Total Number of Evaluations are",scenario.graphs[graph].num_of_evals,"\n")
-    return pf,logbook,topPoints
+    return pf,logbook,topPoints,scenario.graphs[graph].num_of_evals
 
 def meta_with_pb(graph,num_gens):
 
@@ -1601,6 +1622,7 @@ def meta_with_pb(graph,num_gens):
     print(f"Generating Population for {graph}")
     start_time=time.time()
     CXPB, MUTPB = 0.5, 0.1
+    scenario.graphs[graph].num_of_evals=0
     print("Start of evolution", graph)
     gen_basic_constraints(graph)
     pop1 = toolbox1.population(graph_name=graph,pop_size=scenario.pop_size)
@@ -1656,6 +1678,14 @@ def meta_with_pb(graph,num_gens):
         record = stats1.compile(pop1)
 
         max_fitness=record['max']
+        if scenario.graphs[graph].max_fitness[0]<max_fitness[0]:
+            scenario.graphs[graph].max_fitness[0]=max_fitness[0]
+        else:
+            max_fitness[0]=scenario.graphs[graph].max_fitness[0]
+        if scenario.graphs[graph].max_fitness[1]<max_fitness[1]:
+            scenario.graphs[graph].max_fitness[1]=max_fitness[1]
+        else:
+            max_fitness[1]=scenario.graphs[graph].max_fitness[1]
         for ind in pop1:
             if ind.isFeasible==False:
                 # print("This runs?")
@@ -1695,7 +1725,7 @@ def meta_with_pb(graph,num_gens):
     print("---------GENERATING STATISTICS---------")
     print("\nTotal Seconds taken for evaluation are", (end_time-start_time))
     print("Total Number of Evaluations are",scenario.graphs[graph].num_of_evals,"\n")
-    return pf1,logbook1,topPoints1
+    return pf1,logbook1,topPoints1,scenario.graphs[graph].num_of_evals
 
 def meta_energy(graph,num_gens):
     pop1=None
@@ -1915,12 +1945,16 @@ stats1.register("max", numpy.max, axis=0)
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--tg", help="*.tgff file to parse",default=None)
+    parser.add_argument("--config","-c", help="input config file",default=None)
     args = parser.parse_args()
     total_start_time=time.time()
     global scenario
     scenario = Complete_Scenario()
     Config = configparser.ConfigParser()
-    Config.read('config.ini')
+    if args.config==None:
+        Config.read('config.ini')
+    else:
+        Config.read(args.config)
     #edit
     scenario.pop_size=100
     path_of_tgff=None
@@ -1980,7 +2014,9 @@ def main():
                 scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
             # continue
             #pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
-            pf,logbook,topPoints=meta_normal(graph,generations)
+            normal_time=time.time()
+            pf,logbook,topPoints,num_evals=meta_normal(graph,generations)
+            normal_time=(time.time()-normal_time)
             # Making Plots
             phase_name=f"{file_name}_{phase}"
             stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
@@ -2038,7 +2074,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy),max(max_time)]
+            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2069,7 +2105,27 @@ def main():
                 i+=1
                 trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
             phase+=1
-            with open(f"{output_dir}/{phase_name}.txt",'a') as f:
+            with open(f"{output_dir}/output.txt",'a') as f:
+                f.write("------------------------------------------------\n")
+                f.write(f"{phase_name} {graph}\n")
+                # f.write(f"time for sat decoder is {pb_time}\n")
+                f.write(f"time for normal GA is {normal_time}\n")
+                if scenario.dvfs>=3:
+                    f.write(f"Number of dvfs levels is {scenario.dvfs}\n")
+                else:
+                    f.write(f"Number of dvfs levels is 1\n")
+                f.write(f"Number of Tasks in {graph} are {scenario.graphs[graph].num_of_tasks}\n")
+                f.write(f"Number of Tasks in {graph} are {scenario.graphs[graph].num_of_tasks}\n")
+                if scenario.isConstrained==True:
+                    f.write(f"Lowest Energy Value is {scenario.graphs[graph].lowest_energy}\n")
+                    f.write(f"Lowest Time Value is {scenario.graphs[graph].lowest_time}\n")
+
+                    if scenario.objective_scale_energy!=0:
+                        f.write(f"Constraint on Energy value is {(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))}\n")
+                    if scenario.objective_scale_time!=0:
+                        f.write(f"Constraint on time value is {(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time))}\n")
+
+                f.write(f"Total Number of evaluations in normal GA are {num_evals}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
         total_end_time=(time.time()-total_start_time)
 
@@ -2084,7 +2140,9 @@ def main():
                 scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
             # continue
             #pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
-            pf,logbook,topPoints=meta_with_pb(graph,generations)
+            normal_time=time.time()
+            pf,logbook,topPoints,num_evals=meta_with_pb(graph,generations)
+            normal_time=(time.time()-normal_time)
             # Making Plots
 
             stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
@@ -2142,7 +2200,7 @@ def main():
             hv = logbook.select("hv")
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
-            ref_point=[max(max_energy),max(max_time)]
+            ref_point=[max(max_energy)+0.1,max(max_time)+0.1]
 
             hv_value=[hype.compute(ref_point) for hype in hv]
 
@@ -2173,10 +2231,30 @@ def main():
                 i+=1
                 trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
             phase+=1
-            with open(f"{output_dir}/{phase_name}.txt",'a') as f:
-                f.write(f"{graph} pb strat hypervolume is {max(hv_value)}\n")
-        total_end_time=(time.time()-total_start_time)
+            with open(f"{output_dir}/output.txt",'a') as f:
+                f.write("------------------------------------------------\n")
+                f.write(f"{phase_name} {graph}\n")
+                # f.write(f"time for sat decoder is {pb_time}\n")
+                f.write(f"time for sat decoder is {normal_time}\n")
+                if scenario.dvfs>=3:
+                    f.write(f"Number of dvfs levels is {scenario.dvfs}\n")
+                else:
+                    f.write(f"Number of dvfs levels is 1\n")
+                f.write(f"Number of Tasks in {graph} are {scenario.graphs[graph].num_of_tasks}\n")
+                f.write(f"Number of Tasks in {graph} are {scenario.graphs[graph].num_of_tasks}\n")
+                if scenario.isConstrained==True:
+                    f.write(f"Lowest Energy Value is {scenario.graphs[graph].lowest_energy}\n")
+                    f.write(f"Lowest Time Value is {scenario.graphs[graph].lowest_time}\n")
 
+                    if scenario.objective_scale_energy!=0:
+                        f.write(f"Constraint on Energy value is {(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))}\n")
+                    if scenario.objective_scale_time!=0:
+                        f.write(f"Constraint on time value is {(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time))}\n")
+
+                f.write(f"Total Number of evaluations in pb strat GA are {num_evals}\n")
+                f.write(f"{graph} pb strat hypervolume is {max(hv_value)}\n")
+                # f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
+        total_end_time=(time.time()-total_start_time)
     elif Config.get('GA_type','run_type')=="both":
         for graph in scenario.graphs:
             # plot_app_graph(graph,phase,file_name,output_dir)
@@ -2188,11 +2266,11 @@ def main():
                 scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
             # continue
             pb_time=time.time()
-            pf1,logbook1,topPoints1=meta_with_pb(graph,generations)
+            pf1,logbook1,topPoints1,num_evals1=meta_with_pb(graph,generations)
             pb_time=(time.time()-pb_time)
-            meta_time=time.time()
-            pf,logbook,topPoints=meta_normal(graph,generations)
-            meta_time=(time.time()-meta_time)
+            normal_time=time.time()
+            pf,logbook,topPoints,num_evals=meta_normal(graph,generations)
+            normal_time=(time.time()-normal_time)
             # Making Plots
             stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
             hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
@@ -2257,7 +2335,7 @@ def main():
             fitness_max = logbook1.select("max")
             max_energy, max_time = zip(*fitness_max)
             ref_point1=[max(max_energy),max(max_time)]
-            final_ref_point=[max(ref_point[0],ref_point1[0]),max(ref_point[1],ref_point1[1])]
+            final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
 
             hv_value=[hype.compute(final_ref_point) for hype in hv]
             hv_value1=[hype.compute(final_ref_point) for hype in hv1]
@@ -2302,8 +2380,24 @@ def main():
                 f.write("------------------------------------------------\n")
                 f.write(f"{phase_name} {graph}\n")
                 f.write(f"time for sat decoder is {pb_time}\n")
-                f.write(f"time for normal GA is {meta_time}\n")
-                
+                f.write(f"time for normal GA is {normal_time}\n")
+                if scenario.dvfs>=3:
+                    f.write(f"Number of dvfs levels is {scenario.dvfs}\n")
+                else:
+                    f.write(f"Number of dvfs levels is 1\n")
+                f.write(f"Number of Tasks in {graph} are {scenario.graphs[graph].num_of_tasks}\n")
+                if scenario.isConstrained==True:
+                    f.write(f"Lowest Energy Value is {scenario.graphs[graph].lowest_energy}\n")
+                    f.write(f"Lowest Time Value is {scenario.graphs[graph].lowest_time}\n")
+
+                    if scenario.objective_scale_energy!=0:
+                        f.write(f"Constraint on Energy value is {(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))}\n")
+                    if scenario.objective_scale_time!=0:
+                        f.write(f"Constraint on time value is {(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time))}\n")
+
+
+                f.write(f"Total Number of evaluations in pb strat GA are {num_evals1}\n")
+                f.write(f"Total Number of evaluations in normal GA are {num_evals}\n")
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
                 # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
