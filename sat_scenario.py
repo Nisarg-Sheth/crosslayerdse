@@ -1053,10 +1053,33 @@ def check_feasible(individual,energy,time):
     global scenario
     graph=individual.graph
     isFeasible=True
-    if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) and scenario.objective_scale_energy!=0:
+    if scenario.objective_scale_energy!=0 and scenario.objective_scale_time!=0:
+        if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) and time>(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)):
+            num_of_vars=0
+            isFeasible=False
+            if scenario.graphs[graph].num_of_added_con>500:
+                return isFeasible
+            l={}
+            #print("Restricting space")
+            #print(energy)
+            with open(os.path.join(scenario.graphs[graph].output_dir,"cons.lp"), 'a') as f:
+                temp=""
+                for task in individual.task_list:
+                    temp+=f" + 1 {task}_{individual.task_list[task].mapped}"
+                    num_of_vars+=1
+                    if scenario.dvfs!=None and scenario.dvfs>=3:
+                        for level in range(scenario.dvfs):
+                            if individual.task_list[task].dvfs_level==level:
+                                temp+=f" + 1 dvfs_{level}_{task}"
+                            num_of_vars+=1
+                temp+=f" <= {num_of_vars-1}\n"
+                f.write(temp)
+            scenario.graphs[graph].num_of_added_con+=1
+
+    elif energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) and scenario.objective_scale_energy!=0:
         num_of_vars=0
         isFeasible=False
-        if scenario.graphs[graph].num_of_added_con>400:
+        if scenario.graphs[graph].num_of_added_con>500:
             return isFeasible
         l={}
         #print("Restricting space")
@@ -1068,7 +1091,7 @@ def check_feasible(individual,energy,time):
                 num_of_vars+=1
                 if scenario.dvfs!=None and scenario.dvfs>=3:
                     for level in range(scenario.dvfs):
-                        if individual.task_list[task].dvfs_level==level:
+                        if individual.task_list[task].dvfs_level<=level:
                             temp+=f" + 1 dvfs_{level}_{task}"
                         num_of_vars+=1
             temp+=f" <= {num_of_vars-1}\n"
@@ -1078,7 +1101,7 @@ def check_feasible(individual,energy,time):
     elif time>(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)) and scenario.objective_scale_time!=0:
         num_of_vars=0
         isFeasible=False
-        if scenario.graphs[graph].num_of_added_con>400:
+        if scenario.graphs[graph].num_of_added_con>500:
             return isFeasible
         l={}
         #print("Restricting space")
@@ -1090,7 +1113,7 @@ def check_feasible(individual,energy,time):
                 num_of_vars+=1
                 if scenario.dvfs!=None and scenario.dvfs>=3:
                     for level in range(scenario.dvfs):
-                        if individual.task_list[task].dvfs_level==level:
+                        if individual.task_list[task].dvfs_level>=level:
                             temp+=f" + 1 dvfs_{level}_{task}"
                         num_of_vars+=1
             temp+=f" <= {num_of_vars-1}\n"
@@ -2002,7 +2025,7 @@ def main():
     gen_dvfslevel(scenario.dvfs)
     if Config.get('GA_type','objective_type')=="constrained":
         scenario.isConstrained=True
-    phase=0
+    phase="scenario"
     left_ext=input_tgff.rfind('/')
     right_ext=input_tgff.rfind('.')
     file_name=input_tgff[left_ext+1:right_ext]
@@ -2405,7 +2428,7 @@ def main():
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
                 # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
-            phase+=1
+            # phase+=1
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately
 

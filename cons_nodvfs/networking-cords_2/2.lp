@@ -1,0 +1,16 @@
+src_PE_0_0 False 1.0
+src_PE_1_0 False 4.6875
+src_PE_0_1 True 0.875
+src_PE_1_1 False 2.75
+patricia_PE_0_0 False 1.75
+patricia_PE_1_0 True 3.0625
+patricia_PE_0_1 False 2.375
+patricia_PE_1_1 False 0.5625
+pf1m_PE_0_0 False 0.5
+pf1m_PE_1_0 False 1.4375
+pf1m_PE_0_1 True 1.8125
+pf1m_PE_1_1 False 2.125
+sink_PE_0_0 False 1.375
+sink_PE_1_0 True 1.5625
+sink_PE_0_1 False 2.6875
+sink_PE_1_1 False 0.0625

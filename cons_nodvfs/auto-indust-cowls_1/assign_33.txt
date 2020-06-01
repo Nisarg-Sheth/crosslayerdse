@@ -1,0 +1,16 @@
+idct_PE_0_0 false
+src_PE_1_1 false
+idct_PE_1_0 false
+idct_PE_0_1 false
+src_PE_1_0 false
+src_PE_0_1 true
+iir_PE_1_1 true
+idct_PE_1_1 true
+src_PE_0_0 false
+iir_PE_0_0 false
+iir_PE_1_0 false
+iir_PE_0_1 false
+sink_PE_1_1 false
+sink_PE_1_0 true
+sink_PE_0_1 false
+sink_PE_0_0 false

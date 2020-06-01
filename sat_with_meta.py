@@ -1066,7 +1066,7 @@ def check_feasible(individual,energy,time):
                 num_of_vars+=1
                 if scenario.dvfs!=None and scenario.dvfs>=3:
                     for level in range(scenario.dvfs):
-                        if individual.task_list[task].dvfs_level==level:
+                        if individual.task_list[task].dvfs_level<=level:
                             temp+=f" + 1 dvfs_{level}_{task}"
                         num_of_vars+=1
             temp+=f" <= {num_of_vars-1}\n"
@@ -1088,7 +1088,7 @@ def check_feasible(individual,energy,time):
                 num_of_vars+=1
                 if scenario.dvfs!=None and scenario.dvfs>=3:
                     for level in range(scenario.dvfs):
-                        if individual.task_list[task].dvfs_level==level:
+                        if individual.task_list[task].dvfs_level>=level:
                             temp+=f" + 1 dvfs_{level}_{task}"
                         num_of_vars+=1
             temp+=f" <= {num_of_vars-1}\n"

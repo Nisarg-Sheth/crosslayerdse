@@ -1,0 +1,4 @@
+ospf_PE_1_1 true
+ospf_PE_1_0 false
+ospf_PE_0_1 false
+ospf_PE_0_0 false

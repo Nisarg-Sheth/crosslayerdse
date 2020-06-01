@@ -1,0 +1,16 @@
+src_PE_0_0 False 4.0
+src_PE_1_0 False 9.875
+src_PE_0_1 False 0.875
+src_PE_1_1 True 0.8125
+iir_PE_0_0 False 0.75
+iir_PE_1_0 False 2.3125
+iir_PE_0_1 True 7.875
+iir_PE_1_1 False 0.5625
+idct_PE_0_0 False 6.375
+idct_PE_1_0 False 14.25
+idct_PE_0_1 True 3.375
+idct_PE_1_1 False 6.6875
+sink_PE_0_0 False 16.9375
+sink_PE_1_0 True 16.6875
+sink_PE_0_1 False 3.75
+sink_PE_1_1 False 27.1875
