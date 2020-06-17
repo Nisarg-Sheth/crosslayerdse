@@ -236,3 +236,45 @@ Total Number of evaluations in pb strat GA are 5763
 Total Number of evaluations in normal GA are 2226
 scene pb strat hypervolume is 20253954846.90947
 scene normal hypervolume is 0.009999999997526175
+------------------------------------------------
+telecom-cowls_scenario scene
+time for sat decoder is 2099.2625143527985
+time for normal GA is 156.32076382637024
+Number of dvfs levels is 10
+Number of Tasks in scene are 30
+Lowest Energy Value is 19514.781333333354
+Lowest Time Value is 6063.577586206896
+Constraint on Energy value is 58544.34400000006
+Constraint on time value is 18190.73275862069
+Total Number of evaluations in pb strat GA are 5763
+Total Number of evaluations in normal GA are 2226
+scene pb strat hypervolume is 98898332720.78276
+scene normal hypervolume is 0.00999999999825377
+------------------------------------------------
+telecom-mocsyn-asic_scenario scene
+time for sat decoder is 2115.5756862163544
+time for normal GA is 152.29385828971863
+Number of dvfs levels is 10
+Number of Tasks in scene are 30
+Lowest Energy Value is 19514.781333333354
+Lowest Time Value is 1212.7155172413793
+Constraint on Energy value is 58544.34400000006
+Constraint on time value is 3638.1465517241377
+Total Number of evaluations in pb strat GA are 5763
+Total Number of evaluations in normal GA are 2226
+scene pb strat hypervolume is 20253954846.90947
+scene normal hypervolume is 0.009999999997526175
+------------------------------------------------
+telecom-mocsyn_scenario scene
+time for sat decoder is 2117.5221807956696
+time for normal GA is 148.71487426757812
+Number of dvfs levels is 10
+Number of Tasks in scene are 30
+Lowest Energy Value is 19514.781333333354
+Lowest Time Value is 1212.7155172413793
+Constraint on Energy value is 58544.34400000006
+Constraint on time value is 3638.1465517241377
+Total Number of evaluations in pb strat GA are 5763
+Total Number of evaluations in normal GA are 2226
+scene pb strat hypervolume is 20253954846.90947
+scene normal hypervolume is 0.009999999997526175

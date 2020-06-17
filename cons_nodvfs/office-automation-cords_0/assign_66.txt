@@ -4,8 +4,8 @@ dith_PE_1_1 true
 src_PE_1_1 false
 dith_PE_1_0 false
 dith_PE_0_1 false
-src_PE_1_0 true
-src_PE_0_1 false
+src_PE_1_0 false
+src_PE_0_1 true
 rotate_PE_1_1 false
 src_PE_0_0 false
 rotate_PE_1_0 true

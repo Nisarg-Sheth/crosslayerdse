@@ -1646,7 +1646,7 @@ def meta_with_pb(graph,num_gens):
     pop1=None
     print(f"Generating Population for {graph}")
     start_time=time.time()
-    CXPB, MUTPB = 0.5, 0.1
+    CXPB, MUTPB = 0.2, 0.03
     scenario.graphs[graph].num_of_evals=0
     print("Start of evolution", graph)
     gen_basic_constraints(graph)

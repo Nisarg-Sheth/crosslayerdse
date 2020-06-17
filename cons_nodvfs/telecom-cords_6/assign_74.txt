@@ -2,7 +2,7 @@ src_PE_1_1 false
 src_PE_1_0 false
 src_PE_0_1 true
 src_PE_0_0 false
-gsm2_PE_1_1 true
+gsm2_PE_1_1 false
 gsm2_PE_1_0 false
-gsm2_PE_0_1 false
+gsm2_PE_0_1 true
 gsm2_PE_0_0 false

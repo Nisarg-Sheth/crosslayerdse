@@ -10,7 +10,7 @@ patricia_PE_1_0 true
 patricia_PE_0_1 false
 patricia_PE_1_1 false
 patricia_PE_0_0 false
-pf512_PE_1_1 false
-pf512_PE_1_0 true
+pf512_PE_1_1 true
+pf512_PE_1_0 false
 pf512_PE_0_1 false
 pf512_PE_0_0 false

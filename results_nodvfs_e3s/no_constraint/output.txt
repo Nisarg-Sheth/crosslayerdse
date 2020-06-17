@@ -1,0 +1,50 @@
+------------------------------------------------
+auto-indust-mocsyn_scenario scene
+time for sat decoder is 2349.3982470035553
+time for normal GA is 19.64987540245056
+Number of dvfs levels is 1
+Number of Tasks in scene are 24
+Total Number of evaluations in pb strat GA are 11141
+Total Number of evaluations in normal GA are 4724
+scene pb strat hypervolume is 478848789.11604345
+scene normal hypervolume is 478776835.6798676
+------------------------------------------------
+consumer-cords_scenario scene
+time for sat decoder is 883.1586697101593
+time for normal GA is 14.021104335784912
+Number of dvfs levels is 1
+Number of Tasks in scene are 12
+Total Number of evaluations in pb strat GA are 4552
+Total Number of evaluations in normal GA are 4533
+scene pb strat hypervolume is 137641319509.71207
+scene normal hypervolume is 138149945582.56207
+------------------------------------------------
+networking-mocsyn-asic_scenario scene
+time for sat decoder is 874.4023122787476
+time for normal GA is 11.290499210357666
+Number of dvfs levels is 1
+Number of Tasks in scene are 13
+Total Number of evaluations in pb strat GA are 4520
+Total Number of evaluations in normal GA are 4624
+scene pb strat hypervolume is 2468612133.9160967
+scene normal hypervolume is 2413850780.0279803
+------------------------------------------------
+office-automation-cords_scenario scene
+time for sat decoder is 803.7673029899597
+time for normal GA is 9.41961145401001
+Number of dvfs levels is 1
+Number of Tasks in scene are 5
+Total Number of evaluations in pb strat GA are 4351
+Total Number of evaluations in normal GA are 4585
+scene pb strat hypervolume is 968217112.2853066
+scene normal hypervolume is 968303109.9619067
+------------------------------------------------
+telecom-cords_scenario scene
+time for sat decoder is 967.6044268608093
+time for normal GA is 25.79975128173828
+Number of dvfs levels is 1
+Number of Tasks in scene are 30
+Total Number of evaluations in pb strat GA are 4554
+Total Number of evaluations in normal GA are 4559
+scene pb strat hypervolume is 350705352.14959794
+scene normal hypervolume is 352790072.54891026

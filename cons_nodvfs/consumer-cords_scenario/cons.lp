@@ -1,0 +1,12 @@
+ + 1 0src_PE_0_0 + 1 0src_PE_1_0 + 1 0src_PE_0_1 + 1 0src_PE_1_1 = 1
+ + 1 0filt-r_PE_0_0 + 1 0filt-r_PE_1_0 + 1 0filt-r_PE_0_1 + 1 0filt-r_PE_1_1 = 1
+ + 1 0filt-g_PE_0_0 + 1 0filt-g_PE_1_0 + 1 0filt-g_PE_0_1 + 1 0filt-g_PE_1_1 = 1
+ + 1 0filt-b_PE_0_0 + 1 0filt-b_PE_1_0 + 1 0filt-b_PE_0_1 + 1 0filt-b_PE_1_1 = 1
+ + 1 0rgb-yiq_PE_0_0 + 1 0rgb-yiq_PE_1_0 + 1 0rgb-yiq_PE_0_1 + 1 0rgb-yiq_PE_1_1 = 1
+ + 1 0cjpeg_PE_0_0 + 1 0cjpeg_PE_1_0 + 1 0cjpeg_PE_0_1 + 1 0cjpeg_PE_1_1 = 1
+ + 1 0sink_PE_0_0 + 1 0sink_PE_1_0 + 1 0sink_PE_0_1 + 1 0sink_PE_1_1 = 1
+ + 1 1src_PE_0_0 + 1 1src_PE_1_0 + 1 1src_PE_0_1 + 1 1src_PE_1_1 = 1
+ + 1 1djpeg_PE_0_0 + 1 1djpeg_PE_1_0 + 1 1djpeg_PE_0_1 + 1 1djpeg_PE_1_1 = 1
+ + 1 1display_PE_0_0 + 1 1display_PE_1_0 + 1 1display_PE_0_1 + 1 1display_PE_1_1 = 1
+ + 1 1rgb-cymk_PE_0_0 + 1 1rgb-cymk_PE_1_0 + 1 1rgb-cymk_PE_0_1 + 1 1rgb-cymk_PE_1_1 = 1
+ + 1 1print_PE_0_0 + 1 1print_PE_1_0 + 1 1print_PE_0_1 + 1 1print_PE_1_1 = 1
