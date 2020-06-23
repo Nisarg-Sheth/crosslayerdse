@@ -398,26 +398,6 @@ def gen_basic_constraints(graph):
                     scenario.graphs[graph].num_of_vars+=1
                 temp+=f" = 1\n"
                 f.write(temp)
-
-    # scenario.graphs[graph].constraints=[]
-    # for task in scenario.graphs[graph].tasks:
-    #     l={}
-    #     for mapped in scenario.graphs[graph].tasks[task].pe_list:
-    #         temp=f"{task}_{mapped}"
-    #         scenario.graphs[graph].num_of_vars+=1
-    #         l[temp]=('+',1)
-    #     num_of_con+=1
-    #     scenario.graphs[graph].constraints.append([l,1,'='])
-    #     if scenario.dvfs!=None and scenario.dvfs>=3:
-    #         l={}
-    #         for level in range(scenario.dvfs):
-    #             temp=f"dvfs_{level}_{task}"
-    #             scenario.graphs[graph].num_of_vars+=1
-    #             l[temp]=('+',1)
-    #         num_of_con+=1
-    #         scenario.graphs[graph].constraints.append([l,1,'='])
-
-
 #imp
 
 def process_pb_data(individual):
@@ -1600,15 +1580,24 @@ def meta_normal(graph,num_gens):
             scenario.graphs[graph].max_fitness[1]=max_fitness[1]
         else:
             max_fitness[1]=scenario.graphs[graph].max_fitness[1]
+
+        temp_pop=[]
         for ind in pop:
-            if ind.isFeasible==False:
+            if ind.isFeasible==True:
                 # print("This runs?")
-                ind.fitness.values = max_fitness
-        pf.update(pop)
+                temp_pop.append(ind)
+            else:
+                energy1 = ind.fitness.values[0] + 0.5*(max_fitness[0]-ind.fitness.values[0])
+                time1 = ind.fitness.values[1] + 0.5*(max_fitness[1]-ind.fitness.values[1])
+                ind.fitness.values= (energy1,time1)
+
+        pf.update(temp_pop)
         topPoints.update(pop)
-        hv = hypervolume([ind.fitness.values for ind in pf])
+        temp_fitness = [ind.fitness.values for ind in pf]
+        temp_fitness.append(max_fitness)
+        hv = hypervolume(temp_fitness)
         best=tools.selBest(pop, 1)[0]
-        logbook.record(gen=g, evals=100 , hv=hv, best=best.fitness.values, **record)
+        logbook.record(gen=g, evals=100 , pf=pf, hv=hv, best=best.fitness.values, **record)
 
         #Gather all the fitnesses in one list and print the stats
 
@@ -1711,15 +1700,24 @@ def meta_with_pb(graph,num_gens):
             scenario.graphs[graph].max_fitness[1]=max_fitness[1]
         else:
             max_fitness[1]=scenario.graphs[graph].max_fitness[1]
+
+        temp_pop = []
         for ind in pop1:
-            if ind.isFeasible==False:
+            if ind.isFeasible==True:
                 # print("This runs?")
-                ind.fitness.values = max_fitness
-        pf1.update(pop1)
+                temp_pop.append(ind)
+            else:
+                energy1 = ind.fitness.values[0] + 0.5*(max_fitness[0]-ind.fitness.values[0])
+                time1 = ind.fitness.values[1] + 0.5*(max_fitness[1]-ind.fitness.values[1])
+                ind.fitness.values= (energy1,time1)
+
+        pf1.update(temp_pop)
         topPoints1.update(pop1)
-        hv = hypervolume([ind.fitness.values for ind in pf1])
+        temp_fitness = [ind.fitness.values for ind in pf1]
+        temp_fitness.append(max_fitness)
+        hv = hypervolume(temp_fitness)
         best=tools.selBest(pop1, 1)[0]
-        logbook1.record(gen=g, evals=100 , hv=hv, best=best.fitness.values, **record)
+        logbook1.record(gen=g, evals=100 , pf=pf1, hv=hv, best=best.fitness.values, **record)
 
         #Gather all the fitnesses in one list and print the stats
 
@@ -2355,7 +2353,6 @@ def main():
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
             ref_point=[max(max_energy),max(max_time)]
-
             #With PB strat
             gen1= logbook1.select("gen")
             hv1 = logbook1.select("hv")
@@ -2366,7 +2363,6 @@ def main():
 
             hv_value=[hype.compute(final_ref_point) for hype in hv]
             hv_value1=[hype.compute(final_ref_point) for hype in hv1]
-
             fig, ax1 = plt.subplots()
             line1 = ax1.plot(gen, hv_value, "b-", label="Hypervolume")
             ax1.set_xlabel("Generation")
