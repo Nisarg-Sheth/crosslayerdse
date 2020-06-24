@@ -1575,15 +1575,24 @@ def meta_normal(graph,num_gens):
             scenario.graphs[graph].max_fitness[1]=max_fitness[1]
         else:
             max_fitness[1]=scenario.graphs[graph].max_fitness[1]
+
+        temp_pop=[]
         for ind in pop:
-            if ind.isFeasible==False:
+            if ind.isFeasible==True:
                 # print("This runs?")
-                ind.fitness.values = max_fitness
-        pf.update(pop)
+                temp_pop.append(ind)
+            else:
+                energy1 = ind.fitness.values[0] + 0.5*(max_fitness[0]-ind.fitness.values[0])
+                time1 = ind.fitness.values[1] + 0.5*(max_fitness[1]-ind.fitness.values[1])
+                ind.fitness.values= (energy1,time1)
+
+        pf.update(temp_pop)
         topPoints.update(pop)
-        hv = hypervolume([ind.fitness.values for ind in pf])
+        temp_fitness = [ind.fitness.values for ind in pf]
+        temp_fitness.append(max_fitness)
+        hv = hypervolume(temp_fitness)
         best=tools.selBest(pop, 1)[0]
-        logbook.record(gen=g, evals=100 , hv=hv, best=best.fitness.values, **record)
+        logbook.record(gen=g, evals=100 , pf=pf, hv=hv, best=best.fitness.values, **record)
 
         #Gather all the fitnesses in one list and print the stats
 
@@ -1621,7 +1630,7 @@ def meta_with_pb(graph,num_gens):
     pop1=None
     print(f"Generating Population for {graph}")
     start_time=time.time()
-    CXPB, MUTPB = 0.5, 0.1
+    CXPB, MUTPB = 0.2, 0.03
     scenario.graphs[graph].num_of_evals=0
     print("Start of evolution", graph)
     gen_basic_constraints(graph)
@@ -1686,15 +1695,24 @@ def meta_with_pb(graph,num_gens):
             scenario.graphs[graph].max_fitness[1]=max_fitness[1]
         else:
             max_fitness[1]=scenario.graphs[graph].max_fitness[1]
+
+        temp_pop = []
         for ind in pop1:
-            if ind.isFeasible==False:
+            if ind.isFeasible==True:
                 # print("This runs?")
-                ind.fitness.values = max_fitness
-        pf1.update(pop1)
+                temp_pop.append(ind)
+            else:
+                energy1 = ind.fitness.values[0] + 0.5*(max_fitness[0]-ind.fitness.values[0])
+                time1 = ind.fitness.values[1] + 0.5*(max_fitness[1]-ind.fitness.values[1])
+                ind.fitness.values= (energy1,time1)
+
+        pf1.update(temp_pop)
         topPoints1.update(pop1)
-        hv = hypervolume([ind.fitness.values for ind in pf1])
+        temp_fitness = [ind.fitness.values for ind in pf1]
+        temp_fitness.append(max_fitness)
+        hv = hypervolume(temp_fitness)
         best=tools.selBest(pop1, 1)[0]
-        logbook1.record(gen=g, evals=100 , hv=hv, best=best.fitness.values, **record)
+        logbook1.record(gen=g, evals=100 , pf=pf1, hv=hv, best=best.fitness.values, **record)
 
         #Gather all the fitnesses in one list and print the stats
 
@@ -1726,6 +1744,7 @@ def meta_with_pb(graph,num_gens):
     print("\nTotal Seconds taken for evaluation are", (end_time-start_time))
     print("Total Number of Evaluations are",scenario.graphs[graph].num_of_evals,"\n")
     return pf1,logbook1,topPoints1,scenario.graphs[graph].num_of_evals
+
 
 def meta_energy(graph,num_gens):
     pop1=None
@@ -1991,6 +2010,9 @@ def main():
     scenario.single_pop_size=int(Config.get('Meta_data','single_ind'))
     scenario.objective_scale_time=float(Config.get('GA_type','objective_scale_time'))
     scenario.objective_scale_energy=float(Config.get('GA_type','objective_scale_energy'))
+    equate_time = False
+    if Config.get('GA_type','equate_time')=='True':
+        equate_time = True
     if Config.get('GA_type','baseline_enabled')=='true':
         scenario.baseline_value_time=float(Config.get('GA_type','baseline_value_time'))
         scenario.baseline_value_energy=float(Config.get('GA_type','baseline_value_energy'))
@@ -2089,6 +2111,11 @@ def main():
             plt.close()
 
             # The ParetoFront Plotting
+            length_of_pf=0
+            for ind in pf:
+                length_of_pf+=1
+            print(length_of_pf)
+
             energy_pf = [ind.fitness.values[0] for ind in pf]
             time_pf = [ind.fitness.values[1] for ind in pf]
             fig, ax1 = plt.subplots()
@@ -2215,6 +2242,11 @@ def main():
             plt.close()
 
             # The ParetoFront Plotting
+            length_of_pf=0
+            for ind in pf:
+                length_of_pf+=1
+            print(length_of_pf)
+
             energy_pf = [ind.fitness.values[0] for ind in pf]
             time_pf = [ind.fitness.values[1] for ind in pf]
             fig, ax1 = plt.subplots()
@@ -2328,7 +2360,6 @@ def main():
             fitness_max = logbook.select("max")
             max_energy, max_time = zip(*fitness_max)
             ref_point=[max(max_energy),max(max_time)]
-
             #With PB strat
             gen1= logbook1.select("gen")
             hv1 = logbook1.select("hv")
@@ -2339,7 +2370,6 @@ def main():
 
             hv_value=[hype.compute(final_ref_point) for hype in hv]
             hv_value1=[hype.compute(final_ref_point) for hype in hv1]
-
             fig, ax1 = plt.subplots()
             line1 = ax1.plot(gen, hv_value, "b-", label="Hypervolume")
             ax1.set_xlabel("Generation")
@@ -2352,6 +2382,13 @@ def main():
             plt.close()
 
             # The ParetoFront Plotting
+            length_of_pf=0
+            for ind in pf:
+                length_of_pf+=1
+            length_of_pf1=0
+            for ind in pf1:
+                length_of_pf1+=1
+
             energy_pf = [ind.fitness.values[0] for ind in pf]
             time_pf = [ind.fitness.values[1] for ind in pf]
             energy_pf1 = [ind.fitness.values[0] for ind in pf1]
@@ -2367,6 +2404,65 @@ def main():
             plt.savefig(pf_plot_name)
             plt.close()
 
+            # EQUATING THE TIME OF THE RUN..
+
+            if equate_time==True:
+
+                time_scaling_factor=(pb_time/num_evals1)/(normal_time/num_evals)
+                eq_time=time.time()
+                eq_pf,eq_logbook,topPoints,eq_num_evals=meta_normal(graph,generations*time_scaling_factor)
+                eq_time=(time.time()-eq_time)
+                # Making Plots
+                hv_plot_name=f"{output_dir}/{phase_name}_hv_eq.png"
+                pf_plot_name=f"{output_dir}/{phase_name}_pf_eq.png"
+
+                gen= eq_logbook.select("gen")
+                #HyperVolume Plotting
+                hv = eq_logbook.select("hv")
+                fitness_max = eq_logbook.select("max")
+                max_energy, max_time = zip(*fitness_max)
+                ref_point=[max(max_energy),max(max_time)]
+                #With PB strat
+                gen1= logbook1.select("gen")
+                hv1 = logbook1.select("hv")
+                fitness_max = logbook1.select("max")
+                max_energy, max_time = zip(*fitness_max)
+                ref_point1=[max(max_energy),max(max_time)]
+                final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
+
+                eq_hv_value=[hype.compute(final_ref_point) for hype in hv]
+                hv_value1=[hype.compute(final_ref_point) for hype in hv1]
+                fig, ax1 = plt.subplots()
+                line1 = ax1.plot(gen, eq_hv_value, "b-", label="Hypervolume")
+                ax1.set_xlabel("Generation")
+                ax1.set_ylabel("HyperVolume", color="b")
+                line2 = ax1.plot(gen1, hv_value1, "r-", label="HyperVolume with PB strat")
+                lns = line1 + line2
+                labs = [l.get_label() for l in lns]
+                ax1.legend(lns, labs, loc="center right")
+                plt.savefig(hv_plot_name)
+                plt.close()
+
+                # The ParetoFront Plotting
+                eq_length_of_pf=0
+                for ind in eq_pf:
+                    eq_length_of_pf+=1
+
+                energy_pf = [ind.fitness.values[0] for ind in eq_pf]
+                time_pf = [ind.fitness.values[1] for ind in eq_pf]
+                energy_pf1 = [ind.fitness.values[0] for ind in pf1]
+                time_pf1 = [ind.fitness.values[1] for ind in pf1]
+                fig, ax1 = plt.subplots()
+                line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
+                ax1.set_xlabel("Energy")
+                ax1.set_ylabel("Execution Time", color="b")
+                line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat")
+                lns = line1 + line2
+                labs = [l.get_label() for l in lns]
+                ax1.legend(lns, labs, loc="center right")
+                plt.savefig(pf_plot_name)
+                plt.close()
+
 
             i=0
             for ind in topPoints1:
@@ -2379,8 +2475,6 @@ def main():
             with open(f"{output_dir}/output.txt",'a') as f:
                 f.write("------------------------------------------------\n")
                 f.write(f"{phase_name} {graph}\n")
-                f.write(f"time for sat decoder is {pb_time}\n")
-                f.write(f"time for normal GA is {normal_time}\n")
                 if scenario.dvfs>=3:
                     f.write(f"Number of dvfs levels is {scenario.dvfs}\n")
                 else:
@@ -2395,13 +2489,23 @@ def main():
                     if scenario.objective_scale_time!=0:
                         f.write(f"Constraint on time value is {(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time))}\n")
 
-
+                f.write(f"time for sat decoder is {pb_time}\n")
+                f.write(f"time for normal GA is {normal_time}\n")
                 f.write(f"Total Number of evaluations in pb strat GA are {num_evals1}\n")
                 f.write(f"Total Number of evaluations in normal GA are {num_evals}\n")
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
+                f.write(f"{length_of_pf1} is the number of points in the pb strat Pareto front\n")
+                f.write(f"{length_of_pf} is the number of points in the normal Pareto front\n")
+
+                if equate_time==True:
+                    f.write(f"normalised time for normal GA is {eq_time}\n")
+                    f.write(f"Total Number of evaluations in time equalised normal GA are {eq_num_evals}\n")
+                    f.write(f"{graph} time equalised normal hypervolume is {max(eq_hv_value)}\n")
+                    f.write(f"{eq_length_of_pf} is the number of points in the time equalised normal Pareto front\n")
+
                 # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
-            phase+=1
+            # phase+=1
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately
 

@@ -1,4 +1,0 @@
-ospf_PE_0_0 False 1.0
-ospf_PE_1_0 False 7.0
-ospf_PE_0_1 True 15.0
-ospf_PE_1_1 False 14.5

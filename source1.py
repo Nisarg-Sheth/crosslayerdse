@@ -27,6 +27,7 @@ class Complete_Scenario:
         self.objective_scale_time=4
         self.baseline_value_time=2000
         self.baseline_value_energy=2000
+        self.max_implementation=1
 class PB_data:
     def __init__(self):
         self.constraints = []
@@ -47,6 +48,7 @@ class Constraint_graph:
 
 class Task_data:
     def __init__(self,name):
+        self.implementation = 1
         self.name=name
         self.mapped= None
         self.dvfs_level = 1
@@ -55,6 +57,7 @@ class Gene_data:
     def __init__(self):
         self.pe=None
         self.dvfs=1
+        self.implementation=1
 
 class Individual_data:
     def __init__(self):
@@ -133,6 +136,10 @@ class Task:
         self.name = name
         self.type = type
         self.host = host
+        self.num_implementations=1
+        self.implementation_data=[]
+        self.energy_order={}
+        self.time_order={}
         self.pe_list = []
         self.num_of_pe = 0
         self.wcet = {}

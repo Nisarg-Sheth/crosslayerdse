@@ -22,7 +22,7 @@ random.seed(124)
 
 def gen_opt(opt_path,num_task,seed_value):
     print("Generating tgffopt file")
-    num_graphs=4
+    num_graphs=1
     task_count=num_task
     task_type_cnt=40
     with open(opt_path, 'w') as f:
@@ -38,7 +38,6 @@ def gen_opt(opt_path,num_task,seed_value):
         f.write(f"task_unique false\n")
         f.write(f"tg_write\n")
         f.write(f"eps_write\n")
-
 
 def extend_tg(tg_path,template):
     print("adding template to end of generated file")
@@ -193,6 +192,7 @@ def generate_noc(length,breadth,PE_matrix):
         print("Too few PEs in NOC")
 
 def gen_dvfslevel(num_levels):
+    #markthisspot
     global scenario
     scenario.dvfs_level = []
     if num_levels == None or num_levels < 3:
@@ -211,6 +211,21 @@ def gen_dvfslevel(num_levels):
     #this creates a list of size dvfs_num_levels
     #the contents of this list will range from [1600/500 to 200/500]
     #now dvfs_level*freq=dvfs_mode_frequency and dvfs_level*volt=dvfs_mode_voltage
+
+def gen_implementations(graph):
+    global scenario
+    for task in scenario.graphs[graph].tasks:
+        num_imp=random.randint(1,scenario.max_implementation)
+        scenario.graphs[graph].tasks[task].num_implementations=num_imp
+        for i in range(num_imp):
+            temp= random.random()
+            scale_power= 0.5+temp
+            if temp<0.5:
+                scale_time= 1+0.5*random.random()
+            else:
+                scale_time= random.random()
+            scenario.graphs[graph].tasks[task].implementation_data.append((scale_power,scale_time))
+        # ADD THE MONOTONOCITY DATA HERE
 
 def print_app_graph(name):
     global scenario
@@ -254,6 +269,8 @@ def gen_phenotype(individual,graph):
         individual.task_list[task]=Task_data(task)
         if scenario.dvfs!=None and scenario.dvfs>=3:
             individual.task_list[task].dvfs_level=int(individual.pbp_data[task].dvfs)
+        if scenario.graphs[graph].tasks[task].num_implementations>1:
+            individual.task_list[task].implementation=int(individual.pbp_data[task].implementation)
         mapped=scenario.graphs[graph].tasks[task].pe_list[individual.pbp_data[task].pe]
         individual.task_list[task].mapped=mapped
         if mapped in individual.pe_list.keys():
@@ -294,10 +311,15 @@ def gen_phenotype1(individual,graph):
     for parts in individual.assignment:
         if individual.assignment[parts]==1:
             # print(parts)
+            #markthisspot
             if parts.startswith("dvfs_"):
                 d=(parts[5:])
                 vars=d.split("_",1)
                 individual.task_list[vars[1]].dvfs_level=int(vars[0])
+            elif parts.startswith("implementation_"):
+                d=(parts[len("implementation_"):])
+                vars=d.split("_",1)
+                individual.task_list[vars[1]].implementation=int(vars[0])
             else:
                 ext_id = parts.find("_")
                 task=parts[:ext_id]
@@ -328,6 +350,9 @@ def gen_genotype(individual,graph):
         individual.pbp_data[task].pe=random.randint(0,(scenario.graphs[graph].tasks[task].num_of_pe-1))
         if scenario.dvfs!=None and scenario.dvfs>=3:
             individual.pbp_data[task].dvfs=random.randint(0,(scenario.dvfs-1))
+        if scenario.graphs[graph].tasks[task].num_implementations>1:
+            individual.pbp_data[task].implementation=random.randint(0,(scenario.graphs[graph].tasks[task].num_implementations-1))
+
 def gen_genotype1(individual,graph):
     global scenario
     individual.pbp_data={}
@@ -345,11 +370,23 @@ def gen_genotype1(individual,graph):
             start-=increment
             i+=1
 
+        #markthisspot
         if scenario.dvfs!=None and scenario.dvfs>=3:
             i=0
             val=random.randint(0,(scenario.dvfs-1))
             for level in range(scenario.dvfs):
                 temp=f"dvfs_{level}_{task}"
+                individual.pbp_data[task].decision_strat[temp]=[start,bool(0)]
+                if i==val:
+                    individual.pbp_data[task].decision_strat[temp]=[start,bool(1)]
+                start-=increment
+                i+=1
+
+        if scenario.graphs[graph].tasks[task].num_implementations>1:
+            i=0
+            val=random.randint(0,(scenario.graphs[graph].tasks[task].num_implementations-1))
+            for level in range(scenario.graphs[graph].tasks[task].num_implementations):
+                temp=f"implementation_{level}_{task}"
                 individual.pbp_data[task].decision_strat[temp]=[start,bool(0)]
                 if i==val:
                     individual.pbp_data[task].decision_strat[temp]=[start,bool(1)]
@@ -376,6 +413,14 @@ def gen_basic_constraints(graph):
                 temp=""
                 for level in range(scenario.dvfs):
                     temp+=f" + 1 dvfs_{level}_{task}"
+                    scenario.graphs[graph].num_of_vars+=1
+                temp+=f" = 1\n"
+                f.write(temp)
+            #markthisspot
+            if scenario.graphs[graph].tasks[task].num_implementations>1:
+                temp=""
+                for level in range(scenario.graphs[graph].tasks[task].num_implementations):
+                    temp+=f" + 1 implementation_{level}_{task}"
                     scenario.graphs[graph].num_of_vars+=1
                 temp+=f" = 1\n"
                 f.write(temp)
@@ -986,6 +1031,7 @@ def matefunc1(ind1,ind2):
 #imp
 def mutatefunc(ind,indpb=0.1):
     #print("Mutate starts")
+    #markthisspot
     graph=ind.graph
     for task in ind.pbp_data:
         if random.random() < indpb:
@@ -993,6 +1039,9 @@ def mutatefunc(ind,indpb=0.1):
         if random.random() < indpb:
             if scenario.dvfs!=None and scenario.dvfs>=3:
                 ind.pbp_data[task].dvfs=random.randint(0,(scenario.dvfs-1))
+        if random.random() < indpb:
+            if scenario.graphs[graph].tasks[task].num_implementations>1:
+                ind.pbp_data[task].implementation=random.randint(0,(scenario.graphs[graph].tasks[task].num_implementations-1))
     ind.generation+=1
     process_cons(ind)
     #process constraints
@@ -1033,6 +1082,9 @@ def check_feasible(individual,energy,time):
                             if individual.task_list[task].dvfs_level==level:
                                 temp+=f" + 1 dvfs_{level}_{task}"
                             num_of_vars+=1
+                    if scenario.graphs[graph].tasks[task].num_implementations>1:
+                        temp+=f" + 1 implementation_{individual.task_list[task].implementation}_{task}"
+                        num_of_vars+=1
                 temp+=f" <= {num_of_vars-1}\n"
                 f.write(temp)
             scenario.graphs[graph].num_of_added_con+=1
@@ -1054,6 +1106,9 @@ def check_feasible(individual,energy,time):
                     for level in range(scenario.dvfs):
                         if individual.task_list[task].dvfs_level<=level:
                             temp+=f" + 1 dvfs_{level}_{task}"
+                        num_of_vars+=1
+                    if scenario.graphs[graph].tasks[task].num_implementations>1:
+                        temp+=f" + 1 implementation_{individual.task_list[task].implementation}_{task}"
                         num_of_vars+=1
             temp+=f" <= {num_of_vars-1}\n"
             f.write(temp)
@@ -1077,6 +1132,9 @@ def check_feasible(individual,energy,time):
                         if individual.task_list[task].dvfs_level>=level:
                             temp+=f" + 1 dvfs_{level}_{task}"
                         num_of_vars+=1
+                if scenario.graphs[graph].tasks[task].num_implementations>1:
+                    temp+=f" + 1 implementation_{individual.task_list[task].implementation}_{task}"
+                    num_of_vars+=1
             temp+=f" <= {num_of_vars-1}\n"
             f.write(temp)
         scenario.graphs[graph].num_of_added_con+=1
@@ -1106,15 +1164,22 @@ def trace_schedule(individual,plot_path):
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         mapped=individual.task_list[task].mapped
+        time_level=1
+        power_level=1
+        dvfs_level=1
+        implementation=individual.task_list[task].implementation
         if scenario.dvfs>1:
             dvfs_level=1/scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
-        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
-        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        if scenario.graphs[graph].tasks[task].num_implementations>1:
+            time_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][1]
+            power_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][0]
+        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
+        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
         for task1 in individual.task_cluster[cluster]:
             if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]) and task1!=task:
-                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
+                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))):
                     if task1 not in task_end.keys():
-                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))
         for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
@@ -1129,8 +1194,8 @@ def trace_schedule(individual,plot_path):
                     hops=x1+y1
                     message_time=hops*(scenario.graphs[graph].arcs[m].quant/800)+(hops-1)*(0.002)
                     message_list[m]=hops
-                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time):
-                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time)
+                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time):
+                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time)
 
     max_time=0
     for cluster in cluster_time:
@@ -1204,7 +1269,7 @@ def evalParams1(individual):
     dvfs_level=1
     message_communication_time=0.001
 
-
+    #markthisspot
     # print("\nEVALUATION FOR",graph,"\n")
     # for cluster in individual.task_cluster:
     #     mapped=individual.task_cluster[cluster].mapped_to
@@ -1226,15 +1291,22 @@ def evalParams1(individual):
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         mapped=individual.task_list[task].mapped
+        time_level=1
+        power_level=1
+        dvfs_level=1
+        implementation=individual.task_list[task].implementation
         if scenario.dvfs>1:
             dvfs_level=1/scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
-        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
-        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        if scenario.graphs[graph].tasks[task].num_implementations>1:
+            time_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][1]
+            power_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][0]
+        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
+        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
         for task1 in individual.task_cluster[cluster]:
             if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]) and task1!=task:
-                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
+                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))):
                     if task1 not in task_end.keys():
-                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))
         for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
@@ -1249,8 +1321,8 @@ def evalParams1(individual):
                     hops=x1+y1
                     message_time=hops*(scenario.graphs[graph].arcs[m].quant/800)+(hops-1)*(0.002)
                     message_list[m]=hops
-                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time):
-                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time)
+                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time):
+                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time)
 
     max_time=0
     for cluster in cluster_time:
@@ -1261,11 +1333,19 @@ def evalParams1(individual):
     for cluster in individual.task_cluster:
         mapped=individual.task_list[cluster].mapped
         for task in individual.task_cluster[cluster]:
+            time_level=1
+            power_level=1
+            dvfs_level=1
+            implementation=individual.task_list[task].implementation
             if scenario.dvfs>1:
                 #print((individual.dvfs_level[task]))
                 dvfs_level=scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
-            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
-            power=scenario.graphs[graph].tasks[task].power[mapped]
+            if scenario.graphs[graph].tasks[task].num_implementations>1:
+                time_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][1]
+                power_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][0]
+
+            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]*time_level
+            power=scenario.graphs[graph].tasks[task].power[mapped]*power_level
             energy+=(wcet*power*dvfs_level*dvfs_level)
     for m in message_list:
         energy+=((message_list[m]*100-(63))*scenario.graphs[graph].arcs[m].quant)/(1e6)
@@ -1290,7 +1370,6 @@ def evalParams1(individual):
     if scenario.isConstrained==True:
         individual.isFeasible=check_feasible(individual,energy,max_time)
     return (energy,max_time,)
-
 def evalParams(individual):
     global scenario
     graph=individual.graph
@@ -1303,6 +1382,8 @@ def evalParams(individual):
     message_list={}
     dvfs_level=1
     message_communication_time=0.001
+
+    #markthisspot
     # print("\nEVALUATION FOR",graph,"\n")
     # for cluster in individual.task_cluster:
     #     mapped=individual.task_cluster[cluster].mapped_to
@@ -1324,15 +1405,22 @@ def evalParams(individual):
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         mapped=individual.task_list[task].mapped
+        time_level=1
+        power_level=1
+        dvfs_level=1
+        implementation=individual.task_list[task].implementation
         if scenario.dvfs>1:
             dvfs_level=1/scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
-        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
-        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        if scenario.graphs[graph].tasks[task].num_implementations>1:
+            time_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][1]
+            power_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][0]
+        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
+        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
         for task1 in individual.task_cluster[cluster]:
             if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]) and task1!=task:
-                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
+                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))):
                     if task1 not in task_end.keys():
-                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))
         for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
@@ -1347,8 +1435,8 @@ def evalParams(individual):
                     hops=x1+y1
                     message_time=hops*(scenario.graphs[graph].arcs[m].quant/800)+(hops-1)*(0.002)
                     message_list[m]=hops
-                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time):
-                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time)
+                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time):
+                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time)
 
     max_time=0
     for cluster in cluster_time:
@@ -1359,11 +1447,19 @@ def evalParams(individual):
     for cluster in individual.task_cluster:
         mapped=individual.task_list[cluster].mapped
         for task in individual.task_cluster[cluster]:
+            time_level=1
+            power_level=1
+            dvfs_level=1
+            implementation=individual.task_list[task].implementation
             if scenario.dvfs>1:
                 #print((individual.dvfs_level[task]))
                 dvfs_level=scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
-            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
-            power=scenario.graphs[graph].tasks[task].power[mapped]
+            if scenario.graphs[graph].tasks[task].num_implementations>1:
+                time_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][1]
+                power_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][0]
+
+            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]*time_level
+            power=scenario.graphs[graph].tasks[task].power[mapped]*power_level
             energy+=(wcet*power*dvfs_level*dvfs_level)
     for m in message_list:
         energy+=((message_list[m]*100-(63))*scenario.graphs[graph].arcs[m].quant)/(1e6)
@@ -1400,7 +1496,6 @@ def evalParams(individual):
         # print("Or this")
 
     return (energy,max_time,)
-
 def evalEnergy(individual):
     global scenario
     graph=individual.graph
@@ -1422,17 +1517,25 @@ def evalEnergy(individual):
     for cluster in individual.task_cluster:
         mapped=individual.task_list[cluster].mapped
         for task in individual.task_cluster[cluster]:
+            time_level=1
+            power_level=1
+            dvfs_level=1
+            implementation=individual.task_list[task].implementation
             if scenario.dvfs>1:
                 #print((individual.dvfs_level[task]))
                 dvfs_level=scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
-            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]
-            power=scenario.graphs[graph].tasks[task].power[mapped]
+            if scenario.graphs[graph].tasks[task].num_implementations>1:
+                time_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][1]
+                power_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][0]
+
+            wcet=scenario.graphs[graph].tasks[task].wcet[mapped]*time_level
+            power=scenario.graphs[graph].tasks[task].power[mapped]*power_level
             energy+=(wcet*power*dvfs_level*dvfs_level)
     for m in message_list:
         energy+=((message_list[m]*100-(63))*scenario.graphs[graph].arcs[m].quant)/(1e6)
 
-    return energy,
 
+    return energy,
 def evalTime(individual):
     global scenario
     graph=individual.graph
@@ -1457,15 +1560,22 @@ def evalTime(individual):
         task=task_dets[1]
         cluster=individual.task_to_cluster[task]
         mapped=individual.task_list[task].mapped
+        time_level=1
+        power_level=1
+        dvfs_level=1
+        implementation=individual.task_list[task].implementation
         if scenario.dvfs>1:
             dvfs_level=1/scenario.dvfs_level[(individual.task_list[task].dvfs_level)]
-        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
-        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)
+        if scenario.graphs[graph].tasks[task].num_implementations>1:
+            time_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][1]
+            power_level=scenario.graphs[graph].tasks[task].implementation_data[implementation][0]
+        cluster_time[cluster]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
+        task_end[task]=(task_start[task]+scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)
         for task1 in individual.task_cluster[cluster]:
             if (scenario.graphs[graph].tasks[task1].priority>=task_dets[0]) and task1!=task:
-                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))):
+                if (task_start[task1]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))):
                     if task1 not in task_end.keys():
-                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level))
+                        task_start[task1]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level))
         for m in scenario.graphs[graph].arcs:
             if scenario.graphs[graph].arcs[m].task_from==task:
                 task_to=scenario.graphs[graph].arcs[m].task_to
@@ -1480,8 +1590,8 @@ def evalTime(individual):
                     hops=x1+y1
                     message_time=hops*(scenario.graphs[graph].arcs[m].quant/800)+(hops-1)*(0.002)
                     message_list[m]=hops
-                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time):
-                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level)+message_time)
+                if task_start[task_to]<(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time):
+                    task_start[task_to]=(task_start[task]+(scenario.graphs[graph].tasks[task].wcet[mapped]*dvfs_level*time_level)+message_time)
 
     max_time=0
     for cluster in cluster_time:
@@ -1489,8 +1599,6 @@ def evalTime(individual):
             max_time=cluster_time[cluster]
 
     return max_time,
-
-
 
 def meta_normal(graph,num_gens):
     pop=None
@@ -1989,6 +2097,11 @@ def main():
     populate_task_params()
     #saving the number of dvfs levels taken as input
     scenario.dvfs=int(Config.get('Cross_Layer_parameters','num_dvfs'))
+    #markthisspot
+    gen_dvfslevel(scenario.dvfs)
+    #Saving the maximum allowed implementations from the config file
+    scenario.max_implementation=int(Config.get('Cross_Layer_parameters','num_implementations'))
+
     #Input of the number of generations
     generations=int(Config.get('Meta_data','gen'))
     #Number of individuals in each Population
@@ -2003,7 +2116,6 @@ def main():
         scenario.baseline_value_time=float(Config.get('GA_type','baseline_value_time'))
         scenario.baseline_value_energy=float(Config.get('GA_type','baseline_value_energy'))
     scenario.isConstrained=False
-    gen_dvfslevel(scenario.dvfs)
     if Config.get('GA_type','objective_type')=="constrained":
         scenario.isConstrained=True
     phase="scenario"
@@ -2017,6 +2129,7 @@ def main():
         for graph in scenario.graphs:
             # plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
+            gen_implementations(graph)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
                 scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
@@ -2146,6 +2259,7 @@ def main():
         for graph in scenario.graphs:
             # plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
+            gen_implementations(graph)
             phase_name=f"{file_name}_{phase}"
             scenario.graphs[graph].output_dir=os.path.join(cons_output,phase_name)
             if scenario.isConstrained==True:
@@ -2277,7 +2391,11 @@ def main():
         for graph in scenario.graphs:
             # plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
+            gen_implementations(graph)
             phase_name=f"{file_name}_{phase}"
+            with open(f"{output_dir}/output{phase_name}.txt",'w') as f:
+                for task in scenario.graphs[graph].tasks:
+                    f.write(f"{task} has {scenario.graphs[graph].tasks[task].num_implementations} implementations\n")
             scenario.graphs[graph].output_dir=os.path.join(cons_output,phase_name)
             if scenario.isConstrained==True:
                 scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]

@@ -1,9 +1,0 @@
- + 1 src_PE_0_0 + 1 src_PE_1_0 + 1 src_PE_0_1 + 1 src_PE_1_1 = 1
- + 1 fft_PE_0_0 + 1 fft_PE_1_0 + 1 fft_PE_0_1 + 1 fft_PE_1_1 = 1
- + 1 matrix_PE_0_0 + 1 matrix_PE_1_0 + 1 matrix_PE_0_1 + 1 matrix_PE_1_1 = 1
- + 1 ifft_PE_0_0 + 1 ifft_PE_1_0 + 1 ifft_PE_0_1 + 1 ifft_PE_1_1 = 1
- + 1 fir_PE_0_0 + 1 fir_PE_1_0 + 1 fir_PE_0_1 + 1 fir_PE_1_1 = 1
- + 1 angle_PE_0_0 + 1 angle_PE_1_0 + 1 angle_PE_0_1 + 1 angle_PE_1_1 = 1
- + 1 road_PE_0_0 + 1 road_PE_1_0 + 1 road_PE_0_1 + 1 road_PE_1_1 = 1
- + 1 table_PE_0_0 + 1 table_PE_1_0 + 1 table_PE_0_1 + 1 table_PE_1_1 = 1
- + 1 sink_PE_0_0 + 1 sink_PE_1_0 + 1 sink_PE_0_1 + 1 sink_PE_1_1 = 1

@@ -1,8 +1,0 @@
-gsm1_PE_1_1 false
-src_PE_1_1 false
-src_PE_1_0 true
-src_PE_0_1 false
-src_PE_0_0 false
-gsm1_PE_0_0 true
-gsm1_PE_1_0 false
-gsm1_PE_0_1 false
