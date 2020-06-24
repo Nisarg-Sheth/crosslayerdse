@@ -191,25 +191,6 @@ def generate_noc(length,breadth,PE_matrix):
             break
     if isAssigned==False:
         print("Too few PEs in NOC")
-    # while(isAssigned==False):
-    #     for core in scenario.all_tables:
-    #         if(i<length and j<breadth):
-    #             name=f"PE_{i}_{j}"
-    #             scenario.tables[name]=scenario.all_tables[core]
-    #             scenario.tables[name].name=core
-    #             print(core,"is assigned to",name)
-    #             i+=1
-    #         elif(j<(breadth-1)):
-    #             j+=1
-    #             i=0
-    #             name=f"PE_{i}_{j}"
-    #             scenario.tables[name]=scenario.all_tables[core]
-    #             scenario.tables[name].name=core
-    #             print(core,"is assigned to",name)
-    #             i+=1
-    #         else:
-    #             isAssigned=True
-    #             break
 
 def gen_dvfslevel(num_levels):
     global scenario
@@ -1101,7 +1082,6 @@ def check_feasible(individual,energy,time):
         scenario.graphs[graph].num_of_added_con+=1
 
     return isFeasible
-#imp
 def trace_schedule(individual,plot_path):
     global scenario
     graph=individual.graph
@@ -2016,7 +1996,10 @@ def main():
     scenario.single_pop_size=int(Config.get('Meta_data','single_ind'))
     scenario.objective_scale_time=float(Config.get('GA_type','objective_scale_time'))
     scenario.objective_scale_energy=float(Config.get('GA_type','objective_scale_energy'))
-    if Config.get('GA_type','baseline_enabled')=='true':
+    equate_time = False
+    if Config.get('GA_type','equate_time')=='True':
+        equate_time = True
+    if Config.get('GA_type','baseline_enabled')=='True':
         scenario.baseline_value_time=float(Config.get('GA_type','baseline_value_time'))
         scenario.baseline_value_energy=float(Config.get('GA_type','baseline_value_energy'))
     scenario.isConstrained=False
@@ -2114,6 +2097,11 @@ def main():
             plt.close()
 
             # The ParetoFront Plotting
+            length_of_pf=0
+            for ind in pf:
+                length_of_pf+=1
+            print(length_of_pf)
+
             energy_pf = [ind.fitness.values[0] for ind in pf]
             time_pf = [ind.fitness.values[1] for ind in pf]
             fig, ax1 = plt.subplots()
@@ -2240,6 +2228,11 @@ def main():
             plt.close()
 
             # The ParetoFront Plotting
+            length_of_pf=0
+            for ind in pf:
+                length_of_pf+=1
+            print(length_of_pf)
+
             energy_pf = [ind.fitness.values[0] for ind in pf]
             time_pf = [ind.fitness.values[1] for ind in pf]
             fig, ax1 = plt.subplots()
@@ -2375,6 +2368,13 @@ def main():
             plt.close()
 
             # The ParetoFront Plotting
+            length_of_pf=0
+            for ind in pf:
+                length_of_pf+=1
+            length_of_pf1=0
+            for ind in pf1:
+                length_of_pf1+=1
+
             energy_pf = [ind.fitness.values[0] for ind in pf]
             time_pf = [ind.fitness.values[1] for ind in pf]
             energy_pf1 = [ind.fitness.values[0] for ind in pf1]
@@ -2390,6 +2390,65 @@ def main():
             plt.savefig(pf_plot_name)
             plt.close()
 
+            # EQUATING THE TIME OF THE RUN..
+
+            if equate_time==True:
+
+                time_scaling_factor=(pb_time/num_evals1)/(normal_time/num_evals)
+                eq_time=time.time()
+                eq_pf,eq_logbook,topPoints,eq_num_evals=meta_normal(graph,generations*time_scaling_factor)
+                eq_time=(time.time()-eq_time)
+                # Making Plots
+                hv_plot_name=f"{output_dir}/{phase_name}_hv_eq.png"
+                pf_plot_name=f"{output_dir}/{phase_name}_pf_eq.png"
+
+                gen= eq_logbook.select("gen")
+                #HyperVolume Plotting
+                hv = eq_logbook.select("hv")
+                fitness_max = eq_logbook.select("max")
+                max_energy, max_time = zip(*fitness_max)
+                ref_point=[max(max_energy),max(max_time)]
+                #With PB strat
+                gen1= logbook1.select("gen")
+                hv1 = logbook1.select("hv")
+                fitness_max = logbook1.select("max")
+                max_energy, max_time = zip(*fitness_max)
+                ref_point1=[max(max_energy),max(max_time)]
+                final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
+
+                eq_hv_value=[hype.compute(final_ref_point) for hype in hv]
+                hv_value1=[hype.compute(final_ref_point) for hype in hv1]
+                fig, ax1 = plt.subplots()
+                line1 = ax1.plot(gen, eq_hv_value, "b-", label="Hypervolume")
+                ax1.set_xlabel("Generation")
+                ax1.set_ylabel("HyperVolume", color="b")
+                line2 = ax1.plot(gen1, hv_value1, "r-", label="HyperVolume with PB strat")
+                lns = line1 + line2
+                labs = [l.get_label() for l in lns]
+                ax1.legend(lns, labs, loc="center right")
+                plt.savefig(hv_plot_name)
+                plt.close()
+
+                # The ParetoFront Plotting
+                eq_length_of_pf=0
+                for ind in eq_pf:
+                    eq_length_of_pf+=1
+
+                energy_pf = [ind.fitness.values[0] for ind in eq_pf]
+                time_pf = [ind.fitness.values[1] for ind in eq_pf]
+                energy_pf1 = [ind.fitness.values[0] for ind in pf1]
+                time_pf1 = [ind.fitness.values[1] for ind in pf1]
+                fig, ax1 = plt.subplots()
+                line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
+                ax1.set_xlabel("Energy")
+                ax1.set_ylabel("Execution Time", color="b")
+                line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat")
+                lns = line1 + line2
+                labs = [l.get_label() for l in lns]
+                ax1.legend(lns, labs, loc="center right")
+                plt.savefig(pf_plot_name)
+                plt.close()
+
 
             i=0
             for ind in topPoints1:
@@ -2402,8 +2461,6 @@ def main():
             with open(f"{output_dir}/output.txt",'a') as f:
                 f.write("------------------------------------------------\n")
                 f.write(f"{phase_name} {graph}\n")
-                f.write(f"time for sat decoder is {pb_time}\n")
-                f.write(f"time for normal GA is {normal_time}\n")
                 if scenario.dvfs>=3:
                     f.write(f"Number of dvfs levels is {scenario.dvfs}\n")
                 else:
@@ -2418,11 +2475,21 @@ def main():
                     if scenario.objective_scale_time!=0:
                         f.write(f"Constraint on time value is {(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time))}\n")
 
-
+                f.write(f"time for sat decoder is {pb_time}\n")
+                f.write(f"time for normal GA is {normal_time}\n")
                 f.write(f"Total Number of evaluations in pb strat GA are {num_evals1}\n")
                 f.write(f"Total Number of evaluations in normal GA are {num_evals}\n")
                 f.write(f"{graph} pb strat hypervolume is {max(hv_value1)}\n")
                 f.write(f"{graph} normal hypervolume is {max(hv_value)}\n")
+                f.write(f"{length_of_pf1} is the number of points in the pb strat Pareto front\n")
+                f.write(f"{length_of_pf} is the number of points in the normal Pareto front\n")
+
+                if equate_time==True:
+                    f.write(f"normalised time for normal GA is {eq_time}\n")
+                    f.write(f"Total Number of evaluations in time equalised normal GA are {eq_num_evals}\n")
+                    f.write(f"{graph} time equalised normal hypervolume is {max(eq_hv_value)}\n")
+                    f.write(f"{eq_length_of_pf} is the number of points in the time equalised normal Pareto front\n")
+
                 # f.write(f"{graph} pb/normal ratio {max(hv_value1)/max(hv_value)}\n")
             # phase+=1
         total_end_time=(time.time()-total_start_time)
