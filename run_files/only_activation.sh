@@ -7,7 +7,7 @@ cd ~/tmp/Constraints/
 for file in $E3S_PATH/*.tgff
 do
     echo "Test started for $file"
-    python $COMPLETE_PATH --tg=$file -c=~/tmp/Constraints/configuration_files/only_activation.ini
+    python $COMPLETE_PATH --tg=$file -c=./configuration_files/only_activation.ini
     echo "Test completed for $file"
 done
 echo "ITS ALL DONE :)"

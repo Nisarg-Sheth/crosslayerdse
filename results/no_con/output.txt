@@ -1,0 +1,112 @@
+------------------------------------------------
+office-automation-cords_scenario scene
+Number of dvfs levels is 1
+Number of Tasks in scene are 5
+time for sat decoder is 2073.8910009860992
+time for normal GA is 7.767359495162964
+Total Number of evaluations in pb strat GA are 5607
+Total Number of evaluations in normal GA are 5835
+scene pb strat hypervolume is 1532908379.4715219
+scene normal hypervolume is 1387346171.222256
+136 is the number of points in the pb strat Pareto front
+89 is the number of points in the normal Pareto front
+normalised time for normal GA is 6131.492579698563
+Total Number of evaluations in time equalised normal GA are 1556412
+scene time equalised normal hypervolume is 1587050077.2647142
+3390 is the number of points in the time equalised normal Pareto front
+------------------------------------------------
+telecom-cords_scenario scene
+Number of dvfs levels is 1
+Number of Tasks in scene are 30
+time for sat decoder is 1666.9714651107788
+time for normal GA is 25.183234691619873
+Total Number of evaluations in pb strat GA are 5577
+Total Number of evaluations in normal GA are 5668
+scene pb strat hypervolume is 360954258.9554073
+scene normal hypervolume is 318548211.5068337
+136 is the number of points in the pb strat Pareto front
+49 is the number of points in the normal Pareto front
+normalised time for normal GA is 1800.7945959568024
+Total Number of evaluations in time equalised normal GA are 376625
+scene time equalised normal hypervolume is 374961552.5263869
+180 is the number of points in the time equalised normal Pareto front
+------------------------------------------------
+auto-indust-mocsyn_scenario scene
+Number of dvfs levels is 1
+Number of Tasks in scene are 24
+time for sat decoder is 1848.4742684364319
+time for normal GA is 24.99437713623047
+Total Number of evaluations in pb strat GA are 5761
+Total Number of evaluations in normal GA are 5710
+scene pb strat hypervolume is 564990981.4057212
+scene normal hypervolume is 557082662.6517574
+29 is the number of points in the pb strat Pareto front
+51 is the number of points in the normal Pareto front
+normalised time for normal GA is 2045.9596078395844
+Total Number of evaluations in time equalised normal GA are 410900
+scene time equalised normal hypervolume is 571324146.5680224
+139 is the number of points in the time equalised normal Pareto front
+------------------------------------------------
+consumer-cords_scenario scene
+Number of dvfs levels is 1
+Number of Tasks in scene are 12
+time for sat decoder is 1592.7801401615143
+time for normal GA is 15.288547992706299
+Total Number of evaluations in pb strat GA are 5659
+Total Number of evaluations in normal GA are 5532
+scene pb strat hypervolume is 164529550602.08228
+scene normal hypervolume is 149201427060.21567
+107 is the number of points in the pb strat Pareto front
+96 is the number of points in the normal Pareto front
+normalised time for normal GA is 1789.0180168151855
+Total Number of evaluations in time equalised normal GA are 572054
+scene time equalised normal hypervolume is 170258355702.3945
+196 is the number of points in the time equalised normal Pareto front
+------------------------------------------------
+networking-mocsyn-asic_scenario scene
+Number of dvfs levels is 1
+Number of Tasks in scene are 13
+time for sat decoder is 1789.3226709365845
+time for normal GA is 14.550941705703735
+Total Number of evaluations in pb strat GA are 5796
+Total Number of evaluations in normal GA are 5696
+scene pb strat hypervolume is 15380739258.300856
+scene normal hypervolume is 13795517585.663776
+8 is the number of points in the pb strat Pareto front
+13 is the number of points in the normal Pareto front
+normalised time for normal GA is 1760.8994274139404
+Total Number of evaluations in time equalised normal GA are 677051
+scene time equalised normal hypervolume is 18206967213.006493
+34 is the number of points in the time equalised normal Pareto front
+------------------------------------------------
+office-automation-cords_scenario scene
+Number of dvfs levels is 1
+Number of Tasks in scene are 5
+time for sat decoder is 1476.6090269088745
+time for normal GA is 8.151077270507812
+Total Number of evaluations in pb strat GA are 5607
+Total Number of evaluations in normal GA are 5835
+scene pb strat hypervolume is 1559005116.5229461
+scene normal hypervolume is 1526797560.7171361
+61 is the number of points in the pb strat Pareto front
+89 is the number of points in the normal Pareto front
+normalised time for normal GA is 3629.9722142219543
+Total Number of evaluations in time equalised normal GA are 1056048
+scene time equalised normal hypervolume is 1587050077.2647142
+2222 is the number of points in the time equalised normal Pareto front
+------------------------------------------------
+telecom-cords_scenario scene
+Number of dvfs levels is 1
+Number of Tasks in scene are 30
+time for sat decoder is 1712.6316485404968
+time for normal GA is 29.337799072265625
+Total Number of evaluations in pb strat GA are 5577
+Total Number of evaluations in normal GA are 5668
+scene pb strat hypervolume is 360954258.9554073
+scene normal hypervolume is 318548211.5068337
+136 is the number of points in the pb strat Pareto front
+49 is the number of points in the normal Pareto front
+normalised time for normal GA is 1873.6946427822113
+Total Number of evaluations in time equalised normal GA are 332087
+scene time equalised normal hypervolume is 374790470.45178497
+250 is the number of points in the time equalised normal Pareto front

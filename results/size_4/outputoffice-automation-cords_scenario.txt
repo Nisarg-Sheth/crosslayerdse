@@ -1,0 +1,5 @@
+0src has 5 implementations
+0text has 8 implementations
+0sink has 7 implementations
+0rotate has 6 implementations
+0dith has 8 implementations
