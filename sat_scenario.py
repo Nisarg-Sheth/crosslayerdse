@@ -7,6 +7,7 @@ import subprocess
 import time
 import matplotlib.pyplot as plt
 import numpy
+import csv
 from graphviz import Digraph
 from deap import base
 from deap import creator
@@ -94,7 +95,6 @@ def process_block(block):
             core_name = None
             i = 0
             core_name= block[0].strip('@').strip('{').replace(" ","")
-            print(core_name)
             scenario.all_tables[core_name]=Table(core_name,block[1].strip('#'),block[2].strip('#'),block[4].strip('#'))
             for i in range(5, len(block)):
                 if not block[i].startswith('#'):
@@ -188,8 +188,8 @@ def generate_noc(length,breadth,PE_matrix):
             print("Matrix overflowed. Continuing metaheuristic with lesser values")
             isAssigned=True
             break
-    if isAssigned==False:
-        print("Too few PEs in NOC")
+    # if isAssigned==False:
+    #     print("Too few PEs in NOC")
 
 def gen_dvfslevel(num_levels):
     #markthisspot
@@ -251,7 +251,7 @@ def print_app_graph(name):
         print(graph.arcs[arc].task_from, "--->" ,graph.arcs[arc].task_to)
 
 def plot_app_graph(graph,phase,file_name,dir):
-    app_g = Digraph(comment = graph,format='png')
+    app_g = Digraph(comment = graph,format='pdf')
     for task in scenario.graphs[graph].tasks:
         app_g.node(str(task),label=task)
     for m in scenario.graphs[graph].arcs:
@@ -1064,10 +1064,10 @@ def check_feasible(individual,energy,time):
     graph=individual.graph
     isFeasible=True
     if scenario.objective_scale_energy!=0 and scenario.objective_scale_time!=0:
-        if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) and time>(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)):
+        if energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) or time>(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)):
             num_of_vars=0
             isFeasible=False
-            if scenario.graphs[graph].num_of_added_con>500:
+            if scenario.graphs[graph].num_of_added_con>1500:
                 return isFeasible
             l={}
             #print("Restricting space")
@@ -1092,7 +1092,7 @@ def check_feasible(individual,energy,time):
     elif energy>(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)) and scenario.objective_scale_energy!=0:
         num_of_vars=0
         isFeasible=False
-        if scenario.graphs[graph].num_of_added_con>500:
+        if scenario.graphs[graph].num_of_added_con>1500:
             return isFeasible
         l={}
         #print("Restricting space")
@@ -1117,7 +1117,7 @@ def check_feasible(individual,energy,time):
     elif time>(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)) and scenario.objective_scale_time!=0:
         num_of_vars=0
         isFeasible=False
-        if scenario.graphs[graph].num_of_added_con>500:
+        if scenario.graphs[graph].num_of_added_con>1500:
             return isFeasible
         l={}
         #print("Restricting space")
@@ -1602,9 +1602,9 @@ def evalTime(individual):
 
 def meta_normal(graph,num_gens):
     pop=None
-    print(f"Generating Population for {graph}")
+    print("\n-----  NORMAL GA ------")
     start_time=time.time()
-    CXPB, MUTPB = 0.2, 0.03
+    CXPB, MUTPB = 0.2, 0.06
     print("Start of evolution", graph)
     scenario.graphs[graph].num_of_evals=0
     # Evaluate the entire population without PB strat
@@ -1613,7 +1613,7 @@ def meta_normal(graph,num_gens):
     for ind, fit in zip(pop, fitnesses):
         ind.fitness.values = fit
     logbook = tools.Logbook()
-    topPoints= tools.HallOfFame(maxsize=10)
+    topPoints= tools.HallOfFame(maxsize=100)
     pf= tools.ParetoFront()
 
     # Begin the evolution for normal DSE
@@ -1680,9 +1680,12 @@ def meta_normal(graph,num_gens):
                 ind.fitness.values= (energy1,time1)
 
         pf.update(temp_pop)
-        topPoints.update(pop)
+        topPoints.update(temp_pop)
         temp_fitness = [ind.fitness.values for ind in pf]
-        temp_fitness.append(max_fitness)
+        if scenario.isConstrained==True:
+            temp_fitness.append(((scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)-0.1),(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)-0.1)))
+        else:
+            temp_fitness.append(max_fitness)
         hv = hypervolume(temp_fitness)
         best=tools.selBest(pop, 1)[0]
         logbook.record(gen=g, evals=100 , pf=pf, hv=hv, best=best.fitness.values, **record)
@@ -1690,49 +1693,49 @@ def meta_normal(graph,num_gens):
         #Gather all the fitnesses in one list and print the stats
 
 
-        fits0 = [ind.fitness.values[0] for ind in pop]
-        length = len(pop)
-        mean = sum(fits0) / length
-        sum2 = sum(x*x for x in fits0)
-        std = abs(sum2 / length - mean**2)**0.5
-        print(" Values of Energy in microwatt/second")
-        print("   Min %s" % min(fits0))
-        print("   Max %s" % max(fits0))
-        print("   Avg %s" % mean)
-        print("   Std %s" % std)
-        fits0 = [ind.fitness.values[1] for ind in pop]
-        length = len(pop)
-        mean = sum(fits0) / length
-        sum2 = sum(x*x for x in fits0)
-        std = abs(sum2 / length - mean**2)**0.5
-        print(" Values of Execution time in microseconds")
-        print("   Min %s" % min(fits0))
-        print("   Max %s" % max(fits0))
-        print("   Avg %s" % mean)
-        print("   Std %s" % std)
+        # fits0 = [ind.fitness.values[0] for ind in pop]
+        # length = len(pop)
+        # mean = sum(fits0) / length
+        # sum2 = sum(x*x for x in fits0)
+        # std = abs(sum2 / length - mean**2)**0.5
+        # print(" Values of Energy in microwatt/second")
+        # print("   Min %s" % min(fits0))
+        # print("   Max %s" % max(fits0))
+        # print("   Avg %s" % mean)
+        # print("   Std %s" % std)
+        # fits0 = [ind.fitness.values[1] for ind in pop]
+        # length = len(pop)
+        # mean = sum(fits0) / length
+        # sum2 = sum(x*x for x in fits0)
+        # std = abs(sum2 / length - mean**2)**0.5
+        # print(" Values of Execution time in microseconds")
+        # print("   Min %s" % min(fits0))
+        # print("   Max %s" % max(fits0))
+        # print("   Avg %s" % mean)
+        # print("   Std %s" % std)
 
     print("-- End of (successful) evolution for  --")
     end_time=time.time()
     print("---------GENERATING STATISTICS---------")
-    print("\nTotal Seconds taken for evaluation are", (end_time-start_time))
+    print("Total Seconds taken for evaluation are", (end_time-start_time))
     print("Total Number of Evaluations are",scenario.graphs[graph].num_of_evals,"\n")
     return pf,logbook,topPoints,scenario.graphs[graph].num_of_evals
 
 def meta_with_pb(graph,num_gens):
 
     pop1=None
-    print(f"Generating Population for {graph}")
+    print("\n-----  DPLL GA ------")
     start_time=time.time()
-    CXPB, MUTPB = 0.2, 0.03
+    CXPB, MUTPB = 0.2, 0.06
     scenario.graphs[graph].num_of_evals=0
-    print("Start of evolution", graph)
+    print("Start of evolution for PB", graph)
     gen_basic_constraints(graph)
     pop1 = toolbox1.population(graph_name=graph,pop_size=scenario.pop_size)
     fitnesses = list(map(toolbox1.evaluate, pop1))
     for ind, fit in zip(pop1, fitnesses):
         ind.fitness.values = fit
     logbook1 = tools.Logbook()
-    topPoints1= tools.HallOfFame(maxsize=10)
+    topPoints1= tools.HallOfFame(maxsize=100)
     pf1= tools.ParetoFront()
 
     # Begin the evolution for normal DSE
@@ -1800,9 +1803,12 @@ def meta_with_pb(graph,num_gens):
                 ind.fitness.values= (energy1,time1)
 
         pf1.update(temp_pop)
-        topPoints1.update(pop1)
+        topPoints1.update(temp_pop)
         temp_fitness = [ind.fitness.values for ind in pf1]
-        temp_fitness.append(max_fitness)
+        if scenario.isConstrained==True:
+            temp_fitness.append(((scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy)-0.1),(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time)-0.1)))
+        else:
+            temp_fitness.append(max_fitness)
         hv = hypervolume(temp_fitness)
         best=tools.selBest(pop1, 1)[0]
         logbook1.record(gen=g, evals=100 , pf=pf1, hv=hv, best=best.fitness.values, **record)
@@ -1834,7 +1840,7 @@ def meta_with_pb(graph,num_gens):
     print("-- End of (successful) evolution for  --")
     end_time=time.time()
     print("---------GENERATING STATISTICS---------")
-    print("\nTotal Seconds taken for evaluation are", (end_time-start_time))
+    print("Total Seconds taken for evaluation are", (end_time-start_time))
     print("Total Number of Evaluations are",scenario.graphs[graph].num_of_evals,"\n")
     return pf1,logbook1,topPoints1,scenario.graphs[graph].num_of_evals
 
@@ -2123,8 +2129,15 @@ def main():
     right_ext=input_tgff.rfind('.')
     file_name=input_tgff[left_ext+1:right_ext]
     output_dir=Config.get('Output_data','output_dir')
-    cons_output=os.path.abspath(Config.get('Output_data','cons_output'))
-
+    try:
+        os.mkdir(output_dir)
+    except OSError as error:
+        print("Directory exists")
+    cons_output=Config.get('Output_data','cons_output')
+    try:
+        os.mkdir(cons_output)
+    except OSError as error:
+        print("Directory exists")
     if Config.get('GA_type','run_type')=="normal_GA":
         for graph in scenario.graphs:
             # plot_app_graph(graph,phase,file_name,output_dir)
@@ -2140,9 +2153,9 @@ def main():
             normal_time=(time.time()-normal_time)
             # Making Plots
             phase_name=f"{file_name}_{phase}"
-            stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
-            hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
-            pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
+            stats_plot_name=f"{output_dir}/{phase_name}_stats.pdf"
+            hv_plot_name=f"{output_dir}/{phase_name}_hv.pdf"
+            pf_plot_name=f"{output_dir}/{phase_name}_pf.pdf"
 
             gen= logbook.select("gen")
             fitness_avg = logbook.select("avg")
@@ -2229,7 +2242,7 @@ def main():
             i=0
             for ind in topPoints:
                 i+=1
-                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.pdf")
             phase+=1
             with open(f"{output_dir}/output.txt",'a') as f:
                 f.write("------------------------------------------------\n")
@@ -2272,9 +2285,9 @@ def main():
             normal_time=(time.time()-normal_time)
             # Making Plots
 
-            stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
-            hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
-            pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
+            stats_plot_name=f"{output_dir}/{phase_name}_stats.pdf"
+            hv_plot_name=f"{output_dir}/{phase_name}_hv.pdf"
+            pf_plot_name=f"{output_dir}/{phase_name}_pf.pdf"
 
             gen= logbook.select("gen")
             fitness_avg = logbook.select("avg")
@@ -2361,7 +2374,7 @@ def main():
             i=0
             for ind in topPoints:
                 i+=1
-                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.pdf")
             phase+=1
             with open(f"{output_dir}/output.txt",'a') as f:
                 f.write("------------------------------------------------\n")
@@ -2392,14 +2405,16 @@ def main():
             # plot_app_graph(graph,phase,file_name,output_dir)
             # print_app_graph(graph)
             gen_implementations(graph)
-            phase_name=f"{file_name}_{phase}"
-            with open(f"{output_dir}/output{phase_name}.txt",'w') as f:
+            phase_name=f"{file_name}"
+            with open(f"{output_dir}/{phase_name}_implementation.txt",'w') as f:
                 for task in scenario.graphs[graph].tasks:
                     f.write(f"{task} has {scenario.graphs[graph].tasks[task].num_implementations} implementations\n")
             scenario.graphs[graph].output_dir=os.path.join(cons_output,phase_name)
             if scenario.isConstrained==True:
-                scenario.graphs[graph].lowest_energy=meta_energy(graph,40)[0]
-                scenario.graphs[graph].lowest_time=meta_time(graph,40)[0]
+                scenario.graphs[graph].lowest_energy=meta_energy(graph,200)[0]
+                scenario.graphs[graph].lowest_time=meta_time(graph,200)[0]
+                constrained_energy=(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))
+                constrained_time=(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time))
             # continue
             pb_time=time.time()
             pf1,logbook1,topPoints1,num_evals1=meta_with_pb(graph,generations)
@@ -2408,9 +2423,8 @@ def main():
             pf,logbook,topPoints,num_evals=meta_normal(graph,generations)
             normal_time=(time.time()-normal_time)
             # Making Plots
-            stats_plot_name=f"{output_dir}/{phase_name}_stats.png"
-            hv_plot_name=f"{output_dir}/{phase_name}_hv.png"
-            pf_plot_name=f"{output_dir}/{phase_name}_pf.png"
+            hv_plot_name=f"{output_dir}/{phase_name}_hv.pdf"
+            pf_plot_name=f"{output_dir}/{phase_name}_pf.pdf"
 
             gen= logbook.select("gen")
             fitness_avg = logbook.select("avg")
@@ -2419,45 +2433,6 @@ def main():
             min_energy, min_time = zip(*fitness_min)
             fitness_best=logbook.select("best")
             best_energy, best_time = zip(*fitness_best)
-
-            fig, (ax1,ax2,ax3) = plt.subplots(3)
-            #Plotting Energy stats for each generation
-            line1 = ax1.plot(gen, avg_energy, "b-", label="Average Energy")
-            ax1.set_xlabel("Generation")
-            ax1.set_ylabel("Energy", color="b")
-            for tl in ax1.get_yticklabels():
-                tl.set_color("b")
-            line2 = ax1.plot(gen, min_energy, "r-", label="Minimum Energy")
-            lns = line1 + line2
-            labs = [l.get_label() for l in lns]
-            ax1.legend(lns, labs, loc="center right")
-            #Plotting Time stats for each generation
-            line1 = ax2.plot(gen, avg_time, "b-", label="Average Time")
-            ax2.set_xlabel("Generation")
-            ax2.set_ylabel("Execution Time", color="b")
-            for tl in ax2.get_yticklabels():
-                tl.set_color("r")
-            line2 = ax2.plot(gen, min_time, "r-", label="Minimum Time")
-            lns = line1 + line2
-            labs = [l.get_label() for l in lns]
-            ax2.legend(lns, labs, loc="center right")
-            #Plotting Best individuals of each generation
-            line1 = ax3.plot(gen, best_time, "b-", label="Best Time")
-            ax3.set_xlabel("Generation")
-            ax3.set_ylabel("Execution Time", color="b")
-            for tl in ax3.get_yticklabels():
-                tl.set_color("b")
-            ax4 = ax3.twinx()
-            line2 = ax4.plot(gen, best_energy, "r-", label="Best Energy")
-            ax4.set_ylabel("Total Energy", color="r")
-            for tl in ax4.get_yticklabels():
-                tl.set_color("r")
-            lns = line1 + line2
-            labs = [l.get_label() for l in lns]
-            ax3.legend(lns, labs, loc="center right")
-            plt.savefig(stats_plot_name)
-            plt.close()
-            #plt.show()
 
             #HyperVolume Plotting
             hv = logbook.select("hv")
@@ -2471,7 +2446,11 @@ def main():
             max_energy, max_time = zip(*fitness_max)
             ref_point1=[max(max_energy),max(max_time)]
             final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
-
+            if scenario.isConstrained==True:
+                if scenario.objective_scale_energy!=0:
+                    final_ref_point[0]=constrained_energy
+                if scenario.objective_scale_time!=0:
+                    final_ref_point[1]=constrained_time
             hv_value=[hype.compute(final_ref_point) for hype in hv]
             hv_value1=[hype.compute(final_ref_point) for hype in hv1]
             fig, ax1 = plt.subplots()
@@ -2486,27 +2465,58 @@ def main():
             plt.close()
 
             # The ParetoFront Plotting
+
+            temp_pf=[ind.fitness.values for ind in pf]
+            temp_pf1=[ind.fitness.values for ind in pf1]
+            temp_pf = list(dict.fromkeys(temp_pf))
+            temp_pf1 = list(dict.fromkeys(temp_pf1))
             length_of_pf=0
-            for ind in pf:
+            for ind in temp_pf:
                 length_of_pf+=1
             length_of_pf1=0
-            for ind in pf1:
+            for ind in temp_pf1:
                 length_of_pf1+=1
-
-            energy_pf = [ind.fitness.values[0] for ind in pf]
-            time_pf = [ind.fitness.values[1] for ind in pf]
-            energy_pf1 = [ind.fitness.values[0] for ind in pf1]
-            time_pf1 = [ind.fitness.values[1] for ind in pf1]
+            energy_pf = [ind[0] for ind in temp_pf]
+            time_pf = [ind[1] for ind in temp_pf]
+            energy_pf1 = [ind[0] for ind in temp_pf1]
+            time_pf1 = [ind[1] for ind in temp_pf1]
             fig, ax1 = plt.subplots()
-            line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
-            ax1.set_xlabel("Energy")
-            ax1.set_ylabel("Execution Time", color="b")
-            line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat")
+            line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal",marker='x')
+            ax1.set_xlabel("Energy in uJ")
+            ax1.set_ylabel("Execution Time in microSeconds", color="b")
+            line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat",marker='x')
             lns = line1 + line2
             labs = [l.get_label() for l in lns]
             ax1.legend(lns, labs, loc="center right")
             plt.savefig(pf_plot_name)
             plt.close()
+
+            # The PF Hypervolume
+            if scenario.isConstrained==True:
+                temp_pf.append((final_ref_point[0]-0.01,final_ref_point[1]-0.01))
+                temp_pf1.append((final_ref_point[0]-0.01,final_ref_point[1]-0.01))
+            temp_pf_hv=hypervolume(temp_pf)
+            temp_pf1_hv=hypervolume(temp_pf1)
+            pf_hv=temp_pf_hv.compute(final_ref_point)
+            pf1_hv=temp_pf1_hv.compute(final_ref_point)
+
+            with open(f"{output_dir}/{phase_name}_pf.txt",'w') as f:
+                f.write(f"normal {len(energy_pf)}\n")
+                for i in range(len(energy_pf)):
+                    f.write(f"{energy_pf[i]} {time_pf[i]}\n")
+                f.write(f"dpll {len(energy_pf1)}\n")
+                for i in range(len(energy_pf1)):
+                    f.write(f"{energy_pf1[i]} {time_pf1[i]}\n")
+
+            with open(f"{output_dir}/{phase_name}_hv.txt",'w') as f:
+                f.write(f"normal {len(hv_value)}\n")
+                for h in hv_value:
+                    f.write(f"{h}\n")
+                f.write(f"dpll {len(hv_value1)}\n")
+                for h in hv_value1:
+                    f.write(f"{h}\n")
+
+
 
             # EQUATING THE TIME OF THE RUN..
 
@@ -2517,8 +2527,8 @@ def main():
                 eq_pf,eq_logbook,topPoints,eq_num_evals=meta_normal(graph,generations*time_scaling_factor)
                 eq_time=(time.time()-eq_time)
                 # Making Plots
-                hv_plot_name=f"{output_dir}/{phase_name}_hv_eq.png"
-                pf_plot_name=f"{output_dir}/{phase_name}_pf_eq.png"
+                hv_plot_name=f"{output_dir}/{phase_name}_hv_eq.pdf"
+                pf_plot_name=f"{output_dir}/{phase_name}_pf_eq.pdf"
 
                 gen= eq_logbook.select("gen")
                 #HyperVolume Plotting
@@ -2533,7 +2543,11 @@ def main():
                 max_energy, max_time = zip(*fitness_max)
                 ref_point1=[max(max_energy),max(max_time)]
                 final_ref_point=[max(ref_point[0],ref_point1[0])+0.1,max(ref_point[1],ref_point1[1])+0.1]
-
+                if scenario.isConstrained==True:
+                    if scenario.objective_scale_energy!=0:
+                        final_ref_point[0]=constrained_energy
+                    if scenario.objective_scale_time!=0:
+                        final_ref_point[1]=constrained_time
                 eq_hv_value=[hype.compute(final_ref_point) for hype in hv]
                 hv_value1=[hype.compute(final_ref_point) for hype in hv1]
                 fig, ax1 = plt.subplots()
@@ -2548,33 +2562,70 @@ def main():
                 plt.close()
 
                 # The ParetoFront Plotting
-                eq_length_of_pf=0
-                for ind in eq_pf:
-                    eq_length_of_pf+=1
 
-                energy_pf = [ind.fitness.values[0] for ind in eq_pf]
-                time_pf = [ind.fitness.values[1] for ind in eq_pf]
-                energy_pf1 = [ind.fitness.values[0] for ind in pf1]
-                time_pf1 = [ind.fitness.values[1] for ind in pf1]
+                temp_pf=[ind.fitness.values for ind in eq_pf]
+                temp_pf1=[ind.fitness.values for ind in pf1]
+                temp_pf = list(dict.fromkeys(temp_pf))
+                temp_pf1 = list(dict.fromkeys(temp_pf1))
+                eq_length_of_pf=0
+                for ind in temp_pf:
+                    eq_length_of_pf+=1
+                energy_pf = [ind[0] for ind in temp_pf]
+                time_pf = [ind[1] for ind in temp_pf]
+                energy_pf1 = [ind[0] for ind in temp_pf1]
+                time_pf1 = [ind[1] for ind in temp_pf1]
                 fig, ax1 = plt.subplots()
-                line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal")
-                ax1.set_xlabel("Energy")
-                ax1.set_ylabel("Execution Time", color="b")
-                line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat")
+                line1 = ax1.plot(energy_pf, time_pf, "b-", label="ParetoFront Normal",marker='x')
+                ax1.set_xlabel("Energy in uJ")
+                ax1.set_ylabel("Execution Time in microSeconds", color="b")
+                line2 = ax1.plot(energy_pf1, time_pf1, "r-", label="ParetoFront With PB Strat",marker='x')
                 lns = line1 + line2
                 labs = [l.get_label() for l in lns]
                 ax1.legend(lns, labs, loc="center right")
                 plt.savefig(pf_plot_name)
                 plt.close()
 
+                # The PF Hypervolume
+                if scenario.isConstrained==True:
+                    temp_pf.append((final_ref_point[0]-0.01,final_ref_point[1]-0.01))
+                temp_pf_hv=hypervolume(temp_pf)
+                eq_pf_hv=temp_pf_hv.compute(final_ref_point)
+
+                with open(f"{output_dir}/{phase_name}_pf_eq.txt",'w') as f:
+                    f.write(f"normal {len(energy_pf)}\n")
+                    for i in range(len(energy_pf)):
+                        f.write(f"{energy_pf[i]} {time_pf[i]}\n")
+                    f.write(f"dpll {len(energy_pf1)}\n")
+                    for i in range(len(energy_pf1)):
+                        f.write(f"{energy_pf1[i]} {time_pf1[i]}\n")
+
+                with open(f"{output_dir}/{phase_name}_hv_eq.txt",'w') as f:
+                    f.write(f"normal {len(eq_hv_value)}\n")
+                    for h in eq_hv_value:
+                        f.write(f"{h}\n")
+                    f.write(f"dpll {len(hv_value1)}\n")
+                    for h in hv_value1:
+                        f.write(f"{h}\n")
+
+
+
 
             i=0
             for ind in topPoints1:
                 i+=1
-                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.pdf")
             for ind in topPoints:
                 i+=1
-                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.png")
+                trace_schedule(ind,f"{output_dir}/{phase_name}_trace{i}.pdf")
+
+            with open(f"{output_dir}/output{phase_name}.csv",'w', newline='') as outputcsv:
+                writer = csv.writer(outputcsv)
+                writer.writerow(['file','type','dvfs_modes','energy_con','time_con','tot_time','num_evals','hv','pf_points'])
+                writer.writerow([phase_name,'normal',scenario.dvfs,constrained_energy,constrained_time,normal_time,num_evals,pf_hv,length_of_pf])
+                writer.writerow([phase_name,'dpll',scenario.dvfs,constrained_energy,constrained_time,pb_time,num_evals1,pf1_hv,length_of_pf1])
+                if equate_time==True:
+                    writer.writerow([phase_name,'eq_time',scenario.dvfs,constrained_energy,constrained_time,eq_time,eq_num_evals,eq_pf_hv,eq_length_of_pf])
+
 
             with open(f"{output_dir}/output.txt",'a') as f:
                 f.write("------------------------------------------------\n")
@@ -2589,9 +2640,9 @@ def main():
                     f.write(f"Lowest Time Value is {scenario.graphs[graph].lowest_time}\n")
 
                     if scenario.objective_scale_energy!=0:
-                        f.write(f"Constraint on Energy value is {(scenario.objective_scale_energy*(scenario.graphs[graph].lowest_energy))}\n")
+                        f.write(f"Constraint on Energy value is {constrained_energy}\n")
                     if scenario.objective_scale_time!=0:
-                        f.write(f"Constraint on time value is {(scenario.objective_scale_time*(scenario.graphs[graph].lowest_time))}\n")
+                        f.write(f"Constraint on time value is {constrained_time}\n")
 
                 f.write(f"time for sat decoder is {pb_time}\n")
                 f.write(f"time for normal GA is {normal_time}\n")
@@ -2613,7 +2664,7 @@ def main():
         total_end_time=(time.time()-total_start_time)
     #Processing each graph seperately
 
-    print("Discrete Constrainted Meta-Heuristic successful !!!")
+    print("Discrete Constrainted Meta-Heuristic successful !!!\n\n")
     print("Total DSE time is", total_end_time)
     return
 if __name__ == '__main__':

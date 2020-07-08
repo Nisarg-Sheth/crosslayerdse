@@ -1,0 +1,26 @@
+#Pick the value to vary, add it as a heading
+# Vary as you wish.
+objective_scale_energy:
+- 6
+- 4
+- 3
+- 2
+- 0
+---
+objective_scale_time:
+- 6
+- 4
+- 3
+- 2
+- 0
+num_dvfs:
+- 1
+- 3
+- 4
+- 5
+- 6
+---
+num_implementations:
+- 1
+- 3
+- 5
