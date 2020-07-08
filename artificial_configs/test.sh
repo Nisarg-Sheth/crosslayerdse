@@ -9,6 +9,9 @@ cd ..
 pwd
 mkdir ./results/artificial
 mkdir ./cons/artificial
+cd tgff-3.6
+make
+cd ..
 cd artificial_configs
 python gen_config.py
 echo "Generated config files"
