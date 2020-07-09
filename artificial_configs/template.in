@@ -41,8 +41,8 @@ baseline_enabled: False
 # Value of user constraint with respect to minimum value of a particular objective
 # currently unused
 # if objective scale is 0, the constraints are not considered.
-objective_scale_energy: 3
-objective_scale_time: 3
+objective_scale_energy: 5
+objective_scale_time: 5
 
 [Input_data]
 

@@ -1,0 +1,80 @@
+------------------------------------------------
+office-automation-cords scene
+Number of dvfs levels is 5
+Number of Tasks in scene are 5
+Lowest Energy Value is 7646.443240299221
+Lowest Time Value is 1815.787223438591
+Constraint on Energy value is 30585.772961196883
+Constraint on time value is 7263.148893754364
+time for sat decoder is 2733.113788843155
+time for normal GA is 10.02961778640747
+Total Number of evaluations in pb strat GA are 6320
+Total Number of evaluations in normal GA are 6371
+scene pb strat hypervolume is 0.00999999999989086
+scene normal hypervolume is 0.00999999999989086
+0 is the number of points in the pb strat Pareto front
+0 is the number of points in the normal Pareto front
+------------------------------------------------
+consumer-cords scene
+Number of dvfs levels is 5
+Number of Tasks in scene are 12
+Lowest Energy Value is 150466.75499945972
+Lowest Time Value is 29752.07709562906
+Constraint on Energy value is 601867.0199978389
+Constraint on time value is 119008.30838251625
+time for sat decoder is 3223.941655397415
+time for normal GA is 16.52985692024231
+Total Number of evaluations in pb strat GA are 6276
+Total Number of evaluations in normal GA are 6279
+scene pb strat hypervolume is 0.00999999999825377
+scene normal hypervolume is 0.00999999999825377
+0 is the number of points in the pb strat Pareto front
+0 is the number of points in the normal Pareto front
+------------------------------------------------
+networking-mocsyn-asic scene
+Number of dvfs levels is 5
+Number of Tasks in scene are 13
+Lowest Energy Value is 1044.540557782838
+Lowest Time Value is 21212.753360488347
+Constraint on Energy value is 4178.162231131352
+Constraint on time value is 84851.01344195339
+time for sat decoder is 3271.829489469528
+time for normal GA is 15.907078266143799
+Total Number of evaluations in pb strat GA are 6217
+Total Number of evaluations in normal GA are 6305
+scene pb strat hypervolume is 0.010000000000618457
+scene normal hypervolume is 0.010000000000618457
+0 is the number of points in the pb strat Pareto front
+0 is the number of points in the normal Pareto front
+------------------------------------------------
+auto-indust-mocsyn scene
+Number of dvfs levels is 5
+Number of Tasks in scene are 24
+Lowest Energy Value is 4169.9447046441755
+Lowest Time Value is 486.56792479867426
+Constraint on Energy value is 16679.778818576702
+Constraint on time value is 1946.271699194697
+time for sat decoder is 3969.698691368103
+time for normal GA is 25.549225330352783
+Total Number of evaluations in pb strat GA are 6376
+Total Number of evaluations in normal GA are 6291
+scene pb strat hypervolume is 0.009999999999845386
+scene normal hypervolume is 0.009999999999845386
+0 is the number of points in the pb strat Pareto front
+0 is the number of points in the normal Pareto front
+------------------------------------------------
+telecom-cords scene
+Number of dvfs levels is 5
+Number of Tasks in scene are 30
+Lowest Energy Value is 5400.799538358445
+Lowest Time Value is 341.8003626633448
+Constraint on Energy value is 21603.19815343378
+Constraint on time value is 1367.2014506533792
+time for sat decoder is 4279.864508390427
+time for normal GA is 28.554750680923462
+Total Number of evaluations in pb strat GA are 6431
+Total Number of evaluations in normal GA are 6463
+scene pb strat hypervolume is 0.009999999999845386
+scene normal hypervolume is 0.009999999999845386
+0 is the number of points in the pb strat Pareto front
+0 is the number of points in the normal Pareto front

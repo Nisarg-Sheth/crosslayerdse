@@ -1,0 +1,3 @@
+file,type,dvfs_modes,energy_con,time_con,tot_time,num_evals,hv,pf_points
+networking-mocsyn-asic,normal,6,9154.936832,85041.54303030303,15.731404542922974,6313,9.999999994979589e-05,0
+networking-mocsyn-asic,dpll,6,9154.936832,85041.54303030303,3169.8883860111237,6444,9.999999994979589e-05,0

@@ -1,0 +1,16 @@
+------------------------------------------------
+tg_20 scene
+Number of dvfs levels is 5
+Number of Tasks in scene are 26
+Lowest Energy Value is 97021.71669162119
+Lowest Time Value is 14947.284442310915
+Constraint on Energy value is 291065.1500748636
+Constraint on time value is 44841.853326932745
+time for sat decoder is 3968.9284613132477
+time for normal GA is 29.2917160987854
+Total Number of evaluations in pb strat GA are 6298
+Total Number of evaluations in normal GA are 6166
+scene pb strat hypervolume is 0.009999999997526175
+scene normal hypervolume is 0.009999999997526175
+0 is the number of points in the pb strat Pareto front
+0 is the number of points in the normal Pareto front

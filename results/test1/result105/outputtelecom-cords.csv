@@ -1,0 +1,3 @@
+file,type,dvfs_modes,energy_con,time_con,tot_time,num_evals,hv,pf_points
+telecom-cords,normal,1,198563.424,2203.68,25.53279757499695,6313,195179906.11811998,17
+telecom-cords,dpll,1,198563.424,2203.68,3230.319875240326,6295,198611331.61467594,17

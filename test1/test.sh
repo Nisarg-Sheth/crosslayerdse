@@ -1,6 +1,6 @@
 #! /usr/bin/env nix-shell
 #! nix-shell
-
+export CLASSPATH=.:~/tmp/Constraints/sat4j/opt4j-2.7.jar
 COMPLETE_PATH=./sat_scenario.py
 E3S_PATH=./e3s_reduced
 TEST_PATH=./test1
@@ -19,5 +19,6 @@ do
   do
     python $COMPLETE_PATH --tg=$file -c=$config >> run_time_data.txt &
   done
+wait
 done
 echo "ITS ALL DONE :)"
